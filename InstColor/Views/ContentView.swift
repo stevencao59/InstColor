@@ -9,10 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var model = ContentViewModel()
-
+    
     var body: some View {
-        FrameView(image: model.frame)
-            .edgesIgnoringSafeArea(.all)
+        ZStack(alignment: .bottomTrailing) {
+            FrameView(image: model.frame)
+                .edgesIgnoringSafeArea(.all)
+            
+            ErrorView(error: model.error)
+            
+            if let color = model.averageColor {
+                HStack{
+                    ColorResultView(color: color)
+                    Spacer()
+                    HStack {
+                        ColorTextView(iconColor: .red, displayColor: color.components.red)
+                        ColorTextView(iconColor: .green, displayColor: color.components.green)
+                        ColorTextView(iconColor: .blue, displayColor: color.components.blue)
+                    }
+                }
+                .padding()
+                .offset(x: -5, y: -5)
+            }
+        }
+
     }
 }
 

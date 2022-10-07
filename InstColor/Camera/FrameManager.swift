@@ -12,6 +12,7 @@ class FrameManager: NSObject, ObservableObject {
     static let shared = FrameManager()
     
     @Published var current: CVPixelBuffer?
+    @Published var position: AVCaptureDevice.Position?
     
     let videoOutputQueue = DispatchQueue(label: "come.home.leicao.VideoOuputQ", qos: .userInitiated, attributes:  [], autoreleaseFrequency: .workItem)
     

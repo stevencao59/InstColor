@@ -11,7 +11,9 @@ import UIKit
 class ContentViewModel: ObservableObject {
     @Published var frame: CGImage?
     @Published var averageColor: UIColor?
-    
+    @Published var error: Error?
+
+    private let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
     
     func setupSubscriptions() {
@@ -21,16 +23,20 @@ class ContentViewModel: ObservableObject {
                 return CGImage.create(from: buffer)
             }
             .assign(to: &$frame)
-
+        
+        cameraManager.$error
+            .receive(on: RunLoop.main)
+            .map { $0 }
+            .assign(to: &$error)
+        
         $frame
+            .receive(on: RunLoop.main)
             .compactMap { result in
                 if let image = result.publisher.output {
                     let image = UIImage(cgImage: image)
                     if let color = image.averageColor {
-                        print(color.components)
                         return color
                     }
-                    
                 }
                 return nil
             }
