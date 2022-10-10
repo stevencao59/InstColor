@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FrameView: View {
     var image: CGImage?
+    let ratio = 1.0
     
     var body: some View {
         if let image = image {
@@ -17,11 +18,15 @@ struct FrameView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    .clipped()
                     .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height)))
             }
+            .edgesIgnoringSafeArea(.all)
         } else {
-            Color.black
+            GeometryReader { geometry in
+                Rectangle()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .background(.black)
+            }
         }
     }
 }

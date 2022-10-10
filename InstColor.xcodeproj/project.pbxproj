@@ -11,7 +11,11 @@
 		B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */; };
 		B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */; };
 		B6DDD70628EFDA4600E2EC66 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70528EFDA4600E2EC66 /* ErrorView.swift */; };
-		B6DDD70828F0C76C00E2EC66 /* rgb_table.csv in Resources */ = {isa = PBXBuildFile; fileRef = B6DDD70728F0C76C00E2EC66 /* rgb_table.csv */; };
+		B6DDD70B28F1B05900E2EC66 /* color.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DDD70A28F1B05800E2EC66 /* color.json */; };
+		B6DDD70D28F1B2F500E2EC66 /* ColorResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70C28F1B2F500E2EC66 /* ColorResultViewModel.swift */; };
+		B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70F28F1B33C00E2EC66 /* RGBColor.swift */; };
+		B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71128F1C34900E2EC66 /* Decoder.swift */; };
+		B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */; };
 		B6DE828928E729E300826201 /* InstColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828828E729E300826201 /* InstColorApp.swift */; };
 		B6DE828B28E729E300826201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828A28E729E300826201 /* ContentView.swift */; };
 		B6DE828D28E729E400826201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DE828C28E729E400826201 /* Assets.xcassets */; };
@@ -30,7 +34,11 @@
 		B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextView.swift; sourceTree = "<group>"; };
 		B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResultView.swift; sourceTree = "<group>"; };
 		B6DDD70528EFDA4600E2EC66 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		B6DDD70728F0C76C00E2EC66 /* rgb_table.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rgb_table.csv; sourceTree = "<group>"; };
+		B6DDD70A28F1B05800E2EC66 /* color.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = color.json; sourceTree = "<group>"; };
+		B6DDD70C28F1B2F500E2EC66 /* ColorResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResultViewModel.swift; sourceTree = "<group>"; };
+		B6DDD70F28F1B33C00E2EC66 /* RGBColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBColor.swift; sourceTree = "<group>"; };
+		B6DDD71128F1C34900E2EC66 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextGroupView.swift; sourceTree = "<group>"; };
 		B6DE828528E729E300826201 /* InstColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DE828828E729E300826201 /* InstColorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstColorApp.swift; sourceTree = "<group>"; };
 		B6DE828A28E729E300826201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +67,7 @@
 		B6DDD6FC28EBC52B00E2EC66 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B6DDD71128F1C34900E2EC66 /* Decoder.swift */,
 				B6EBA0C528E790A4006954F8 /* CGImage.swift */,
 				B6DDD6FA28EA7A9700E2EC66 /* Color.swift */,
 			);
@@ -81,6 +90,7 @@
 				B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */,
 				B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
+				B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */,
 				B6DDD70528EFDA4600E2EC66 /* ErrorView.swift */,
 				B6DE829628E72A0800826201 /* FrameView.swift */,
 			);
@@ -91,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				B6EBA0C328E78DC6006954F8 /* ContentViewModel.swift */,
+				B6DDD70C28F1B2F500E2EC66 /* ColorResultViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -106,9 +117,17 @@
 		B6DDD70928F0C78D00E2EC66 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				B6DDD70728F0C76C00E2EC66 /* rgb_table.csv */,
+				B6DDD70A28F1B05800E2EC66 /* color.json */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		B6DDD70E28F1B31900E2EC66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B6DDD70F28F1B33C00E2EC66 /* RGBColor.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B6DE827C28E729E300826201 = {
@@ -130,6 +149,7 @@
 		B6DE828728E729E300826201 /* InstColor */ = {
 			isa = PBXGroup;
 			children = (
+				B6DDD70E28F1B31900E2EC66 /* Model */,
 				B6DDD70928F0C78D00E2EC66 /* Data */,
 				B6DDD70028EBC5E900E2EC66 /* Modifier */,
 				B6DDD6FF28EBC5D500E2EC66 /* ViewModels */,
@@ -210,8 +230,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DE829028E729E400826201 /* Preview Assets.xcassets in Resources */,
+				B6DDD70B28F1B05900E2EC66 /* color.json in Resources */,
 				B6DE828D28E729E400826201 /* Assets.xcassets in Resources */,
-				B6DDD70828F0C76C00E2EC66 /* rgb_table.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,12 +245,16 @@
 				B6DE829728E72A0800826201 /* FrameView.swift in Sources */,
 				B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */,
 				B6EBA0C228E78B97006954F8 /* FrameManager.swift in Sources */,
+				B6DDD70D28F1B2F500E2EC66 /* ColorResultViewModel.swift in Sources */,
 				B6DE829B28E72FA900826201 /* CameraError.swift in Sources */,
+				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */,
+				B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
 				B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */,
 				B6EBA0C828E79736006954F8 /* ZoomModifier.swift in Sources */,
+				B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */,
 				B6DE828B28E729E300826201 /* ContentView.swift in Sources */,
 				B6DE829928E72C2400826201 /* CameraManager.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* ErrorView.swift in Sources */,

@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct ColorResultView: View {
+    @StateObject private var model = ColorResultViewModel()
     let color: UIColor
-    var uiColor: Color {
-        Color(uiColor: color)
-    }
     
     var body: some View {
         HStack {
-            Text("Average Color:")
-                .font(.title2)
-            
             RoundedRectangle(cornerRadius: 5)
-                .fill(uiColor)
-                .frame(width: 20, height: 20)
+                .fill(Color(uiColor: color))
+                .frame(width: 30, height: 30)
+                .onChange(of: color) { newValue in
+                    model.color = newValue
+                }
+            Text(model.colorName ?? "Unknown Color")
+                .font(.title2)
+                .animation(.easeIn)
         }
     }
 }
