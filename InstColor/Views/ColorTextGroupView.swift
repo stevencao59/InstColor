@@ -16,7 +16,6 @@ struct ColorTextGroupView: View {
     }
     
     var body: some View {
-        let color = UIColor(red: Int(components.red), green: Int(components.green), blue: Int(components.blue))
         VStack {
             HStack {
                 ColorTextView(iconColor: .red, displayColor: components.red)
@@ -24,7 +23,7 @@ struct ColorTextGroupView: View {
                 ColorTextView(iconColor: .blue, displayColor: components.blue)
             }
             Text("Hex: \(translateHexString(components.red, components.green, components.blue))")
-                .font(.footnote)
+                .font(.body)
                 .foregroundColor(.white)
                 .animation(.default)
         }

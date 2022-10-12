@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FrameView: View {
     var image: CGImage?
-    let ratio = 1.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -17,8 +16,10 @@ struct FrameView: View {
                 Image(image, scale: 1.0, label: Text("Camera feed"))
                     .resizable()
                     .scaledToFit()
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea(.all)
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                    .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height)))
+                    .modifier(ThumbnailModifier())
+
             } else {
                 Rectangle()
                     .frame(width: geometry.size.width, height: geometry.size.height)

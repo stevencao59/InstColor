@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             FrameView(image: model.frame)
-            ErrorView(error: model.error)
+            NavigationView(error: model.error)
             DashboardView(color: model.averageColor)
         }
     }

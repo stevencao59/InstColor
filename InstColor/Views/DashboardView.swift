@@ -12,6 +12,7 @@ struct DashboardView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             if let color = color {
                 HStack(alignment: .center) {
                     ColorResultView(color: color)
@@ -19,11 +20,12 @@ struct DashboardView: View {
                     ColorTextGroupView(components: color.components)
                 }
                 .padding()
+                .frame(maxWidth: .infinity)
+                .background(.black)
+                .animation(.easeInOut, value: 0.25)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: 100)
-        .background(.black)
-        .opacity(0.8)
+
     }
 }
 
