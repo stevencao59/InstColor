@@ -19,6 +19,7 @@ struct ColorTextView: View {
                 
             Text("\(String(format: "%g", Double(displayColor * 255)))")
                 .font(.footnote)
+                .foregroundColor(.white)
         }
     }
 }

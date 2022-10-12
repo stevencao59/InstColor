@@ -12,17 +12,14 @@ struct FrameView: View {
     let ratio = 1.0
     
     var body: some View {
-        if let image = image {
-            GeometryReader { geometry in
+        GeometryReader { geometry in
+            if let image = image {
                 Image(image, scale: 1.0, label: Text("Camera feed"))
                     .resizable()
                     .scaledToFit()
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height)))
-            }
-            .edgesIgnoringSafeArea(.all)
-        } else {
-            GeometryReader { geometry in
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea(.all)
+            } else {
                 Rectangle()
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .background(.black)

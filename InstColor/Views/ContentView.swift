@@ -14,17 +14,8 @@ struct ContentView: View {
         ZStack(alignment: .bottomTrailing) {
             FrameView(image: model.frame)
             ErrorView(error: model.error)
-            
-            if let color = model.averageColor {
-                HStack{
-                    ColorResultView(color: color)
-                    Spacer()
-                    ColorTextGroupView(components: color.components)
-                }
-                .padding()
-            }
+            DashboardView(color: model.averageColor)
         }
-
     }
 }
 

@@ -13,14 +13,16 @@ struct ColorResultView: View {
     
     var body: some View {
         HStack {
-            RoundedRectangle(cornerRadius: 5)
+            RoundedRectangle(cornerRadius: 40)
                 .fill(Color(uiColor: color))
-                .frame(width: 30, height: 30)
+                .frame(width: 40, height: 40)
                 .onChange(of: color) { newValue in
                     model.color = newValue
                 }
+
             Text(model.colorName ?? "Unknown Color")
                 .font(.title2)
+                .foregroundColor(.white)
                 .animation(.easeIn)
         }
     }
