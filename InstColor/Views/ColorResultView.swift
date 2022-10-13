@@ -12,7 +12,7 @@ struct ColorResultView: View {
     let color: UIColor
     
     var body: some View {
-        HStack {
+        VStack {
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color(uiColor: color))
                 .frame(width: 40, height: 40)

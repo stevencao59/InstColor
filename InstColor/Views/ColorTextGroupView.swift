@@ -23,7 +23,7 @@ struct ColorTextGroupView: View {
                 ColorTextView(iconColor: .blue, displayColor: components.blue)
             }
             Text("Hex: \(translateHexString(components.red, components.green, components.blue))")
-                .font(.body)
+                .font(.footnote)
                 .foregroundColor(.white)
                 .animation(.default)
         }

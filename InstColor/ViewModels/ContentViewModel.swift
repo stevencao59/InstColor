@@ -10,7 +10,9 @@ import UIKit
 
 class ContentViewModel: ObservableObject {
     @Published var frame: CGImage?
+    @Published var thumbFrame: CGImage?
     @Published var averageColor: UIColor?
+    @Published var location: CGPoint?
     @Published var error: Error?
 
     private let cameraManager = CameraManager.shared

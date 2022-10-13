@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
     let color: UIColor?
+    let location: CGPoint?
     
     var body: some View {
         VStack {
@@ -31,6 +32,6 @@ struct DashboardView: View {
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView(color: UIColor(.white))
+        DashboardView(color: UIColor(.white), location: CGPoint(x: 100, y: 50))
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct ThumbnailModifier: ViewModifier {
-    @State private var location: CGPoint = .zero
+struct ThumbViewModifier: ViewModifier {
+    @Binding var location: CGPoint?
     
     var tapGesture: some Gesture {
         SpatialTapGesture().onEnded { event in

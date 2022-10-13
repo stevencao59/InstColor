@@ -17,7 +17,9 @@
 		B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71128F1C34900E2EC66 /* Decoder.swift */; };
 		B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */; };
 		B6DDD71828F500C100E2EC66 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71728F500C100E2EC66 /* DashboardView.swift */; };
-		B6DDD71A28F65E8200E2EC66 /* ThumbnailModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71928F65E8200E2EC66 /* ThumbnailModifier.swift */; };
+		B6DDD71A28F65E8200E2EC66 /* ThumbViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71928F65E8200E2EC66 /* ThumbViewModifier.swift */; };
+		B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71B28F791F500E2EC66 /* ThumbView.swift */; };
+		B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */; };
 		B6DE828928E729E300826201 /* InstColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828828E729E300826201 /* InstColorApp.swift */; };
 		B6DE828B28E729E300826201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828A28E729E300826201 /* ContentView.swift */; };
 		B6DE828D28E729E400826201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DE828C28E729E400826201 /* Assets.xcassets */; };
@@ -42,7 +44,9 @@
 		B6DDD71128F1C34900E2EC66 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextGroupView.swift; sourceTree = "<group>"; };
 		B6DDD71728F500C100E2EC66 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
-		B6DDD71928F65E8200E2EC66 /* ThumbnailModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailModifier.swift; sourceTree = "<group>"; };
+		B6DDD71928F65E8200E2EC66 /* ThumbViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbViewModifier.swift; sourceTree = "<group>"; };
+		B6DDD71B28F791F500E2EC66 /* ThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbView.swift; sourceTree = "<group>"; };
+		B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		B6DE828528E729E300826201 /* InstColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DE828828E729E300826201 /* InstColorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstColorApp.swift; sourceTree = "<group>"; };
 		B6DE828A28E729E300826201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,9 +75,10 @@
 		B6DDD6FC28EBC52B00E2EC66 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B6DDD71128F1C34900E2EC66 /* Decoder.swift */,
 				B6EBA0C528E790A4006954F8 /* CGImage.swift */,
 				B6DDD6FA28EA7A9700E2EC66 /* Color.swift */,
+				B6DDD71128F1C34900E2EC66 /* Decoder.swift */,
+				B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 		B6DDD6FE28EBC5B300E2EC66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6DDD71B28F791F500E2EC66 /* ThumbView.swift */,
 				B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */,
 				B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
@@ -115,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				B6EBA0C728E79736006954F8 /* ZoomModifier.swift */,
-				B6DDD71928F65E8200E2EC66 /* ThumbnailModifier.swift */,
+				B6DDD71928F65E8200E2EC66 /* ThumbViewModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 				B6DDD70D28F1B2F500E2EC66 /* ColorResultViewModel.swift in Sources */,
 				B6DE829B28E72FA900826201 /* CameraError.swift in Sources */,
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
+				B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */,
 				B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */,
 				B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
@@ -263,8 +270,9 @@
 				B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */,
 				B6DDD71828F500C100E2EC66 /* DashboardView.swift in Sources */,
 				B6DE828B28E729E300826201 /* ContentView.swift in Sources */,
-				B6DDD71A28F65E8200E2EC66 /* ThumbnailModifier.swift in Sources */,
+				B6DDD71A28F65E8200E2EC66 /* ThumbViewModifier.swift in Sources */,
 				B6DE829928E72C2400826201 /* CameraManager.swift in Sources */,
+				B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,
 				B6DE828928E729E300826201 /* InstColorApp.swift in Sources */,
 			);

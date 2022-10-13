@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FrameView: View {
     var image: CGImage?
-    
+    @Binding var location: CGPoint?
+
     var body: some View {
         GeometryReader { geometry in
             if let image = image {
@@ -18,8 +19,7 @@ struct FrameView: View {
                     .scaledToFit()
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                     .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height)))
-                    .modifier(ThumbnailModifier())
-
+                    .modifier(ThumbViewModifier(location: $location))
             } else {
                 Rectangle()
                     .frame(width: geometry.size.width, height: geometry.size.height)
@@ -31,6 +31,6 @@ struct FrameView: View {
 
 struct FrameView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameView()
+        FrameView(location: .constant(CGPoint(x: 100, y: 100)))
     }
 }
