@@ -13,6 +13,7 @@ class ContentViewModel: ObservableObject {
     @Published var thumbFrame: CGImage?
     @Published var averageColor: UIColor?
     @Published var location: CGPoint?
+    @Published var rectSize: CGSize?
     @Published var error: Error?
 
     private let cameraManager = CameraManager.shared

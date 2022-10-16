@@ -10,6 +10,7 @@ import SwiftUI
 struct FrameView: View {
     var image: CGImage?
     @Binding var location: CGPoint?
+    @Binding var rectSize: CGSize?
 
     var body: some View {
         GeometryReader { geometry in
@@ -20,17 +21,17 @@ struct FrameView: View {
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                     .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height)))
                     .modifier(ThumbViewModifier(location: $location))
-            } else {
-                Rectangle()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .background(.black)
+                    .measureSize {
+                        rectSize = $0
+                    }
             }
         }
+        .background(.black)
     }
 }
 
 struct FrameView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameView(location: .constant(CGPoint(x: 100, y: 100)))
+        FrameView(location: .constant(CGPoint(x: 100, y: 100)), rectSize: .constant(CGSize(width: 50, height: 50)))
     }
 }
