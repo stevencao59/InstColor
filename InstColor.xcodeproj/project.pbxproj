@@ -17,11 +17,9 @@
 		B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71128F1C34900E2EC66 /* Decoder.swift */; };
 		B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */; };
 		B6DDD71828F500C100E2EC66 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71728F500C100E2EC66 /* DashboardView.swift */; };
-		B6DDD71A28F65E8200E2EC66 /* TapGestureModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71928F65E8200E2EC66 /* TapGestureModifier.swift */; };
 		B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71B28F791F500E2EC66 /* ThumbView.swift */; };
 		B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */; };
-		B6DDD72028F8FB0D00E2EC66 /* MeasureSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71F28F8FB0D00E2EC66 /* MeasureSizeModifier.swift */; };
-		B6DDD72228F8FC9C00E2EC66 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD72128F8FC9C00E2EC66 /* View.swift */; };
+		B6DDD72428FD00F400E2EC66 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD72328FD00F400E2EC66 /* RectangleView.swift */; };
 		B6DE828928E729E300826201 /* InstColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828828E729E300826201 /* InstColorApp.swift */; };
 		B6DE828B28E729E300826201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828A28E729E300826201 /* ContentView.swift */; };
 		B6DE828D28E729E400826201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DE828C28E729E400826201 /* Assets.xcassets */; };
@@ -32,7 +30,7 @@
 		B6EBA0C228E78B97006954F8 /* FrameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C128E78B97006954F8 /* FrameManager.swift */; };
 		B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C328E78DC6006954F8 /* ContentViewModel.swift */; };
 		B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C528E790A4006954F8 /* CGImage.swift */; };
-		B6EBA0C828E79736006954F8 /* ZoomModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C728E79736006954F8 /* ZoomModifier.swift */; };
+		B6EBA0C828E79736006954F8 /* FrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C728E79736006954F8 /* FrameModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,11 +44,9 @@
 		B6DDD71128F1C34900E2EC66 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextGroupView.swift; sourceTree = "<group>"; };
 		B6DDD71728F500C100E2EC66 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
-		B6DDD71928F65E8200E2EC66 /* TapGestureModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureModifier.swift; sourceTree = "<group>"; };
 		B6DDD71B28F791F500E2EC66 /* ThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbView.swift; sourceTree = "<group>"; };
 		B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		B6DDD71F28F8FB0D00E2EC66 /* MeasureSizeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureSizeModifier.swift; sourceTree = "<group>"; };
-		B6DDD72128F8FC9C00E2EC66 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		B6DDD72328FD00F400E2EC66 /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
 		B6DE828528E729E300826201 /* InstColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DE828828E729E300826201 /* InstColorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstColorApp.swift; sourceTree = "<group>"; };
 		B6DE828A28E729E300826201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,7 +58,7 @@
 		B6EBA0C128E78B97006954F8 /* FrameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameManager.swift; sourceTree = "<group>"; };
 		B6EBA0C328E78DC6006954F8 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		B6EBA0C528E790A4006954F8 /* CGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
-		B6EBA0C728E79736006954F8 /* ZoomModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomModifier.swift; sourceTree = "<group>"; };
+		B6EBA0C728E79736006954F8 /* FrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +79,6 @@
 				B6DDD6FA28EA7A9700E2EC66 /* Color.swift */,
 				B6DDD71128F1C34900E2EC66 /* Decoder.swift */,
 				B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */,
-				B6DDD72128F8FC9C00E2EC66 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -105,6 +100,7 @@
 				B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */,
 				B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
+				B6DDD72328FD00F400E2EC66 /* RectangleView.swift */,
 				B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */,
 				B6DDD70528EFDA4600E2EC66 /* NavigationView.swift */,
 				B6DE829628E72A0800826201 /* FrameView.swift */,
@@ -125,9 +121,7 @@
 		B6DDD70028EBC5E900E2EC66 /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
-				B6EBA0C728E79736006954F8 /* ZoomModifier.swift */,
-				B6DDD71928F65E8200E2EC66 /* TapGestureModifier.swift */,
-				B6DDD71F28F8FB0D00E2EC66 /* MeasureSizeModifier.swift */,
+				B6EBA0C728E79736006954F8 /* FrameModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -260,7 +254,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6DDD72028F8FB0D00E2EC66 /* MeasureSizeModifier.swift in Sources */,
 				B6DE829728E72A0800826201 /* FrameView.swift in Sources */,
 				B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */,
 				B6EBA0C228E78B97006954F8 /* FrameManager.swift in Sources */,
@@ -269,16 +262,15 @@
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */,
 				B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */,
-				B6DDD72228F8FC9C00E2EC66 /* View.swift in Sources */,
+				B6DDD72428FD00F400E2EC66 /* RectangleView.swift in Sources */,
 				B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
 				B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */,
-				B6EBA0C828E79736006954F8 /* ZoomModifier.swift in Sources */,
+				B6EBA0C828E79736006954F8 /* FrameModifier.swift in Sources */,
 				B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */,
 				B6DDD71828F500C100E2EC66 /* DashboardView.swift in Sources */,
 				B6DE828B28E729E300826201 /* ContentView.swift in Sources */,
-				B6DDD71A28F65E8200E2EC66 /* TapGestureModifier.swift in Sources */,
 				B6DE829928E72C2400826201 /* CameraManager.swift in Sources */,
 				B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,

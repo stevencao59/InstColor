@@ -25,7 +25,6 @@ struct ColorTextGroupView: View {
             Text("Hex: \(translateHexString(components.red, components.green, components.blue))")
                 .font(.footnote)
                 .foregroundColor(.white)
-                .animation(.default)
         }
 
     }

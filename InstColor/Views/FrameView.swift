@@ -19,11 +19,7 @@ struct FrameView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height)))
-                    .modifier(ThumbViewModifier(location: $location))
-                    .measureSize {
-                        rectSize = $0
-                    }
+                    .modifier(ZoomModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $rectSize, location: $location))
             }
         }
         .background(.black)

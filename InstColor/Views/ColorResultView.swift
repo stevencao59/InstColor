@@ -12,7 +12,7 @@ struct ColorResultView: View {
     let color: UIColor
     
     var body: some View {
-        VStack {
+        HStack {
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color(uiColor: color))
                 .frame(width: 40, height: 40)
@@ -23,7 +23,6 @@ struct ColorResultView: View {
             Text(model.colorName ?? "Unknown Color")
                 .font(.title2)
                 .foregroundColor(.white)
-                .animation(.easeIn)
         }
     }
 }

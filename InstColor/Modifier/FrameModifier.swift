@@ -86,10 +86,16 @@ struct ZoomModifier: ViewModifier {
     private var contentSize: CGSize
     private var min: CGFloat = 1.0
     private var max: CGFloat = 3.0
+    
     @State var currentScale: CGFloat = 1.0
     
-    init(contentSize: CGSize) {
+    @Binding var rectSize: CGSize?
+    @Binding var location: CGPoint?
+    
+    init(contentSize: CGSize, rectSize: Binding<CGSize?>, location: Binding<CGPoint?>) {
         self.contentSize = contentSize
+        self._rectSize = rectSize
+        self._location = location
     }
     
     var doubleTapGesture: some Gesture {
@@ -101,6 +107,12 @@ struct ZoomModifier: ViewModifier {
         }
     }
     
+    var tapGesture: some Gesture {
+        SpatialTapGesture().onEnded { event in
+            location = event.location
+        }
+    }
+    
     func body(content: Content) -> some View {
         ScrollView([.horizontal, .vertical], showsIndicators: false) {
             content
@@ -108,6 +120,13 @@ struct ZoomModifier: ViewModifier {
                 .modifier(PinchToZoom(minScale: min, maxScale: max, scale: $currentScale))
         }
         .gesture(doubleTapGesture)
+        .gesture(tapGesture)
+        .onChange(of: currentScale) { newValue in
+            rectSize = CGSize(width: contentSize.width * newValue, height: contentSize.height * newValue)
+        }
+        .onAppear() {
+            rectSize = CGSize(width: contentSize.width, height: contentSize.height)
+        }
         .animation(.easeOut, value: currentScale)
     }
     

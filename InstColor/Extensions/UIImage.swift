@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension UIImage {
-    func cropImage(toRect cropRect: CGRect, viewWidth: CGFloat, viewHeight: CGFloat) -> UIImage? {
+    func cropImage(toRect cropRect: CGRect, viewWidth: CGFloat, viewHeight: CGFloat) -> CGImage? {
         let imageViewScale = max(self.size.width / viewWidth,
                                  self.size.height / viewHeight)
         
@@ -19,9 +19,7 @@ extension UIImage {
         else {
             return nil
         }
-        
-        let croppedImage: UIImage = UIImage(cgImage: cutImageRef)
-        return croppedImage
+        return cutImageRef
     }
     
 }

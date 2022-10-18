@@ -12,9 +12,11 @@ struct ContentView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            FrameView(image: model.frame, location: $model.location, rectSize: $model.rectSize)
+            FrameView(image: model.frame, location: $model.location, rectSize: $model.size)
+                .overlay(RectangleView(rect: model.rect), alignment: .topLeading)
             NavigationView(error: model.error)
-            DashboardView(color: model.averageColor, location: model.location, rectSize: model.rectSize)
+            DashboardView(color: model.averageColor)
+                .overlay(ThumbView(frame: model.thumbFrame, location: model.location), alignment: .topTrailing)
         }
     }
 }

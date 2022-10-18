@@ -15,6 +15,8 @@ struct ThumbView: View {
         VStack {
             if let image = frame {
                 Image(image, scale: 1, label: Text("Thumbview Feed"))
+                    .scaledToFit()
+                    .border(.yellow)
             }
             if let location = location {
                 Text("x: \(Int(location.x)) y: \(Int(location.y))")
