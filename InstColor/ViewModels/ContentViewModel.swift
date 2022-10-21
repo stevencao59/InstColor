@@ -9,30 +9,29 @@ import CoreImage
 import UIKit
 
 class ContentViewModel: ObservableObject {
+    // Note: recognizeFrame is the frame where we get average color from
     @Published var frame: CGImage?
     @Published var thumbFrame: CGImage?
+    @Published var recgonizeFrame: CGImage?
+    
+    // Image source can be from whole camera, thumb image or camera pictures
+    @Published var frameSource: FrameSource = .wholeImage
+    
     @Published var averageColor: UIColor?
     @Published var location: CGPoint?
     @Published var rect: CGRect?
     @Published var size: CGSize?
     @Published var error: Error?
-
+    
     private let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
     
     func setupSubscriptions() {
-        frameManager.$current
-            .receive(on: RunLoop.main)
-            .compactMap { buffer in
-                return CGImage.create(from: buffer)
-            }
-            .assign(to: &$frame)
-        
         cameraManager.$error
             .receive(on: RunLoop.main)
             .map { $0 }
             .assign(to: &$error)
-        
+
         $location
             .receive(on: RunLoop.main)
             .compactMap() { loc in
@@ -42,19 +41,13 @@ class ContentViewModel: ObservableObject {
                 return nil
             }
             .assign(to: &$rect)
-        
-        $thumbFrame
+
+        frameManager.$current
             .receive(on: RunLoop.main)
-            .compactMap { result in
-                if let image = result.publisher.output {
-                    let image = UIImage(cgImage: image)
-                    if let color = image.averageColor {
-                        return color
-                    }
-                }
-                return nil
+            .compactMap { buffer in
+                return CGImage.create(from: buffer)
             }
-            .assign(to: &$averageColor)
+            .assign(to: &$frame)
         
         $frame
             .receive(on: RunLoop.main)
@@ -70,6 +63,33 @@ class ContentViewModel: ObservableObject {
                 return nil
             }
             .assign(to: &$thumbFrame)
+
+        $frame
+            .receive(on: RunLoop.main)
+            .compactMap { frame in
+                switch self.frameSource {
+                case .wholeImage:
+                    return self.frame
+                case .thumbImage:
+                    return self.thumbFrame
+                default:
+                    return self.frame
+                }
+            }
+            .assign(to: &$recgonizeFrame)
+
+        $recgonizeFrame
+            .receive(on: RunLoop.main)
+            .compactMap { result in
+                if let image = result.publisher.output {
+                    let image = UIImage(cgImage: image)
+                    if let color = image.averageColor {
+                        return color
+                    }
+                }
+                return nil
+            }
+            .assign(to: &$averageColor)
     }
     
     init() {

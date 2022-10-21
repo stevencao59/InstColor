@@ -9,25 +9,18 @@ import SwiftUI
 
 struct RectangleView: View {
     var rect: CGRect?
-    var offset: CGSize? {
-        if let rect = rect {
-            return CGSize(width: rect.origin.x, height: rect.origin.y)
-        }
-        return nil
-    }
     
-
+    @State private var rectScale = 2
+    
     var body: some View {
         if let rect = rect {
-            if let offset = offset {
-                Rectangle()
-                    .fill(.clear)
-                    .border(.yellow)
-                    .contentShape(Rectangle())
-                    .frame(width: rect.width, height: rect.height)
-                    .offset(offset)
-                    .animation(.default, value: offset)
-            }
+            Rectangle()
+                .fill(.clear)
+                .border(.yellow)
+                .contentShape(Rectangle())
+                .frame(width: rect.width, height: rect.height)
+                .offset(CGSize(width: rect.origin.x, height: rect.origin.y))
+                .animation(.easeInOut(duration: 0.5), value: rect.origin)
         }
     }
 }

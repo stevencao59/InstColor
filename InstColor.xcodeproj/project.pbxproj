@@ -20,6 +20,8 @@
 		B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71B28F791F500E2EC66 /* ThumbView.swift */; };
 		B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */; };
 		B6DDD72428FD00F400E2EC66 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD72328FD00F400E2EC66 /* RectangleView.swift */; };
+		B6DDD72628FF844900E2EC66 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD72528FF844900E2EC66 /* Enum.swift */; };
+		B6DDD72828FFA82600E2EC66 /* FrameSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */; };
 		B6DE828928E729E300826201 /* InstColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828828E729E300826201 /* InstColorApp.swift */; };
 		B6DE828B28E729E300826201 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE828A28E729E300826201 /* ContentView.swift */; };
 		B6DE828D28E729E400826201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DE828C28E729E400826201 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		B6DDD71B28F791F500E2EC66 /* ThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbView.swift; sourceTree = "<group>"; };
 		B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		B6DDD72328FD00F400E2EC66 /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
+		B6DDD72528FF844900E2EC66 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameSourceView.swift; sourceTree = "<group>"; };
 		B6DE828528E729E300826201 /* InstColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DE828828E729E300826201 /* InstColorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstColorApp.swift; sourceTree = "<group>"; };
 		B6DE828A28E729E300826201 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 				B6DDD70528EFDA4600E2EC66 /* NavigationView.swift */,
 				B6DE829628E72A0800826201 /* FrameView.swift */,
 				B6DDD71728F500C100E2EC66 /* DashboardView.swift */,
+				B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DDD70F28F1B33C00E2EC66 /* RGBColor.swift */,
+				B6DDD72528FF844900E2EC66 /* Enum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,9 +261,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DE829728E72A0800826201 /* FrameView.swift in Sources */,
+				B6DDD72828FFA82600E2EC66 /* FrameSourceView.swift in Sources */,
 				B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */,
 				B6EBA0C228E78B97006954F8 /* FrameManager.swift in Sources */,
 				B6DDD70D28F1B2F500E2EC66 /* ColorResultViewModel.swift in Sources */,
+				B6DDD72628FF844900E2EC66 /* Enum.swift in Sources */,
 				B6DE829B28E72FA900826201 /* CameraError.swift in Sources */,
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */,

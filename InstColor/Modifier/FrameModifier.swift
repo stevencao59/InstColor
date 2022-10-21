@@ -82,7 +82,7 @@ struct PinchToZoom: ViewModifier {
     }
 }
 
-struct ZoomModifier: ViewModifier {
+struct FrameModifier: ViewModifier {
     private var contentSize: CGSize
     private var min: CGFloat = 1.0
     private var max: CGFloat = 3.0
@@ -91,11 +91,13 @@ struct ZoomModifier: ViewModifier {
     
     @Binding var rectSize: CGSize?
     @Binding var location: CGPoint?
+    @Binding var frameSource: FrameSource
     
-    init(contentSize: CGSize, rectSize: Binding<CGSize?>, location: Binding<CGPoint?>) {
+    init(contentSize: CGSize, rectSize: Binding<CGSize?>, location: Binding<CGPoint?>, frameSource: Binding<FrameSource>) {
         self.contentSize = contentSize
         self._rectSize = rectSize
         self._location = location
+        self._frameSource = frameSource
     }
     
     var doubleTapGesture: some Gesture {
@@ -110,6 +112,7 @@ struct ZoomModifier: ViewModifier {
     var tapGesture: some Gesture {
         SpatialTapGesture().onEnded { event in
             location = event.location
+            frameSource = .thumbImage
         }
     }
     

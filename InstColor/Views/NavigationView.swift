@@ -8,31 +8,37 @@
 import SwiftUI
 
 struct NavigationView: View {
-  var error: Error?
-
-  var body: some View {
-    VStack {
-        ZStack{
-            if let error = error {
-                Text(error.localizedDescription)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+    var error: Error?
+    @Binding var frameSource: FrameSource
+    
+    var body: some View {
+        VStack {
+            ZStack {
+                if let error = error {
+                    Text(error.localizedDescription)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                }
+                else {
+                    HStack {
+                        FrameSourceView(frameSource: $frameSource)
+                        Spacer()
+                    }
+                }
             }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(error == nil ? Color.black : Color.red)
+            .animation(.easeInOut, value: 0.25)
+            
+            Spacer()
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(error == nil ? Color.black : Color.red)
-        .animation(.easeInOut, value: 0.25)
-
-      Spacer()
     }
-
-  }
 }
 
 struct NavigationView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationView(error: CameraError.cannotAddInput)
+      NavigationView(error: CameraError.cannotAddInput, frameSource: .constant(.thumbImage))
   }
 }

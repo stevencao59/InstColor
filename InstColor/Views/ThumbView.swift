@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ThumbView: View {
     var frame: CGImage?
-    var location: CGPoint?
     
     var body: some View {
         VStack {
@@ -18,15 +17,13 @@ struct ThumbView: View {
                     .scaledToFit()
                     .border(.yellow)
             }
-            if let location = location {
-                Text("x: \(Int(location.x)) y: \(Int(location.y))")
-            }
         }
+        .padding()
     }
 }
 
 struct ThumbnailView_Previews: PreviewProvider {
     static var previews: some View {
-        ThumbView(frame: UIImage(systemName: "heart.fill")?.cgImage, location: CGPoint(x: 100, y: 50))
+        ThumbView(frame: UIImage(systemName: "heart.fill")?.cgImage)
     }
 }
