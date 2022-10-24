@@ -30,7 +30,6 @@ struct NavigationView: View {
             .padding()
             .frame(maxWidth: .infinity)
             .background(error == nil ? Color.black : Color.red)
-            .animation(.easeInOut, value: 0.25)
             
             Spacer()
         }

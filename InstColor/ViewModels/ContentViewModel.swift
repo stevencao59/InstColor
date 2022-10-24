@@ -4,7 +4,6 @@
 //
 //  Created by Lei Cao on 9/30/22.
 //
-
 import CoreImage
 import UIKit
 
@@ -17,10 +16,18 @@ class ContentViewModel: ObservableObject {
     // Image source can be from whole camera, thumb image or camera pictures
     @Published var frameSource: FrameSource = .wholeImage
     
+    // Average color results
     @Published var averageColor: UIColor?
+    
+    // Pressed location, size and scale
     @Published var location: CGPoint?
     @Published var rect: CGRect?
+    @Published var scaleAmount: Double = 2
+    
+    // Image size
     @Published var size: CGSize?
+    
+    // All camera errors
     @Published var error: Error?
     
     private let cameraManager = CameraManager.shared
@@ -36,7 +43,7 @@ class ContentViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .compactMap() { loc in
                 if let location = self.location {
-                    return CGRect(x: location.x - 20, y: location.y - 20, width: 20, height: 20)
+                    return CGRect(x: location.x, y: location.y - 20, width: 20, height: 20)
                 }
                 return nil
             }

@@ -7,16 +7,6 @@
 
 import Foundation
 
-enum CameraError: Error {
-  case cameraUnavailable
-  case cannotAddInput
-  case cannotAddOutput
-  case createCaptureInput(Error)
-  case deniedAuthorization
-  case restrictedAuthorization
-  case unknownAuthorization
-}
-
 extension CameraError: LocalizedError {
   var errorDescription: String? {
     switch self {

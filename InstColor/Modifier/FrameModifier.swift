@@ -91,12 +91,17 @@ struct FrameModifier: ViewModifier {
     
     @Binding var rectSize: CGSize?
     @Binding var location: CGPoint?
+    @Binding var scaleAmount: Double
+
     @Binding var frameSource: FrameSource
     
-    init(contentSize: CGSize, rectSize: Binding<CGSize?>, location: Binding<CGPoint?>, frameSource: Binding<FrameSource>) {
+    init(contentSize: CGSize, rectSize: Binding<CGSize?>, location: Binding<CGPoint?>, frameSource: Binding<FrameSource>, scaleAmount: Binding<Double>) {
         self.contentSize = contentSize
+
         self._rectSize = rectSize
         self._location = location
+        self._scaleAmount = scaleAmount
+        
         self._frameSource = frameSource
     }
     
@@ -113,6 +118,7 @@ struct FrameModifier: ViewModifier {
         SpatialTapGesture().onEnded { event in
             location = event.location
             frameSource = .thumbImage
+            scaleAmount = 2
         }
     }
     

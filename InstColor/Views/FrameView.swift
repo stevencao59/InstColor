@@ -11,16 +11,27 @@ struct FrameView: View {
     var image: CGImage?
     @Binding var location: CGPoint?
     @Binding var rectSize: CGSize?
+    @Binding var scaleAmount: Double
+    
     @Binding var frameSource: FrameSource
 
     var body: some View {
         GeometryReader { geometry in
-            if let image = image {
-                Image(image, scale: 1.0, label: Text("Camera feed"))
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $rectSize, location: $location, frameSource: $frameSource))
+            ZStack {
+                if let image = image {
+                    Image(image, scale: 1.0, label: Text("Camera feed"))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                        .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $rectSize, location: $location, frameSource: $frameSource, scaleAmount: $scaleAmount))
+                }
+//                ZStack {
+//                    Rectangle()
+//                        .background(.yellow)
+//                        .offset(x: 0, y: 50)
+//                        .frame(width: 5, height: 50)
+//                }
+//                .frame(width: rectSize?.width, height: rectSize?.height, alignment: .topLeading)
             }
         }
         .background(.black)
@@ -29,6 +40,6 @@ struct FrameView: View {
 
 struct FrameView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameView(location: .constant(CGPoint(x: 100, y: 100)), rectSize: .constant(CGSize(width: 50, height: 50)), frameSource: .constant(.wholeImage))
+        FrameView(location: .constant(CGPoint(x: 100, y: 100)), rectSize: .constant(CGSize(width: 50, height: 50)), scaleAmount: .constant(1.0), frameSource: .constant(.wholeImage))
     }
 }

@@ -22,7 +22,6 @@ struct DashboardView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(.black)
-                .animation(.easeInOut, value: 0.25)
             }
         }
 

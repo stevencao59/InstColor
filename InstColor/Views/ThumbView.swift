@@ -9,13 +9,16 @@ import SwiftUI
 
 struct ThumbView: View {
     var frame: CGImage?
+    var frameSource: FrameSource
     
     var body: some View {
         VStack {
-            if let image = frame {
-                Image(image, scale: 1, label: Text("Thumbview Feed"))
-                    .scaledToFit()
-                    .border(.yellow)
+            if frameSource == .thumbImage {
+                if let image = frame {
+                    Image(image, scale: 1, label: Text("Thumbview Feed"))
+                        .scaledToFit()
+                        .border(.yellow)
+                }
             }
         }
         .padding()
@@ -24,6 +27,6 @@ struct ThumbView: View {
 
 struct ThumbnailView_Previews: PreviewProvider {
     static var previews: some View {
-        ThumbView(frame: UIImage(systemName: "heart.fill")?.cgImage)
+        ThumbView(frame: UIImage(systemName: "heart.fill")?.cgImage, frameSource: .thumbImage)
     }
 }
