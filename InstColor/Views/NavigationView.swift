@@ -10,6 +10,7 @@ import SwiftUI
 struct NavigationView: View {
     var error: Error?
     @Binding var frameSource: FrameSource
+    @Binding var navigationHeight: CGFloat
     
     var body: some View {
         VStack {
@@ -22,12 +23,13 @@ struct NavigationView: View {
                 }
                 else {
                     HStack {
-                        FrameSourceView(frameSource: $frameSource)
-                        Spacer()
+                        FrameSourceView(frameSource: $frameSource, navigationHeight: $navigationHeight)
+                        Text("Camera")
+                            .foregroundColor(.yellow)
+                            .font(.headline)
                     }
                 }
             }
-            .padding()
             .frame(maxWidth: .infinity)
             .background(error == nil ? Color.black : Color.red)
             
@@ -38,6 +40,6 @@ struct NavigationView: View {
 
 struct NavigationView_Previews: PreviewProvider {
   static var previews: some View {
-      NavigationView(error: CameraError.cannotAddInput, frameSource: .constant(.thumbImage))
+      NavigationView(error: CameraError.cannotAddInput, frameSource: .constant(.thumbImage), navigationHeight: .constant(1.0))
   }
 }

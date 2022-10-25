@@ -10,18 +10,24 @@ import SwiftUI
 struct ThumbView: View {
     var frame: CGImage?
     var frameSource: FrameSource
+    @State private var viewXOffset = 100.0
     
     var body: some View {
         VStack {
-            if frameSource == .thumbImage {
-                if let image = frame {
-                    Image(image, scale: 1, label: Text("Thumbview Feed"))
-                        .scaledToFit()
-                        .border(.yellow)
+            HStack {
+                if let frame = frame {
+                    Image(frame, scale: 1, label: Text("Thumbview Feed"))
+                            .scaledToFit()
+                            .border(.yellow)
                 }
             }
+            .offset(x: viewXOffset, y: 0)
+            .animation(.spring(dampingFraction: 1.0), value: viewXOffset)
         }
         .padding()
+        .onChange(of: frame) { value in
+            viewXOffset = frameSource == .thumbImage ? 0 : 100.0
+        }
     }
 }
 

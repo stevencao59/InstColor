@@ -14,7 +14,7 @@ struct ContentView: View {
         ZStack(alignment: .bottomTrailing) {
             FrameView(image: model.frame, location: $model.location, rectSize: $model.size, scaleAmount: $model.scaleAmount, frameSource: $model.frameSource)
                 .overlay(RectangleView(rect: model.rect, frameSource: model.frameSource, scaleAmount: $model.scaleAmount), alignment: .topLeading)
-            NavigationView(error: model.error, frameSource: $model.frameSource)
+            NavigationView(error: model.error, frameSource: $model.frameSource, navigationHeight: $model.navigationHeight)
             DashboardView(color: model.averageColor)
                 .overlay(ThumbView(frame: model.thumbFrame, frameSource: model.frameSource), alignment: .topTrailing)
         }
