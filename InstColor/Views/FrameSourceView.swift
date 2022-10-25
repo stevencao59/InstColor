@@ -10,25 +10,19 @@ import SwiftUI
 struct FrameSourceView: View {
     @Binding var frameSource: FrameSource
     @Binding var navigationHeight: CGFloat
-    
-    var thumbviewColor: Color {
-        frameSource == .wholeImage ? .white : .yellow
-    }
+    @Binding var imageName: String
 
     func changeFrameSource() {
         frameSource = frameSource == .thumbImage ? .wholeImage : .thumbImage
     }
     
     var body: some View {
-        VStack() {
-            Button(action: changeFrameSource) {
-                Image(systemName: "viewfinder")
-                    .foregroundColor(thumbviewColor)
-            }
+        VStack {
+            Image(systemName: imageName)
         }
         .background(.black)
+        .foregroundColor(.yellow)
         .opacity(0.8)
-        .animation(.easeIn, value: thumbviewColor)
         .overlay(
             GeometryReader { geo in
                 Color.clear
@@ -37,11 +31,15 @@ struct FrameSourceView: View {
                     }
             }
         )
+        .animation(.easeIn, value: imageName)
+        .onChange(of: frameSource) { newSurce in
+            imageName = newSurce == .thumbImage ? "viewfinder.circle" : "viewfinder"
+        }
     }
 }
 
 struct FrameSourceView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameSourceView(frameSource: .constant(.wholeImage), navigationHeight: .constant(1.0))
+        FrameSourceView(frameSource: .constant(.wholeImage), navigationHeight: .constant(1.0), imageName: .constant("viewfinder"))
     }
 }

@@ -12,7 +12,8 @@ struct ColorTextGroupView: View {
     
     func translateHexString(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> String {
         let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        return NSString(format:"#%06x", rgb) as String
+        let result = NSString(format:"#%06x", rgb) as String
+        return result.uppercased()
     }
     
     var body: some View {

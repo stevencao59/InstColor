@@ -12,6 +12,12 @@ struct NavigationView: View {
     @Binding var frameSource: FrameSource
     @Binding var navigationHeight: CGFloat
     
+    @State var imageName = "viewfinder"
+    
+    func changeFrameSource() {
+        frameSource = frameSource == .thumbImage ? .wholeImage : .thumbImage
+    }
+    
     var body: some View {
         VStack {
             ZStack {
@@ -23,10 +29,33 @@ struct NavigationView: View {
                 }
                 else {
                     HStack {
-                        FrameSourceView(frameSource: $frameSource, navigationHeight: $navigationHeight)
-                        Text("Camera")
+                        FrameSourceView(frameSource: $frameSource, navigationHeight: $navigationHeight, imageName: $imageName)
+                        HStack {
+                            Menu {
+                                Button(action: changeFrameSource) {
+                                    HStack {
+                                        Text("Full Screen")
+                                        Image(systemName: "viewfinder")
+                                    }
+                                    .foregroundColor(.yellow)
+                                }
+                                Button(action: changeFrameSource) {
+                                    HStack {
+                                        Text("Rectagle View")
+                                        Image(systemName: "viewfinder.circle")
+                                    }
+                                }
+                            } label: {
+                                HStack {
+                                    Text("Camera")
+                                    Image(systemName: "chevron.down")
+                                }
+                                .foregroundColor(.yellow)
+                            }
                             .foregroundColor(.yellow)
                             .font(.headline)
+                            .padding([.vertical])
+                        }
                     }
                 }
             }
