@@ -9,9 +9,11 @@ import SwiftUI
 
 struct NavigationMenu: View {
     let action: () -> Void
+    var frameSource: FrameSource
     
-    init (action: @escaping () -> Void) {
+    init (action: @escaping () -> Void, frameSource: FrameSource) {
         self.action = action
+        self.frameSource = frameSource
     }
     
     var body: some View {
@@ -19,16 +21,21 @@ struct NavigationMenu: View {
             Button(action: action) {
                 HStack {
                     Text("Full Screen")
-                    Image(systemName: "viewfinder")
+                    if frameSource == .wholeImage {
+                        Image(systemName: "checkmark")
+                    }
                 }
-                .foregroundColor(.yellow)
             }
+            
             Button(action: action) {
                 HStack {
                     Text("Rectagle View")
-                    Image(systemName: "viewfinder.circle")
+                    if frameSource == .thumbImage {
+                        Image(systemName: "checkmark")
+                    }
                 }
             }
+            
         } label: {
             HStack {
                 Text("Camera")
@@ -61,7 +68,7 @@ struct NavigationView: View {
                         .padding()
                 } else {
                     FrameSourceView(frameSource: $frameSource, imageName: $imageName)
-                    NavigationMenu(action: changeFrameSource)
+                    NavigationMenu(action: changeFrameSource, frameSource: frameSource)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -72,7 +79,6 @@ struct NavigationView: View {
                 GeometryReader { geo in
                     Color.clear
                         .onAppear {
-                            print("Navigation Height is \(geo.size.height)")
                             navigationHeight = geo.size.height
                         }
                 }

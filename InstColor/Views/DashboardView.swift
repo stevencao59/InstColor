@@ -28,7 +28,6 @@ struct DashboardView: View {
                     GeometryReader { geo in
                         Color.clear
                             .onAppear {
-                                print("Dashboard Height is \(geo.size.height)")
                                 dashboardHeight = geo.size.height
                             }
                     }

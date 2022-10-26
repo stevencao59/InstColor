@@ -17,7 +17,9 @@ struct FrameView: View {
     @Binding var scaleAmount: Double
     
     @Binding var frameSource: FrameSource
-
+    
+    @State private var cornerViewOpacity = 1.0
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -29,11 +31,17 @@ struct FrameView: View {
                         .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                         .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $rectSize, location: $location, frameSource: $frameSource, scaleAmount: $scaleAmount))
                     
-                    RectCornerView()
-                        .frame(height: geometry.size.height - dashboardHeight - navigationHeight)
+                        RectCornerView()
+                            .frame(height: geometry.size.height - dashboardHeight - navigationHeight)
+                            .opacity(cornerViewOpacity)
+                            
                 }
             }
             .ignoresSafeArea()
+            .animation(.easeIn, value: cornerViewOpacity)
+            .onChange(of: frameSource) { source in
+                cornerViewOpacity = source == .wholeImage ? 1.0 : 0.0
+            }
         }
     }
 }
