@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FrameSourceView: View {
     @Binding var frameSource: FrameSource
-    @Binding var navigationHeight: CGFloat
     @Binding var imageName: String
 
     func changeFrameSource() {
@@ -20,17 +19,8 @@ struct FrameSourceView: View {
         VStack {
             Image(systemName: imageName)
         }
-        .background(.black)
         .foregroundColor(.yellow)
         .opacity(0.8)
-        .overlay(
-            GeometryReader { geo in
-                Color.clear
-                    .onAppear {
-                        navigationHeight = geo.size.height
-                    }
-            }
-        )
         .animation(.easeIn, value: imageName)
         .onChange(of: frameSource) { newSurce in
             imageName = newSurce == .thumbImage ? "viewfinder.circle" : "viewfinder"
@@ -40,6 +30,6 @@ struct FrameSourceView: View {
 
 struct FrameSourceView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameSourceView(frameSource: .constant(.wholeImage), navigationHeight: .constant(1.0), imageName: .constant("viewfinder"))
+        FrameSourceView(frameSource: .constant(.wholeImage), imageName: .constant("viewfinder"))
     }
 }

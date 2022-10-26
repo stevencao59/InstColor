@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
     let color: UIColor?
+    @Binding var dashboardHeight: CGFloat
     
     var body: some View {
         VStack {
@@ -22,6 +23,17 @@ struct DashboardView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(.black)
+                .opacity(0.9)
+                .overlay(
+                    GeometryReader { geo in
+                        Color.clear
+                            .onAppear {
+                                print("Dashboard Height is \(geo.size.height)")
+                                dashboardHeight = geo.size.height
+                            }
+                    }
+                )
+
             }
         }
 
@@ -30,6 +42,6 @@ struct DashboardView: View {
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView(color: UIColor(.white))
+        DashboardView(color: UIColor(.white), dashboardHeight: .constant(10))
     }
 }

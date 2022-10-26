@@ -29,15 +29,16 @@ class ContentViewModel: ObservableObject {
     
     // Navigation height
     @Published var navigationHeight: CGFloat = 0
+    @Published var dashboardHeight: CGFloat = 0
     
     // All camera errors
     @Published var error: Error?
+
+    // Thumb view size to exact color
+    @Published var thumbViewSize = 20.0
     
     private let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
-    
-    // Thumb view size to exact color
-    private let thumbViewSize = 20.0
     
     func setupSubscriptions() {
         cameraManager.$error
@@ -49,7 +50,7 @@ class ContentViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .compactMap() { loc in
                 if let location = self.location {
-                    return CGRect(x: location.x, y: location.y - self.navigationHeight, width: self.thumbViewSize, height: self.thumbViewSize)
+                    return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
                 }
                 return nil
             }
@@ -69,7 +70,7 @@ class ContentViewModel: ObservableObject {
                     let image = UIImage(cgImage: image)
                     if let rect = self.rect {
                         if let size = self.size {
-                            let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y - self.navigationHeight - (self.thumbViewSize / 2), width: rect.width, height: rect.height)
+                            let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
                             return image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
                         }
                     }

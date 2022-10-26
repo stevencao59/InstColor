@@ -17,8 +17,8 @@ struct ThumbView: View {
             HStack {
                 if let frame = frame {
                     Image(frame, scale: 1, label: Text("Thumbview Feed"))
-                            .scaledToFit()
-                            .border(.yellow)
+                        .scaledToFit()
+                        .border(.yellow)
                 }
             }
             .offset(x: viewXOffset, y: 0)

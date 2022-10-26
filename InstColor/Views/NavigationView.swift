@@ -7,6 +7,39 @@
 
 import SwiftUI
 
+struct NavigationMenu: View {
+    let action: () -> Void
+    
+    init (action: @escaping () -> Void) {
+        self.action = action
+    }
+    
+    var body: some View {
+        Menu {
+            Button(action: action) {
+                HStack {
+                    Text("Full Screen")
+                    Image(systemName: "viewfinder")
+                }
+                .foregroundColor(.yellow)
+            }
+            Button(action: action) {
+                HStack {
+                    Text("Rectagle View")
+                    Image(systemName: "viewfinder.circle")
+                }
+            }
+        } label: {
+            HStack {
+                Text("Camera")
+                Image(systemName: "chevron.down")
+            }
+        }
+        .font(.headline)
+        .padding([.vertical])
+    }
+}
+
 struct NavigationView: View {
     var error: Error?
     @Binding var frameSource: FrameSource
@@ -20,55 +53,38 @@ struct NavigationView: View {
     
     var body: some View {
         VStack {
-            ZStack {
+            HStack {
                 if let error = error {
                     Text(error.localizedDescription)
                         .bold()
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                }
-                else {
-                    HStack {
-                        FrameSourceView(frameSource: $frameSource, navigationHeight: $navigationHeight, imageName: $imageName)
-                        HStack {
-                            Menu {
-                                Button(action: changeFrameSource) {
-                                    HStack {
-                                        Text("Full Screen")
-                                        Image(systemName: "viewfinder")
-                                    }
-                                    .foregroundColor(.yellow)
-                                }
-                                Button(action: changeFrameSource) {
-                                    HStack {
-                                        Text("Rectagle View")
-                                        Image(systemName: "viewfinder.circle")
-                                    }
-                                }
-                            } label: {
-                                HStack {
-                                    Text("Camera")
-                                    Image(systemName: "chevron.down")
-                                }
-                                .foregroundColor(.yellow)
-                            }
-                            .foregroundColor(.yellow)
-                            .font(.headline)
-                            .padding([.vertical])
-                        }
-                    }
+                        .padding()
+                } else {
+                    FrameSourceView(frameSource: $frameSource, imageName: $imageName)
+                    NavigationMenu(action: changeFrameSource)
                 }
             }
             .frame(maxWidth: .infinity)
-            .background(error == nil ? Color.black : Color.red)
-            
+            .background(.black)
+            .opacity(0.9)
+            .foregroundColor(.yellow)
+            .overlay(
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear {
+                            print("Navigation Height is \(geo.size.height)")
+                            navigationHeight = geo.size.height
+                        }
+                }
+            )
             Spacer()
+            
         }
     }
 }
 
 struct NavigationView_Previews: PreviewProvider {
   static var previews: some View {
-      NavigationView(error: CameraError.cannotAddInput, frameSource: .constant(.thumbImage), navigationHeight: .constant(1.0))
+      NavigationView(error: nil, frameSource: .constant(.thumbImage), navigationHeight: .constant(1.0))
   }
 }
