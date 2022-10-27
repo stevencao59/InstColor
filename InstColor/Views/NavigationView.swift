@@ -48,27 +48,24 @@ struct NavigationMenu: View {
 }
 
 struct NavigationView: View {
-    var error: Error?
-    @Binding var frameSource: FrameSource
-    @Binding var navigationHeight: CGFloat
-    
+    @ObservedObject var model: ContentViewModel
     @State var imageName = "viewfinder"
     
     func changeFrameSource() {
-        frameSource = frameSource == .thumbImage ? .wholeImage : .thumbImage
+        model.frameSource = model.frameSource == .thumbImage ? .wholeImage : .thumbImage
     }
     
     var body: some View {
         VStack {
             HStack {
-                if let error = error {
+                if let error = model.error {
                     Text(error.localizedDescription)
                         .bold()
                         .multilineTextAlignment(.center)
                         .padding()
                 } else {
-                    FrameSourceView(frameSource: $frameSource, imageName: $imageName)
-                    NavigationMenu(action: changeFrameSource, frameSource: frameSource)
+                    FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
+                    NavigationMenu(action: changeFrameSource, frameSource: model.frameSource)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -80,7 +77,7 @@ struct NavigationView: View {
                     Color.clear
                         .onAppear {
                             print("navigation bar is \(geo.size.height)")
-                            navigationHeight = geo.size.height
+                            model.navigationHeight = geo.size.height
                         }
                 }
             )
@@ -92,6 +89,6 @@ struct NavigationView: View {
 
 struct NavigationView_Previews: PreviewProvider {
   static var previews: some View {
-      NavigationView(error: nil, frameSource: .constant(.thumbImage), navigationHeight: .constant(1.0))
+      NavigationView(model: ContentViewModel())
   }
 }

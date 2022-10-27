@@ -63,14 +63,12 @@ struct RectangleImageView: View {
 }
 
 struct RectangleView: View {
-    var rect: CGRect?
-    var frameSource: FrameSource
-    @Binding var scaleAmount: Double
+    @ObservedObject var model: ContentViewModel
     
     var body: some View {
-        if frameSource == .thumbImage {
-            if let rect = rect {
-                RectangleImageView(rect: rect, scaleAmount: $scaleAmount)
+        if model.frameSource == .thumbImage {
+            if let rect = model.rect {
+                RectangleImageView(rect: rect, scaleAmount: $model.scaleAmount)
                 .frame(width: rect.width, height: rect.height)
                 .offset(CGSize(width: rect.origin.x, height: rect.origin.y))
             }

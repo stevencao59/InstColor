@@ -13,11 +13,11 @@ struct ContentView: View {
     var body: some View {
         ContentContainerView(model: model) {
             ZStack(alignment: .bottomTrailing) {
-                FrameView(image: model.frame, navigationHeight: model.navigationHeight, dashboardHeight: model.dashboardHeight, statusBarHeight: model.statusBarHeight, bottomBarHeight: model.bottomBarHeight, location: $model.location, rectSize: $model.size, scaleAmount: $model.scaleAmount, frameSource: $model.frameSource)
-                    .overlay(RectangleView(rect: model.rect, frameSource: model.frameSource, scaleAmount: $model.scaleAmount), alignment: .topLeading)
-                NavigationView(error: model.error, frameSource: $model.frameSource, navigationHeight: $model.navigationHeight)
-                DashboardView(color: model.averageColor, dashboardHeight: $model.dashboardHeight)
-                    .overlay(ThumbView(frame: model.thumbFrame, frameSource: model.frameSource), alignment: .topTrailing)
+                FrameView(model: model)
+                    .overlay(RectangleView(model: model), alignment: .topLeading)
+                NavigationView(model: model)
+                DashboardView(model: model)
+                    .overlay(ThumbView(model: model), alignment: .topTrailing)
             }
         }
     }

@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ThumbView: View {
-    var frame: CGImage?
-    var frameSource: FrameSource
+    @ObservedObject var model: ContentViewModel
     @State private var viewXOffset = 100.0
     
     var body: some View {
         VStack {
             HStack {
-                if let frame = frame {
+                if let frame = model.thumbFrame {
                     Image(frame, scale: 1, label: Text("Thumbview Feed"))
                         .scaledToFit()
                         .border(.yellow)
@@ -25,14 +24,14 @@ struct ThumbView: View {
             .animation(.spring(dampingFraction: 1.0), value: viewXOffset)
         }
         .padding()
-        .onChange(of: frame) { value in
-            viewXOffset = frameSource == .thumbImage ? 0 : 100.0
+        .onChange(of: model.thumbFrame) { value in
+            viewXOffset = model.frameSource == .thumbImage ? 0 : 100.0
         }
     }
 }
 
 struct ThumbnailView_Previews: PreviewProvider {
     static var previews: some View {
-        ThumbView(frame: UIImage(systemName: "heart.fill")?.cgImage, frameSource: .thumbImage)
+        ThumbView(model: ContentViewModel())
     }
 }

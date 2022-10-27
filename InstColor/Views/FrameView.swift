@@ -8,32 +8,21 @@
 import SwiftUI
 
 struct FrameView: View {
-    var image: CGImage?
-    var navigationHeight: CGFloat
-    var dashboardHeight: CGFloat
-    var statusBarHeight: CGFloat
-    var bottomBarHeight: CGFloat
-    
-    @Binding var location: CGPoint?
-    @Binding var rectSize: CGSize?
-    @Binding var scaleAmount: Double
-    
-    @Binding var frameSource: FrameSource
-    
+    @ObservedObject var model: ContentViewModel
     @State private var cornerViewOpacity = 1.0
     
     var body: some View {
         ZStack {
             GeometryReader { geometry in
-                if let image = image {
+                if let image = model.frame {
                     Image(image, scale: 1.0, label: Text("Camera feed"))
                         .resizable()
                         .scaledToFit()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                        .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $rectSize, location: $location, frameSource: $frameSource, scaleAmount: $scaleAmount))
+                        .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
                     
-                    RectCornerView(navigationHeight: navigationHeight, statusBarHeight: statusBarHeight, bottomBarHeight: bottomBarHeight)
+                    RectCornerView(navigationHeight: model.navigationHeight, statusBarHeight: model.statusBarHeight, bottomBarHeight: model.bottomBarHeight)
                         .frame(height: geometry.size.height)
                         .opacity(cornerViewOpacity)
                 }
@@ -41,7 +30,7 @@ struct FrameView: View {
         }
         .ignoresSafeArea()
         .animation(.easeIn, value: cornerViewOpacity)
-        .onChange(of: frameSource) { source in
+        .onChange(of: $model.frameSource.wrappedValue) { source in
             cornerViewOpacity = source == .wholeImage ? 1.0 : 0.0
         }
     }
@@ -49,6 +38,6 @@ struct FrameView: View {
 
 struct FrameView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameView(navigationHeight: 20, dashboardHeight: 20, statusBarHeight: 10, bottomBarHeight: 10, location: .constant(CGPoint(x: 100, y: 100)), rectSize: .constant(CGSize(width: 50, height: 50)), scaleAmount: .constant(1.0), frameSource: .constant(.wholeImage))
+        FrameView(model: ContentViewModel())
     }
 }

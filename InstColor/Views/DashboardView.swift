@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct DashboardView: View {
-    let color: UIColor?
-    @Binding var dashboardHeight: CGFloat
+    @ObservedObject var model: ContentViewModel
     
     var body: some View {
         VStack {
             Spacer()
-            if let color = color {
+            if let color = model.averageColor {
                 HStack(alignment: .center) {
                     ColorResultView(color: color)
                     Spacer()
@@ -28,7 +27,7 @@ struct DashboardView: View {
                     GeometryReader { geo in
                         Color.clear
                             .onAppear {
-                                dashboardHeight = geo.size.height
+                                model.dashboardHeight = geo.size.height
                             }
                     }
                 )
@@ -41,6 +40,6 @@ struct DashboardView: View {
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView(color: UIColor(.white), dashboardHeight: .constant(10))
+        DashboardView(model: ContentViewModel())
     }
 }
