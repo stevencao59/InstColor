@@ -27,9 +27,11 @@ class ContentViewModel: ObservableObject {
     // Image size
     @Published var size: CGSize?
     
-    // Navigation height
+    // Navigation/dashboard height
     @Published var navigationHeight: CGFloat = 0
     @Published var dashboardHeight: CGFloat = 0
+    @Published var statusBarHeight: CGFloat = 0
+    @Published var bottomBarHeight: CGFloat = 0
     
     // All camera errors
     @Published var error: Error?

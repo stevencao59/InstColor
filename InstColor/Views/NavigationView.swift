@@ -73,12 +73,13 @@ struct NavigationView: View {
             }
             .frame(maxWidth: .infinity)
             .background(.black)
-            .opacity(0.9)
+            .opacity(0.8)
             .foregroundColor(.yellow)
             .overlay(
                 GeometryReader { geo in
                     Color.clear
                         .onAppear {
+                            print("navigation bar is \(geo.size.height)")
                             navigationHeight = geo.size.height
                         }
                 }

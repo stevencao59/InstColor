@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A695812909B482003DEE57 /* ContentContainerView.swift */; };
 		B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD6FA28EA7A9700E2EC66 /* Color.swift */; };
 		B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */; };
 		B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B6A695812909B482003DEE57 /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
 		B6DDD6FA28EA7A9700E2EC66 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextView.swift; sourceTree = "<group>"; };
 		B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResultView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */,
 				B6DDD71528F4BDCB00E2EC66 /* ColorTextGroupView.swift */,
 				B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */,
+				B6A695812909B482003DEE57 /* ContentContainerView.swift */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
 				B6DDD71728F500C100E2EC66 /* DashboardView.swift */,
 				B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */,
@@ -282,6 +285,7 @@
 				B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
+				B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */,
 				B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */,
 				B6EBA0C828E79736006954F8 /* FrameModifier.swift in Sources */,
 				B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */,
