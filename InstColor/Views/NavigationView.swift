@@ -76,7 +76,6 @@ struct NavigationView: View {
                 GeometryReader { geo in
                     Color.clear
                         .onAppear {
-                            print("navigation bar is \(geo.size.height)")
                             model.navigationHeight = geo.size.height
                         }
                 }
