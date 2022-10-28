@@ -22,7 +22,7 @@ class ContentViewModel: ObservableObject {
     // Pressed location, size and scale
     @Published var location: CGPoint?
     @Published var rect: CGRect?
-    @Published var scaleAmount: Double = 2
+    @Published var scaleAmount: Double = 1.5
     
     // Image size
     @Published var size: CGSize?

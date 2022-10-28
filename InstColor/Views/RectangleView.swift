@@ -46,6 +46,8 @@ struct RectangleImageView: View {
     var body: some View {
         if let rect = rect {
             Image(systemName: "viewfinder")
+                .resizable()
+                .scaledToFit()
                 .foregroundColor(.yellow)
                 .scaleEffect(scaleAmount)
                 .onChange(of: rect) { _ in
@@ -69,8 +71,8 @@ struct RectangleView: View {
         if model.frameSource == .thumbImage {
             if let rect = model.rect {
                 RectangleImageView(rect: rect, scaleAmount: $model.scaleAmount)
-                .frame(width: rect.width, height: rect.height)
-                .offset(CGSize(width: rect.origin.x, height: rect.origin.y))
+            .frame(width: rect.width, height: rect.height)
+            .offset(CGSize(width: rect.origin.x, height: rect.origin.y))
             }
         }
 
