@@ -7,53 +7,9 @@
 
 import SwiftUI
 
-struct NavigationMenu: View {
-    let action: () -> Void
-    var frameSource: FrameSource
-    
-    init (action: @escaping () -> Void, frameSource: FrameSource) {
-        self.action = action
-        self.frameSource = frameSource
-    }
-    
-    var body: some View {
-        Menu {
-            Button(action: action) {
-                HStack {
-                    Text("Full Screen")
-                    if frameSource == .wholeImage {
-                        Image(systemName: "checkmark")
-                    }
-                }
-            }
-            
-            Button(action: action) {
-                HStack {
-                    Text("Rectagle View")
-                    if frameSource == .thumbImage {
-                        Image(systemName: "checkmark")
-                    }
-                }
-            }
-            
-        } label: {
-            HStack {
-                Text("Camera")
-                Image(systemName: "chevron.down")
-            }
-        }
-        .font(.headline)
-        .padding([.vertical])
-    }
-}
-
 struct NavigationView: View {
     @ObservedObject var model: ContentViewModel
     @State var imageName = "viewfinder"
-    
-    func changeFrameSource() {
-        model.frameSource = model.frameSource == .thumbImage ? .wholeImage : .thumbImage
-    }
     
     var body: some View {
         VStack {
@@ -65,7 +21,7 @@ struct NavigationView: View {
                         .padding()
                 } else {
                     FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
-                    NavigationMenu(action: changeFrameSource, frameSource: model.frameSource)
+                    NavigationMenuView(frameSource: $model.frameSource, thumbFrameSize: $model.thumbViewSize)
                 }
             }
             .frame(maxWidth: .infinity)

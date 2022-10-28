@@ -22,3 +22,9 @@ enum FrameSource {
     case thumbImage
     case cameraImage
 }
+
+enum ThumbFrameSize: Double {
+    case halfSize = 10
+    case defaultSize = 20
+    case doubleSize = 40
+}

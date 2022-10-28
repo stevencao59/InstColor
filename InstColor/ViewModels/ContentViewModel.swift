@@ -37,10 +37,30 @@ class ContentViewModel: ObservableObject {
     @Published var error: Error?
 
     // Thumb view size to exact color
-    @Published var thumbViewSize = 20.0
+    @Published var thumbViewSize: ThumbFrameSize = .defaultSize
     
     private let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
+    
+    func getThumbFrame(cgImage: CGImage?) -> CGImage? {
+        if let image = cgImage {
+            let image = UIImage(cgImage: image)
+            if let rect = self.rect {
+                if let size = self.size {
+                    let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize.rawValue, width: rect.width, height: rect.height)
+                    return image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
+                }
+            }
+        }
+        return nil
+    }
+    
+    func getRect(loc: CGPoint?) -> CGRect? {
+        if let location = loc {
+            return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize.rawValue / 2, width: self.thumbViewSize.rawValue, height: self.thumbViewSize.rawValue)
+        }
+        return nil
+    }
     
     func setupSubscriptions() {
         cameraManager.$error
@@ -51,13 +71,17 @@ class ContentViewModel: ObservableObject {
         $location
             .receive(on: RunLoop.main)
             .compactMap() { loc in
-                if let location = self.location {
-                    return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
-                }
-                return nil
+                return self.getRect(loc: loc)
             }
             .assign(to: &$rect)
 
+        $thumbViewSize
+            .receive(on: RunLoop.main)
+            .compactMap() { loc in
+                return self.getRect(loc: self.location)
+            }
+            .assign(to: &$rect)
+        
         frameManager.$current
             .receive(on: RunLoop.main)
             .compactMap { buffer in
@@ -68,16 +92,7 @@ class ContentViewModel: ObservableObject {
         $frame
             .receive(on: RunLoop.main)
             .compactMap { result in
-                if let image = result.publisher.output {
-                    let image = UIImage(cgImage: image)
-                    if let rect = self.rect {
-                        if let size = self.size {
-                            let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
-                            return image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
-                        }
-                    }
-                }
-                return nil
+                return self.getThumbFrame(cgImage: result.publisher.output)
             }
             .assign(to: &$thumbFrame)
 

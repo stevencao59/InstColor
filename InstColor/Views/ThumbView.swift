@@ -9,23 +9,20 @@ import SwiftUI
 
 struct ThumbView: View {
     @ObservedObject var model: ContentViewModel
-    @State private var viewXOffset = 100.0
+    @State private var thumbViewOpacity = 1.0
     
     var body: some View {
         VStack {
-            HStack {
-                if let frame = model.thumbFrame {
-                    Image(frame, scale: 1, label: Text("Thumbview Feed"))
-                        .scaledToFit()
-                        .border(.yellow)
-                }
+            if let frame = model.thumbFrame {
+                Image(frame, scale: 1, label: Text("Thumbview Feed"))
+                    .scaledToFit()
+                    .border(.yellow)
             }
-            .offset(x: viewXOffset, y: 0)
-            .animation(.spring(dampingFraction: 1.0), value: viewXOffset)
         }
-        .padding()
-        .onChange(of: model.thumbFrame) { value in
-            viewXOffset = model.frameSource == .thumbImage ? 0 : 100.0
+        .opacity(thumbViewOpacity)
+        .animation(.default, value: thumbViewOpacity)
+        .onReceive(model.$thumbFrame) { _ in
+            thumbViewOpacity = model.frameSource == .thumbImage ? 1 : 0
         }
     }
 }
