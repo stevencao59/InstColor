@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A695812909B482003DEE57 /* ContentContainerView.swift */; };
-		B6A69584290A2DE2003DEE57 /* NavigationMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69583290A2DE2003DEE57 /* NavigationMenuView.swift */; };
+		B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69583290A2DE2003DEE57 /* SliderControlView.swift */; };
+		B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69585290C7109003DEE57 /* ScaleSliderView.swift */; };
 		B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD6FA28EA7A9700E2EC66 /* Color.swift */; };
 		B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */; };
 		B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */; };
@@ -40,7 +41,8 @@
 
 /* Begin PBXFileReference section */
 		B6A695812909B482003DEE57 /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
-		B6A69583290A2DE2003DEE57 /* NavigationMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuView.swift; sourceTree = "<group>"; };
+		B6A69583290A2DE2003DEE57 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
+		B6A69585290C7109003DEE57 /* ScaleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleSliderView.swift; sourceTree = "<group>"; };
 		B6DDD6FA28EA7A9700E2EC66 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextView.swift; sourceTree = "<group>"; };
 		B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResultView.swift; sourceTree = "<group>"; };
@@ -115,9 +117,10 @@
 				B6DDD71728F500C100E2EC66 /* DashboardView.swift */,
 				B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */,
 				B6DE829628E72A0800826201 /* FrameView.swift */,
-				B6A69583290A2DE2003DEE57 /* NavigationMenuView.swift */,
+				B6A69583290A2DE2003DEE57 /* SliderControlView.swift */,
 				B6DDD70528EFDA4600E2EC66 /* NavigationView.swift */,
 				B6DDD72D2908312100E2EC66 /* RectCornerView.swift */,
+				B6A69585290C7109003DEE57 /* ScaleSliderView.swift */,
 				B6DDD71B28F791F500E2EC66 /* ThumbView.swift */,
 			);
 			path = Views;
@@ -280,7 +283,7 @@
 				B6DDD72E2908312100E2EC66 /* RectCornerView.swift in Sources */,
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */,
-				B6A69584290A2DE2003DEE57 /* NavigationMenuView.swift in Sources */,
+				B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */,
 				B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */,
 				B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
@@ -294,6 +297,7 @@
 				B6DE829928E72C2400826201 /* CameraManager.swift in Sources */,
 				B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,
+				B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */,
 				B6DE828928E729E300826201 /* InstColorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

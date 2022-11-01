@@ -7,6 +7,7 @@
 import CoreImage
 import UIKit
 
+@MainActor
 class ContentViewModel: ObservableObject {
     // Note: recognizeFrame is the frame where we get average color from
     @Published var frame: CGImage?
@@ -37,7 +38,7 @@ class ContentViewModel: ObservableObject {
     @Published var error: Error?
 
     // Thumb view size to exact color
-    @Published var thumbViewSize: ThumbFrameSize = .defaultSize
+    @Published var thumbViewSize: CGFloat = 20
     
     private let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
@@ -47,7 +48,7 @@ class ContentViewModel: ObservableObject {
             let image = UIImage(cgImage: image)
             if let rect = self.rect {
                 if let size = self.size {
-                    let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize.rawValue, width: rect.width, height: rect.height)
+                    let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
                     return image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
                 }
             }
@@ -57,7 +58,7 @@ class ContentViewModel: ObservableObject {
     
     func getRect(loc: CGPoint?) -> CGRect? {
         if let location = loc {
-            return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize.rawValue / 2, width: self.thumbViewSize.rawValue, height: self.thumbViewSize.rawValue)
+            return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize  / 2, width: self.thumbViewSize, height: self.thumbViewSize)
         }
         return nil
     }

@@ -9,25 +9,48 @@ import SwiftUI
 
 struct NavigationView: View {
     @ObservedObject var model: ContentViewModel
+
     @State var imageName = "viewfinder"
+    @State var sizeWeight: CGFloat = 1
+    @State var showSliderControl = false
+
+    var showScaleSlider: Bool {
+        return model.frameSource != .wholeImage
+    }
+    
+    let defaultThumbFrameSize = 20.0
     
     var body: some View {
         VStack {
-            HStack {
-                if let error = model.error {
-                    Text(error.localizedDescription)
-                        .bold()
-                        .multilineTextAlignment(.center)
+            VStack {
+                HStack {
+                    if let error = model.error {
+                        Text(error.localizedDescription)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    } else {
+                        HStack {
+                            FrameSourceView(frameSource: $model.frameSource, imageName: $imageName, showSliderControl: $showSliderControl)
+                            Spacer()
+                        }
                         .padding()
-                } else {
-                    FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
-                    NavigationMenuView(frameSource: $model.frameSource, thumbFrameSize: $model.thumbViewSize)
+                        if showScaleSlider {
+                            SliderControlView(showScaleSlider: $showSliderControl)
+                        }
+                    }
+                }
+                if showSliderControl {
+                    ScaleSliderView(sizeWeight: $sizeWeight)
                 }
             }
             .frame(maxWidth: .infinity)
+            .padding()
             .background(.black)
             .opacity(0.8)
             .foregroundColor(.yellow)
+            .animation(.default, value: showScaleSlider)
+            .animation(.default, value: showSliderControl)
             .overlay(
                 GeometryReader { geo in
                     Color.clear
@@ -36,14 +59,16 @@ struct NavigationView: View {
                         }
                 }
             )
+            .onChange(of: sizeWeight) { weight in
+                model.thumbViewSize = defaultThumbFrameSize * weight
+            }
             Spacer()
-            
         }
     }
 }
 
 struct NavigationView_Previews: PreviewProvider {
   static var previews: some View {
-      NavigationView(model: ContentViewModel())
+      NavigationView(model: ContentViewModel(), showSliderControl: true)
   }
 }
