@@ -23,6 +23,7 @@ struct FrameSourceView: View {
                 Image(systemName: imageName)
             }
         }
+        .scaleEffect(1.5)
         .foregroundColor(.yellow)
         .opacity(0.8)
         .animation(.easeIn, value: imageName)

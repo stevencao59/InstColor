@@ -24,6 +24,7 @@ struct SliderControlView: View {
                 }
             }
         }
+        .scaleEffect(1.5)
         .animation(.default, value: showScaleSlider)
     }
 }

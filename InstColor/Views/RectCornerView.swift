@@ -16,6 +16,7 @@ struct RectSingleView: View {
     var body: some View {
         Rectangle()
             .border(.yellow)
+            .opacity(0.8)
             .frame(width: cornerWidth, height: cornerHeight)
             .offset(x: offsetX, y: offsetY)
     }
@@ -38,15 +39,21 @@ struct RectCornerView: View {
     var body: some View {
         ZStack {
             GeometryReader { geo in
-                RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: 0, offsetY: offsetTopHeight)
-                RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: 0, offsetY: offsetTopHeight)
-                RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: geo.size.width - cornerLength, offsetY: offsetTopHeight)
-                RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: geo.size.width - 1, offsetY: offsetTopHeight)
+                Group {
+                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: 0, offsetY: offsetTopHeight)
+                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: 0, offsetY: offsetTopHeight)
+                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: geo.size.width - cornerLength, offsetY: offsetTopHeight)
+                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: geo.size.width - 1, offsetY: offsetTopHeight)
+                }
 
-                RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: geo.size.width - 1, offsetY: geo.size.height - offsetBottomHeight)
-                RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: geo.size.width - cornerLength, offsetY: geo.size.height - offsetBottomHeight + cornerLength)
-                RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight + cornerLength)
-                RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight)
+                Group {
+                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: geo.size.width - 1, offsetY: geo.size.height - offsetBottomHeight - 1.0)
+                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: geo.size.width - cornerLength, offsetY: geo.size.height - offsetBottomHeight + cornerLength - 1)
+                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight + cornerLength - 1)
+                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight - 1.0)
+                }
+                .padding([.top])
+                
             }
         }
         .background(.clear)

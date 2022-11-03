@@ -5,11 +5,16 @@
 //  Created by Lei Cao on 9/30/22.
 //
 
+import Combine
 import Foundation
 import AVFoundation
 
 class CameraManager: ObservableObject {
     @Published var error: CameraError?
+
+    @Published var cameraPosition: AVCaptureDevice.Position = .back
+    private var subscriptions = Set<AnyCancellable>()
+
     enum Status {
         case unconfigured
         case configured
@@ -54,7 +59,7 @@ class CameraManager: ObservableObject {
         }
     }
     
-    private func configureCaptureSession() {
+    private func configureCaptureSession(cameraPosition: AVCaptureDevice.Position) {
         guard status == .unconfigured else {
             return
         }
@@ -109,9 +114,27 @@ class CameraManager: ObservableObject {
     private func configure() {
         checkPermission()
         sessionQueue.async {
-            self.configureCaptureSession()
+            self.configureCaptureSession(cameraPosition: self.cameraPosition)
             self.session.startRunning()
+            self.startSubscription()
         }
+    }
+    
+    private func startSubscription() {
+        $cameraPosition
+            .receive(on: RunLoop.main)
+            .subscribe(on: DispatchQueue.global())
+            .sink (receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print("Position Subscription is finished!")
+                }
+            }, receiveValue: { value in
+                print("Current position: \(value)")
+            })
+            .store(in: &subscriptions)
     }
     
     func set(_ delegate: AVCaptureVideoDataOutputSampleBufferDelegate, queue: DispatchQueue) {

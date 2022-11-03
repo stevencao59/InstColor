@@ -40,7 +40,7 @@ class ContentViewModel: ObservableObject {
     // Thumb view size to exact color
     @Published var thumbViewSize: CGFloat = 20
     
-    private let cameraManager = CameraManager.shared
+    let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
     
     func getThumbFrame(cgImage: CGImage?) -> CGImage? {

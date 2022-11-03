@@ -15,7 +15,7 @@ struct FrameView: View {
         ZStack {
             GeometryReader { geometry in
                 if let image = model.frame {
-                    Image(image, scale: 1.0, label: Text("Camera feed"))
+                    Image(image, scale: 1, label: Text("Camera feed"))
                         .resizable()
                         .scaledToFit()
                         .aspectRatio(contentMode: .fill)

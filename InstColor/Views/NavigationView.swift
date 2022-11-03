@@ -20,6 +20,10 @@ struct NavigationView: View {
     
     let defaultThumbFrameSize = 20.0
     
+    func switchCameraPosition() {
+        model.cameraManager.cameraPosition = model.cameraManager.cameraPosition == .back ? .front : .back
+    }
+    
     var body: some View {
         VStack {
             VStack {
@@ -31,16 +35,25 @@ struct NavigationView: View {
                             .padding()
                     } else {
                         HStack {
-                            FrameSourceView(frameSource: $model.frameSource, imageName: $imageName, showSliderControl: $showSliderControl)
-                            Spacer()
+                            Group {
+                                FrameSourceView(frameSource: $model.frameSource, imageName: $imageName, showSliderControl: $showSliderControl)
+                                Button(action: switchCameraPosition) {
+                                    Image(systemName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
+                                        .scaleEffect(1.5)
+                                }
+                                .padding([.horizontal])
+
+                                Spacer()
+                            }
+                            
                         }
-                        .padding()
+                        .padding([.horizontal, .bottom])
                         if showScaleSlider {
                             SliderControlView(showScaleSlider: $showSliderControl)
                         }
                     }
                 }
-                if showSliderControl {
+                if showSliderControl && showScaleSlider {
                     ScaleSliderView(sizeWeight: $sizeWeight)
                 }
             }
