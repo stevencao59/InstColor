@@ -123,20 +123,20 @@ struct FrameModifier: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        ScrollView([.horizontal, .vertical], showsIndicators: false) {
-            content
-                .frame(width: contentSize.width * currentScale, height: contentSize.height * currentScale, alignment: .center)
-                .modifier(PinchToZoom(minScale: min, maxScale: max, scale: $currentScale))
-        }
-        .gesture(doubleTapGesture)
-        .gesture(tapGesture)
-        .onChange(of: currentScale) { newValue in
-            rectSize = CGSize(width: contentSize.width * newValue, height: contentSize.height * newValue)
-        }
-        .onAppear() {
-            rectSize = CGSize(width: contentSize.width, height: contentSize.height)
-        }
-        .animation(.easeOut, value: currentScale)
+        content
+            .frame(width: contentSize.width * currentScale, height: contentSize.height * currentScale, alignment: .center)
+            .modifier(PinchToZoom(minScale: min, maxScale: max, scale: $currentScale))
+        
+            .gesture(doubleTapGesture)
+            .gesture(tapGesture)
+
+            .onChange(of: currentScale) { newValue in
+                rectSize = CGSize(width: contentSize.width * newValue, height: contentSize.height * newValue)
+            }
+            .onAppear() {
+                rectSize = CGSize(width: contentSize.width, height: contentSize.height)
+            }
+            .animation(.easeOut, value: currentScale)
     }
     
 }

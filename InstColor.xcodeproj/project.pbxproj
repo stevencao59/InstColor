@@ -119,12 +119,12 @@
 				B6DDD71728F500C100E2EC66 /* DashboardView.swift */,
 				B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */,
 				B6DE829628E72A0800826201 /* FrameView.swift */,
-				B6A69583290A2DE2003DEE57 /* SliderControlView.swift */,
+				B637962A29159F110004DBC0 /* ImageButtonView.swift */,
 				B6DDD70528EFDA4600E2EC66 /* NavigationView.swift */,
 				B6DDD72D2908312100E2EC66 /* RectCornerView.swift */,
 				B6A69585290C7109003DEE57 /* ScaleSliderView.swift */,
+				B6A69583290A2DE2003DEE57 /* SliderControlView.swift */,
 				B6DDD71B28F791F500E2EC66 /* ThumbView.swift */,
-				B637962A29159F110004DBC0 /* ImageButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

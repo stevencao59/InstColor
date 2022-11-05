@@ -10,7 +10,31 @@ import SwiftUI
 struct ThumbView: View {
     @ObservedObject var model: ContentViewModel
     @State private var thumbViewOpacity = 1.0
-        
+    
+    @GestureState private var fingerLocation: CGPoint? = nil
+    @GestureState private var startLocation: CGPoint? = nil
+    
+    var dragGesutre: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                if let location = model.location {
+                    var newLocation = startLocation ?? location
+                    newLocation.x += value.translation.width
+                    newLocation.y += value.translation.height
+                    model.location = newLocation
+                }
+            }.updating($startLocation) { (value, startLocation, transaction) in
+                startLocation = startLocation ?? model.location
+            }
+    }
+    
+    var fingerDragGesture: some Gesture {
+        DragGesture()
+            .updating($fingerLocation) { (value, fingerLocation, transaction) in
+                fingerLocation = value.location
+            }
+    }
+    
     var body: some View {
         if let rect = model.rect {
             if let frame = model.thumbFrame {
@@ -26,6 +50,9 @@ struct ThumbView: View {
                 .animation(.default, value: rect.width)
                 .scaleEffect(model.scaleAmount)
                 .offset(CGSize(width: rect.origin.x, height: rect.origin.y))
+                .gesture(
+                    dragGesutre.simultaneously(with: fingerDragGesture)
+                )
                 .onReceive(model.$thumbFrame) { _ in
                     thumbViewOpacity = model.frameSource == .thumbImage ? 1 : 0
                 }
