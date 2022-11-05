@@ -13,15 +13,15 @@ struct NavigationView: View {
     @State var imageName = "viewfinder"
     @State var sizeWeight: CGFloat = 1
     @State var showSliderControl = false
-
-    var showScaleSlider: Bool {
-        return model.frameSource != .wholeImage
-    }
+    @State var showScaleSlider = false
     
     let defaultThumbFrameSize = 20.0
     
     func switchCameraPosition() {
         model.cameraManager.cameraPosition = model.cameraManager.cameraPosition == .back ? .front : .back
+        withAnimation {
+            model.animationAmount += 180
+        }
     }
     
     var body: some View {
@@ -32,14 +32,13 @@ struct NavigationView: View {
                         Text(error.localizedDescription)
                             .bold()
                             .multilineTextAlignment(.center)
-                            .padding()
+                            .padding([.horizontal, .bottom])
                     } else {
                         HStack {
                             Group {
-                                FrameSourceView(frameSource: $model.frameSource, imageName: $imageName, showSliderControl: $showSliderControl)
+                                FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
                                 Button(action: switchCameraPosition) {
-                                    Image(systemName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
-                                        .scaleEffect(1.5)
+                                    ImageButtonView(imageName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
                                 }
                                 .padding([.horizontal])
 
@@ -48,12 +47,13 @@ struct NavigationView: View {
                             
                         }
                         .padding([.horizontal, .bottom])
-                        if showScaleSlider {
-                            SliderControlView(showScaleSlider: $showSliderControl)
+                        if showSliderControl {
+                            SliderControlView(showScaleSlider: $showScaleSlider)
+                                .padding([.horizontal, .bottom])
                         }
                     }
                 }
-                if showSliderControl && showScaleSlider {
+                if showScaleSlider {
                     ScaleSliderView(sizeWeight: $sizeWeight)
                 }
             }
@@ -74,6 +74,9 @@ struct NavigationView: View {
             )
             .onChange(of: sizeWeight) { weight in
                 model.thumbViewSize = defaultThumbFrameSize * weight
+            }
+            .onChange(of: model.frameSource) { source in
+                showSliderControl = model.frameSource == .thumbImage
             }
             Spacer()
         }

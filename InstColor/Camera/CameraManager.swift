@@ -11,7 +11,6 @@ import AVFoundation
 
 class CameraManager: ObservableObject {
     @Published var error: CameraError?
-
     @Published var cameraPosition: AVCaptureDevice.Position = .back
     private var subscriptions = Set<AnyCancellable>()
 
@@ -26,6 +25,7 @@ class CameraManager: ObservableObject {
     
     let session = AVCaptureSession()
     private let sessionQueue = DispatchQueue(label: "come.home.leicao.SessionQ")
+    private var cameraInput: AVCaptureInput?
     private let videoOutput = AVCaptureVideoDataOutput()
     private var status = Status.unconfigured
     
@@ -59,6 +59,18 @@ class CameraManager: ObservableObject {
         }
     }
     
+    private func addDeviceOutput() throws {
+        if !session.canAddOutput(videoOutput) {
+            session.removeOutput(session.outputs[0])
+        }
+        session.addOutput(videoOutput)
+        
+        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
+        
+        let videoConnection = videoOutput.connection(with: .video)
+        videoConnection?.videoOrientation = .portrait
+    }
+    
     private func configureCaptureSession(cameraPosition: AVCaptureDevice.Position) {
         guard status == .unconfigured else {
             return
@@ -68,7 +80,7 @@ class CameraManager: ObservableObject {
             session.commitConfiguration()
         }
         
-        let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+        let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: cameraPosition)
         guard let camera = device else {
             set(error: .cameraUnavailable)
             status = .failed
@@ -76,9 +88,14 @@ class CameraManager: ObservableObject {
         }
         
         do {
-            let cameraInput = try AVCaptureDeviceInput(device: camera)
-            if session.canAddInput(cameraInput) {
-                session.addInput(cameraInput)
+            if let cameraInput = cameraInput {
+                session.removeInput(cameraInput)
+            }
+            
+            let deviceInput = try AVCaptureDeviceInput(device: camera)
+            if session.canAddInput(deviceInput) {
+                session.addInput(deviceInput)
+                cameraInput = deviceInput
             } else {
                 set(error: .cannotAddInput)
                 status = .failed
@@ -90,14 +107,9 @@ class CameraManager: ObservableObject {
             return
         }
         
-        if session.canAddOutput(videoOutput) {
-            session.addOutput(videoOutput)
-            
-            videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
-            
-            let videoConnection = videoOutput.connection(with: .video)
-            videoConnection?.videoOrientation = .portrait
-        } else {
+        do {
+            try addDeviceOutput()
+        } catch {
             set(error: .cannotAddOutput)
             status = .failed
             return
@@ -114,7 +126,6 @@ class CameraManager: ObservableObject {
     private func configure() {
         checkPermission()
         sessionQueue.async {
-            self.configureCaptureSession(cameraPosition: self.cameraPosition)
             self.session.startRunning()
             self.startSubscription()
         }
@@ -124,6 +135,7 @@ class CameraManager: ObservableObject {
         $cameraPosition
             .receive(on: RunLoop.main)
             .subscribe(on: DispatchQueue.global())
+            .removeDuplicates()
             .sink (receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -132,7 +144,8 @@ class CameraManager: ObservableObject {
                     print("Position Subscription is finished!")
                 }
             }, receiveValue: { value in
-                print("Current position: \(value)")
+                self.status = .unconfigured
+                self.configureCaptureSession(cameraPosition: value)
             })
             .store(in: &subscriptions)
     }
@@ -142,5 +155,4 @@ class CameraManager: ObservableObject {
             self.videoOutput.setSampleBufferDelegate(delegate, queue: queue)
         }
     }
-    
 }

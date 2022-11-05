@@ -20,6 +20,7 @@ struct FrameView: View {
                         .scaledToFit()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                        .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
                         .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
                     
                     RectCornerView(navigationHeight: model.navigationHeight, statusBarHeight: model.statusBarHeight, bottomBarHeight: model.bottomBarHeight)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B637962B29159F110004DBC0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637962A29159F110004DBC0 /* ImageButtonView.swift */; };
 		B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A695812909B482003DEE57 /* ContentContainerView.swift */; };
 		B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69583290A2DE2003DEE57 /* SliderControlView.swift */; };
 		B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69585290C7109003DEE57 /* ScaleSliderView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B637962A29159F110004DBC0 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		B6A695812909B482003DEE57 /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
 		B6A69583290A2DE2003DEE57 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
 		B6A69585290C7109003DEE57 /* ScaleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleSliderView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				B6DDD72D2908312100E2EC66 /* RectCornerView.swift */,
 				B6A69585290C7109003DEE57 /* ScaleSliderView.swift */,
 				B6DDD71B28F791F500E2EC66 /* ThumbView.swift */,
+				B637962A29159F110004DBC0 /* ImageButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */,
 				B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */,
 				B6DDD71028F1B33C00E2EC66 /* RGBColor.swift in Sources */,
+				B637962B29159F110004DBC0 /* ImageButtonView.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
 				B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */,

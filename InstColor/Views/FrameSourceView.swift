@@ -10,20 +10,17 @@ import SwiftUI
 struct FrameSourceView: View {
     @Binding var frameSource: FrameSource
     @Binding var imageName: String
-    @Binding var showSliderControl: Bool
 
     func changeFrameSource() {
         frameSource = frameSource == .thumbImage ? .wholeImage : .thumbImage
-        showSliderControl = frameSource == .thumbImage
     }
     
     var body: some View {
         VStack {
             Button(action: changeFrameSource) {
-                Image(systemName: imageName)
+                ImageButtonView(imageName: imageName)
             }
         }
-        .scaleEffect(1.5)
         .foregroundColor(.yellow)
         .opacity(0.8)
         .animation(.easeIn, value: imageName)
@@ -35,6 +32,6 @@ struct FrameSourceView: View {
 
 struct FrameSourceView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameSourceView(frameSource: .constant(.wholeImage), imageName: .constant("viewfinder"), showSliderControl: .constant(true))
+        FrameSourceView(frameSource: .constant(.wholeImage), imageName: .constant("viewfinder"))
     }
 }

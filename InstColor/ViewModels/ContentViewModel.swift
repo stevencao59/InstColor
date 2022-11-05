@@ -40,6 +40,9 @@ class ContentViewModel: ObservableObject {
     // Thumb view size to exact color
     @Published var thumbViewSize: CGFloat = 20
     
+    // Animation Amounts
+    @Published var animationAmount = 0.0
+    
     let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
     

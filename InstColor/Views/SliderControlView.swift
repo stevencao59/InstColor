@@ -18,13 +18,12 @@ struct SliderControlView: View {
         VStack {
             Button(action: setShowScaleSlider) {
                 if showScaleSlider {
-                    Image(systemName: "chevron.up")
+                    ImageButtonView(imageName: "chevron.up")
                 } else {
-                    Image(systemName:  "chevron.down")
+                    ImageButtonView(imageName:  "chevron.down")
                 }
             }
         }
-        .scaleEffect(1.5)
         .animation(.default, value: showScaleSlider)
     }
 }
