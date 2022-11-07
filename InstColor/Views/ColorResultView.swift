@@ -9,26 +9,43 @@ import SwiftUI
 
 struct ColorResultView: View {
     @StateObject private var model = ColorResultViewModel()
+    @State var showColorDetail = false
+    
     let color: UIColor
     
+    var containerCotentWidth: Double
+    
+    var colorDisplayName: String {
+        return model.colorName ?? "Unknown Color"
+    }
+    
+    func clickToShowSheet() {
+        showColorDetail.toggle()
+    }
+    
     var body: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 40)
-                .fill(Color(uiColor: color))
-                .frame(width: 40, height: 40)
-                .onChange(of: color) { newValue in
-                    model.color = newValue
-                }
-
-            Text(model.colorName ?? "Unknown Color")
-                .font(.title2)
-                .foregroundColor(.white)
+        Button(action: clickToShowSheet) {
+            HStack {
+                RoundedRectangle(cornerRadius: 40)
+                    .fill(Color(uiColor: color))
+                    .frame(width: 40, height: 40)
+                    .onChange(of: color) { newValue in
+                        model.color = newValue
+                    }
+                Text(colorDisplayName)
+                    .font(.title2)
+                    .foregroundColor(.white)
+            }
+        }
+        .sheet(isPresented: $showColorDetail) {
+            ColorDetailView(color: color, colorName: colorDisplayName, containerCotentWidth: containerCotentWidth, showColorDetail: $showColorDetail)
+                .presentationDetents([.medium])
         }
     }
 }
 
 struct ColorResultView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorResultView(color: UIColor(.red))
+        ColorResultView(color: UIColor(.red), containerCotentWidth: 100)
     }
 }

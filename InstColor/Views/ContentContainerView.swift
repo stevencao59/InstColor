@@ -22,6 +22,7 @@ struct ContentContainerView<Content: View>: View {
                 .onAppear() {
                     model.statusBarHeight = geo.safeAreaInsets.top
                     model.bottomBarHeight = geo.safeAreaInsets.bottom
+                    model.containerCotentWidth = geo.size.width
                 }
         }
     }

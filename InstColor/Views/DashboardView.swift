@@ -15,7 +15,7 @@ struct DashboardView: View {
             Spacer()
             if let color = model.averageColor {
                 HStack(alignment: .center) {
-                    ColorResultView(color: color)
+                    ColorResultView(color: color, containerCotentWidth: model.containerCotentWidth)
                     Spacer()
                     ColorTextGroupView(components: color.components)
                 }

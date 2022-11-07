@@ -53,4 +53,28 @@ extension UIColor {
 
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
+    
+    func getWeightedAverage(_ red: Int, _ green: Int, _ blue: Int) -> Double {
+        let doubleRed = Double(red)
+        let weightedRed = 0.3 * pow(doubleRed - (self.components.red * 255.0), 2)
+        
+        let doubleGreen = Double(green)
+        let weightedGreen = 0.59 * pow(doubleGreen - (self.components.green * 255.0), 2)
+        
+        let doubleBlue = Double(blue)
+        let weightedBlue = 0.11 * pow(doubleBlue - (self.components.blue * 255.0), 2)
+        
+        return weightedRed + weightedGreen + weightedBlue
+    }
+    
+    func calculateClosestColor() -> RGBColor? {
+        let colorMap: [RGBColor] = Bundle.main.decode("color.json")
+        let closestColor = colorMap.reduce(colorMap[0]) { prevItem, currItem in
+            let prevAvg = getWeightedAverage(prevItem.Red, prevItem.Green, prevItem.Blue)
+            let currAvg = getWeightedAverage(currItem.Red, currItem.Green, currItem.Blue)
+            
+            return currAvg < prevAvg ? currItem : prevItem
+        }
+        return closestColor
+    }
 }
