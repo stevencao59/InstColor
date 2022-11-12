@@ -23,6 +23,93 @@ extension UIImage {
     }
 }
 
+// Color converting
+extension UIColor {
+    func normalize(value: CGFloat, min: CGFloat, max: CGFloat) -> CGFloat {
+        var output = value
+        if value > max {
+            output = max
+        } else if value < min {
+            output = min
+        }
+        return output
+    }
+    
+    private func getColorGeneric(hueValues: [CGFloat]) throws -> [UIColor] {
+        let hls = getRgbHls(r: self.components.red, g: self.components.green, b: self.components.blue)
+        
+        var resultList: [(r: CGFloat, g: CGFloat, b: CGFloat)] = []
+        for value in hueValues {
+            var convertedVal = (hls.h * 360 + value) %% 360
+            convertedVal = convertedVal / 360
+            let newHls = (h: convertedVal, l: hls.l, s: hls.s)
+            resultList.append(getHlsRgb(h: newHls.h, l: newHls.l, s: newHls.s))
+        }
+        
+        return resultList.map { UIColor(red: Int($0.r) * 255, green: Int($0.g) * 255, blue: Int($0.b) * 255) }
+    }
+    
+    private func getMonochromaticColorGeneric() throws -> [UIColor]? {
+        let hsv = getRgbHsv(r: self.components.red, g: self.components.green, b: self.components.blue)
+        let increment = [0, 0.05, 0.1]
+        
+        var result: [(r: CGFloat, g: CGFloat, b: CGFloat)] = []
+        var output: [(r: CGFloat, g: CGFloat, b: CGFloat)] = []
+        
+        for x in increment {
+            for y in increment {
+                let h = hsv.h
+                let s1 = normalize(value: hsv.s, min: 0, max: 100) + x
+                let v1 = normalize(value: hsv.v + y, min: 0, max: 100)
+                let rgb1 = getHsvRgb(h: h, s: s1, v: v1)
+                let item1 = [rgb1.r, rgb1.g, rgb1.b].map { normalize(value: round($0 * 255), min: 0, max: 255) }
+                
+                let s2 = normalize(value: hsv.s, min: 0, max: 100) - x
+                let v2 = normalize(value: hsv.v - y, min: 0, max: 100)
+                let rgb2 = getHsvRgb(h: h, s: s2, v: v2)
+                let item2 = [rgb2.r, rgb2.g, rgb2.b].map { normalize(value: round($0 * 255), min: 0, max: 255) }
+                
+                result.append((r: item1[0], g: item1[1], b: item1[2]))
+                result.append((r: item2[0], g: item2[1], b: item2[2]))
+            }
+        }
+        
+        for c in result {
+            let contains = output.contains { $0 == c }
+            if !contains {
+                output.append(c)
+            }
+        }
+        
+        return output.map { UIColor(red: Int($0.r), green: Int($0.g), blue: Int($0.b)) }
+    }
+    
+    
+    func getComplementaryColor() -> UIColor? {
+        return try? getColorGeneric(hueValues: [180])[0]
+    }
+    
+    func getTriadicColor() -> [UIColor]? {
+        return try? getColorGeneric(hueValues: [120, 240])
+    }
+    
+    func getSplitComplementaryColor() -> [UIColor]? {
+        return try? getColorGeneric(hueValues: [150, 210])
+    }
+    
+    func getAnalogousColor() -> [UIColor]? {
+        return try? getColorGeneric(hueValues: [30, -30])
+    }
+    
+    func getTetradicColor() -> [UIColor]? {
+        return try? getColorGeneric(hueValues: [60, 180, 240])
+    }
+    
+    func getMonochromaticColor() -> [UIColor]? {
+        return try? getMonochromaticColorGeneric()
+    }
+}
+
 extension UIColor {
     var coreImageColor: CIColor {
         return CIColor(color: self)

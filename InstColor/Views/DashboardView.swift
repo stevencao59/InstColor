@@ -31,10 +31,8 @@ struct DashboardView: View {
                             }
                     }
                 )
-
             }
         }
-
     }
 }
 

@@ -59,27 +59,16 @@ struct ColorSliderView: View {
 }
 
 struct ColorDetailView: View {
+    @StateObject var model = ColorDetailViewModel()
     
     @Binding var showColorDetail: Bool
-    @State var color: UIColor
-    @State var colorName: String
 
-    @State var red: Double
-    @State var green: Double
-    @State var blue: Double
-    
+    var color: UIColor
     var containerCotentWidth: Double
     
-    init(color: UIColor, colorName: String, containerCotentWidth: Double, showColorDetail: Binding<Bool>) {
+    init(color: UIColor, containerCotentWidth: Double, showColorDetail: Binding<Bool>) {
         self.color = color
-        self.colorName = colorName
-
-        self.red = Double(color.components.red * 255)
-        self.green = Double(color.components.green * 255)
-        self.blue = Double(color.components.blue * 255)
-        
         self.containerCotentWidth = containerCotentWidth
-        
         self._showColorDetail = showColorDetail
     }
     
@@ -90,8 +79,8 @@ struct ColorDetailView: View {
     var body: some View {
         VStack {
             VStack {
-                if let color {
-                    if let colorName {
+                if let color = model.color {
+                    if let colorName = model.colorName {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(.white, lineWidth: 5)
@@ -102,24 +91,17 @@ struct ColorDetailView: View {
                                 .frame(width: 100, height: 100)
                         }
 
-                            
-                            
-                            
                         Text(colorName)
                             .font(.headline)
                             .foregroundColor(.white)
-                            .onChange(of: color) { name in
-                                let rgbColor = color.calculateClosestColor()
-                                self.colorName = rgbColor?.English ?? "Unknown Color"
-                            }
                     }
                 }
             }
             
             VStack {
-                ColorSliderView(colorValue: $red, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.red))
-                ColorSliderView(colorValue: $green, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.green))
-                ColorSliderView(colorValue: $blue, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.blue))
+                ColorSliderView(colorValue: $model.red, color: $model.color, containerCotentWidth: containerCotentWidth, iconColor: Color(.red))
+                ColorSliderView(colorValue: $model.green, color: $model.color, containerCotentWidth: containerCotentWidth, iconColor: Color(.green))
+                ColorSliderView(colorValue: $model.blue, color: $model.color, containerCotentWidth: containerCotentWidth, iconColor: Color(.blue))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -142,11 +124,14 @@ struct ColorDetailView: View {
         }
         .padding()
         .background(Color.black.edgesIgnoringSafeArea(.all))
+        .onAppear() {
+            self.model.color = color
+        }
     }
 }
 
 struct ColorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorDetailView(color: .orange, colorName: "Orange", containerCotentWidth: 393, showColorDetail: .constant(true))
+        ColorDetailView(color: .orange, containerCotentWidth: 393, showColorDetail: .constant(true))
     }
 }
