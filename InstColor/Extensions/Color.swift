@@ -85,8 +85,8 @@ extension UIColor {
     }
     
     
-    func getComplementaryColor() -> UIColor? {
-        return try? getColorGeneric(hueValues: [180])[0]
+    func getComplementaryColor() -> [UIColor]? {
+        return try? getColorGeneric(hueValues: [180])
     }
     
     func getTriadicColor() -> [UIColor]? {

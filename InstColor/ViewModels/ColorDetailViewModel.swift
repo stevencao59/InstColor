@@ -14,7 +14,7 @@ class ColorDetailViewModel: ObservableObject {
     @Published var colorName: String?
     
     // All related convertable colors
-    @Published var complementaryColor: UIColor?
+    @Published var complementaryColor: [UIColor]?
     @Published var triadicColor: [UIColor]?
     @Published var splitComplementaryColor: [UIColor]?
     @Published var analogousColor: [UIColor]?
@@ -27,6 +27,10 @@ class ColorDetailViewModel: ObservableObject {
     @Published var green: Double = 0
     @Published var blue: Double = 0
     
+    @Published var redText: String = "0"
+    @Published var greenText: String = "0"
+    @Published var blueText: String = "0"
+    
     func startSubscription() {
         $color
             .receive(on: RunLoop.main)
@@ -37,6 +41,10 @@ class ColorDetailViewModel: ObservableObject {
                 self.red = Double(color.components.red * 255)
                 self.green = Double(color.components.green * 255)
                 self.blue = Double(color.components.blue * 255)
+                
+                self.redText = "\("\(String(format: "%.0f", self.red))")"
+                self.greenText = "\("\(String(format: "%.0f", self.green))")"
+                self.blueText = "\("\(String(format: "%.0f", self.blue))")"
                 
                 let testColor = UIColor(red: 0, green: 255, blue: 255)
                 self.complementaryColor = testColor.getComplementaryColor()
