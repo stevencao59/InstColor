@@ -7,6 +7,28 @@
 
 import SwiftUI
 
+struct ColorSliderGroupView: View {
+    @Binding var red: Double
+    @Binding var green: Double
+    @Binding var blue: Double
+    
+    @Binding var redText: String
+    @Binding var greenText: String
+    @Binding var blueText: String
+    
+    @Binding var color: UIColor
+
+    var containerCotentWidth: Double
+    
+    var body: some View {
+        VStack {
+            ColorSliderView(colorValue: $red, colorValueText: $redText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.red))
+            ColorSliderView(colorValue: $green, colorValueText: $greenText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.green))
+            ColorSliderView(colorValue: $blue, colorValueText: $blueText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.blue))
+        }
+    }
+}
+
 struct ColorSliderView: View {
     @Binding var colorValue: Double
     @Binding var color: UIColor
@@ -51,7 +73,7 @@ struct ColorSliderView: View {
         HStack {
             Circle()
                 .fill(iconColor)
-                .frame(width: containerCotentWidth * 0.05)
+                .frame(width: 10)
             Spacer()
             TextEditor(text: $colorValueText )
                 .scrollContentBackground(.hidden)

@@ -33,7 +33,7 @@ class ColorDetailViewModel: ObservableObject {
     
     func startSubscription() {
         $color
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { color in
                 let rgbColor = color.calculateClosestColor()
                 self.colorName = rgbColor?.English ?? "Unknown Color"
@@ -46,13 +46,14 @@ class ColorDetailViewModel: ObservableObject {
                 self.greenText = "\("\(String(format: "%.0f", self.green))")"
                 self.blueText = "\("\(String(format: "%.0f", self.blue))")"
                 
-                let testColor = UIColor(red: 0, green: 255, blue: 255)
-                self.complementaryColor = testColor.getComplementaryColor()
-                self.triadicColor = color.getTriadicColor()
-                self.splitComplementaryColor = color.getSplitComplementaryColor()
-                self.analogousColor = color.getAnalogousColor()
-                self.tetradicColor = color.getTetradicColor()
-                self.monochromaticColor = color.getMonochromaticColor()
+                DispatchQueue.main.async {
+                    self.complementaryColor = color.getComplementaryColor()
+                    self.triadicColor = color.getTriadicColor()
+                    self.splitComplementaryColor = color.getSplitComplementaryColor()
+                    self.analogousColor = color.getAnalogousColor()
+                    self.tetradicColor = color.getTetradicColor()
+                    self.monochromaticColor = color.getMonochromaticColor()
+                }
             })
             .store(in: &subscriptions)
     }

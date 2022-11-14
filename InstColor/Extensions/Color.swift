@@ -45,8 +45,8 @@ extension UIColor {
             let newHls = (h: convertedVal, l: hls.l, s: hls.s)
             resultList.append(getHlsRgb(h: newHls.h, l: newHls.l, s: newHls.s))
         }
-        
-        return resultList.map { UIColor(red: Int($0.r) * 255, green: Int($0.g) * 255, blue: Int($0.b) * 255) }
+        let result = resultList.map { UIColor(red: Int($0.r * 255), green: Int($0.g * 255), blue: Int($0.b * 255)) }
+        return result
     }
     
     private func getMonochromaticColorGeneric() throws -> [UIColor]? {
@@ -80,8 +80,9 @@ extension UIColor {
                 output.append(c)
             }
         }
-        
-        return output.map { UIColor(red: Int($0.r), green: Int($0.g), blue: Int($0.b)) }
+
+        let convOutput = output.map { UIColor(red: Int($0.r), green: Int($0.g), blue: Int($0.b)) }
+        return convOutput
     }
     
     

@@ -27,31 +27,11 @@ struct ColorDetailView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                if let color = model.color {
-                    if let colorName = model.colorName {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(.white, lineWidth: 5)
-                                .frame(width: 100, height: 100)
-         
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color(color))
-                                .frame(width: 100, height: 100)
-                        }
-
-                        Text(colorName)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
-                }
-            }
+            ColorIconView(color: model.color, colorName: model.colorName)
             
-            VStack {
-                ColorSliderView(colorValue: $model.red, colorValueText: $model.redText, color: $model.color, containerCotentWidth: containerCotentWidth, iconColor: Color(.red))
-                ColorSliderView(colorValue: $model.green, colorValueText: $model.greenText, color: $model.color, containerCotentWidth: containerCotentWidth, iconColor: Color(.green))
-                ColorSliderView(colorValue: $model.blue, colorValueText: $model.blueText, color: $model.color, containerCotentWidth: containerCotentWidth, iconColor: Color(.blue))
-            }
+            ColorSliderGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, containerCotentWidth: containerCotentWidth)
+            
+            ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .topLeading) {

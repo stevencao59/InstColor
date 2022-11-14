@@ -41,13 +41,17 @@ struct ColorResultView: View {
             ColorDetailView(color: color, containerCotentWidth: containerCotentWidth, showColorDetail: $showColorDetail)
                 .opacity(0.8)
                 .clearModalBackground()
-                .presentationDetents([.medium])
+                .presentationDetents([.medium, .large])
         }
     }
 }
 
 struct ColorResultView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorResultView(color: UIColor(.red), containerCotentWidth: 100)
+        ZStack {
+            Rectangle()
+            ColorResultView(color: UIColor(.red), containerCotentWidth: 100)
+        }
+        .ignoresSafeArea()
     }
 }
