@@ -12,11 +12,14 @@ struct ColorDetailView: View {
     
     @Binding var showColorDetail: Bool
 
+    @State var hexText: String
+    
     var color: UIColor
     var containerCotentWidth: Double
     
     init(color: UIColor, containerCotentWidth: Double, showColorDetail: Binding<Bool>) {
         self.color = color
+        self.hexText = color.toHexString() ?? "Unknown Hex"
         self.containerCotentWidth = containerCotentWidth
         self._showColorDetail = showColorDetail
     }
@@ -31,6 +34,8 @@ struct ColorDetailView: View {
             
             ColorSliderGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, containerCotentWidth: containerCotentWidth)
             
+            ColorHexTextView(displayColor: $model.color)
+
             ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

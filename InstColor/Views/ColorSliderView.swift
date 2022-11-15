@@ -22,9 +22,9 @@ struct ColorSliderGroupView: View {
     
     var body: some View {
         VStack {
-            ColorSliderView(colorValue: $red, colorValueText: $redText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.red))
-            ColorSliderView(colorValue: $green, colorValueText: $greenText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.green))
-            ColorSliderView(colorValue: $blue, colorValueText: $blueText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.blue))
+            ColorSliderView(colorValue: $red, colorValueText: $redText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.red), range: 0.0...255.0)
+            ColorSliderView(colorValue: $green, colorValueText: $greenText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.green), range: 0.0...255.0)
+            ColorSliderView(colorValue: $blue, colorValueText: $blueText, color: $color, containerCotentWidth: containerCotentWidth, iconColor: Color(.blue), range: 0.0...255.0)
         }
     }
 }
@@ -38,16 +38,16 @@ struct ColorSliderView: View {
     
     var containerCotentWidth: Double
     var iconColor: Color
+    var range: ClosedRange<Double>
     
-    let range = 0.0...255.0
-    
-    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconColor: Color) {
+    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconColor: Color, range: ClosedRange<Double>) {
         self._colorValue = colorValue
         self._colorValueText = colorValueText
         self._color = color
         
         self.containerCotentWidth = containerCotentWidth
         self.iconColor = iconColor
+        self.range = range
         
         UIStepper.appearance().setDecrementImage(UIImage(systemName: "minus"), for: .normal)
         UIStepper.appearance().setIncrementImage(UIImage(systemName: "plus"), for: .normal)
@@ -115,6 +115,6 @@ struct ColorSliderView: View {
 
 struct ColorSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconColor: Color(.white))
+        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconColor: Color(.white), range: 0.0...255.0)
     }
 }

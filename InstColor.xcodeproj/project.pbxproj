@@ -12,6 +12,7 @@
 		B68C1A4429213E8500AC7662 /* ColorTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4329213E8500AC7662 /* ColorTypeView.swift */; };
 		B68C1A4829215E6900AC7662 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4729215E6900AC7662 /* Array.swift */; };
 		B68C1A4A2921C2B000AC7662 /* ColorIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A492921C2B000AC7662 /* ColorIconView.swift */; };
+		B68C1A4C2923471500AC7662 /* ColorHexTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4B2923471500AC7662 /* ColorHexTextView.swift */; };
 		B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A695812909B482003DEE57 /* ContentContainerView.swift */; };
 		B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69583290A2DE2003DEE57 /* SliderControlView.swift */; };
 		B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69585290C7109003DEE57 /* ScaleSliderView.swift */; };
@@ -56,6 +57,7 @@
 		B68C1A4329213E8500AC7662 /* ColorTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTypeView.swift; sourceTree = "<group>"; };
 		B68C1A4729215E6900AC7662 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		B68C1A492921C2B000AC7662 /* ColorIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorIconView.swift; sourceTree = "<group>"; };
+		B68C1A4B2923471500AC7662 /* ColorHexTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHexTextView.swift; sourceTree = "<group>"; };
 		B6A695812909B482003DEE57 /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
 		B6A69583290A2DE2003DEE57 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
 		B6A69585290C7109003DEE57 /* ScaleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleSliderView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				B6A69585290C7109003DEE57 /* ScaleSliderView.swift */,
 				B6A69583290A2DE2003DEE57 /* SliderControlView.swift */,
 				B6DDD71B28F791F500E2EC66 /* ThumbView.swift */,
+				B68C1A4B2923471500AC7662 /* ColorHexTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				B6BBCF5D291F37C70010C3FE /* Math.swift in Sources */,
 				B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */,
 				B68C1A4429213E8500AC7662 /* ColorTypeView.swift in Sources */,
+				B68C1A4C2923471500AC7662 /* ColorHexTextView.swift in Sources */,
 				B6BBCF54291B5D5A0010C3FE /* View.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,
 				B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */,

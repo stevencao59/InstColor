@@ -31,13 +31,12 @@ class ColorDetailViewModel: ObservableObject {
     @Published var greenText: String = "0"
     @Published var blueText: String = "0"
     
+    @Published var colorHexString: String = ""
+    
     func startSubscription() {
         $color
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { color in
-                let rgbColor = color.calculateClosestColor()
-                self.colorName = rgbColor?.English ?? "Unknown Color"
-
                 self.red = Double(color.components.red * 255)
                 self.green = Double(color.components.green * 255)
                 self.blue = Double(color.components.blue * 255)
@@ -46,7 +45,12 @@ class ColorDetailViewModel: ObservableObject {
                 self.greenText = "\("\(String(format: "%.0f", self.green))")"
                 self.blueText = "\("\(String(format: "%.0f", self.blue))")"
                 
+                self.colorHexString = color.toHexString() ?? "Unknown Hex"
+                
                 DispatchQueue.main.async {
+                    let rgbColor = color.calculateClosestColor()
+                    self.colorName = rgbColor?.English ?? "Unknown Color"
+                    
                     self.complementaryColor = color.getComplementaryColor()
                     self.triadicColor = color.getTriadicColor()
                     self.splitComplementaryColor = color.getSplitComplementaryColor()
