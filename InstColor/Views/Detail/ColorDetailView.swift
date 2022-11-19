@@ -32,7 +32,7 @@ struct ColorDetailView: View {
         VStack {
             ColorIconView(color: model.color, colorName: model.colorName)
             
-            ColorSliderGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, containerCotentWidth: containerCotentWidth)
+            SliderGroupContainerView(model: model, containerCotentWidth: containerCotentWidth)
             
             ColorHexTextView(displayColor: $model.color)
 
@@ -44,7 +44,6 @@ struct ColorDetailView: View {
                 Text("Save")
                     .font(.headline)
             }
-            .padding([.horizontal])
         }
         .overlay(alignment: .topTrailing) {
             Button(action: toggleSheet){
@@ -54,7 +53,6 @@ struct ColorDetailView: View {
                     .frame(width: 30)
                     .foregroundColor(.white)
             }
-            .padding([.horizontal])
         }
         .padding()
         .background(Color.black.edgesIgnoringSafeArea(.all))

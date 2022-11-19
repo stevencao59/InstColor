@@ -23,6 +23,7 @@ class ColorDetailViewModel: ObservableObject {
     
     private var subscriptions = Set<AnyCancellable>()
     
+    // Rgb color properties
     @Published var red: Double = 0
     @Published var green: Double = 0
     @Published var blue: Double = 0
@@ -31,11 +32,21 @@ class ColorDetailViewModel: ObservableObject {
     @Published var greenText: String = "0"
     @Published var blueText: String = "0"
     
+    // Hsl color properties
+    @Published var hue: Double = 0
+    @Published var satuation: Double = 0
+    @Published var lightness: Double = 0
+    
+    @Published var hueText: String = "0"
+    @Published var satuationText: String = "0"
+    @Published var lightnessText: String = "0"
+    
     @Published var colorHexString: String = ""
     
     func startSubscription() {
         $color
             .receive(on: DispatchQueue.main)
+            .removeDuplicates()
             .sink(receiveValue: { color in
                 self.red = Double(color.components.red * 255)
                 self.green = Double(color.components.green * 255)
@@ -45,19 +56,26 @@ class ColorDetailViewModel: ObservableObject {
                 self.greenText = "\("\(String(format: "%.0f", self.green))")"
                 self.blueText = "\("\(String(format: "%.0f", self.blue))")"
                 
+                let hsl = getRgbHls(r: color.components.red, g: color.components.green, b: color.components.blue)
+                self.hue = Double(hsl.h * 360)
+                self.satuation = hsl.s
+                self.lightness = hsl.l
+                
+                self.hueText = "\("\(String(format: "%.0f", self.hue))")"
+                self.satuationText = "\("\(String(format: "%.2f", self.satuation))")"
+                self.lightnessText = "\("\(String(format: "%.2f", self.lightness))")"
+                
                 self.colorHexString = color.toHexString() ?? "Unknown Hex"
                 
-                DispatchQueue.main.async {
-                    let rgbColor = color.calculateClosestColor()
-                    self.colorName = rgbColor?.English ?? "Unknown Color"
-                    
-                    self.complementaryColor = color.getComplementaryColor()
-                    self.triadicColor = color.getTriadicColor()
-                    self.splitComplementaryColor = color.getSplitComplementaryColor()
-                    self.analogousColor = color.getAnalogousColor()
-                    self.tetradicColor = color.getTetradicColor()
-                    self.monochromaticColor = color.getMonochromaticColor()
-                }
+                let rgbColor = color.calculateClosestColor()
+                self.colorName = rgbColor?.English ?? "Unknown Color"
+                
+                self.complementaryColor = color.getComplementaryColor()
+                self.triadicColor = color.getTriadicColor()
+                self.splitComplementaryColor = color.getSplitComplementaryColor()
+                self.analogousColor = color.getAnalogousColor()
+                self.tetradicColor = color.getTetradicColor()
+                self.monochromaticColor = color.getMonochromaticColor()
             })
             .store(in: &subscriptions)
     }

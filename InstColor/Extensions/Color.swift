@@ -51,7 +51,7 @@ extension UIColor {
     
     private func getMonochromaticColorGeneric() throws -> [UIColor]? {
         let hsv = getRgbHsv(r: self.components.red, g: self.components.green, b: self.components.blue)
-        let increment = [0, 0.05, 0.1]
+        let increment = [0, 0.1]
         
         var result: [(r: CGFloat, g: CGFloat, b: CGFloat)] = []
         var output: [(r: CGFloat, g: CGFloat, b: CGFloat)] = []
@@ -75,7 +75,9 @@ extension UIColor {
         }
         
         for c in result {
-            let contains = output.contains { $0 == c }
+            let contains = output.contains {
+                $0.r == c.r && $0.g == c.g && $0.b == c.b
+            }
             if !contains {
                 output.append(c)
             }
