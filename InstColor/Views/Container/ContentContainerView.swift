@@ -18,12 +18,14 @@ struct ContentContainerView<Content: View>: View {
     
     var body: some View {
         GeometryReader { geo in
-            self.content()
-                .onAppear() {
-                    model.statusBarHeight = geo.safeAreaInsets.top
-                    model.bottomBarHeight = geo.safeAreaInsets.bottom
-                    model.containerCotentWidth = geo.size.width
-                }
+            NavigationStack {
+                self.content()
+                    .onAppear() {
+                        model.statusBarHeight = geo.safeAreaInsets.top
+                        model.bottomBarHeight = geo.safeAreaInsets.bottom
+                        model.containerCotentWidth = geo.size.width
+                    }
+            }
         }
     }
 }

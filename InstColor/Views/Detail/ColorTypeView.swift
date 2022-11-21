@@ -28,15 +28,7 @@ struct ColorTypeGridItemView: View {
     var body: some View {
         Button(action: setColor) {
             VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(.white, lineWidth: 2)
-                        .frame(height: 50)
-                    
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color(gridItemColor))
-                        .frame(height: 50)
-                }
+                BorderedRectView(color: Color(gridItemColor), cornerRadius: 15, lineWidth: 2, height: 50)
 
                 Text(colorName ?? "Loading...")
                     .font(.caption2)

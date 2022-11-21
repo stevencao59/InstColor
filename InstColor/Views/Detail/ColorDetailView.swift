@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct ColorDetailView: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject var model = ColorDetailViewModel()
-    
-    @Binding var showColorDetail: Bool
-
-    @State var hexText: String
+    @State var hexText: String = "Unknown Hex"
     
     var color: UIColor
-    var containerCotentWidth: Double
+    var containerCotentWidth: Double = 0
     
-    init(color: UIColor, containerCotentWidth: Double, showColorDetail: Binding<Bool>) {
+    init(color: UIColor, containerCotentWidth: Double) {
         self.color = color
         self.hexText = color.toHexString() ?? "Unknown Hex"
         self.containerCotentWidth = containerCotentWidth
-        self._showColorDetail = showColorDetail
     }
     
     func toggleSheet() {
-        showColorDetail.toggle()
+        dismiss()
+    }
+    
+    func saveColor() {
+        var savedColors = UserDefaults.standard.readColor(forKey: "FavoriteColors") ?? []
+        savedColors.append(FavoriteColor(id: UUID().uuidString, red: Int(color.components.red * 255), green: Int(color.components.green * 255), blue: Int(color.components.blue * 255), createdDate: Date()))
+        UserDefaults.standard.setColor(savedColors, forKey: "FavoriteColors")
     }
     
     var body: some View {
@@ -40,7 +43,7 @@ struct ColorDetailView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(alignment: .topLeading) {
-            Button(action: { }) {
+            Button(action: saveColor) {
                 Text("Save")
                     .font(.headline)
             }
@@ -64,6 +67,6 @@ struct ColorDetailView: View {
 
 struct ColorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorDetailView(color: .orange, containerCotentWidth: 393, showColorDetail: .constant(true))
+        ColorDetailView(color: .orange, containerCotentWidth: 393)
     }
 }

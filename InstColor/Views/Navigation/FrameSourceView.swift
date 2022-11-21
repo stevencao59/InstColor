@@ -16,10 +16,8 @@ struct FrameSourceView: View {
     }
     
     var body: some View {
-        VStack {
-            Button(action: changeFrameSource) {
-                ImageButtonView(imageName: imageName)
-            }
+        Button(action: changeFrameSource) {
+            ImageButtonView(imageName: imageName)
         }
         .foregroundColor(.yellow)
         .opacity(0.8)

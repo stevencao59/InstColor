@@ -16,15 +16,7 @@ struct ColorIconView: View {
         VStack {
             if let color {
                 if let colorName {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(.white, lineWidth: 5)
-                            .frame(width: 100, height: 100)
-     
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(Color(color))
-                            .frame(width: 100, height: 100)
-                    }
+                    BorderedRectView(color: Color(color), cornerRadius: 15, lineWidth: 5, width: 100, height: 100)
 
                     Text(colorName)
                         .font(.headline)

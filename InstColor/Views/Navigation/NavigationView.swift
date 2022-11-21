@@ -34,23 +34,7 @@ struct NavigationView: View {
                             .multilineTextAlignment(.center)
                             .padding([.horizontal, .bottom])
                     } else {
-                        HStack {
-                            Group {
-                                FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
-                                Button(action: switchCameraPosition) {
-                                    ImageButtonView(imageName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
-                                }
-                                .padding([.horizontal])
-
-                                Spacer()
-                            }
-                            
-                        }
-                        .padding([.horizontal, .bottom])
-                        if showSliderControl {
-                            SliderControlView(showScaleSlider: $showScaleSlider)
-                                .padding([.horizontal, .bottom])
-                        }
+                        ToolBarView(frameSource: $model.frameSource , imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, switchCameraAction: switchCameraPosition)
                     }
                 }
                 if showScaleSlider {
