@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavoriteColor: Codable, Identifiable {
+struct FavoriteColor: Codable, Identifiable, Hashable {
     let id: String
     let red: Int
     let green: Int

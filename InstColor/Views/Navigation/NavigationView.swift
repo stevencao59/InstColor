@@ -34,7 +34,7 @@ struct NavigationView: View {
                             .multilineTextAlignment(.center)
                             .padding([.horizontal, .bottom])
                     } else {
-                        ToolBarView(frameSource: $model.frameSource , imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, switchCameraAction: switchCameraPosition)
+                        ToolBarView(frameSource: $model.frameSource , imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth, switchCameraAction: switchCameraPosition)
                     }
                 }
                 if showScaleSlider {
