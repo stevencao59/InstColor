@@ -9,20 +9,17 @@ import Foundation
 import SwiftUI
 
 struct ColorIconView: View {
-    var color: UIColor?
+    var color: UIColor
     var colorName: String?
     
     var body: some View {
         VStack {
-            if let color {
-                if let colorName {
-                    BorderedRectView(color: Color(color), cornerRadius: 15, lineWidth: 5, width: 100, height: 100)
-
-                    Text(colorName)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                }
-            }
+            BorderedRectView(color: Color(color), cornerRadius: 15, lineWidth: 5, width: 100, height: 100)
+            
+            Text(colorName ?? "Loading...")
+                .font(.headline)
+                .foregroundColor(.white)
+            
         }
         .padding()
     }

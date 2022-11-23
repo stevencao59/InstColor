@@ -45,6 +45,7 @@ class ColorDetailViewModel: ObservableObject {
     
     func startSubscription() {
         $color
+            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { color in
