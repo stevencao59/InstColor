@@ -38,7 +38,7 @@ struct ColorResultView: View {
             }
         }
         .sheet(isPresented: $showColorDetail) {
-            ColorDetailModalView(color: color, containerCotentWidth: containerCotentWidth)
+            ColorDetailView(color: color, containerCotentWidth: containerCotentWidth, showModalButtons: true)
                 .opacity(0.8)
                 .clearModalBackground()
                 .presentationDetents([.medium, .large])
