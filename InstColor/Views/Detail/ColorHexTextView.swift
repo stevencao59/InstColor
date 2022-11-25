@@ -16,15 +16,15 @@ struct ColorHexTextView: View {
             Text("HEX: #")
                 .font(.body)
                 .bold()
-            TextEditor(text: $hexText)
+            TextField("", text: $hexText)
                 .scrollContentBackground(.hidden)
                 .background(Color(UIColor(red: 66, green: 66, blue: 66)))
                 .multilineTextAlignment(.center)
                 .cornerRadius(5)
                 .frame(width: 100, height: 40)
-                .onChange(of: hexText) { text in
+                .onSubmit {
                     DispatchQueue.main.async {
-                        if let color = UIColor(hex: text) {
+                        if let color = UIColor(hex: hexText) {
                             displayColor = color
                         }
                     }

@@ -12,6 +12,7 @@ import AVFoundation
 class CameraManager: ObservableObject {
     @Published var error: CameraError?
     @Published var cameraPosition: AVCaptureDevice.Position = .back
+    @Published var cameraRunnning: Bool = true
     private var subscriptions = Set<AnyCancellable>()
 
     enum Status {
@@ -78,6 +79,7 @@ class CameraManager: ObservableObject {
         session.beginConfiguration()
         defer {
             session.commitConfiguration()
+            status = .configured
         }
         
         let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: cameraPosition)
@@ -114,9 +116,6 @@ class CameraManager: ObservableObject {
             status = .failed
             return
         }
-        
-        status = .configured
-        
     }
     
     private init() {
@@ -146,6 +145,24 @@ class CameraManager: ObservableObject {
             }, receiveValue: { value in
                 self.status = .unconfigured
                 self.configureCaptureSession(cameraPosition: value)
+            })
+            .store(in: &subscriptions)
+        
+        $cameraRunnning
+            .receive(on: RunLoop.main)
+            .subscribe(on: DispatchQueue.global())
+            .removeDuplicates()
+            .sink(receiveValue: { value in
+                if value {
+                    if self.status == .configured {
+                        self.sessionQueue.async {
+                            self.session.startRunning()
+                        }
+                    }
+                } else {
+                    self.session.stopRunning()
+                    
+                }
             })
             .store(in: &subscriptions)
     }

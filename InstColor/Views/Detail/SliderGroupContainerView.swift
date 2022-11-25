@@ -35,7 +35,7 @@ struct SliderGroupContainerView: View {
             if colorType == "RGB" {
                 SliderRgbGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, containerCotentWidth: containerCotentWidth)
             } else if colorType == "HSL" {
-                SliderHslGroupView(hue: $model.hue, satuation: $model.satuation, lightness: $model.lightness, hueText: $model.hueText, satuationText: $model.satuationText, lightnessText: $model.lightnessText, color: $model.color, containerCotentWidth: containerCotentWidth)
+                SliderHsbGroupView(hue: $model.hue, satuation: $model.satuation, brightness: $model.brightness, hueText: $model.hueText, satuationText: $model.satuationText, brightnessText: $model.brightnessText, color: $model.color, containerCotentWidth: containerCotentWidth)
             }
         }
         .padding([.horizontal])

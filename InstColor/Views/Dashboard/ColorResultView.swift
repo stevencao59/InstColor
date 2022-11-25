@@ -26,9 +26,7 @@ struct ColorResultView: View {
     var body: some View {
         Button(action: clickToShowSheet) {
             HStack {
-                RoundedRectangle(cornerRadius: 40)
-                    .fill(Color(uiColor: color))
-                    .frame(width: 40, height: 40)
+                BorderedRectView(color: Color(color), cornerRadius: 40, lineWidth: 1, width: 40, height: 40)
                     .onChange(of: color) { newValue in
                         model.color = newValue
                     }

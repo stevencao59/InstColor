@@ -32,7 +32,6 @@ struct FavoriteColorRow: View {
             Text("\(Int(uiColor.components.blue * 255))")
                 .font(.footnote)
         }
-        .padding()
     }
 }
 

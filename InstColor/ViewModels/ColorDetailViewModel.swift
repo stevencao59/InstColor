@@ -35,11 +35,11 @@ class ColorDetailViewModel: ObservableObject {
     // Hsl color properties
     @Published var hue: Double = 0
     @Published var satuation: Double = 0
-    @Published var lightness: Double = 0
+    @Published var brightness: Double = 0
     
     @Published var hueText: String = "0"
     @Published var satuationText: String = "0"
-    @Published var lightnessText: String = "0"
+    @Published var brightnessText: String = "0"
     
     @Published var colorHexString: String = ""
     
@@ -57,14 +57,19 @@ class ColorDetailViewModel: ObservableObject {
                 self.greenText = "\("\(String(format: "%.0f", self.green))")"
                 self.blueText = "\("\(String(format: "%.0f", self.blue))")"
                 
-                let hsl = getRgbHls(r: color.components.red, g: color.components.green, b: color.components.blue)
-                self.hue = Double(hsl.h * 360)
-                self.satuation = hsl.s
-                self.lightness = hsl.l
+                var hue: CGFloat = 0.0
+                var satuation: CGFloat = 0.0
+                var brightness: CGFloat = 0.0
+                var alpha: CGFloat = 0.0
+
+                color.getHue(&hue, saturation: &satuation, brightness: &brightness, alpha: &alpha)
+                self.hue = hue
+                self.satuation = satuation
+                self.brightness = brightness
                 
-                self.hueText = "\("\(String(format: "%.0f", self.hue))")"
+                self.hueText = "\("\(String(format: "%.2f", self.hue))")"
                 self.satuationText = "\("\(String(format: "%.2f", self.satuation))")"
-                self.lightnessText = "\("\(String(format: "%.2f", self.lightness))")"
+                self.brightnessText = "\("\(String(format: "%.2f", self.brightness))")"
                 
                 self.colorHexString = color.toHexString() ?? "Unknown Hex"
                 

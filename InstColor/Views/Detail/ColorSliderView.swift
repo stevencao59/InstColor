@@ -17,9 +17,10 @@ struct ColorSliderView: View {
     var containerCotentWidth: Double
     var iconText: String
     var range: ClosedRange<Double>
+    var step: Double
     var setColor: (Double, String) -> Void
     
-    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, setColor: @escaping (Double, String) -> Void) {
+    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, setColor: @escaping (Double, String) -> Void) {
         self._colorValue = colorValue
         self._colorValueText = colorValueText
         self._color = color
@@ -27,6 +28,7 @@ struct ColorSliderView: View {
         self.containerCotentWidth = containerCotentWidth
         self.iconText = iconText
         self.range = range
+        self.step = step
         self.setColor = setColor
         
         UIStepper.appearance().setDecrementImage(UIImage(systemName: "minus"), for: .normal)
@@ -52,7 +54,7 @@ struct ColorSliderView: View {
                     .onChange(of: sliderValue) { value in
                         colorValue = value
                     }
-                Stepper("", value: $colorValue, in: range)
+                Stepper("", value: $colorValue, in: range, step: step)
                     .foregroundColor(.white)
                     .tint(.white)
             }
@@ -84,6 +86,6 @@ struct ColorSliderView: View {
 
 struct ColorSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconText: "R", range: 0.0...255.0) {_, _ in }
+        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconText: "R", range: 0.0...255.0, step: 0.1) {_, _ in }
     }
 }

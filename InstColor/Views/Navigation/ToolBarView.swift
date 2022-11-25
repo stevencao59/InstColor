@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ToolBarView: View {
-    @Binding var frameSouce: FrameSource
+    @ObservedObject var model: ContentViewModel
     @Binding var imageName: String
     @Binding var showScaleSlider: Bool
     @Binding var showSliderControl: Bool
@@ -18,8 +18,9 @@ struct ToolBarView: View {
     var containerCotentWidth: CGFloat
     var switchCameraAction: () -> Void
     
-    init(frameSource: Binding<FrameSource>, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat, switchCameraAction: @escaping () -> Void ) {
-        self._frameSouce = frameSource
+    init(model: ContentViewModel, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat, switchCameraAction: @escaping () -> Void ) {
+        self.model = model
+
         self._imageName = imageName
         self._showScaleSlider = showScaleSlider
         self._showSliderControl = showSliderControl
@@ -35,7 +36,7 @@ struct ToolBarView: View {
     var body: some View {
         HStack {
             Group {
-                FrameSourceView(frameSource: $frameSouce, imageName: $imageName)
+                FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
                 Button(action: switchCameraAction) {
                     ImageButtonView(imageName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
                 }
@@ -48,7 +49,10 @@ struct ToolBarView: View {
             }
             .padding([.horizontal, .bottom])
             .fullScreenCover(isPresented: $showFavorites) {
-                FavoritesView(containerCotentWidth: containerCotentWidth)
+                return FavoritesView(containerCotentWidth: containerCotentWidth)
+            }
+            .onChange(of: showFavorites) { toShow in
+                model.cameraManager.cameraRunnning = !toShow
             }
         }
     }
@@ -56,6 +60,6 @@ struct ToolBarView: View {
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(frameSource: .constant(.cameraImage), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300, switchCameraAction: { })
+        ToolBarView(model: ContentViewModel(), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300, switchCameraAction: { })
     }
 }

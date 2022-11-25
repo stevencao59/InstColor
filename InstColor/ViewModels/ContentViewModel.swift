@@ -34,6 +34,7 @@ class ContentViewModel: ObservableObject {
     @Published var statusBarHeight: CGFloat = 0
     @Published var bottomBarHeight: CGFloat = 0
     @Published var containerCotentWidth: CGFloat = 0
+    @Published var containerCotentHeight: CGFloat = 0
     
     // All camera errors
     @Published var error: Error?
@@ -64,7 +65,7 @@ class ContentViewModel: ObservableObject {
         if let location = loc {
             return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize  / 2, width: self.thumbViewSize, height: self.thumbViewSize)
         }
-        return nil
+        return CGRect(x: self.containerCotentWidth / 2 - (self.thumbViewSize / 2), y: (self.containerCotentHeight / 2) - self.navigationHeight - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
     }
     
     func setupSubscriptions() {

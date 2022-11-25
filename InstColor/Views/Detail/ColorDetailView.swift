@@ -82,6 +82,7 @@ struct ColorDetailView: View {
 
             ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
         }
+        .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .modifier(SaveColorModifier(color: model.color, showModalButtons: showModalButtons))
