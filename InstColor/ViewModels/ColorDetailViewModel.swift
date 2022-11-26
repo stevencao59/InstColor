@@ -45,18 +45,19 @@ class ColorDetailViewModel: ObservableObject {
     
     func startSubscription() {
         $color
-            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.1) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { color in
-                self.red = Double(color.components.red * 255)
-                self.green = Double(color.components.green * 255)
-                self.blue = Double(color.components.blue * 255)
-                
-                self.redText = "\("\(String(format: "%.0f", self.red))")"
-                self.greenText = "\("\(String(format: "%.0f", self.green))")"
-                self.blueText = "\("\(String(format: "%.0f", self.blue))")"
-                
+                self.colorHexString = color.toHexString() ?? "Unknown Hex"
+            })
+            .store(in: &subscriptions)
+        
+        $color
+            .debounce(for: .seconds(0.1) , scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { color in
                 var hue: CGFloat = 0.0
                 var satuation: CGFloat = 0.0
                 var brightness: CGFloat = 0.0
@@ -70,9 +71,29 @@ class ColorDetailViewModel: ObservableObject {
                 self.hueText = "\("\(String(format: "%.2f", self.hue))")"
                 self.satuationText = "\("\(String(format: "%.2f", self.satuation))")"
                 self.brightnessText = "\("\(String(format: "%.2f", self.brightness))")"
+            })
+            .store(in: &subscriptions)
+        
+        $color
+            .debounce(for: .seconds(0.1) , scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { color in
+                self.red = Double(color.components.red * 255)
+                self.green = Double(color.components.green * 255)
+                self.blue = Double(color.components.blue * 255)
                 
-                self.colorHexString = color.toHexString() ?? "Unknown Hex"
-                
+                self.redText = "\("\(String(format: "%.0f", self.red))")"
+                self.greenText = "\("\(String(format: "%.0f", self.green))")"
+                self.blueText = "\("\(String(format: "%.0f", self.blue))")"
+            })
+            .store(in: &subscriptions)
+    
+        $color
+            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { color in
                 let rgbColor = color.calculateClosestColor()
                 self.colorName = rgbColor?.English ?? "Unknown Color"
                 

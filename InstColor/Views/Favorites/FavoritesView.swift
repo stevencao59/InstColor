@@ -7,30 +7,36 @@
 
 import SwiftUI
 
+struct RowTextView: View {
+    var text: String
+    var color: Double
+
+    var body: some View {
+        HStack {
+            Text(text)
+                .bold()
+            Text("\(Int(color * 255))")
+        }
+    }
+}
+
 struct FavoriteColorRow: View {
     var title: String
     var uiColor: UIColor
     
     var body: some View {
         HStack {
-            VStack {
-                BorderedRectView(color: Color(uiColor), cornerRadius: 50, lineWidth: 2, width: 100, height: 50)
-                Text(title)
-                    .bold()
-            }
+            BorderedRectView(color: Color(uiColor), cornerRadius: 50, lineWidth: 2, width: 100, height: 50)
+            Text(title)
+                .bold()
             Spacer()
-            Text("R:  ")
-                .bold() +
-            Text("\(Int(uiColor.components.red * 255))")
-                .font(.footnote) +
-            Text("  G:  ")
-                .bold() +
-            Text("\(Int(uiColor.components.green * 255))")
-                .font(.footnote) +
-            Text("  B:  ")
-                .bold() +
-            Text("\(Int(uiColor.components.blue * 255))")
-                .font(.footnote)
+            
+            VStack(alignment: .leading) {
+                RowTextView(text: "R: ", color: uiColor.components.red)
+                RowTextView(text: "G: ", color: uiColor.components.green)
+                RowTextView(text: "B: ", color: uiColor.components.blue)
+            }
+            .font(.footnote)
         }
     }
 }
