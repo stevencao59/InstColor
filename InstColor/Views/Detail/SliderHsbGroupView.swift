@@ -24,24 +24,26 @@ struct SliderHsbGroupView: View {
         var clampedValue = value
         if clampedValue < 0 {
             clampedValue = 0
-        } else if clampedValue > 1 {
-            clampedValue = 1
+        } else if clampedValue > 360 && iconText == "H" {
+            clampedValue = 360
+        } else if clampedValue > 100 && ["S", "B"].contains(iconText) {
+            clampedValue = 100
         }
 
         if iconText == "H" {
-            color = UIColor(hue: clampedValue, saturation: satuation, brightness: brightness, alpha: 1)
+            color = UIColor(hue: clampedValue / 360, saturation: satuation / 100, brightness: brightness / 100, alpha: 1)
         } else if iconText == "S" {
-            color = UIColor(hue: hue, saturation: clampedValue, brightness: brightness, alpha: 1)
+            color = UIColor(hue: hue / 360, saturation: clampedValue / 100, brightness: brightness / 100, alpha: 1)
         } else if iconText == "B" {
-            color = UIColor(hue: hue, saturation: satuation, brightness: clampedValue, alpha: 1)
+            color = UIColor(hue: hue / 360, saturation: satuation / 100, brightness: clampedValue / 100, alpha: 1)
         }
     }
     
     var body: some View {
         VStack {
-            ColorSliderView(colorValue: $hue, colorValueText: $hueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "H", range: 0.0...1.0, step: 0.01, setColor: setColor)
-            ColorSliderView(colorValue: $satuation, colorValueText: $satuationText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "S", range: 0.0...1.0, step: 0.01, setColor: setColor)
-            ColorSliderView(colorValue: $brightness, colorValueText: $brightnessText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...1.0, step: 0.01, setColor: setColor)
+            ColorSliderView(colorValue: $hue, colorValueText: $hueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "H", range: 0.0...360.0, step: 1, setColor: setColor)
+            ColorSliderView(colorValue: $satuation, colorValueText: $satuationText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "S", range: 0.0...100.0, step: 1, setColor: setColor)
+            ColorSliderView(colorValue: $brightness, colorValueText: $brightnessText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...100.0, step: 1, setColor: setColor)
         }
     }
 }

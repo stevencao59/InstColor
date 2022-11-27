@@ -12,7 +12,7 @@ struct SliderGroupContainerView: View {
     @State private var colorType = "RGB"
     
     var containerCotentWidth: Double
-    var colorTyes = ["RGB", "HSL"]
+    var colorTypes = ["RGB", "HSB"]
     
     init(model: ColorDetailViewModel, containerCotentWidth: Double) {
         self.model = model
@@ -26,7 +26,7 @@ struct SliderGroupContainerView: View {
     var body: some View {
         VStack {
             Picker("Color Type", selection: $colorType) {
-                ForEach(colorTyes, id: \.self) {
+                ForEach(colorTypes, id: \.self) {
                     Text($0)
                 }
             }
@@ -34,7 +34,7 @@ struct SliderGroupContainerView: View {
 
             if colorType == "RGB" {
                 SliderRgbGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, containerCotentWidth: containerCotentWidth)
-            } else if colorType == "HSL" {
+            } else if colorType == "HSB" {
                 SliderHsbGroupView(hue: $model.hue, satuation: $model.satuation, brightness: $model.brightness, hueText: $model.hueText, satuationText: $model.satuationText, brightnessText: $model.brightnessText, color: $model.color, containerCotentWidth: containerCotentWidth)
             }
         }

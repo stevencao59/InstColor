@@ -17,8 +17,6 @@ struct ScaleSliderView: View {
             Slider(value: $sizeWeight, in: range)
                 .padding([.leading])
         }
-        .tint(.yellow)
-        .padding()
     }
 }
 

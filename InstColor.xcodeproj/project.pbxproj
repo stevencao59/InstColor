@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
+		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B637962B29159F110004DBC0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637962A29159F110004DBC0 /* ImageButtonView.swift */; };
 		B6471B2D292B31C6006A1474 /* BorderedRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6471B2C292B31C6006A1474 /* BorderedRectView.swift */; };
 		B68C1A4129213D1300AC7662 /* ColorSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4029213D1300AC7662 /* ColorSliderView.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
 		B637962A29159F110004DBC0 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		B6471B2C292B31C6006A1474 /* BorderedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedRectView.swift; sourceTree = "<group>"; };
 		B68C1A4029213D1300AC7662 /* ColorSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSliderView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				B68C1A492921C2B000AC7662 /* ColorIconView.swift */,
 				B6BBCF4D2916B1D90010C3FE /* ColorDetailView.swift */,
 				B68C1A4B2923471500AC7662 /* ColorHexTextView.swift */,
+				B60EC4842933182700483710 /* ColorShadeView.swift */,
 				B68C1A5529273F4500AC7662 /* SliderGroupContainerView.swift */,
 				B68C1A53292734FB00AC7662 /* SliderHsbGroupView.swift */,
 				B68C1A512927323900AC7662 /* SliderRgbGroupView.swift */,
@@ -404,6 +407,7 @@
 				B6DE829728E72A0800826201 /* FrameView.swift in Sources */,
 				B6BBCF52291B5BFF0010C3FE /* ClearViewModifier.swift in Sources */,
 				B6DDD72828FFA82600E2EC66 /* FrameSourceView.swift in Sources */,
+				B60EC4852933182700483710 /* ColorShadeView.swift in Sources */,
 				B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */,
 				B6EBA0C228E78B97006954F8 /* FrameManager.swift in Sources */,
 				B6DDD70D28F1B2F500E2EC66 /* ColorResultViewModel.swift in Sources */,

@@ -10,7 +10,8 @@ import SwiftUI
 struct ColorResultView: View {
     @StateObject private var model = ColorResultViewModel()
     @State var showColorDetail = false
-    
+    @State var selectedDetent: PresentationDetent = .medium
+
     let color: UIColor
     
     var containerCotentWidth: Double
@@ -36,10 +37,10 @@ struct ColorResultView: View {
             }
         }
         .sheet(isPresented: $showColorDetail) {
-            ColorDetailView(color: color, containerCotentWidth: containerCotentWidth, showModalButtons: true)
+            ColorDetailView(color: color, containerCotentWidth: containerCotentWidth, showModalButtons: true, selectedDetent: selectedDetent)
                 .opacity(0.8)
                 .clearModalBackground()
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.medium, .large], selection: $selectedDetent)
         }
     }
 }

@@ -57,6 +57,49 @@ struct SaveColorModifier: ViewModifier {
     }
 }
 
+struct InformationTypeView: View {
+    @ObservedObject var model: ColorDetailViewModel
+    @State var selectedInformationType = "Types"
+    
+    var showTypesView: Bool {
+        return selectedInformationType == "Types"
+    }
+    
+    var showInformationView: Bool {
+        return selectedDetent == .large
+    }
+    
+    var containerCotentWidth: Double
+    var informationTypes = ["Types", "Shades"]
+    var selectedDetent: PresentationDetent
+    
+    var body: some View {
+        VStack {
+            if showInformationView {
+                Divider()
+                    .padding([.horizontal])
+
+                Picker("Information", selection: $selectedInformationType) {
+                    ForEach(informationTypes, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .frame(width: containerCotentWidth / 2)
+                
+                if showTypesView {
+                    ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
+                } else {
+                    ColorShadeView(referenceColor: $model.color)
+                }
+            }
+        }
+        .padding([.horizontal])
+        .animation(.easeIn, value: showTypesView)
+        .animation(.easeIn, value: showInformationView)
+    }
+}
+
 struct ColorDetailView: View {
     @StateObject var model = ColorDetailViewModel()
     @State var hexText: String = "Unknown Hex"
@@ -64,12 +107,14 @@ struct ColorDetailView: View {
     var color: UIColor
     var containerCotentWidth: Double = 0
     var showModalButtons: Bool
-    
-    init(color: UIColor, containerCotentWidth: Double, showModalButtons: Bool) {
+    var selectedDetent: PresentationDetent
+
+    init(color: UIColor, containerCotentWidth: Double, showModalButtons: Bool, selectedDetent: PresentationDetent) {
         self.color = color
-        self.hexText = color.toHexString() ?? "Unknown Hex"
         self.containerCotentWidth = containerCotentWidth
         self.showModalButtons = showModalButtons
+        self.selectedDetent = selectedDetent
+        self.hexText = color.toHexString() ?? "Unknown Hex"
     }
     
     var body: some View {
@@ -79,8 +124,8 @@ struct ColorDetailView: View {
             SliderGroupContainerView(model: model, containerCotentWidth: containerCotentWidth)
             
             ColorHexTextView(displayColor: $model.color)
-
-            ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
+            
+            InformationTypeView(model: model, containerCotentWidth: containerCotentWidth, selectedDetent: selectedDetent)
         }
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -95,6 +140,6 @@ struct ColorDetailView: View {
 
 struct ColorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorDetailView(color: .orange, containerCotentWidth: 393, showModalButtons: true)
+        ColorDetailView(color: .orange, containerCotentWidth: 393, showModalButtons: true, selectedDetent: .large)
     }
 }

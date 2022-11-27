@@ -15,4 +15,6 @@ func %%(left: Double, right: Double) -> Double {
     return result
 }
 
-
+func lerp(from a: CGFloat, to b: CGFloat, alpha: CGFloat) -> CGFloat {
+    return (1 - alpha) * a + alpha * b
+}

@@ -64,13 +64,13 @@ class ColorDetailViewModel: ObservableObject {
                 var alpha: CGFloat = 0.0
 
                 color.getHue(&hue, saturation: &satuation, brightness: &brightness, alpha: &alpha)
-                self.hue = hue
-                self.satuation = satuation
-                self.brightness = brightness
+                self.hue = self.hue == 360 ? 360 : hue * 360
+                self.satuation = satuation * 100
+                self.brightness = brightness * 100
                 
-                self.hueText = "\("\(String(format: "%.2f", self.hue))")"
-                self.satuationText = "\("\(String(format: "%.2f", self.satuation))")"
-                self.brightnessText = "\("\(String(format: "%.2f", self.brightness))")"
+                self.hueText = "\("\(String(format: "%.0f", self.hue))")"
+                self.satuationText = "\("\(String(format: "%.0f", self.satuation))")"
+                self.brightnessText = "\("\(String(format: "%.0f", self.brightness))")"
             })
             .store(in: &subscriptions)
         
