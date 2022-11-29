@@ -15,8 +15,6 @@ struct NavigationView: View {
     @State var showSliderControl = false
     @State var showScaleSlider = false
     
-    let defaultThumbFrameSize = 20.0
-    
     func switchCameraPosition() {
         model.cameraManager.cameraPosition = model.cameraManager.cameraPosition == .back ? .front : .back
         withAnimation {
@@ -44,7 +42,6 @@ struct NavigationView: View {
             .frame(maxWidth: .infinity)
             .padding()
             .background(.black)
-            .opacity(0.8)
             .foregroundColor(.yellow)
             .animation(.default, value: showScaleSlider)
             .animation(.default, value: showSliderControl)
@@ -56,8 +53,8 @@ struct NavigationView: View {
                         }
                 }
             )
-            .onChange(of: sizeWeight) { weight in
-                model.thumbViewSize = defaultThumbFrameSize * weight
+            .onChange(of: sizeWeight) { scale in
+                model.scaleAmount = scale
             }
             .onChange(of: model.frameSource) { source in
                 showSliderControl = model.frameSource == .thumbImage

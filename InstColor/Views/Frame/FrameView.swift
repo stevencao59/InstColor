@@ -18,7 +18,7 @@ struct FrameView: View {
                     Image(image, scale: 1, label: Text("Camera feed"))
                         .resizable()
                         .scaledToFit()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                         .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
                         .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))

@@ -6,9 +6,14 @@
 //
 import CoreImage
 import UIKit
+import Combine
 
 @MainActor
 class ContentViewModel: ObservableObject {
+    
+    // Cancellables
+    private var subscriptions = Set<AnyCancellable>()
+    
     // Note: recognizeFrame is the frame where we get average color from
     @Published var frame: CGImage?
     @Published var thumbFrame: CGImage?
@@ -23,7 +28,7 @@ class ContentViewModel: ObservableObject {
     // Pressed location, size and scale
     @Published var location: CGPoint?
     @Published var rect: CGRect?
-    @Published var scaleAmount: Double = 1.5
+    @Published var scaleAmount: Double = 1
     
     // Image size
     @Published var size: CGSize?
@@ -40,7 +45,7 @@ class ContentViewModel: ObservableObject {
     @Published var error: Error?
 
     // Thumb view size to exact color
-    @Published var thumbViewSize: CGFloat = 20
+    var thumbViewSize: CGFloat = 0.0
     
     // Animation Amounts
     @Published var animationAmount = 0.0
@@ -54,7 +59,8 @@ class ContentViewModel: ObservableObject {
             if let rect = self.rect {
                 if let size = self.size {
                     let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
-                    return image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
+                    let croppedImage = image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
+                    return croppedImage
                 }
             }
         }
@@ -63,7 +69,7 @@ class ContentViewModel: ObservableObject {
     
     func getRect(loc: CGPoint?) -> CGRect? {
         if let location = loc {
-            return CGRect(x: location.x, y: location.y - self.navigationHeight - self.thumbViewSize  / 2, width: self.thumbViewSize, height: self.thumbViewSize)
+            return CGRect(x: location.x - self.thumbViewSize / 2, y: location.y - self.navigationHeight - self.thumbViewSize  / 2, width: self.thumbViewSize, height: self.thumbViewSize)
         }
         return CGRect(x: self.containerCotentWidth / 2 - (self.thumbViewSize / 2), y: (self.containerCotentHeight / 2) - self.navigationHeight - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
     }
@@ -80,20 +86,18 @@ class ContentViewModel: ObservableObject {
                 return self.getRect(loc: loc)
             }
             .assign(to: &$rect)
-
-        $thumbViewSize
-            .receive(on: RunLoop.main)
-            .compactMap() { loc in
-                return self.getRect(loc: self.location)
-            }
-            .assign(to: &$rect)
         
         frameManager.$current
             .receive(on: RunLoop.main)
-            .compactMap { buffer in
-                return CGImage.create(from: buffer)
-            }
-            .assign(to: &$frame)
+            .sink(receiveValue: { buffer in
+                guard let image = CGImage.create(from: buffer) else {
+                    self.frame = nil
+                    return
+                }
+                self.thumbViewSize = (Double(image.height) / Double(image.width)) * 10
+                self.frame = image
+            })
+            .store(in: &subscriptions)
         
         $frame
             .receive(on: RunLoop.main)

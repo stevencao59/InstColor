@@ -19,7 +19,7 @@ extension UIImage {
         else {
             return nil
         }
-        return cutImageRef
+        let resImage = UIImage(cgImage: cutImageRef, scale: self.imageRendererFormat.scale, orientation: self.imageOrientation)
+        return resImage.cgImage
     }
-    
 }

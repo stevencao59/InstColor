@@ -22,7 +22,6 @@ struct DashboardView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(.black)
-                .opacity(0.8)
                 .overlay(
                     GeometryReader { geo in
                         Color.clear

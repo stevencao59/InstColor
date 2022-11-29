@@ -42,6 +42,7 @@ struct ThumbView: View {
                     Image(frame, scale: 1, label: Text("Thumbview Feed"))
                         .resizable()
                         .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
                         .border(.yellow)
                 }
                 .frame(width: rect.width)
@@ -55,16 +56,6 @@ struct ThumbView: View {
                 )
                 .onReceive(model.$thumbFrame) { _ in
                     thumbViewOpacity = model.frameSource == .thumbImage ? 1 : 0
-                }
-                .onChange(of: rect) { _ in
-                    withAnimation() {
-                        model.scaleAmount = 1.5
-                    }
-                }
-                .onAppear() {
-                    withAnimation() {
-                        model.scaleAmount = 1.5
-                    }
                 }
             }
         }
