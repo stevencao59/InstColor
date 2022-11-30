@@ -58,7 +58,8 @@ class ContentViewModel: ObservableObject {
             let image = UIImage(cgImage: image)
             if let rect = self.rect {
                 if let size = self.size {
-                    let finalRect = CGRect(x: rect.origin.x, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
+                    let posX =  self.cameraManager.cameraPosition == .front ? self.containerCotentWidth - rect.origin.x - self.thumbViewSize : rect.origin.x
+                    let finalRect = CGRect(x: posX, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
                     let croppedImage = image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
                     return croppedImage
                 }

@@ -14,6 +14,10 @@ struct ThumbView: View {
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
     
+    var orientation: Image.Orientation {
+        return model.cameraManager.cameraPosition == .front ? .upMirrored : .up
+    }
+    
     var dragGesutre: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -39,7 +43,7 @@ struct ThumbView: View {
         if let rect = model.rect {
             if let frame = model.thumbFrame {
                 VStack {
-                    Image(frame, scale: 1, label: Text("Thumbview Feed"))
+                    Image(frame, scale: 1, orientation: orientation, label: Text("Thumbview Feed"))
                         .resizable()
                         .scaledToFit()
                         .aspectRatio(contentMode: .fit)

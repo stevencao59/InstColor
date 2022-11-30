@@ -13,7 +13,7 @@ struct ScaleSliderView: View {
     
     var body: some View {
         HStack {
-            Text("Extract Size")
+            Text("Scale")
             Slider(value: $sizeWeight, in: range)
                 .padding([.leading])
             Text("x \(String(format: "%.1f", sizeWeight))")
