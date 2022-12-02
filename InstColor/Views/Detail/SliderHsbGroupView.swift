@@ -17,7 +17,8 @@ struct SliderHsbGroupView: View {
     @Binding var brightnessText: String
     
     @Binding var color: UIColor
-
+    
+    var keyboardFocusState: FocusState<FocusElement?>.Binding
     var containerCotentWidth: Double
     
     func setColor(value: Double, iconText: String) {
@@ -41,15 +42,15 @@ struct SliderHsbGroupView: View {
     
     var body: some View {
         VStack {
-            ColorSliderView(colorValue: $hue, colorValueText: $hueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "H", range: 0.0...360.0, step: 1, setColor: setColor)
-            ColorSliderView(colorValue: $satuation, colorValueText: $satuationText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "S", range: 0.0...100.0, step: 1, setColor: setColor)
-            ColorSliderView(colorValue: $brightness, colorValueText: $brightnessText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...100.0, step: 1, setColor: setColor)
+            ColorSliderView(colorValue: $hue, colorValueText: $hueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "H", range: 0.0...360.0, step: 1, path: .hue, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $satuation, colorValueText: $satuationText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "S", range: 0.0...100.0, step: 1, path: .satuation, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $brightness, colorValueText: $brightnessText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...100.0, step: 1, path: .brightness, keyboardFocusState: keyboardFocusState, setColor: setColor)
         }
     }
 }
 
 struct SliderHsbGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderHsbGroupView(hue: .constant(100), satuation: .constant(100), brightness: .constant(100), hueText: .constant("H"), satuationText: .constant("S"), brightnessText: .constant("B"), color: .constant(.red), containerCotentWidth: 200)
+        SliderHsbGroupView(hue: .constant(100), satuation: .constant(100), brightness: .constant(100), hueText: .constant("H"), satuationText: .constant("S"), brightnessText: .constant("B"), color: .constant(.red), keyboardFocusState: FocusState<FocusElement?>().projectedValue, containerCotentWidth: 200)
     }
 }

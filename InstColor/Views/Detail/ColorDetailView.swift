@@ -100,10 +100,26 @@ struct InformationTypeView: View {
     }
 }
 
+struct ColorIconContainerView: View {
+    @Binding var color: UIColor
+    @Binding var colorName: String?
+
+    var keyboardFocusState: FocusState<FocusElement?>.Binding
+
+    var body: some View {
+        ZStack {
+            ColorIconView(color: color, colorName: colorName)
+        }
+        .frame(maxWidth: .infinity)
+        .defocusOnTap(keyboardFocusState)
+    }
+}
+
 struct ColorDetailView: View {
     @StateObject var model = ColorDetailViewModel()
     @State var hexText: String = "Unknown Hex"
-    
+    @FocusState var keyboardFocusState: FocusElement?
+
     var color: UIColor
     var containerCotentWidth: Double = 0
     var showModalButtons: Bool
@@ -119,9 +135,9 @@ struct ColorDetailView: View {
     
     var body: some View {
         VStack {
-            ColorIconView(color: model.color, colorName: model.colorName)
-            
-            SliderGroupContainerView(model: model, containerCotentWidth: containerCotentWidth)
+            ColorIconContainerView(color: $model.color, colorName: $model.colorName, keyboardFocusState: $keyboardFocusState)
+
+            SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: containerCotentWidth)
             
             ColorHexTextView(displayColor: $model.color)
             

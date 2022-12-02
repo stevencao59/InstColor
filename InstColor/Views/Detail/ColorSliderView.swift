@@ -13,22 +13,31 @@ struct ColorSliderView: View {
     @Binding var colorValue: Double
     @Binding var colorValueText: String
     @Binding var color: UIColor
+
+    var keyboardFocusState: FocusState<FocusElement?>.Binding
     
     var containerCotentWidth: Double
     var iconText: String
     var range: ClosedRange<Double>
     var step: Double
+    var path: FocusElement?
+    
     var setColor: (Double, String) -> Void
     
-    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, setColor: @escaping (Double, String) -> Void) {
+    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, path: FocusElement, keyboardFocusState: FocusState<FocusElement?>.Binding
+        , setColor: @escaping (Double, String) -> Void) {
         self._colorValue = colorValue
         self._colorValueText = colorValueText
         self._color = color
-        
+
         self.containerCotentWidth = containerCotentWidth
         self.iconText = iconText
         self.range = range
         self.step = step
+        self.path = path
+        
+        self.keyboardFocusState = keyboardFocusState
+        
         self.setColor = setColor
         
         UIStepper.appearance().setDecrementImage(UIImage(systemName: "minus"), for: .normal)
@@ -41,7 +50,8 @@ struct ColorSliderView: View {
                 .font(.footnote)
                 .foregroundColor(.gray)
             Spacer()
-            TextEditor(text: $colorValueText )
+            TextEditor(text: $colorValueText)
+                .focused(keyboardFocusState, equals: path)
                 .scrollContentBackground(.hidden)
                 .background(Color(UIColor(red: 66, green: 66, blue: 66)))
                 .multilineTextAlignment(.center)
@@ -85,7 +95,8 @@ struct ColorSliderView: View {
 }
 
 struct ColorSliderView_Previews: PreviewProvider {
+    static var focused: FocusState<FocusElement?> = FocusState<FocusElement?>()
     static var previews: some View {
-        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconText: "R", range: 0.0...255.0, step: 0.1) {_, _ in }
+        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconText: "R", range: 0.0...255.0, step: 0.1, path: .brightness, keyboardFocusState: focused.projectedValue) {_, _ in }
     }
 }

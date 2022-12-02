@@ -49,7 +49,7 @@ struct ShadeRowView: View {
                     .padding([.top])
                 HStack {
                     if let referenceColor {
-                        ForEach(0...4, id: \.self) { i in
+                        ForEach(1...4, id: \.self) { i in
                             ShadeView(referenceColor: $referenceColor, shadeColor: referenceColor.combine(with: combineColor, amount: sliderValue * Double(i)))
                         }
                     }

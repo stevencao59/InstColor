@@ -18,6 +18,7 @@ struct SliderRgbGroupView: View {
     
     @Binding var color: UIColor
 
+    var keyboardFocusState: FocusState<FocusElement?>.Binding
     var containerCotentWidth: Double
     
     func setColor(value: Double, iconText: String) {
@@ -38,15 +39,15 @@ struct SliderRgbGroupView: View {
     
     var body: some View {
         VStack {
-            ColorSliderView(colorValue: $red, colorValueText: $redText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "R", range: 0.0...255.0, step: 1, setColor: setColor)
-            ColorSliderView(colorValue: $green, colorValueText: $greenText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "G", range: 0.0...255.0, step: 1, setColor: setColor)
-            ColorSliderView(colorValue: $blue, colorValueText: $blueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...255.0, step: 1, setColor: setColor)
+            ColorSliderView(colorValue: $red, colorValueText: $redText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "R", range: 0.0...255.0, step: 1, path: .hue, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $green, colorValueText: $greenText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "G", range: 0.0...255.0, step: 1, path: .hue, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $blue, colorValueText: $blueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...255.0, step: 1, path: .hue, keyboardFocusState: keyboardFocusState, setColor: setColor)
         }
     }
 }
 
 struct SliderRgbGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderRgbGroupView(red: .constant(100), green: .constant(100), blue: .constant(100), redText: .constant("R"), greenText: .constant("G"), blueText: .constant("B"), color: .constant(.red), containerCotentWidth: 200)
+        SliderRgbGroupView(red: .constant(100), green: .constant(100), blue: .constant(100), redText: .constant("R"), greenText: .constant("G"), blueText: .constant("B"), color: .constant(.red), keyboardFocusState: FocusState<FocusElement?>().projectedValue, containerCotentWidth: 200)
     }
 }
