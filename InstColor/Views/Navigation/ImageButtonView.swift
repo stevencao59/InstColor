@@ -12,7 +12,7 @@ struct ImageButtonView: View {
     
     var body: some View {
         Circle()
-            .strokeBorder(.yellow)
+            .strokeBorder(.white)
             .frame(width: 20, height: 20)
             .background(.clear)
             .overlay() {
@@ -20,8 +20,6 @@ struct ImageButtonView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 10, height: 10)
-                    .foregroundColor(.yellow)
-                    
             }
             .scaleEffect(1.5)
     }

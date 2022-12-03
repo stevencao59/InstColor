@@ -42,7 +42,7 @@ struct NavigationView: View {
             .frame(maxWidth: .infinity)
             .padding()
             .background(.black)
-            .foregroundColor(.yellow)
+            .foregroundColor(.white)
             .animation(.default, value: showScaleSlider)
             .animation(.default, value: showSliderControl)
             .overlay(

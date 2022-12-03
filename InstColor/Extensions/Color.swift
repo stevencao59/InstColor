@@ -198,7 +198,7 @@ extension UIColor {
         return weightedRed + weightedGreen + weightedBlue
     }
     
-    func calculateClosestColor() -> RGBColor? {
+    func calculateClosestColor() -> (Color: String, BaseColor: String) {
         let colorMap: [RGBColor] = Bundle.main.decode("color.json")
         let closestColor = colorMap.reduce(colorMap[0]) { prevItem, currItem in
             let prevAvg = getWeightedAverage(prevItem.Red, prevItem.Green, prevItem.Blue)
@@ -206,7 +206,7 @@ extension UIColor {
             
             return currAvg < prevAvg ? currItem : prevItem
         }
-        return closestColor
+        return (closestColor.Color.removeLastInt(), closestColor.BaseColor)
     }
     
     func getColorComponents() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {

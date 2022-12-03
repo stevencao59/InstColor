@@ -12,7 +12,7 @@ struct ShadeView: View {
     var shadeColor: UIColor
     var colorName: String {
         let name = shadeColor.calculateClosestColor()
-        return name?.English ?? "Unknown Color"
+        return name.Color
     }
     
     func selectColor() {

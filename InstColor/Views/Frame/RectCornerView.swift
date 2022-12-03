@@ -15,7 +15,7 @@ struct RectSingleView: View {
 
     var body: some View {
         Rectangle()
-            .border(.yellow)
+            .border(.white)
             .opacity(0.8)
             .frame(width: cornerWidth, height: cornerHeight)
             .offset(x: offsetX, y: offsetY)
@@ -25,15 +25,15 @@ struct RectSingleView: View {
 struct RectCornerView: View {
     var navigationHeight: CGFloat
     var statusBarHeight: CGFloat
-    var bottomBarHeight: CGFloat
-    let cornerLength = 40.0
+    var frameHeight: CGFloat
+    let cornerLength = 30.0
 
     var offsetTopHeight: CGFloat {
         return navigationHeight + statusBarHeight
     }
     
     var offsetBottomHeight: CGFloat {
-        return navigationHeight + statusBarHeight + bottomBarHeight + 1
+        return navigationHeight + statusBarHeight
     }
     
     var body: some View {
@@ -47,13 +47,13 @@ struct RectCornerView: View {
                 }
 
                 Group {
-                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: geo.size.width - 1, offsetY: geo.size.height - offsetBottomHeight - 1.0)
-                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: geo.size.width - cornerLength, offsetY: geo.size.height - offsetBottomHeight + cornerLength - 1)
-                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight + cornerLength - 1)
-                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight - 1.0)
+                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: geo.size.width - 1, offsetY: geo.size.height - offsetBottomHeight - cornerLength)
+                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: geo.size.width - cornerLength, offsetY: geo.size.height - offsetBottomHeight)
+                    RectSingleView(cornerHeight: 1, cornerWidth: cornerLength, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight)
+                    RectSingleView(cornerHeight: cornerLength, cornerWidth: 1, offsetX: 0, offsetY: geo.size.height - offsetBottomHeight - cornerLength)
                 }
                 .padding([.top])
-                
+
             }
         }
         .background(.clear)
@@ -62,7 +62,7 @@ struct RectCornerView: View {
 
 struct RectCornerView_Previews: PreviewProvider {
     static var previews: some View {
-        RectCornerView(navigationHeight: 10, statusBarHeight: 10, bottomBarHeight: 10)
+        RectCornerView(navigationHeight: 10, statusBarHeight: 10, frameHeight: 100)
             .background(.black)
     }
         

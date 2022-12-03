@@ -23,7 +23,7 @@ struct FrameView: View {
                         .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
                         .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
                     
-                    RectCornerView(navigationHeight: model.navigationHeight, statusBarHeight: model.statusBarHeight, bottomBarHeight: model.bottomBarHeight)
+                    RectCornerView(navigationHeight: model.navigationHeight, statusBarHeight: model.statusBarHeight, frameHeight: geometry.size.height)
                         .frame(height: geometry.size.height)
                         .opacity(cornerViewOpacity)
                 }

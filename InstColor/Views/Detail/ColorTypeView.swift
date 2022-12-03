@@ -15,9 +15,7 @@ struct ColorTypeGridItemView: View {
     
     func getColorName(color: UIColor) {
         DispatchQueue.main.async {
-            if let name = color.calculateClosestColor() {
-                colorName = name.English
-            }
+            colorName = color.calculateClosestColor().Color
         }
     }
     

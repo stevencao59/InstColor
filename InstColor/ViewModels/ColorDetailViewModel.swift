@@ -12,6 +12,7 @@ import Combine
 class ColorDetailViewModel: ObservableObject {
     @Published var color: UIColor = .white
     @Published var colorName: String?
+    @Published var baseColoeNsme: String?
     
     // All related convertable colors
     @Published var complementaryColor: [UIColor]?
@@ -95,7 +96,7 @@ class ColorDetailViewModel: ObservableObject {
             .removeDuplicates()
             .sink(receiveValue: { color in
                 let rgbColor = color.calculateClosestColor()
-                self.colorName = rgbColor?.English ?? "Unknown Color"
+                self.colorName = rgbColor.Color
                 
                 self.complementaryColor = color.getComplementaryColor()
                 self.triadicColor = color.getTriadicColor()

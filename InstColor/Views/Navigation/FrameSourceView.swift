@@ -19,7 +19,6 @@ struct FrameSourceView: View {
         Button(action: changeFrameSource) {
             ImageButtonView(imageName: imageName)
         }
-        .foregroundColor(.yellow)
         .opacity(0.8)
         .animation(.easeIn, value: imageName)
         .onChange(of: frameSource) { newSurce in

@@ -8,13 +8,9 @@
 import Foundation
 
 struct RGBColor: Codable {
-    let RAL: String
+    let Color: String
+    let BaseColor: String
     let Red: Int
     let Green: Int
     let Blue: Int
-    let German: String
-    let English: String
-    let French: String
-    let Spanish: String
-    let Nederlands: String
 }

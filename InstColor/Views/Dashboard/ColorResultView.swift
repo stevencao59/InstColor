@@ -14,10 +14,14 @@ struct ColorResultView: View {
 
     let color: UIColor
     
-    var containerCotentWidth: Double
+    let containerCotentWidth: Double
     
-    var colorDisplayName: String {
+    var colorName: String {
         return model.colorName ?? "Unknown Color"
+    }
+    
+    var colorBaseName: String {
+        return model.baseColorName ?? "Unknown Color"
     }
     
     func clickToShowSheet() {
@@ -31,9 +35,15 @@ struct ColorResultView: View {
                     .onChange(of: color) { newValue in
                         model.color = newValue
                     }
-                Text(colorDisplayName)
-                    .font(.title2)
-                    .foregroundColor(.white)
+                VStack(alignment: .leading) {
+                    Text(colorName)
+                        .font(.title2)
+                        .foregroundColor(.white)
+                    Text("Base Color: \(colorBaseName)")
+                        .font(.footnote)
+                        .foregroundColor(.white)
+                }
+
             }
         }
         .sheet(isPresented: $showColorDetail) {

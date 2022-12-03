@@ -7,18 +7,24 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class ColorResultViewModel: ObservableObject {
     @Published var color: UIColor = UIColor(.white)
     @Published var colorName: String?
+    @Published var baseColorName: String?
+    
+    private var subscriptions = Set<AnyCancellable>()
     
     init() {
         $color
             .receive(on: RunLoop.main)
-            .map { color in
+            .sink(receiveValue: { color in
                 let closestColor = color.calculateClosestColor()
-                return closestColor?.English
-            }
-            .assign(to: &$colorName)
+
+                self.colorName = closestColor.Color
+                self.baseColorName = closestColor.BaseColor
+            })
+            .store(in: &subscriptions)
     }
 }
