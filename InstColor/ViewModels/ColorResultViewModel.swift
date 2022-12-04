@@ -11,8 +11,9 @@ import Combine
 
 class ColorResultViewModel: ObservableObject {
     @Published var color: UIColor = UIColor(.white)
-    @Published var colorName: String?
-    @Published var baseColorName: String?
+    @Published var colorName: String = "Unknown Color"
+    @Published var baseColorName: String = "Unknown Base Color"
+    @Published var baseColorHex: String = "#000000"
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -24,6 +25,7 @@ class ColorResultViewModel: ObservableObject {
 
                 self.colorName = closestColor.Color
                 self.baseColorName = closestColor.BaseColor
+                self.baseColorHex = closestColor.BaseColorHex
             })
             .store(in: &subscriptions)
     }

@@ -14,15 +14,9 @@ struct ColorResultView: View {
 
     let color: UIColor
     
+    let colorName: String
+    let baseColorName: String
     let containerCotentWidth: Double
-    
-    var colorName: String {
-        return model.colorName ?? "Unknown Color"
-    }
-    
-    var colorBaseName: String {
-        return model.baseColorName ?? "Unknown Color"
-    }
     
     func clickToShowSheet() {
         showColorDetail.toggle()
@@ -36,12 +30,11 @@ struct ColorResultView: View {
                         model.color = newValue
                     }
                 VStack(alignment: .leading) {
-                    Text(colorName)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                    Text("Base Color: \(colorBaseName)")
-                        .font(.footnote)
-                        .foregroundColor(.white)
+                    HStack {
+                        Text("\(colorName)")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    }
                 }
 
             }
@@ -59,7 +52,7 @@ struct ColorResultView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle()
-            ColorResultView(color: UIColor(.red), containerCotentWidth: 100)
+            ColorResultView(color: UIColor(.red), colorName: "Red", baseColorName: "Red", containerCotentWidth: 100)
         }
         .ignoresSafeArea()
     }

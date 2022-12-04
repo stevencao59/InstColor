@@ -10,6 +10,7 @@ import Foundation
 struct RGBColor: Codable {
     let Color: String
     let BaseColor: String
+    let BaseColorHex: String
     let Red: Int
     let Green: Int
     let Blue: Int
