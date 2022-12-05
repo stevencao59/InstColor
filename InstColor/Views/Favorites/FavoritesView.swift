@@ -51,6 +51,7 @@ struct CloseButtonView: View {
     var body: some View {
         Button(action: dismissView) {
             Text("Close")
+                .foregroundColor(.blue)
         }
     }
 }
@@ -98,9 +99,11 @@ struct FavoritesView: View {
                         ToolbarItem {
                             Button(action: clearFavorites) {
                                 Text("Clear")
+                                    .foregroundColor(.blue)
                             }
                         }
                     }
+                    .navigationTitle("Favorites")
                     .scrollContentBackground(.hidden)
                     .background(.black)
                 }

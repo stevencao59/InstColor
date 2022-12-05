@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RGBColor: Codable {
+struct RGBColor: Codable, Hashable{
     let Color: String
     let BaseColor: String
     let BaseColorHex: String

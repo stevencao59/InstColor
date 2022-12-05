@@ -14,6 +14,7 @@ struct ToolBarView: View {
     @Binding var showSliderControl: Bool
 
     @State var showFavorites: Bool = false
+    @State var showReferences: Bool = false
     
     var containerCotentWidth: CGFloat
     var switchCameraAction: () -> Void
@@ -33,6 +34,10 @@ struct ToolBarView: View {
         showFavorites.toggle()
     }
     
+    func toggleReferences() {
+        showReferences.toggle()
+    }
+    
     var body: some View {
         HStack {
             Group {
@@ -43,6 +48,9 @@ struct ToolBarView: View {
                 Button(action: toggleFavorites) {
                     ImageButtonView(imageName: "folder")
                 }
+                Button(action: toggleReferences) {
+                    ImageButtonView(imageName: "list.bullet")
+                }
                 if showSliderControl {
                     SliderControlView(showScaleSlider: $showScaleSlider)
                 }
@@ -52,6 +60,12 @@ struct ToolBarView: View {
                 return FavoritesView(containerCotentWidth: containerCotentWidth)
             }
             .onChange(of: showFavorites) { toShow in
+                model.cameraManager.cameraRunnning = !toShow
+            }
+            .fullScreenCover(isPresented: $showReferences) {
+                return ReferencesView(containerCotentWidth: containerCotentWidth)
+            }
+            .onChange(of: showReferences) { toShow in
                 model.cameraManager.cameraRunnning = !toShow
             }
         }
