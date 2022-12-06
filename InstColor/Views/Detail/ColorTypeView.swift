@@ -30,6 +30,7 @@ struct ColorTypeGridItemView: View {
 
                 Text(colorName ?? "Loading...")
                     .font(.caption2)
+                    .lineLimit(1, reservesSpace: false)
                     .foregroundColor(.white)
             }
         }
@@ -47,13 +48,16 @@ struct ColorTypeGridItemView: View {
 struct ColorTypeGridView: View {
     var colors: [UIColor]?
     var title: String
-
+    var showColorRow: Bool {
+        return colors != nil
+    }
+    
     @Binding var referenceColor: UIColor
-        
+    
     var body: some View {
         VStack {
             Grid {
-                if let colors {
+                if showColorRow {
                     HStack {
                         Text(title)
                             .font(.headline)
@@ -63,7 +67,7 @@ struct ColorTypeGridView: View {
                             .foregroundColor(.white)
                     }
                     
-                    ForEach(colors.chunked(into: 4), id: \.self) { colorRow in
+                    ForEach(colors!.chunked(into: 4), id: \.self) { colorRow in
                         GridRow {
                             ForEach(colorRow, id: \.self) { row in
                                 ColorTypeGridItemView(gridItemColor: row, referenceColor: $referenceColor)
@@ -72,6 +76,7 @@ struct ColorTypeGridView: View {
                     }
                 }
             }
+            .animation(.easeIn, value: showColorRow)
 
             Divider()
                 .padding([.horizontal])
@@ -101,15 +106,13 @@ struct ColorTypeView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                ColorTypeGridView(colors: complementaryColor, title: "Complementary Color", referenceColor: $referenceColor)
-                ColorTypeGridView(colors: triadicColor, title: "Triadic Colors", referenceColor: $referenceColor)
-                ColorTypeGridView(colors: splitComplementaryColor, title: "Split Complementary Colors", referenceColor: $referenceColor)
-                ColorTypeGridView(colors: analogousColor, title: "Analogous Colors", referenceColor: $referenceColor)
-                ColorTypeGridView(colors: tetradicColor, title: "Tetradic Colors", referenceColor: $referenceColor)
-                ColorTypeGridView(colors: monochromaticColor, title: "Monochromatic Colors", referenceColor: $referenceColor)
-            }
+        VStack {
+            ColorTypeGridView(colors: complementaryColor, title: "Complementary Color", referenceColor: $referenceColor)
+            ColorTypeGridView(colors: triadicColor, title: "Triadic Colors", referenceColor: $referenceColor)
+            ColorTypeGridView(colors: splitComplementaryColor, title: "Split Complementary Colors", referenceColor: $referenceColor)
+            ColorTypeGridView(colors: analogousColor, title: "Analogous Colors", referenceColor: $referenceColor)
+            ColorTypeGridView(colors: tetradicColor, title: "Tetradic Colors", referenceColor: $referenceColor)
+            ColorTypeGridView(colors: monochromaticColor, title: "Monochromatic Colors", referenceColor: $referenceColor)
         }
     }
 }

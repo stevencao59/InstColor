@@ -36,6 +36,7 @@ struct ResultTextContainerView: View {
                                 BorderedRectView(color: Color(baseColor), cornerRadius: 40, lineWidth: 1, width: 10, height: 10)
                             }
                         }
+                        .padding([.horizontal])
                     }
                 } else {
                     ColorTextGroupView(components: color.components)

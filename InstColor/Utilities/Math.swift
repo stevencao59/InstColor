@@ -18,3 +18,7 @@ func %%(left: Double, right: Double) -> Double {
 func lerp(from a: CGFloat, to b: CGFloat, alpha: CGFloat) -> CGFloat {
     return (1 - alpha) * a + alpha * b
 }
+
+func clamp(value: CGFloat, greater: CGFloat, less: CGFloat) -> CGFloat {
+    return value < greater ? greater : value > less ? less : value
+}

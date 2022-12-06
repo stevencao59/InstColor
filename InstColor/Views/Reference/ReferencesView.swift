@@ -38,6 +38,9 @@ struct ReferenceSectionView: View {
                     .listRowBackground(Color.black)
                 }
             }
+            .navigationTitle(title)
+            .scrollContentBackground(.hidden)
+            .background(.black)
         }
     }
 }
@@ -46,6 +49,13 @@ struct ReferencesView: View {
     @State var colorMaps: [RGBColor]?
 
     var containerCotentWidth = 0.0
+    
+    init(colorMaps: [RGBColor]? = nil, containerCotentWidth: Double = 0.0) {
+        self.colorMaps = colorMaps
+        self.containerCotentWidth = containerCotentWidth
+        
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    }
     
     var body: some View {
         VStack {
@@ -61,8 +71,8 @@ struct ReferencesView: View {
                                     }
                                     Text(item.key)
                                 }
-                                
                             }
+                            .listRowBackground(Color.black)
                         }
                     }
                     .toolbar {
@@ -71,6 +81,7 @@ struct ReferencesView: View {
                         }
                     }
                     .navigationTitle("References")
+                    .navigationBarTitleDisplayMode(.inline)
                     .scrollContentBackground(.hidden)
                     .background(.black)
                 }

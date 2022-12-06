@@ -23,10 +23,13 @@ struct ColorTextGroupView: View {
                 ColorTextView(iconColor: .green, displayColor: components.green)
                 ColorTextView(iconColor: .blue, displayColor: components.blue)
             }
-            Text("Hex: \(translateHexString(components.red, components.green, components.blue))")
+            Text("Hex: ")
+                .bold()
+                .font(.footnote) +
+            Text("\(translateHexString(components.red, components.green, components.blue))")
                 .font(.footnote)
-                .foregroundColor(.white)
         }
+        .foregroundColor(.white)
 
     }
 }

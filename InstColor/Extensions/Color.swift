@@ -231,10 +231,10 @@ extension UIColor {
         let fromComponents = self.getColorComponents()
         let toComponents = color.getColorComponents()
         
-        let redAmount = lerp(from: fromComponents.red,
-                             to: toComponents.red, alpha: amount)
-        let greenAmount = lerp(from: fromComponents.green, to: toComponents.green, alpha: amount)
-        let blueAmount = lerp(from: fromComponents.blue, to: toComponents.blue, alpha: amount)
+        let redAmount = clamp(value: lerp(from: fromComponents.red,
+                                          to: toComponents.red, alpha: amount), greater: 0, less: 1)
+        let greenAmount = clamp(value: lerp(from: fromComponents.green, to: toComponents.green, alpha: amount), greater: 0, less: 1)
+        let blueAmount = clamp(value: lerp(from: fromComponents.blue, to: toComponents.blue, alpha: amount), greater: 0, less: 1)
         
         let color = UIColor(red: redAmount, green: greenAmount, blue: blueAmount, alpha:  1)
         return color

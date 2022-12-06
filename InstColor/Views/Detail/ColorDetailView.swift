@@ -60,14 +60,7 @@ struct SaveColorModifier: ViewModifier {
 struct InformationTypeView: View {
     @ObservedObject var model: ColorDetailViewModel
     @State var selectedInformationType = "Types"
-    
-    var showTypesView: Bool {
-        return selectedInformationType == "Types"
-    }
-    
-    var showInformationView: Bool {
-        return selectedDetent == .large
-    }
+    @State var showTypesView = true
     
     var containerCotentWidth: Double
     var informationTypes = ["Types", "Shades"]
@@ -75,28 +68,28 @@ struct InformationTypeView: View {
     
     var body: some View {
         VStack {
-            if showInformationView {
-                Divider()
-                    .padding([.horizontal])
-
-                Picker("Information", selection: $selectedInformationType) {
-                    ForEach(informationTypes, id: \.self) {
-                        Text($0)
-                    }
+            Divider()
+                .padding([.horizontal])
+            
+            Picker("Information", selection: $selectedInformationType) {
+                ForEach(informationTypes, id: \.self) {
+                    Text($0)
                 }
-                .pickerStyle(.segmented)
-                .frame(width: containerCotentWidth / 2)
-                
-                if showTypesView {
-                    ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
-                } else {
-                    ColorShadeView(referenceColor: $model.color)
-                }
+            }
+            .pickerStyle(.segmented)
+            .frame(width: containerCotentWidth / 2)
+            
+            if showTypesView {
+                ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
+            } else {
+                ColorShadeView(referenceColor: $model.color)
             }
         }
         .padding([.horizontal])
         .animation(.easeIn, value: showTypesView)
-        .animation(.easeIn, value: showInformationView)
+        .onChange(of: selectedInformationType) { val in
+            showTypesView = selectedInformationType == "Types"
+        }
     }
 }
 
@@ -134,7 +127,7 @@ struct ColorDetailView: View {
     }
     
     var body: some View {
-        VStack {
+        ScrollView {
             ColorIconContainerView(color: $model.color, colorName: $model.colorName, keyboardFocusState: $keyboardFocusState)
 
             SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: containerCotentWidth)

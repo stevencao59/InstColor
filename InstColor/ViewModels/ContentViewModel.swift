@@ -97,6 +97,7 @@ class ContentViewModel: ObservableObject {
                 }
                 self.thumbViewSize = (Double(image.height) / Double(image.width)) * 10
                 self.frame = image
+                self.rect = self.getRect(loc: self.location)
             })
             .store(in: &subscriptions)
         

@@ -65,17 +65,16 @@ struct ColorShadeView: View {
     
     var body: some View {
         VStack {
-            Text("Shade Amount")
-                .font(.headline)
-                .bold(true)
-                .padding([.top])
-            Slider(value: $sliderValue, in: 0.1...0.3)
-                .padding([.top, .horizontal])
-            ScrollView {
-                Grid {
-                    ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Light Shades", combineColor: .white)
-                    ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Dark Shades", combineColor: .black)
-                }
+            HStack {
+                Text("Shade Amount")
+                    .bold(true)
+                Slider(value: $sliderValue, in: 0.1...0.3)
+            }
+            .padding([.horizontal])
+            
+            Grid {
+                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Light Shades", combineColor: .white)
+                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Dark Shades", combineColor: .black)
             }
         }
         .foregroundColor(.white)

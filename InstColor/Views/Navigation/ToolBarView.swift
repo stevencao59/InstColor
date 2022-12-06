@@ -46,7 +46,7 @@ struct ToolBarView: View {
                     ImageButtonView(imageName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
                 }
                 Button(action: toggleFavorites) {
-                    ImageButtonView(imageName: "folder")
+                    ImageButtonView(imageName: "heart")
                 }
                 Button(action: toggleReferences) {
                     ImageButtonView(imageName: "list.bullet")

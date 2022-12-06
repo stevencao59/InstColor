@@ -104,6 +104,7 @@ struct FavoritesView: View {
                         }
                     }
                     .navigationTitle("Favorites")
+                    .navigationBarTitleDisplayMode(.inline)
                     .scrollContentBackground(.hidden)
                     .background(.black)
                 }
