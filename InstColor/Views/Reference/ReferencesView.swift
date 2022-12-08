@@ -54,7 +54,7 @@ struct ReferencesView: View {
         self.colorMaps = colorMaps
         self.containerCotentWidth = containerCotentWidth
         
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     var body: some View {

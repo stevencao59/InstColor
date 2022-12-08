@@ -112,12 +112,12 @@ struct ColorDetailView: View {
     @StateObject var model = ColorDetailViewModel()
     @State var hexText: String = "Unknown Hex"
     @FocusState var keyboardFocusState: FocusElement?
-
+    
     var color: UIColor
     var containerCotentWidth: Double = 0
     var showModalButtons: Bool
     var selectedDetent: PresentationDetent
-
+    
     init(color: UIColor, containerCotentWidth: Double, showModalButtons: Bool, selectedDetent: PresentationDetent) {
         self.color = color
         self.containerCotentWidth = containerCotentWidth
@@ -127,14 +127,15 @@ struct ColorDetailView: View {
     }
     
     var body: some View {
-        ScrollView {
+        VStack {
             ColorIconContainerView(color: $model.color, colorName: $model.colorName, keyboardFocusState: $keyboardFocusState)
-
-            SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: containerCotentWidth)
-            
-            ColorHexTextView(displayColor: $model.color)
-            
-            InformationTypeView(model: model, containerCotentWidth: containerCotentWidth, selectedDetent: selectedDetent)
+            ScrollView {
+                SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: containerCotentWidth)
+                
+                ColorHexTextView(displayColor: $model.color)
+                
+                InformationTypeView(model: model, containerCotentWidth: containerCotentWidth, selectedDetent: selectedDetent)
+            }
         }
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -143,7 +144,6 @@ struct ColorDetailView: View {
         .onAppear() {
             self.model.color = color
         }
-        
     }
 }
 

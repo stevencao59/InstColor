@@ -53,6 +53,7 @@ struct ColorTypeGridView: View {
     }
     
     @Binding var referenceColor: UIColor
+    @State var showTooltipsSheet = false
     
     var body: some View {
         VStack {
@@ -63,8 +64,10 @@ struct ColorTypeGridView: View {
                             .font(.headline)
                             .bold(true)
                             .foregroundColor(.white)
-                        Image(systemName: "questionmark.circle")
-                            .foregroundColor(.white)
+                        Button(action: { showTooltipsSheet.toggle() }) {
+                            Image(systemName: "questionmark.circle")
+                                .foregroundColor(.white)
+                        }
                     }
                     
                     ForEach(colors!.chunked(into: 4), id: \.self) { colorRow in
@@ -82,6 +85,11 @@ struct ColorTypeGridView: View {
                 .padding([.horizontal])
         }
         .padding()
+        .sheet(isPresented: $showTooltipsSheet) {
+            TooltipView(title: title, tooltipsText: tooltipsDict[title])
+                .presentationDetents([.medium])
+        }
+        
     }
 }
 
