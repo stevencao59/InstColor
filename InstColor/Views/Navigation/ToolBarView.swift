@@ -18,8 +18,9 @@ struct ToolBarView: View {
     
     var containerCotentWidth: CGFloat
     var switchCameraAction: () -> Void
+    var turnOnTorch: () -> Void
     
-    init(model: ContentViewModel, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat, switchCameraAction: @escaping () -> Void ) {
+    init(model: ContentViewModel, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat, switchCameraAction: @escaping () -> Void, turnOnTorch: @escaping () -> Void) {
         self.model = model
 
         self._imageName = imageName
@@ -28,6 +29,7 @@ struct ToolBarView: View {
 
         self.containerCotentWidth = containerContentWidth
         self.switchCameraAction = switchCameraAction
+        self.turnOnTorch = turnOnTorch
     }
     
     func toggleFavorites() {
@@ -50,6 +52,9 @@ struct ToolBarView: View {
                 }
                 Button(action: toggleReferences) {
                     ImageButtonView(imageName: "list.bullet")
+                }
+                PressableButtonView(action: turnOnTorch) {
+                    ImageButtonView(imageName: "flashlight.on.fill")
                 }
                 if showSliderControl {
                     SliderControlView(showScaleSlider: $showScaleSlider)
@@ -74,6 +79,6 @@ struct ToolBarView: View {
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(model: ContentViewModel(), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300, switchCameraAction: { })
+        ToolBarView(model: ContentViewModel(), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300, switchCameraAction: { }, turnOnTorch: { })
     }
 }

@@ -13,6 +13,8 @@ class CameraManager: ObservableObject {
     @Published var error: CameraError?
     @Published var cameraPosition: AVCaptureDevice.Position = .back
     @Published var cameraRunnning: Bool = true
+    @Published var torchMode: Bool = false
+
     private var subscriptions = Set<AnyCancellable>()
 
     enum Status {
@@ -57,6 +59,21 @@ class CameraManager: ObservableObject {
             break
         @unknown default:
             set(error: .unknownAuthorization)
+        }
+    }
+    
+    private func toggleTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                device.torchMode = on == true ? .on : .off
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch is available but cannot be opened!")
+            }
+        } else {
+            print("Torch is not available!")
         }
     }
     
@@ -131,6 +148,15 @@ class CameraManager: ObservableObject {
     }
     
     private func startSubscription() {
+        $torchMode
+            .receive(on: RunLoop.main)
+            .subscribe(on: DispatchQueue.global())
+            .removeDuplicates()
+            .sink(receiveValue: { openTorch in
+                self.toggleTorch(on: openTorch)
+            })
+            .store(in: &subscriptions)
+        
         $cameraPosition
             .receive(on: RunLoop.main)
             .subscribe(on: DispatchQueue.global())

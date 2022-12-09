@@ -20,30 +20,28 @@ struct ResultTextContainerView: View {
     
     var body: some View {
         Button(action: toggleShowBaseColor) {
-            ZStack {
-                if showBaseColor {
-                    if let baseColor = UIColor(hex: baseColorHex) {
-                        VStack {
-                            Text("Family:")
-                                .foregroundColor(.white)
+            if showBaseColor {
+                if let baseColor = UIColor(hex: baseColorHex) {
+                    VStack {
+                        Text("Family:")
+                            .foregroundColor(.white)
+                            .font(.footnote)
+                            .bold()
+                        HStack {
+                            Text("\(baseColorName)")
                                 .font(.footnote)
-                                .bold()
-                            HStack {
-                                Text("\(baseColorName)")
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                                
-                                BorderedRectView(color: Color(baseColor), cornerRadius: 40, lineWidth: 1, width: 10, height: 10)
-                            }
+                                .foregroundColor(.white)
+                            
+                            BorderedRectView(color: Color(baseColor), cornerRadius: 40, lineWidth: 1, width: 10, height: 10)
                         }
-                        .padding([.horizontal])
                     }
-                } else {
-                    ColorTextGroupView(components: color.components)
+                    .padding([.trailing])
                 }
+            } else {
+                ColorTextGroupView(components: color.components)
             }
-            .animation(.easeIn, value: showBaseColor)
         }
+        .animation(.easeIn, value: showBaseColor)
     }
 }
 

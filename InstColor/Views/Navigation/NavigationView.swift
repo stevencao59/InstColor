@@ -22,6 +22,10 @@ struct NavigationView: View {
         }
     }
     
+    func turnOnTorch() {
+        model.cameraManager.torchMode.toggle()
+    }
+    
     var body: some View {
         VStack {
             VStack {
@@ -32,7 +36,7 @@ struct NavigationView: View {
                             .multilineTextAlignment(.center)
                             .padding([.horizontal, .bottom])
                     } else {
-                        ToolBarView(model: model, imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth, switchCameraAction: switchCameraPosition)
+                        ToolBarView(model: model, imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth, switchCameraAction: switchCameraPosition, turnOnTorch: turnOnTorch)
                     }
                 }
                 if showScaleSlider {

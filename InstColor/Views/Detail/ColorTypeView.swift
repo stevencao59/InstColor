@@ -87,6 +87,8 @@ struct ColorTypeGridView: View {
         .padding()
         .sheet(isPresented: $showTooltipsSheet) {
             TooltipView(title: title, tooltipsText: tooltipsDict[title])
+                .background(.black)
+                .foregroundColor(.white)
                 .presentationDetents([.medium])
         }
         
