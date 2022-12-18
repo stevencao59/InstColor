@@ -13,6 +13,8 @@
 		B6471B2D292B31C6006A1474 /* BorderedRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6471B2C292B31C6006A1474 /* BorderedRectView.swift */; };
 		B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D56E2940378800BB4D76 /* TooltipView.swift */; };
 		B659D5722943D28600BB4D76 /* PressableButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D5712943D28600BB4D76 /* PressableButtonView.swift */; };
+		B659D5752944D10C00BB4D76 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B659D5742944D10C00BB4D76 /* FirebaseAnalytics */; };
+		B659D5772944D25200BB4D76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B659D5762944D25200BB4D76 /* GoogleService-Info.plist */; };
 		B68C1A4129213D1300AC7662 /* ColorSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4029213D1300AC7662 /* ColorSliderView.swift */; };
 		B68C1A4429213E8500AC7662 /* ColorTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4329213E8500AC7662 /* ColorTypeView.swift */; };
 		B68C1A4829215E6900AC7662 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4729215E6900AC7662 /* Array.swift */; };
@@ -72,6 +74,7 @@
 		B6471B2C292B31C6006A1474 /* BorderedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedRectView.swift; sourceTree = "<group>"; };
 		B659D56E2940378800BB4D76 /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		B659D5712943D28600BB4D76 /* PressableButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressableButtonView.swift; sourceTree = "<group>"; };
+		B659D5762944D25200BB4D76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B68C1A4029213D1300AC7662 /* ColorSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSliderView.swift; sourceTree = "<group>"; };
 		B68C1A4329213E8500AC7662 /* ColorTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTypeView.swift; sourceTree = "<group>"; };
 		B68C1A4729215E6900AC7662 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B659D5752944D10C00BB4D76 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,19 +338,20 @@
 		B6DE828728E729E300826201 /* InstColor */ = {
 			isa = PBXGroup;
 			children = (
-				B659D5702940378F00BB4D76 /* Tools */,
-				B60EC481292DDD4D00483710 /* Configs */,
-				B6BBCF55291B5F800010C3FE /* Utilities */,
-				B6DDD70E28F1B31900E2EC66 /* Model */,
-				B6DDD70928F0C78D00E2EC66 /* Data */,
-				B6DDD70028EBC5E900E2EC66 /* Modifier */,
-				B6DDD6FF28EBC5D500E2EC66 /* ViewModels */,
-				B6DDD6FE28EBC5B300E2EC66 /* Views */,
-				B6DDD6FD28EBC56D00E2EC66 /* Camera */,
-				B6DDD6FC28EBC52B00E2EC66 /* Extensions */,
+				B659D5762944D25200BB4D76 /* GoogleService-Info.plist */,
 				B6DE828828E729E300826201 /* InstColorApp.swift */,
 				B6DE828C28E729E400826201 /* Assets.xcassets */,
+				B6DDD6FD28EBC56D00E2EC66 /* Camera */,
+				B60EC481292DDD4D00483710 /* Configs */,
+				B6DDD70928F0C78D00E2EC66 /* Data */,
+				B6DDD6FC28EBC52B00E2EC66 /* Extensions */,
+				B6DDD70E28F1B31900E2EC66 /* Model */,
+				B6DDD70028EBC5E900E2EC66 /* Modifier */,
 				B6DE828E28E729E400826201 /* Preview Content */,
+				B659D5702940378F00BB4D76 /* Tools */,
+				B6BBCF55291B5F800010C3FE /* Utilities */,
+				B6DDD6FF28EBC5D500E2EC66 /* ViewModels */,
+				B6DDD6FE28EBC5B300E2EC66 /* Views */,
 			);
 			path = InstColor;
 			sourceTree = "<group>";
@@ -375,6 +380,9 @@
 			dependencies = (
 			);
 			name = InstColor;
+			packageProductDependencies = (
+				B659D5742944D10C00BB4D76 /* FirebaseAnalytics */,
+			);
 			productName = InstColor;
 			productReference = B6DE828528E729E300826201 /* InstColor.app */;
 			productType = "com.apple.product-type.application";
@@ -403,6 +411,9 @@
 				Base,
 			);
 			mainGroup = B6DE827C28E729E300826201;
+			packageReferences = (
+				B659D5732944D10C00BB4D76 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = B6DE828628E729E300826201 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -418,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DE829028E729E400826201 /* Preview Assets.xcassets in Resources */,
+				B659D5772944D25200BB4D76 /* GoogleService-Info.plist in Resources */,
 				B6DDD70B28F1B05900E2EC66 /* color.json in Resources */,
 				B6DE828D28E729E400826201 /* Assets.xcassets in Resources */,
 			);
@@ -625,6 +637,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.home.leicao.InstColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -655,6 +668,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.home.leicao.InstColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -685,6 +699,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B659D5732944D10C00BB4D76 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B659D5742944D10C00BB4D76 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B659D5732944D10C00BB4D76 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B6DE827D28E729E300826201 /* Project object */;
 }
