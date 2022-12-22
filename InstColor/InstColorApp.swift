@@ -7,12 +7,15 @@
 
 import SwiftUI
 import Firebase
+import AppTrackingTransparency
+import GoogleMobileAds
 
 @main
 struct InstColorApp: App {
     
     init() {
         FirebaseApp.configure()
+        initiateAdmob()
     }
     
     var body: some Scene {

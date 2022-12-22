@@ -26,6 +26,8 @@ struct FrameView: View {
                     RectCornerView(navigationHeight: model.navigationHeight, statusBarHeight: model.statusBarHeight, frameHeight: geometry.size.height)
                         .frame(height: geometry.size.height)
                         .opacity(cornerViewOpacity)
+                    SwiftUIBannerAd(adPosition: .top, adUnitId: adUnitTestID)
+                        .offset(CGSize(width: 0, height: model.navigationHeight + model.statusBarHeight))
                 }
             }
         }
