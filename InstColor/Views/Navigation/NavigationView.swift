@@ -15,17 +15,6 @@ struct NavigationView: View {
     @State var showSliderControl = false
     @State var showScaleSlider = false
     
-    func switchCameraPosition() {
-        model.cameraManager.cameraPosition = model.cameraManager.cameraPosition == .back ? .front : .back
-        withAnimation {
-            model.animationAmount += 180
-        }
-    }
-    
-    func turnOnTorch() {
-        model.cameraManager.torchMode.toggle()
-    }
-    
     var body: some View {
         VStack {
             VStack {
@@ -36,7 +25,7 @@ struct NavigationView: View {
                             .multilineTextAlignment(.center)
                             .padding([.horizontal, .bottom])
                     } else {
-                        ToolBarView(model: model, imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth, switchCameraAction: switchCameraPosition, turnOnTorch: turnOnTorch)
+                        ToolBarView(model: model, imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth)
                     }
                 }
                 if showScaleSlider {

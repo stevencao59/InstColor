@@ -65,6 +65,7 @@ struct DashboardView: View {
                 .onChange(of: color) { color in
                     resultModel.color = color
                 }
+                .modifier(FloatToolbarViewModifier(model: model))
                 .overlay(
                     GeometryReader { geo in
                         Color.clear

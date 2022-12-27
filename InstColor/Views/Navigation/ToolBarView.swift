@@ -13,14 +13,13 @@ struct ToolBarView: View {
     @Binding var showScaleSlider: Bool
     @Binding var showSliderControl: Bool
 
+    @State var showAbout: Bool = false
     @State var showFavorites: Bool = false
     @State var showReferences: Bool = false
     
     var containerCotentWidth: CGFloat
-    var switchCameraAction: () -> Void
-    var turnOnTorch: () -> Void
     
-    init(model: ContentViewModel, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat, switchCameraAction: @escaping () -> Void, turnOnTorch: @escaping () -> Void) {
+    init(model: ContentViewModel, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat) {
         self.model = model
 
         self._imageName = imageName
@@ -28,8 +27,6 @@ struct ToolBarView: View {
         self._showSliderControl = showSliderControl
 
         self.containerCotentWidth = containerContentWidth
-        self.switchCameraAction = switchCameraAction
-        self.turnOnTorch = turnOnTorch
     }
     
     func toggleFavorites() {
@@ -39,28 +36,31 @@ struct ToolBarView: View {
     func toggleReferences() {
         showReferences.toggle()
     }
-    
+
+    func toggleAbout() {
+        showAbout.toggle()
+    }
+
     var body: some View {
         HStack {
             Group {
-                FrameSourceView(frameSource: $model.frameSource, imageName: $imageName)
-                Button(action: switchCameraAction) {
-                    ImageButtonView(imageName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
-                }
                 Button(action: toggleFavorites) {
                     ImageButtonView(imageName: "heart")
                 }
                 Button(action: toggleReferences) {
                     ImageButtonView(imageName: "list.bullet")
                 }
-                PressableButtonView(action: turnOnTorch) {
-                    ImageButtonView(imageName: "flashlight.on.fill")
-                }
                 if showSliderControl {
                     SliderControlView(showScaleSlider: $showScaleSlider)
                 }
+                Button(action: toggleAbout) {
+                    ImageButtonView(imageName: "questionmark")
+                        .foregroundColor(.white)
+                }
+
             }
             .padding([.horizontal, .bottom])
+            .scaleEffect(1.2)
             .fullScreenCover(isPresented: $showFavorites) {
                 return FavoritesView(containerCotentWidth: containerCotentWidth)
             }
@@ -73,12 +73,18 @@ struct ToolBarView: View {
             .onChange(of: showReferences) { toShow in
                 model.cameraManager.cameraRunnning = !toShow
             }
+            .fullScreenCover(isPresented: $showAbout) {
+                return AboutView()
+            }
+            .onChange(of: showAbout) { toShow in
+                model.cameraManager.cameraRunnning = !toShow
+            }
         }
     }
 }
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(model: ContentViewModel(), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300, switchCameraAction: { }, turnOnTorch: { })
+        ToolBarView(model: ContentViewModel(), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300)
     }
 }

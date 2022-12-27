@@ -35,6 +35,11 @@
 		B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69583290A2DE2003DEE57 /* SliderControlView.swift */; };
 		B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69585290C7109003DEE57 /* ScaleSliderView.swift */; };
 		B6B30CEB295408EB00F92811 /* Admob.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CEA295408EB00F92811 /* Admob.swift */; };
+		B6B30CF7295792C900F92811 /* FloatToolbarViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CF6295792C900F92811 /* FloatToolbarViewModifier.swift */; };
+		B6B30CFA2957931100F92811 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CF92957931100F92811 /* AboutView.swift */; };
+		B6B30CFC2957938600F92811 /* ModalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CFB2957938500F92811 /* ModalViewModifier.swift */; };
+		B6B30CFE2957950100F92811 /* CloseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CFD2957950100F92811 /* CloseButtonView.swift */; };
+		B6B30D002958A8B700F92811 /* VerticalSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CFF2958A8B700F92811 /* VerticalSliderView.swift */; };
 		B6BBCF4E2916B1D90010C3FE /* ColorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBCF4D2916B1D90010C3FE /* ColorDetailView.swift */; };
 		B6BBCF52291B5BFF0010C3FE /* ClearViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBCF51291B5BFF0010C3FE /* ClearViewModifier.swift */; };
 		B6BBCF54291B5D5A0010C3FE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBCF53291B5D5A0010C3FE /* View.swift */; };
@@ -98,6 +103,11 @@
 		B6A69583290A2DE2003DEE57 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
 		B6A69585290C7109003DEE57 /* ScaleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleSliderView.swift; sourceTree = "<group>"; };
 		B6B30CEA295408EB00F92811 /* Admob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admob.swift; sourceTree = "<group>"; };
+		B6B30CF6295792C900F92811 /* FloatToolbarViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatToolbarViewModifier.swift; sourceTree = "<group>"; };
+		B6B30CF92957931100F92811 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		B6B30CFB2957938500F92811 /* ModalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewModifier.swift; sourceTree = "<group>"; };
+		B6B30CFD2957950100F92811 /* CloseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButtonView.swift; sourceTree = "<group>"; };
+		B6B30CFF2958A8B700F92811 /* VerticalSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSliderView.swift; sourceTree = "<group>"; };
 		B6BBCF4D2916B1D90010C3FE /* ColorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailView.swift; sourceTree = "<group>"; };
 		B6BBCF51291B5BFF0010C3FE /* ClearViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearViewModifier.swift; sourceTree = "<group>"; };
 		B6BBCF53291B5D5A0010C3FE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -168,6 +178,8 @@
 			children = (
 				B659D56E2940378800BB4D76 /* TooltipView.swift */,
 				B659D5712943D28600BB4D76 /* PressableButtonView.swift */,
+				B6B30CFD2957950100F92811 /* CloseButtonView.swift */,
+				B6B30CFF2958A8B700F92811 /* VerticalSliderView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -247,6 +259,14 @@
 			path = Reference;
 			sourceTree = "<group>";
 		};
+		B6B30CF82957930200F92811 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				B6B30CF92957931100F92811 /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		B6BBCF55291B5F800010C3FE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +313,7 @@
 		B6DDD6FE28EBC5B300E2EC66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6B30CF82957930200F92811 /* About */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
 				B607850E2951705B00C6897E /* Admob */,
 				B68C1A5C292920B300AC7662 /* Container */,
@@ -321,6 +342,8 @@
 			children = (
 				B6EBA0C728E79736006954F8 /* FrameModifier.swift */,
 				B6BBCF51291B5BFF0010C3FE /* ClearViewModifier.swift */,
+				B6B30CF6295792C900F92811 /* FloatToolbarViewModifier.swift */,
+				B6B30CFB2957938500F92811 /* ModalViewModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -486,8 +509,10 @@
 				B68C1A522927323900AC7662 /* SliderRgbGroupView.swift in Sources */,
 				B68C1A4A2921C2B000AC7662 /* ColorIconView.swift in Sources */,
 				B68C1A4829215E6900AC7662 /* Array.swift in Sources */,
+				B6B30CFA2957931100F92811 /* AboutView.swift in Sources */,
 				B68C1A652929DF7600AC7662 /* UserDefaults.swift in Sources */,
 				B68C1A5F292928A600AC7662 /* ToolBarView.swift in Sources */,
+				B6B30CFE2957950100F92811 /* CloseButtonView.swift in Sources */,
 				B68C1A54292734FB00AC7662 /* SliderHsbGroupView.swift in Sources */,
 				B6DE829B28E72FA900826201 /* CameraError.swift in Sources */,
 				B6DDD72A29071FA200E2EC66 /* CIImage.swift in Sources */,
@@ -495,6 +520,7 @@
 				B6BBCF4E2916B1D90010C3FE /* ColorDetailView.swift in Sources */,
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B659D5722943D28600BB4D76 /* PressableButtonView.swift in Sources */,
+				B6B30D002958A8B700F92811 /* VerticalSliderView.swift in Sources */,
 				B6DDD71E28F7A7C100E2EC66 /* UIImage.swift in Sources */,
 				B60EC483292DDD6200483710 /* Constants.swift in Sources */,
 				B698946F293C55450057265D /* ReferencesView.swift in Sources */,
@@ -522,6 +548,8 @@
 				B6BBCF54291B5D5A0010C3FE /* View.swift in Sources */,
 				B6B30CEB295408EB00F92811 /* Admob.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,
+				B6B30CFC2957938600F92811 /* ModalViewModifier.swift in Sources */,
+				B6B30CF7295792C900F92811 /* FloatToolbarViewModifier.swift in Sources */,
 				B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */,
 				B6BBCF59291E014E0010C3FE /* ColorDetailViewModel.swift in Sources */,
 				B6DE828928E729E300826201 /* InstColorApp.swift in Sources */,

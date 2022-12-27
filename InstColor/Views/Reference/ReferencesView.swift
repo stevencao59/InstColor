@@ -75,11 +75,7 @@ struct ReferencesView: View {
                             .listRowBackground(Color.black)
                         }
                     }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            CloseButtonView()
-                        }
-                    }
+                    .modifier(SimpleModalViewModifier())
                     .navigationTitle("References")
                     .navigationBarTitleDisplayMode(.inline)
                     .scrollContentBackground(.hidden)

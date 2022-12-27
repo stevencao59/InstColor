@@ -41,21 +41,6 @@ struct FavoriteColorRow: View {
     }
 }
 
-struct CloseButtonView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    func dismissView() {
-        dismiss()
-    }
-    
-    var body: some View {
-        Button(action: dismissView) {
-            Text("Close")
-                .foregroundColor(.blue)
-        }
-    }
-}
-
 struct FavoritesView: View {
     @State var favoriteColors: [FavoriteColor]?
     @State var selectedColor = UIColor(.white)

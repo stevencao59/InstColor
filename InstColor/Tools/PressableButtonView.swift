@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-struct PressableButtonView<Content: View>: View {
+struct PressableButtonView: View {
+    var imageName: String
     var action: () -> Void
-    var content: () -> Content
+
+    @State var frameSize: CGFloat
+    @State var imageSize: CGFloat
     
     @State var pressed: Bool = false
     
@@ -18,22 +21,23 @@ struct PressableButtonView<Content: View>: View {
         pressed.toggle()
     }
     
-    init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
+    init(imageName: String, action: @escaping () -> Void, frameSize: CGFloat = 20, imageSize: CGFloat = 10) {
+        self.imageName = imageName
         self.action = action
-        self.content = content
+        self.frameSize = frameSize
+        self.imageSize = imageSize
     }
     
     var body: some View {
         Button(action: pressedAction) {
-            content()
+            ImageButtonView(imageName: imageName, color: pressed ? .yellow : .white, frameSize: frameSize, imageSize: imageSize)
         }
-        .foregroundColor(pressed ? .yellow : .white)
         .animation(.easeIn, value: pressed)
     }
 }
 
 struct PressableView_Previews: PreviewProvider {
     static var previews: some View {
-        PressableButtonView(action: { }) { }
+        PressableButtonView(imageName: "preview", action: { })
     }
 }

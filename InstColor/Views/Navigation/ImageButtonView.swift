@@ -9,19 +9,22 @@ import SwiftUI
 
 struct ImageButtonView: View {
     let imageName: String
+    var color: Color = .white
+    @State var frameSize: CGFloat = 20
+    @State var imageSize: CGFloat = 10
     
     var body: some View {
         Circle()
-            .strokeBorder(.white)
-            .frame(width: 20, height: 20)
+            .strokeBorder(color)
+            .frame(width: frameSize, height: frameSize)
             .background(.clear)
             .overlay() {
                 Image(systemName: imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 10, height: 10)
+                    .frame(width: imageSize, height: imageSize)
+                    .foregroundColor(color)
             }
-            .scaleEffect(1.5)
     }
 }
 
