@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThumbView: View {
     @ObservedObject var model: ContentViewModel
-    @State private var thumbViewOpacity = 1.0
+    @State private var thumbViewOpacity = 0.0
     
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil

@@ -94,14 +94,15 @@ struct InformationTypeView: View {
 }
 
 struct ColorIconContainerView: View {
-    @Binding var color: UIColor
-    @Binding var colorName: String?
+    let color: UIColor
+    let colorName: String?
+    let baseColorName: String?
 
     var keyboardFocusState: FocusState<FocusElement?>.Binding
 
     var body: some View {
         ZStack {
-            ColorIconView(color: color, colorName: colorName)
+            ColorIconView(color: color, colorName: colorName, baseColorName: baseColorName)
         }
         .frame(maxWidth: .infinity)
         .defocusOnTap(keyboardFocusState)
@@ -128,7 +129,7 @@ struct ColorDetailView: View {
     
     var body: some View {
         VStack {
-            ColorIconContainerView(color: $model.color, colorName: $model.colorName, keyboardFocusState: $keyboardFocusState)
+            ColorIconContainerView(color: model.color, colorName: model.colorName, baseColorName: model.baseColorName, keyboardFocusState: $keyboardFocusState)
             ScrollView {
                 SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: containerCotentWidth)
                 

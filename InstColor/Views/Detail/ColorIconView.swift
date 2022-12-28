@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 struct ColorIconView: View {
-    var color: UIColor
-    var colorName: String?
+    let color: UIColor
+    let colorName: String?
+    let baseColorName: String?
     
     var body: some View {
         VStack {
@@ -18,8 +19,19 @@ struct ColorIconView: View {
             
             Text(colorName ?? "Loading...")
                 .font(.headline)
+                .bold()
                 .foregroundColor(.white)
             
+            Group {
+                if baseColorName != nil {
+                    Text("\(baseColorName!) Family")
+                } else {
+                    Text("Loading...")
+                }
+            }
+            .font(.footnote)
+            .foregroundColor(.gray)
+
         }
         .padding()
     }
@@ -29,7 +41,7 @@ struct ColorIconView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle()
-            ColorIconView(color: UIColor(.blue), colorName: "Blue")
+            ColorIconView(color: UIColor(.blue), colorName: "Blue", baseColorName: "Blue")
         }
         .ignoresSafeArea()
     }

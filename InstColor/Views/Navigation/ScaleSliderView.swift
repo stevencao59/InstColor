@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ScaleSliderView: View {
     @Binding var sizeWeight: CGFloat
-    var range = CGFloat(1.0)...3.0
+    var range = CGFloat(1.0)...5.0
     
     var body: some View {
         HStack {
-            Text("Scale")
+            Text("Scale:")
             Slider(value: $sizeWeight, in: range)
-                .padding([.leading])
-            Text("x \(String(format: "%.1f", sizeWeight))")
+                .padding([.horizontal])
+            Text("x \(String(format: "%.1f", sizeWeight)) / \(String(format: "%.1f", range.upperBound))")
         }
     }
 }

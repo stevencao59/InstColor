@@ -44,6 +44,7 @@ struct FavoriteColorRow: View {
 struct FavoritesView: View {
     @State var favoriteColors: [FavoriteColor]?
     @State var selectedColor = UIColor(.white)
+    @State private var showAlertWindow = false
 
     var containerCotentWidth = 0.0
 
@@ -82,7 +83,9 @@ struct FavoritesView: View {
                             CloseButtonView()
                         }
                         ToolbarItem {
-                            Button(action: clearFavorites) {
+                            Button(action: {
+                                showAlertWindow = true
+                            }) {
                                 Text("Clear")
                                     .foregroundColor(.blue)
                             }
@@ -92,6 +95,12 @@ struct FavoritesView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .scrollContentBackground(.hidden)
                     .background(.black)
+                    .alert("Are you sure to clear all favorite colors?", isPresented: $showAlertWindow) {
+                        Button("Clear", role: .destructive) {
+                            clearFavorites()
+                        }
+                        Button("Cancel", role: .cancel) { }
+                    }
                 }
                 else {
                     ZStack {

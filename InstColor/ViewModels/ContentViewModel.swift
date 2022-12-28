@@ -53,6 +53,9 @@ class ContentViewModel: ObservableObject {
     let cameraManager = CameraManager.shared
     private let frameManager = FrameManager.shared
     
+    // Camera running indicator
+    @Published var isCameraReady: Bool = true
+    
     func getThumbFrame(cgImage: CGImage?) -> CGImage? {
         if let image = cgImage {
             let image = UIImage(cgImage: image)
@@ -81,6 +84,13 @@ class ContentViewModel: ObservableObject {
             .map { $0 }
             .assign(to: &$error)
 
+        cameraManager.$cameraRunnning
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { isRunning in
+                self.isCameraReady = isRunning
+            })
+            .store(in: &subscriptions)
+        
         $location
             .receive(on: RunLoop.main)
             .compactMap() { loc in

@@ -61,6 +61,7 @@ struct FloatToolbarViewModifier: ViewModifier {
                                 PressableButtonView(imageName: "flashlight.on.fill", action: turnOnTorch)
                             }
                             .padding([.horizontal], 5)
+                            .scaleEffect(1.2)
                         }
                         .padding([.vertical], 5)
                         .modifier(ContainerSizeAwareModifier(size: $toolbarSize))
