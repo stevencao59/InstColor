@@ -10,6 +10,7 @@ import GoogleMobileAds
 
 class BannerAdVC: UIViewController {
     let adUnitId: String
+    weak var delegate: BannerViewControllerDelegate?
     
     init(adUnitId: String) {
         self.adUnitId = adUnitId
@@ -58,83 +59,121 @@ class BannerAdVC: UIViewController {
     
 }
 
+protocol BannerViewControllerDelegate: AnyObject {
+  func bannerViewController(_ bannerViewController: BannerAdVC)
+}
+
 struct BannerAd: UIViewControllerRepresentable {
+    @Binding var isSuccesful: Bool
+    let adUnitId = adUnitTestID
+    
+    func makeUIViewController(context: Context) -> BannerAdVC {
+        let bannerView = BannerAdVC(adUnitId: adUnitId)
+        bannerView.delegate = context.coordinator
+        bannerView.bannerView.isHidden = true
+        bannerView.bannerView.delegate = context.coordinator
+        
+        return bannerView
+    }
+    
+    func updateUIViewController(_ uiViewController: BannerAdVC, context: Context) {
+        
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self, $isSuccesful)
+    }
+    
+    class Coordinator: NSObject, BannerViewControllerDelegate, GADBannerViewDelegate
+    {
+        let parent: BannerAd
+        @Binding var isSuccessful: Bool
+        
+        init(_ parent: BannerAd, _ isSuccessful: Binding<Bool>) {
+            self.parent = parent
+            self._isSuccessful = isSuccessful
+        }
+        
+        // MARK: - BannerViewControllerWidthDelegate methods
+        
+        func bannerViewController(
+            _ bannerViewController: BannerAdVC
+        ) {
+            
+        }
+        
+        // MARK: - GADBannerViewDelegate methods
+        
+        func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+            isSuccessful = true
+            bannerView.isHidden = false
+            print("DID RECEIVE AD")
+        }
+        
+        func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+            isSuccessful = false
+            bannerView.isHidden = true
+            print("DID NOT RECEIVE AD: \(error.localizedDescription)")
+        }
+    }
+}
+
+struct BannerContentView: View {
+    @State var viewSize: CGSize = CGSize(width: 0, height: 0)
+    @State var isSuccesful = false
+    
+    @State var adSize: GADAdSize = GADAdSize()
     let adUnitId: String
     
     init(adUnitId: String) {
         self.adUnitId = adUnitId
     }
     
-    
-    func makeUIViewController(context: Context) -> BannerAdVC {
-        return BannerAdVC(adUnitId: adUnitId)
-    }
-
-    func updateUIViewController(_ uiViewController: BannerAdVC, context: Context) {
-        
-    }
-}
-
-struct SwiftUIBannerAd: View {
-    @State var height: CGFloat = 0 //Height of ad
-    @State var width: CGFloat = 0 //Width of ad
-    @State var adPosition: AdPosition
-    let adUnitId: String
-    
-    init(adPosition: AdPosition, adUnitId: String) {
-        self.adPosition = adPosition
-        self.adUnitId = adUnitId
-    }
-    
-    enum AdPosition {
-        case top
-        case bottom
+    var keyWindow: UIWindow? {
+        // Get connected scenes
+        return UIApplication.shared.connectedScenes
+            // Keep only active scenes, onscreen and visible to the user
+            .filter { $0.activationState == .foregroundActive }
+            // Keep only the first `UIWindowScene`
+            .first(where: { $0 is UIWindowScene })
+            // Get its associated windows
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            // Finally, keep only the key window
+            .first(where: \.isKeyWindow)
     }
     
     public var body: some View {
         VStack {
-            if adPosition == .bottom {
-                Spacer() //Pushes ad to bottom
-            }
-            
-            //Ad
-            BannerAd(adUnitId: adUnitId)
-                .frame(width: width, height: height, alignment: .center)
+            BannerAd(isSuccesful: $isSuccesful)
+                .frame(width: viewSize.width, height: viewSize.height)
                 .onAppear {
-                    //Call this in .onAppear() b/c need to load the initial frame size
-                    //.onReceive() will not be called on initial load
                     setFrame()
                 }
-                //Changes the frame of the ad whenever the device is rotated.
-                //This is what creates the adaptive ad
-                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    setFrame()
-                }
-            
-            if adPosition == .top {
-                Spacer() //Pushes ad to top
-            }
+                .opacity(isSuccesful ? 1 : 0)
+                .animation(.default, value: isSuccesful)
+                
+        }
+        .onChange(of: isSuccesful) { success in
+            viewSize = success ? CGSize(width: adSize.size.width, height: adSize.size.height) : CGSize(width: 0, height: 0)
         }
     }
     
     func setFrame() {
         //Get the frame of the safe area
-        let safeAreaInsets = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero
+        let safeAreaInsets = keyWindow?.safeAreaInsets ?? .zero
         let frame = UIScreen.main.bounds.inset(by: safeAreaInsets)
         
         //Use the frame to determine the size of the ad
-        let adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(frame.width)
-        
-        //Set the ads frame
-        self.width = adSize.size.width
-        self.height = adSize.size.height
+        adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(frame.width - 25)
+
+        viewSize.width = adSize.size.width
     }
 }
 
 struct BannerContentView_Previews: PreviewProvider {
   static var previews: some View {
       ZStack {
-          SwiftUIBannerAd(adPosition: .bottom, adUnitId: adUnitTestID)
+          BannerContentView(adUnitId: adUnitTestID)
       }
   }
 }

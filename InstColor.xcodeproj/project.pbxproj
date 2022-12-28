@@ -369,9 +369,9 @@
 		B6DE827C28E729E300826201 = {
 			isa = PBXGroup;
 			children = (
+				B6D67D9A29517F4A0012F91A /* Frameworks */,
 				B6DE828728E729E300826201 /* InstColor */,
 				B6DE828628E729E300826201 /* Products */,
-				B6D67D9A29517F4A0012F91A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

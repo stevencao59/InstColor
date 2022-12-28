@@ -18,6 +18,8 @@ struct NavigationView: View {
     var body: some View {
         VStack {
             VStack {
+                BannerContentView(adUnitId: adUnitTestID)
+                    .padding([.bottom])
                 HStack {
                     if let error = model.error {
                         Text(error.localizedDescription)
@@ -30,10 +32,10 @@ struct NavigationView: View {
                 }
                 if showScaleSlider {
                     ScaleSliderView(sizeWeight: $sizeWeight)
+                        .padding([.horizontal, .bottom])
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding()
             .background(.black)
             .foregroundColor(.white)
             .animation(.default, value: showScaleSlider)
