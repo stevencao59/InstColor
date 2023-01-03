@@ -28,7 +28,15 @@ struct AboutView: View {
                             Text("Version: \(appVersion ?? "")" )
                         }
                         .foregroundColor(.white)
-                        Link("helps@instcolor.com", destination: URL(string: "mailto:helps@instcolor.com")!)
+                        Group {
+                            Link("Quick Guide", destination: URL(string: "https://www.google.com")!)
+                            Link("Privacy Policy", destination: URL(string: "https://www.google.com")!)
+                            Link("helps@instcolor.com", destination: URL(string: "mailto:helps@instcolor.com")!)
+                            Button (action: { }) {
+                                Text("Remove Ads")
+                            }
+                        }
+                        .foregroundColor(Color(UIColor.link))
                     }
                     .padding(.bottom)
                 }
