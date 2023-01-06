@@ -13,6 +13,7 @@ struct FrameView: View {
     
     var body: some View {
         ZStack {
+            Color.black
             GeometryReader { geometry in
                 if let image = model.frame {
                     Image(image, scale: 1, label: Text("Camera feed"))

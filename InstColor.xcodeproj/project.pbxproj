@@ -11,6 +11,8 @@
 		B60785102951706E00C6897E /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607850F2951706E00C6897E /* BannerView.swift */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
+		B61D9C862963E0AD00ED0D0E /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = B61D9C852963E0AD00ED0D0E /* RevenueCat */; };
+		B625B14129668D85001E1890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B625B14029668D85001E1890 /* LaunchScreen.storyboard */; };
 		B637962B29159F110004DBC0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637962A29159F110004DBC0 /* ImageButtonView.swift */; };
 		B6471B2D292B31C6006A1474 /* BorderedRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6471B2C292B31C6006A1474 /* BorderedRectView.swift */; };
 		B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D56E2940378800BB4D76 /* TooltipView.swift */; };
@@ -80,6 +82,7 @@
 		B607850F2951706E00C6897E /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
+		B625B14029668D85001E1890 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B637962A29159F110004DBC0 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		B6471B2C292B31C6006A1474 /* BorderedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedRectView.swift; sourceTree = "<group>"; };
 		B659D56E2940378800BB4D76 /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
@@ -151,6 +154,7 @@
 			files = (
 				B6078506295161B400C6897E /* GoogleMobileAds in Frameworks */,
 				B659D5752944D10C00BB4D76 /* FirebaseAnalytics in Frameworks */,
+				B61D9C862963E0AD00ED0D0E /* RevenueCat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +394,7 @@
 				B6078507295163BE00C6897E /* Info.plist */,
 				B6DE828828E729E300826201 /* InstColorApp.swift */,
 				B6DE828C28E729E400826201 /* Assets.xcassets */,
+				B625B14029668D85001E1890 /* LaunchScreen.storyboard */,
 				B6DDD6FD28EBC56D00E2EC66 /* Camera */,
 				B60EC481292DDD4D00483710 /* Configs */,
 				B6DDD70928F0C78D00E2EC66 /* Data */,
@@ -432,6 +437,7 @@
 			packageProductDependencies = (
 				B659D5742944D10C00BB4D76 /* FirebaseAnalytics */,
 				B6078505295161B400C6897E /* GoogleMobileAds */,
+				B61D9C852963E0AD00ED0D0E /* RevenueCat */,
 			);
 			productName = InstColor;
 			productReference = B6DE828528E729E300826201 /* InstColor.app */;
@@ -464,6 +470,7 @@
 			packageReferences = (
 				B659D5732944D10C00BB4D76 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B6078504295161B400C6897E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				B61D9C842963E0AD00ED0D0E /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = B6DE828628E729E300826201 /* Products */;
 			projectDirPath = "";
@@ -482,6 +489,7 @@
 				B6DE829028E729E400826201 /* Preview Assets.xcassets in Resources */,
 				B659D5772944D25200BB4D76 /* GoogleService-Info.plist in Resources */,
 				B6DDD70B28F1B05900E2EC66 /* color.json in Resources */,
+				B625B14129668D85001E1890 /* LaunchScreen.storyboard in Resources */,
 				B6DE828D28E729E400826201 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,7 +696,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract colors from the camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -723,7 +731,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract colors from the camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -775,6 +783,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		B61D9C842963E0AD00ED0D0E /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		B659D5732944D10C00BB4D76 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -790,6 +806,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B6078504295161B400C6897E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		B61D9C852963E0AD00ED0D0E /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B61D9C842963E0AD00ED0D0E /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
 		};
 		B659D5742944D10C00BB4D76 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
