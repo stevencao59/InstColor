@@ -14,6 +14,8 @@ let adUnitID = "ca-app-pub-3047763899887691/5454245923"
 
 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
+let revenueCatApiKey = "appl_qRlgnzPOxMldFkRPNOUNxfjkvFw"
+
 let tooltipsDict = [
     "Complementary Color" : """
     Complementary colors are pairs of colors which, when combined or mixed, cancel each other out (lose hue) by producing a grayscale color like white or black. When placed next to each other, they create the strongest contrast for those two colors. Complementary colors may also be called "opposite colors".

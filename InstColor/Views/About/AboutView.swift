@@ -16,7 +16,7 @@ struct AboutView: View {
                 Color.clear
                 VStack {
                     Group {
-                        Image(systemName: "app.dashed")
+                        Image("LaunchIcon")
                             .resizable()
                             .scaledToFit()
                             .frame(width: imageSize / 4)

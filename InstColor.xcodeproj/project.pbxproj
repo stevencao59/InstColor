@@ -13,6 +13,10 @@
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B61D9C862963E0AD00ED0D0E /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = B61D9C852963E0AD00ED0D0E /* RevenueCat */; };
 		B625B14129668D85001E1890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B625B14029668D85001E1890 /* LaunchScreen.storyboard */; };
+		B625B1432968A090001E1890 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B625B1422968A090001E1890 /* StoreKit.framework */; };
+		B625B1462968B011001E1890 /* PurchasesDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B1452968B011001E1890 /* PurchasesDelegateHandler.swift */; };
+		B625B1482968B188001E1890 /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B1472968B188001E1890 /* ConfigurationManager.swift */; };
+		B625B14A2968BEEF001E1890 /* RevenueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B1492968BEEF001E1890 /* RevenueViewModel.swift */; };
 		B637962B29159F110004DBC0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637962A29159F110004DBC0 /* ImageButtonView.swift */; };
 		B6471B2D292B31C6006A1474 /* BorderedRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6471B2C292B31C6006A1474 /* BorderedRectView.swift */; };
 		B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D56E2940378800BB4D76 /* TooltipView.swift */; };
@@ -83,6 +87,10 @@
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
 		B625B14029668D85001E1890 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B625B1422968A090001E1890 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B625B1452968B011001E1890 /* PurchasesDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelegateHandler.swift; sourceTree = "<group>"; };
+		B625B1472968B188001E1890 /* ConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
+		B625B1492968BEEF001E1890 /* RevenueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueViewModel.swift; sourceTree = "<group>"; };
 		B637962A29159F110004DBC0 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		B6471B2C292B31C6006A1474 /* BorderedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedRectView.swift; sourceTree = "<group>"; };
 		B659D56E2940378800BB4D76 /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
@@ -155,6 +163,7 @@
 				B6078506295161B400C6897E /* GoogleMobileAds in Frameworks */,
 				B659D5752944D10C00BB4D76 /* FirebaseAnalytics in Frameworks */,
 				B61D9C862963E0AD00ED0D0E /* RevenueCat in Frameworks */,
+				B625B1432968A090001E1890 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +184,15 @@
 				B60EC482292DDD6200483710 /* Constants.swift */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		B625B1442968AFE5001E1890 /* Revenue */ = {
+			isa = PBXGroup;
+			children = (
+				B625B1452968B011001E1890 /* PurchasesDelegateHandler.swift */,
+				B625B1472968B188001E1890 /* ConfigurationManager.swift */,
+			);
+			path = Revenue;
 			sourceTree = "<group>";
 		};
 		B659D5702940378F00BB4D76 /* Tools */ = {
@@ -284,6 +302,7 @@
 		B6D67D9A29517F4A0012F91A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B625B1422968A090001E1890 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -317,8 +336,8 @@
 		B6DDD6FE28EBC5B300E2EC66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B6B30CF82957930200F92811 /* About */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
+				B6B30CF82957930200F92811 /* About */,
 				B607850E2951705B00C6897E /* Admob */,
 				B68C1A5C292920B300AC7662 /* Container */,
 				B68C1A5B2928A3E500AC7662 /* Dashboard */,
@@ -337,6 +356,7 @@
 				B6EBA0C328E78DC6006954F8 /* ContentViewModel.swift */,
 				B6DDD70C28F1B2F500E2EC66 /* ColorResultViewModel.swift */,
 				B6BBCF58291E014E0010C3FE /* ColorDetailViewModel.swift */,
+				B625B1492968BEEF001E1890 /* RevenueViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -392,9 +412,9 @@
 			children = (
 				B659D5762944D25200BB4D76 /* GoogleService-Info.plist */,
 				B6078507295163BE00C6897E /* Info.plist */,
+				B625B14029668D85001E1890 /* LaunchScreen.storyboard */,
 				B6DE828828E729E300826201 /* InstColorApp.swift */,
 				B6DE828C28E729E400826201 /* Assets.xcassets */,
-				B625B14029668D85001E1890 /* LaunchScreen.storyboard */,
 				B6DDD6FD28EBC56D00E2EC66 /* Camera */,
 				B60EC481292DDD4D00483710 /* Configs */,
 				B6DDD70928F0C78D00E2EC66 /* Data */,
@@ -402,6 +422,7 @@
 				B6DDD70E28F1B31900E2EC66 /* Model */,
 				B6DDD70028EBC5E900E2EC66 /* Modifier */,
 				B6DE828E28E729E400826201 /* Preview Content */,
+				B625B1442968AFE5001E1890 /* Revenue */,
 				B659D5702940378F00BB4D76 /* Tools */,
 				B6BBCF55291B5F800010C3FE /* Utilities */,
 				B6DDD6FF28EBC5D500E2EC66 /* ViewModels */,
@@ -506,6 +527,7 @@
 				B6DE829728E72A0800826201 /* FrameView.swift in Sources */,
 				B6BBCF52291B5BFF0010C3FE /* ClearViewModifier.swift in Sources */,
 				B6DDD72828FFA82600E2EC66 /* FrameSourceView.swift in Sources */,
+				B625B14A2968BEEF001E1890 /* RevenueViewModel.swift in Sources */,
 				B60EC4852933182700483710 /* ColorShadeView.swift in Sources */,
 				B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */,
 				B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */,
@@ -541,6 +563,7 @@
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
 				B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */,
+				B625B1462968B011001E1890 /* PurchasesDelegateHandler.swift in Sources */,
 				B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */,
 				B6EBA0C828E79736006954F8 /* FrameModifier.swift in Sources */,
 				B6DDD71228F1C34900E2EC66 /* Decoder.swift in Sources */,
@@ -552,6 +575,7 @@
 				B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */,
 				B698946C293BA5790057265D /* String.swift in Sources */,
 				B68C1A4429213E8500AC7662 /* ColorTypeView.swift in Sources */,
+				B625B1482968B188001E1890 /* ConfigurationManager.swift in Sources */,
 				B68C1A4C2923471500AC7662 /* ColorHexTextView.swift in Sources */,
 				B6BBCF54291B5D5A0010C3FE /* View.swift in Sources */,
 				B6B30CEB295408EB00F92811 /* Admob.swift in Sources */,

@@ -18,7 +18,7 @@ struct NavigationView: View {
     var body: some View {
         VStack {
             VStack {
-                BannerContentView(adUnitId: adUnitTestID)
+                BannerContentView(adUnitId: adUnitID)
                     .padding([.bottom])
                 HStack {
                     if let error = model.error {

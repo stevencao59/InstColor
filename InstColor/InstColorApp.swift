@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import AppTrackingTransparency
 import GoogleMobileAds
+import RevenueCat
 
 @main
 struct InstColorApp: App {
@@ -16,11 +17,13 @@ struct InstColorApp: App {
     init() {
         FirebaseApp.configure()
         initiateAdmob()
+        configureRevenueCat()
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .getOfferings()
         }
     }
 }
