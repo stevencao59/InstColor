@@ -31,7 +31,7 @@ struct ReferenceSectionView: View {
             List {
                 ForEach(item.value, id: \.self) { mapItem in
                     ZStack {
-                        NavigationLink(destination: ColorDetailView(color: UIColor(red: mapItem.Red, green: mapItem.Green, blue: mapItem.Blue), containerCotentWidth: containerCotentWidth, showModalButtons: false, selectedDetent: .large)) {
+                        NavigationLink(destination: ColorDetailView(color: UIColor(red: mapItem.Red, green: mapItem.Green, blue: mapItem.Blue), showModalButtons: false, selectedDetent: .large)) {
                             ReferenceRowView(mapItem: mapItem)
                         }
                     }

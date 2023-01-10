@@ -16,11 +16,15 @@ struct AboutView: View {
                 Color.clear
                 VStack {
                     Group {
-                        Image("LaunchIcon")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: imageSize / 4)
-                            .foregroundColor(.white)
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(.white)
+                            .frame(width: imageSize / 4 + 10, height: imageSize / 4 + 10)
+                            .overlay {
+                                Image("LaunchIcon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: imageSize / 4)
+                            }
                         Group {
                             Text("InstColor")
                                 .font(.title)
@@ -32,9 +36,9 @@ struct AboutView: View {
                             Link("Quick Guide", destination: URL(string: "https://www.google.com")!)
                             Link("Privacy Policy", destination: URL(string: "https://www.google.com")!)
                             Link("helps@instcolor.com", destination: URL(string: "mailto:helps@instcolor.com")!)
-                            Button (action: { }) {
-                                Text("Remove Ads")
-                            }
+//                            Button (action: { }) {
+//                                Text("Remove Ads")
+//                            }
                         }
                         .foregroundColor(Color(UIColor.link))
                     }

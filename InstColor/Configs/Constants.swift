@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 let favoritColorKey = "FavoriteColors"
 
@@ -15,6 +16,10 @@ let adUnitID = "ca-app-pub-3047763899887691/5454245923"
 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
 let revenueCatApiKey = "appl_qRlgnzPOxMldFkRPNOUNxfjkvFw"
+
+let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+
+let defaultFontSize = 17.0
 
 let tooltipsDict = [
     "Complementary Color" : """

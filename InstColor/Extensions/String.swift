@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension String {
     var isInt: Bool {
@@ -21,4 +22,10 @@ extension String {
         }
         return output
     }
+    
+    func widthOfString(usingFont font: UIFont) -> CGFloat {
+         let fontAttributes = [NSAttributedString.Key.font: font]
+         let size = self.size(withAttributes: fontAttributes)
+         return size.width
+     }
 }

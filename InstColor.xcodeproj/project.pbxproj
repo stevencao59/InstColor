@@ -17,6 +17,7 @@
 		B625B1462968B011001E1890 /* PurchasesDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B1452968B011001E1890 /* PurchasesDelegateHandler.swift */; };
 		B625B1482968B188001E1890 /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B1472968B188001E1890 /* ConfigurationManager.swift */; };
 		B625B14A2968BEEF001E1890 /* RevenueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B1492968BEEF001E1890 /* RevenueViewModel.swift */; };
+		B625B14D296A2CED001E1890 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625B14C296A2CED001E1890 /* ImageView.swift */; };
 		B637962B29159F110004DBC0 /* ImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637962A29159F110004DBC0 /* ImageButtonView.swift */; };
 		B6471B2D292B31C6006A1474 /* BorderedRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6471B2C292B31C6006A1474 /* BorderedRectView.swift */; };
 		B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D56E2940378800BB4D76 /* TooltipView.swift */; };
@@ -91,6 +92,7 @@
 		B625B1452968B011001E1890 /* PurchasesDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelegateHandler.swift; sourceTree = "<group>"; };
 		B625B1472968B188001E1890 /* ConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
 		B625B1492968BEEF001E1890 /* RevenueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueViewModel.swift; sourceTree = "<group>"; };
+		B625B14C296A2CED001E1890 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		B637962A29159F110004DBC0 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		B6471B2C292B31C6006A1474 /* BorderedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedRectView.swift; sourceTree = "<group>"; };
 		B659D56E2940378800BB4D76 /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,14 @@
 				B625B1472968B188001E1890 /* ConfigurationManager.swift */,
 			);
 			path = Revenue;
+			sourceTree = "<group>";
+		};
+		B625B14B296A2CD3001E1890 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				B625B14C296A2CED001E1890 /* ImageView.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		B659D5702940378F00BB4D76 /* Tools */ = {
@@ -344,6 +354,7 @@
 				B68C1A582928A2AD00AC7662 /* Detail */,
 				B68C1A5D2929227900AC7662 /* Favorites */,
 				B68C1A592928A30200AC7662 /* Frame */,
+				B625B14B296A2CD3001E1890 /* Image */,
 				B68C1A5A2928A34400AC7662 /* Navigation */,
 				B698946D293C55220057265D /* Reference */,
 			);
@@ -562,6 +573,7 @@
 				B68C1A632929DD0800AC7662 /* FavoriteColor.swift in Sources */,
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
+				B625B14D296A2CED001E1890 /* ImageView.swift in Sources */,
 				B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */,
 				B625B1462968B011001E1890 /* PurchasesDelegateHandler.swift in Sources */,
 				B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */,
@@ -717,7 +729,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InstColor/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract colors from the camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract color information from your camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -752,7 +764,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InstColor/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract colors from the camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract color information from your camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

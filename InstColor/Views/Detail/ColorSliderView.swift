@@ -49,25 +49,25 @@ struct ColorSliderView: View {
             Text(iconText)
                 .font(.footnote)
                 .foregroundColor(.gray)
-            Spacer()
+            
             TextEditor(text: $colorValueText)
                 .focused(keyboardFocusState, equals: path)
                 .scrollContentBackground(.hidden)
                 .background(Color(UIColor(red: 66, green: 66, blue: 66)))
+                .frame(width: "0".widthOfString(usingFont: .systemFont(ofSize: defaultFontSize)) * 4)
                 .multilineTextAlignment(.center)
                 .keyboardType(.numberPad)
-                .frame(width: containerCotentWidth * 0.12, height: containerCotentWidth * 0.1)
                 .cornerRadius(10)
-            HStack {
-                Slider(value: $sliderValue, in: range)
-                    .frame(width: containerCotentWidth * 0.45)
-                    .onChange(of: sliderValue) { value in
-                        colorValue = value
-                    }
-                Stepper("", value: $colorValue, in: range, step: step)
-                    .foregroundColor(.white)
-                    .tint(.white)
-            }
+            
+            Slider(value: $sliderValue, in: range)
+                .frame(maxWidth: .infinity)
+                .onChange(of: sliderValue) { value in
+                    colorValue = value
+                }
+            Stepper("", value: $colorValue, in: range, step: step)
+                .labelsHidden()
+                .foregroundColor(.white)
+                .tint(.white)
         }
         .padding([.horizontal])
         .foregroundColor(.white)

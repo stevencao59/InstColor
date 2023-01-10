@@ -112,16 +112,16 @@ struct ColorIconContainerView: View {
 struct ColorDetailView: View {
     @StateObject var model = ColorDetailViewModel()
     @State var hexText: String = "Unknown Hex"
+    @State var viewSize: CGSize = CGSize(width: 0, height: 0)
+
     @FocusState var keyboardFocusState: FocusElement?
     
     var color: UIColor
-    var containerCotentWidth: Double = 0
     var showModalButtons: Bool
     var selectedDetent: PresentationDetent
     
-    init(color: UIColor, containerCotentWidth: Double, showModalButtons: Bool, selectedDetent: PresentationDetent) {
+    init(color: UIColor, showModalButtons: Bool, selectedDetent: PresentationDetent) {
         self.color = color
-        self.containerCotentWidth = containerCotentWidth
         self.showModalButtons = showModalButtons
         self.selectedDetent = selectedDetent
         self.hexText = color.toHexString() ?? "Unknown Hex"
@@ -131,17 +131,25 @@ struct ColorDetailView: View {
         VStack {
             ColorIconContainerView(color: model.color, colorName: model.colorName, baseColorName: model.baseColorName, keyboardFocusState: $keyboardFocusState)
             ScrollView {
-                SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: containerCotentWidth)
+                SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: viewSize.width)
                 
                 ColorHexTextView(displayColor: $model.color)
                 
-                InformationTypeView(model: model, containerCotentWidth: containerCotentWidth, selectedDetent: selectedDetent)
+                InformationTypeView(model: model, containerCotentWidth: viewSize.width, selectedDetent: selectedDetent)
             }
         }
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .modifier(SaveColorModifier(color: model.color, showModalButtons: showModalButtons))
+        .overlay {
+            GeometryReader { geo in
+                Color.clear
+                    .onAppear {
+                        viewSize = CGSize(width: geo.size.width, height: geo.size.height)
+                    }
+            }
+        }
         .onAppear() {
             self.model.color = color
         }
@@ -150,6 +158,6 @@ struct ColorDetailView: View {
 
 struct ColorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorDetailView(color: .orange, containerCotentWidth: 393, showModalButtons: true, selectedDetent: .large)
+        ColorDetailView(color: .orange, showModalButtons: true, selectedDetent: .large)
     }
 }

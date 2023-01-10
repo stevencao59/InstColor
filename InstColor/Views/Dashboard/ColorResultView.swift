@@ -16,7 +16,6 @@ struct ColorResultView: View {
     
     let colorName: String
     let baseColorName: String
-    let containerCotentWidth: Double
     
     func clickToShowSheet() {
         showColorDetail.toggle()
@@ -40,7 +39,7 @@ struct ColorResultView: View {
             }
         }
         .sheet(isPresented: $showColorDetail) {
-            ColorDetailView(color: color, containerCotentWidth: containerCotentWidth, showModalButtons: true, selectedDetent: selectedDetent)
+            ColorDetailView(color: color, showModalButtons: true, selectedDetent: selectedDetent)
                 .opacity(0.8)
                 .clearModalBackground()
                 .presentationDetents([.medium, .large], selection: $selectedDetent)
@@ -52,7 +51,7 @@ struct ColorResultView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle()
-            ColorResultView(color: UIColor(.red), colorName: "Red", baseColorName: "Red", containerCotentWidth: 100)
+            ColorResultView(color: UIColor(.red), colorName: "Red", baseColorName: "Red")
         }
         .ignoresSafeArea()
     }

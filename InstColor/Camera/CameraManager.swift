@@ -142,6 +142,8 @@ class CameraManager: ObservableObject {
     private func configure() {
         checkPermission()
         sessionQueue.async {
+            self.session.sessionPreset = deviceIdiom == .pad ? AVCaptureSession.Preset.photo : AVCaptureSession.Preset.high
+            
             self.session.startRunning()
             self.startSubscription()
         }
