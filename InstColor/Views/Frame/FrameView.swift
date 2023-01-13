@@ -14,20 +14,35 @@ struct FrameView: View {
     var body: some View {
         ZStack {
             Color.black
-            GeometryReader { geometry in
-                if let image = model.frame {
-                    Image(image, scale: 1, label: Text("Camera feed"))
+            if let error = model.error {
+                VStack {
+                    Image(systemName: "exclamationmark.triangle")
                         .resizable()
                         .scaledToFit()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                        .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
-                        .blur(radius: frameBlur)
-                        .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
-                        .onChange(of: model.isCameraReady) { isReady in
-                            frameBlur = isReady ? 0 : 50
-                        }
-                        .animation(.default, value: frameBlur)
+                        .frame(width: UIScreen.screenWidth / 4)
+                        .padding()
+                    Text(error.localizedDescription)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding([.horizontal, .bottom])
+                }
+                .foregroundColor(.white)
+            } else {
+                GeometryReader { geometry in
+                    if let image = model.frame {
+                        Image(image, scale: 1, label: Text("Camera feed"))
+                            .resizable()
+                            .scaledToFit()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                            .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
+                            .blur(radius: frameBlur)
+                            .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
+                            .onChange(of: model.isCameraReady) { isReady in
+                                frameBlur = isReady ? 0 : 50
+                            }
+                            .animation(.default, value: frameBlur)
+                    }
                 }
             }
         }

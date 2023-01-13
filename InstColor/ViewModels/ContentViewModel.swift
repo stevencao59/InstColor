@@ -34,7 +34,6 @@ class ContentViewModel: ObservableObject {
     @Published var size: CGSize?
     
     // Navigation/dashboard size
-    @Published var navigationHeight: CGFloat = 0
     @Published var dashboardHeight: CGFloat = 0
     @Published var statusBarHeight: CGFloat = 0
     @Published var bottomBarHeight: CGFloat = 0
@@ -56,9 +55,12 @@ class ContentViewModel: ObservableObject {
     // Camera running indicator
     @Published var isCameraReady: Bool = true
     
+    // Image height scale
+    var imageSpaceSize: CGFloat = 0.0
+    
     func getThumbFrame(cgImage: CGImage?) -> CGImage? {
-        if let image = cgImage {
-            let image = UIImage(cgImage: image)
+        if let cgImage {
+            let image = UIImage(cgImage: cgImage)
             if let rect = self.rect {
                 if let size = self.size {
                     let posX =  self.cameraManager.cameraPosition == .front ? self.containerCotentWidth - rect.origin.x - self.thumbViewSize : rect.origin.x
@@ -73,9 +75,9 @@ class ContentViewModel: ObservableObject {
     
     func getRect(loc: CGPoint?) -> CGRect? {
         if let location = loc {
-            return CGRect(x: location.x - self.thumbViewSize / 2, y: location.y - self.navigationHeight - self.thumbViewSize  / 2, width: self.thumbViewSize, height: self.thumbViewSize)
+            return CGRect(x: location.x - self.thumbViewSize / 2, y: location.y - (self.imageSpaceSize - (self.thumbViewSize / 2)), width: self.thumbViewSize, height: self.thumbViewSize)
         }
-        return CGRect(x: self.containerCotentWidth / 2 - (self.thumbViewSize / 2), y: (self.containerCotentHeight / 2) - self.navigationHeight - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
+        return CGRect(x: self.containerCotentWidth / 2 - (self.thumbViewSize / 2), y: (self.containerCotentHeight / 2) - self.imageSpaceSize - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
     }
     
     func setupSubscriptions() {
@@ -98,6 +100,26 @@ class ContentViewModel: ObservableObject {
             }
             .assign(to: &$rect)
         
+//        Timer.publish(every: 0.01, on: .main, in: .default)
+//            .autoconnect()
+//            .sink(receiveValue: { value in
+//                guard let uiImage = UIImage(named: "TestImage") else {
+//                    self.frame = nil
+//                    return
+//                }
+//
+//                guard let image = uiImage.convertToCgImage() else {
+//                    self.frame = nil
+//                    return
+//                }
+//
+//                self.thumbViewSize = (Double(image.height) / Double(image.width)) * 10
+//                self.frame = image
+//                self.rect = self.getRect(loc: self.location)
+//                self.imageSpaceSize = (UIScreen.screenHeight - (Double(image.height) / Double(image.width)) * UIScreen.screenWidth) / 2
+//            })
+//            .store(in: &subscriptions)
+        
         frameManager.$current
             .receive(on: RunLoop.main)
             .sink(receiveValue: { buffer in
@@ -108,6 +130,7 @@ class ContentViewModel: ObservableObject {
                 self.thumbViewSize = (Double(image.height) / Double(image.width)) * 10
                 self.frame = image
                 self.rect = self.getRect(loc: self.location)
+                self.imageSpaceSize = (UIScreen.screenHeight - (Double(image.height) / Double(image.width)) * UIScreen.screenWidth) / 2
             })
             .store(in: &subscriptions)
         

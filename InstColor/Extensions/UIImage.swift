@@ -22,4 +22,13 @@ extension UIImage {
         let resImage = UIImage(cgImage: cutImageRef, scale: self.imageRendererFormat.scale, orientation: self.imageOrientation)
         return resImage.cgImage
     }
+    
+    func convertToCgImage() -> CGImage? {
+        let ciImage = CIImage(image: self)
+        let context = CIContext(options: nil)
+        if let ciImage {
+            return context.createCGImage(ciImage, from: ciImage.extent)
+        }
+        return nil
+    }
 }
