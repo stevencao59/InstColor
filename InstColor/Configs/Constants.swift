@@ -14,6 +14,7 @@ let adUnitTestID = "ca-app-pub-3940256099942544/2435281174"
 let adUnitID = "ca-app-pub-3047763899887691/5454245923"
 
 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+let appBuildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
 
 let revenueCatApiKey = "appl_qRlgnzPOxMldFkRPNOUNxfjkvFw"
 

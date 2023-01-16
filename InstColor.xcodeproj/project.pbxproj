@@ -54,6 +54,7 @@
 		B6BBCF59291E014E0010C3FE /* ColorDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBCF58291E014E0010C3FE /* ColorDetailViewModel.swift */; };
 		B6BBCF5D291F37C70010C3FE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBCF5C291F37C70010C3FE /* Math.swift */; };
 		B6CE35512971119200A78764 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE35502971119200A78764 /* Device.swift */; };
+		B6CE35542973B33A00A78764 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE35532973B33A00A78764 /* WebView.swift */; };
 		B6DDD6FB28EA7A9700E2EC66 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD6FA28EA7A9700E2EC66 /* Color.swift */; };
 		B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */; };
 		B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */; };
@@ -129,6 +130,7 @@
 		B6BBCF58291E014E0010C3FE /* ColorDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailViewModel.swift; sourceTree = "<group>"; };
 		B6BBCF5C291F37C70010C3FE /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		B6CE35502971119200A78764 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		B6CE35532973B33A00A78764 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		B6DDD6FA28EA7A9700E2EC66 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B6DDD70128EE72CD00E2EC66 /* ColorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTextView.swift; sourceTree = "<group>"; };
 		B6DDD70328EFC06200E2EC66 /* ColorResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorResultView.swift; sourceTree = "<group>"; };
@@ -311,6 +313,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		B6CE35522973B32400A78764 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				B6CE35532973B33A00A78764 /* WebView.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		B6D67D9A29517F4A0012F91A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +359,7 @@
 		B6DDD6FE28EBC5B300E2EC66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6CE35522973B32400A78764 /* Web */,
 				B6DE828A28E729E300826201 /* ContentView.swift */,
 				B6B30CF82957930200F92811 /* About */,
 				B607850E2951705B00C6897E /* Admob */,
@@ -557,6 +568,7 @@
 				B68C1A652929DF7600AC7662 /* UserDefaults.swift in Sources */,
 				B68C1A5F292928A600AC7662 /* ToolBarView.swift in Sources */,
 				B6B30CFE2957950100F92811 /* CloseButtonView.swift in Sources */,
+				B6CE35542973B33A00A78764 /* WebView.swift in Sources */,
 				B68C1A54292734FB00AC7662 /* SliderHsbGroupView.swift in Sources */,
 				B6DE829B28E72FA900826201 /* CameraError.swift in Sources */,
 				B6DDD72A29071FA200E2EC66 /* CIImage.swift in Sources */,
@@ -727,16 +739,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InstColor/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract color information from your camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use camera to extract color information, including color name, RGB values, color family and etc.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -762,16 +775,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InstColor/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to extract color information from your camera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use camera to extract color information, including color name, RGB values, color family and etc.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (

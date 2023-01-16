@@ -29,12 +29,12 @@ struct AboutView: View {
                             Text("InstColor")
                                 .font(.title)
                                 .bold()
-                            Text("Version: \(appVersion ?? "")" )
+                            Text("Version: \(appVersion ?? "") (\(appBuildNumber ?? ""))" )
                         }
                         .foregroundColor(.white)
                         Group {
-                            Link("Quick Guide", destination: URL(string: "https://www.google.com")!)
-                            Link("Privacy Policy", destination: URL(string: "https://www.google.com")!)
+                            Link("Quick Guide", destination: URL(string: "https://www.instcolor.com")!)
+                            Link("Privacy Policy", destination: URL(string: "https://www.instcolor.com/privacy-policies")!)
                             Link("helps@instcolor.com", destination: URL(string: "mailto:helps@instcolor.com")!)
 //                            Button (action: { }) {
 //                                Text("Remove Ads")
