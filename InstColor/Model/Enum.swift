@@ -36,4 +36,5 @@ enum FocusElement: Hashable {
     case red
     case green
     case blue
+    case hex
 }

@@ -10,13 +10,16 @@ import SwiftUI
 struct ColorHexTextView: View {
     @Binding var displayColor: UIColor
     @State var hexText: String = ""
-    
+
+    var keyboardFocusState: FocusState<FocusElement?>.Binding
+
     var body: some View {
         HStack {
             Text("HEX: #")
                 .font(.body)
                 .bold()
             TextField("", text: $hexText)
+                .focused(keyboardFocusState, equals: .hex)
                 .scrollContentBackground(.hidden)
                 .background(Color(UIColor(red: 66, green: 66, blue: 66)))
                 .multilineTextAlignment(.center)
@@ -43,7 +46,8 @@ struct ColorHexTextView: View {
 }
 
 struct ColorHexTextView_Previews: PreviewProvider {
+    static var focused: FocusState<FocusElement?> = FocusState<FocusElement?>()
     static var previews: some View {
-        ColorHexTextView(displayColor: .constant(.white))
+        ColorHexTextView(displayColor: .constant(.white), keyboardFocusState: focused.projectedValue)
     }
 }

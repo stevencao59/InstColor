@@ -133,7 +133,7 @@ struct ColorDetailView: View {
             ScrollView {
                 SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: viewSize.width)
                 
-                ColorHexTextView(displayColor: $model.color)
+                ColorHexTextView(displayColor: $model.color, keyboardFocusState: $keyboardFocusState)
                 
                 InformationTypeView(model: model, containerCotentWidth: viewSize.width, selectedDetent: selectedDetent)
             }
