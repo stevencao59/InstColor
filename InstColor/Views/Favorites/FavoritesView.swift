@@ -47,7 +47,16 @@ struct FavoritesView: View {
     @State private var showAlertWindow = false
 
     var containerCotentWidth = 0.0
-
+    
+    init(favoriteColors: [FavoriteColor]? = nil, selectedColor: UIColor = UIColor(.white), showAlertWindow: Bool = false, containerCotentWidth: Double = 0.0) {
+        self.favoriteColors = favoriteColors
+        self.selectedColor = selectedColor
+        self.showAlertWindow = showAlertWindow
+        self.containerCotentWidth = containerCotentWidth
+        
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     func deleteFavorites(at offsets: IndexSet) {
         if var favoriteColors {
             favoriteColors.remove(atOffsets: offsets)

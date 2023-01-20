@@ -56,7 +56,7 @@ class ContentViewModel: ObservableObject {
     @Published var isCameraReady: Bool = true
     
     // Image height scale
-    var imageSpaceSize: CGFloat = 0.0
+    var imageScaledHeight: CGFloat = 0.0
     
     func getThumbFrame(cgImage: CGImage?) -> CGImage? {
         if let cgImage {
@@ -64,7 +64,7 @@ class ContentViewModel: ObservableObject {
             if let rect = self.rect {
                 if let size = self.size {
                     let posX =  self.cameraManager.cameraPosition == .front ? self.containerCotentWidth - rect.origin.x - self.thumbViewSize : rect.origin.x
-                    let finalRect = CGRect(x: posX, y: rect.origin.y  - self.thumbViewSize, width: rect.width, height: rect.height)
+                    let finalRect = CGRect(x: posX, y: rect.origin.y, width: rect.width, height: rect.height)
                     let croppedImage = image.cropImage(toRect: finalRect, viewWidth: size.width, viewHeight: size.height)
                     return croppedImage
                 }
@@ -75,9 +75,14 @@ class ContentViewModel: ObservableObject {
     
     func getRect(loc: CGPoint?) -> CGRect? {
         if let location = loc {
-            return CGRect(x: location.x - self.thumbViewSize / 2, y: location.y - (self.imageSpaceSize - (self.thumbViewSize / 2)), width: self.thumbViewSize, height: self.thumbViewSize)
+            return CGRect(x: location.x - self.thumbViewSize / 2, y: location.y - (self.thumbViewSize / 2), width: self.thumbViewSize, height: self.thumbViewSize)
         }
-        return CGRect(x: self.containerCotentWidth / 2 - (self.thumbViewSize / 2), y: (self.containerCotentHeight / 2) - self.imageSpaceSize - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
+        return CGRect(x: self.containerCotentWidth / 2 - (self.thumbViewSize / 2), y: (self.containerCotentHeight / 2) - self.thumbViewSize / 2, width: self.thumbViewSize, height: self.thumbViewSize)
+    }
+    
+    func getScaledHeight(image: CGImage) -> CGFloat {
+        let scaledHeight = (Double(image.height) / Double(image.width)) * UIScreen.screenWidth
+        return scaledHeight
     }
     
     func setupSubscriptions() {
@@ -130,7 +135,7 @@ class ContentViewModel: ObservableObject {
                 self.thumbViewSize = (Double(image.height) / Double(image.width)) * 10
                 self.frame = image
                 self.rect = self.getRect(loc: self.location)
-                self.imageSpaceSize = (UIScreen.screenHeight - (Double(image.height) / Double(image.width)) * UIScreen.screenWidth) / 2
+                self.imageScaledHeight = self.getScaledHeight(image: image)
             })
             .store(in: &subscriptions)
         

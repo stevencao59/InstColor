@@ -12,7 +12,7 @@ struct FrameView: View {
     @State private var frameBlur = 0.0
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             Color.black
             if let error = model.error {
                 VStack {
@@ -28,21 +28,20 @@ struct FrameView: View {
                 }
                 .foregroundColor(.white)
             } else {
-                GeometryReader { geometry in
-                    if let image = model.frame {
-                        Image(image, scale: 1, label: Text("Camera feed"))
-                            .resizable()
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                            .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
-                            .blur(radius: frameBlur)
-                            .modifier(FrameModifier(contentSize: CGSize(width: geometry.size.width, height: geometry.size.height), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
-                            .onChange(of: model.isCameraReady) { isReady in
-                                frameBlur = isReady ? 0 : 50
-                            }
-                            .animation(.default, value: frameBlur)
-                    }
+                if let image = model.frame {
+                    Image(image, scale: 1, label: Text("Camera feed"))
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: UIScreen.screenWidth, height: model.imageScaledHeight, alignment: .center)
+                        .rotation3DEffect(.degrees(model.animationAmount), axis: (x: 0, y: 1, z: 0))
+                        .blur(radius: frameBlur)
+                        .modifier(FrameModifier(contentSize: CGSize(width: UIScreen.screenWidth, height: model.imageScaledHeight), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
+                        .onChange(of: model.isCameraReady) { isReady in
+                            frameBlur = isReady ? 0 : 50
+                        }
+                        .animation(.default, value: frameBlur)
+                        .overlay(ThumbView(model: model), alignment: .topLeading)
                 }
             }
         }

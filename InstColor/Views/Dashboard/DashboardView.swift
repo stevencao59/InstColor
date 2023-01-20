@@ -34,7 +34,7 @@ struct ResultTextContainerView: View {
                             }
                         }
                         .font(.caption)
-                        .padding([.trailing])
+                        .padding([.bottom, .trailing])
                     }
                 } else {
                     ColorTextGroupView(components: color.components)

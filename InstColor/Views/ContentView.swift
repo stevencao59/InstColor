@@ -14,7 +14,6 @@ struct ContentView: View {
         ContentContainerView(model: model) {
             ZStack(alignment: .bottomTrailing) {
                 FrameView(model: model)
-                    .overlay(ThumbView(model: model), alignment: .topLeading)
                 NavigationView(model: model)
                 DashboardView(model: model)
             }

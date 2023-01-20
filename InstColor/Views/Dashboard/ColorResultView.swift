@@ -17,6 +17,8 @@ struct ColorResultView: View {
     let colorName: String
     let baseColorName: String
     
+    let resultSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 40
+    
     func clickToShowSheet() {
         showColorDetail.toggle()
     }
@@ -24,7 +26,7 @@ struct ColorResultView: View {
     var body: some View {
         Button(action: clickToShowSheet) {
             HStack {
-                BorderedRectView(color: Color(color), cornerRadius: 40, lineWidth: 1, width: 40, height: 40)
+                BorderedRectView(color: Color(color), cornerRadius: resultSize, lineWidth: 1, width: resultSize, height: resultSize)
                     .onChange(of: color) { newValue in
                         model.color = newValue
                     }

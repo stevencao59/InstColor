@@ -59,7 +59,7 @@ struct ToolBarView: View {
                 }
 
             }
-            .padding([.horizontal, .bottom])
+            .padding()
             .scaleEffect(1.2)
             .fullScreenCover(isPresented: $showFavorites) {
                 return FavoritesView(containerCotentWidth: containerCotentWidth)
