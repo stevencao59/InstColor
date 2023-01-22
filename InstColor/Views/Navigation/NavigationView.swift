@@ -18,8 +18,8 @@ struct NavigationView: View {
     var body: some View {
         VStack {
             VStack {
-//                BannerContentView(adUnitId: adUnitID)
-//                    .padding([.bottom])
+                BannerContentView(adUnitId: adUnitID)
+                    .padding([.bottom])
                 HStack {
                     ToolBarView(model: model, imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth)
                 }

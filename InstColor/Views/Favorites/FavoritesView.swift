@@ -115,7 +115,14 @@ struct FavoritesView: View {
                     ZStack {
                         Rectangle()
                             .fill(.black)
-                        Text("No Favorite Color is saved!")
+                        VStack {
+                            Image(systemName: "folder.badge.plus")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.screenWidth / 4)
+                                .padding()
+                            Text("No Favorite Color is saved")
+                        }
                     }
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {

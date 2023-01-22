@@ -17,13 +17,13 @@ struct InstColorApp: App {
     init() {
         FirebaseApp.configure()
         initiateAdmob()
-        configureRevenueCat()
+//        configureRevenueCat()
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .getOfferings()
+//                .getOfferings()
         }
     }
 }

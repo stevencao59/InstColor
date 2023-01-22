@@ -64,8 +64,8 @@ protocol BannerViewControllerDelegate: AnyObject {
 }
 
 struct BannerAd: UIViewControllerRepresentable {
+    var adUnitId: String
     @Binding var isSuccesful: Bool
-    let adUnitId = adUnitTestID
     
     func makeUIViewController(context: Context) -> BannerAdVC {
         let bannerView = BannerAdVC(adUnitId: adUnitId)
@@ -144,7 +144,7 @@ struct BannerContentView: View {
     
     public var body: some View {
         VStack {
-            BannerAd(isSuccesful: $isSuccesful)
+            BannerAd(adUnitId: adUnitId, isSuccesful: $isSuccesful)
                 .frame(width: viewSize.width, height: viewSize.height)
                 .onAppear {
                     setFrame()
