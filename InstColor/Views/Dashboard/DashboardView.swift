@@ -76,6 +76,7 @@ struct DashboardView: View {
                 )
             }
         }
+        .padding([.bottom])
     }
 }
 
