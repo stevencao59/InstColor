@@ -33,6 +33,7 @@ struct ColorResultView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("\(colorName)")
+                            .lineLimit(1)
                             .font(.title2)
                             .foregroundColor(.white)
                     }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct SaveColorModifier: ViewModifier {
     @Environment(\.dismiss) private var dismiss
@@ -57,13 +58,69 @@ struct SaveColorModifier: ViewModifier {
     }
 }
 
+struct ColorSpaceView: View {
+    @Binding var colorInfos: [ColorInfo]
+    
+    @State private var selectedInfo: String = ""
+    @State private var showCopyMessage = false
+    @State private var copiedMessage = ""
+    @State private var showTooltipsSheet = false
+    
+    var body: some View {
+        VStack {
+            VStack {
+                ForEach(colorInfos) { info in
+                    VStack {
+                        HStack {
+                            HStack {
+                                Text(info.InfoName)
+                                    .bold()
+                                Button(action: {
+                                    selectedInfo = info.InfoName
+                                    showTooltipsSheet.toggle()
+                                }) {
+                                    Image(systemName: "questionmark.circle")
+                                }
+                            }
+                            Spacer()
+                            Text(info.Value)
+                        }
+                        Divider()
+                            .overlay(.gray)
+                    }
+                    .padding([.bottom, .horizontal])
+                    .onLongPressGesture() {
+                        copiedMessage = "\(info.InfoName) (\(info.Value))"
+                        UIPasteboard.general.setValue(copiedMessage,
+                                                      forPasteboardType: UTType.plainText.identifier)
+                        showCopyMessage.toggle()
+                    }
+                }
+            }
+            Text("Press and hold to copy color space values")
+                .font(.footnote)
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .foregroundColor(.white)
+        .alert("Color space info is copied!\n\(copiedMessage)", isPresented: $showCopyMessage) {
+            Button("Ok", role: .cancel) { }
+        }
+        .sheet(isPresented: $showTooltipsSheet) {
+            TooltipView(title: selectedInfo, tooltipsText: tooltipsDict[selectedInfo])
+                .background(.black)
+                .foregroundColor(.white)
+                .presentationDetents([.medium])
+        }
+    }
+}
+
 struct InformationTypeView: View {
     @ObservedObject var model: ColorDetailViewModel
     @State var selectedInformationType = "Types"
-    @State var showTypesView = true
     
     var containerCotentWidth: Double
-    var informationTypes = ["Types", "Shades"]
+    var informationTypes = ["Types", "Shades", "Color Spaces"]
     var selectedDetent: PresentationDetent
     
     var body: some View {
@@ -77,19 +134,18 @@ struct InformationTypeView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .frame(width: containerCotentWidth / 2)
+            .frame(width: containerCotentWidth / 1.2)
             
-            if showTypesView {
+            if selectedInformationType == "Types" {
                 ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
-            } else {
+            } else if selectedInformationType == "Shades" {
                 ColorShadeView(referenceColor: $model.color)
+            } else if selectedInformationType == "Color Spaces" {
+                ColorSpaceView(colorInfos: $model.colorInfos)
             }
         }
         .padding([.horizontal])
-        .animation(.easeIn, value: showTypesView)
-        .onChange(of: selectedInformationType) { val in
-            showTypesView = selectedInformationType == "Types"
-        }
+        .animation(.easeIn, value: selectedInformationType)
     }
 }
 

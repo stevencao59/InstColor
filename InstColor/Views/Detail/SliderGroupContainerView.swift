@@ -14,7 +14,7 @@ struct SliderGroupContainerView: View {
     var keyboardFocusState: FocusState<FocusElement?>.Binding
     
     var containerCotentWidth: Double
-    var colorTypes = ["RGB", "HSB"]
+    var colorTypes = ["RGB", "HSB", "CMYK"]
     
     init(model: ColorDetailViewModel, keyboardFocusState: FocusState<FocusElement?>.Binding, containerCotentWidth: Double) {
         self.model = model
@@ -34,17 +34,20 @@ struct SliderGroupContainerView: View {
                 }
             }
             .pickerStyle(.segmented)
+            .padding([.bottom])
             
             ZStack {
                 if colorType == "RGB" {
                     SliderRgbGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, keyboardFocusState: keyboardFocusState, containerCotentWidth: containerCotentWidth)
                 } else if colorType == "HSB" {
                     SliderHsbGroupView(hue: $model.hue, satuation: $model.satuation, brightness: $model.brightness, hueText: $model.hueText, satuationText: $model.satuationText, brightnessText: $model.brightnessText, color: $model.color, keyboardFocusState: keyboardFocusState, containerCotentWidth: containerCotentWidth)
+                } else if colorType == "CMYK" {
+                    SliderCmykGroupView(cyan: $model.cyan, magenta: $model.magenta, yellow: $model.yellow, key: $model.key, cyanText: $model.cyanText, magentaText: $model.magentaText, yellowText: $model.yellowText, keyText: $model.keyText, color: $model.color, keyboardFocusState: keyboardFocusState, containerCotentWidth: containerCotentWidth)
                 }
             }
         }
         .padding([.horizontal])
-        .frame(width: containerCotentWidth / 2)
+        .frame(width: containerCotentWidth / 1.2)
         .animation(.default, value: colorType)
     }
 }

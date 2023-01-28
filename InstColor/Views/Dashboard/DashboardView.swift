@@ -25,7 +25,6 @@ struct ResultTextContainerView: View {
                     if let baseColor = UIColor(hex: baseColorHex) {
                         VStack {
                             Text("Family Color:")
-                                .foregroundColor(.white)
                                 .bold()
                             HStack {
                                 BorderedRectView(color: Color(baseColor), cornerRadius: 40, lineWidth: 1, width: 15, height: 15)
@@ -33,8 +32,9 @@ struct ResultTextContainerView: View {
                                     .foregroundColor(.white)
                             }
                         }
+                        .foregroundColor(.white)
                         .font(.caption)
-                        .padding([.bottom, .trailing])
+                        .padding([.trailing])
                     }
                 } else {
                     ColorTextGroupView(components: color.components)
@@ -60,7 +60,6 @@ struct DashboardView: View {
                     ResultTextContainerView(color: color, baseColorName: resultModel.baseColorName, baseColorHex: resultModel.baseColorHex)
                 }
                 .padding()
-                .frame(maxWidth: .infinity)
                 .background(.black)
                 .onChange(of: color) { color in
                     resultModel.color = color

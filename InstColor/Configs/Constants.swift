@@ -41,6 +41,24 @@ let tooltipsDict = [
     Tetradic colors are somewhat equally apart colors on a given color wheel. However, they are formed by four colors instead of three. As they consist of four colors equally distanced on the color wheel, tetradic color schemes have two opposing sets of complementary colors. This is why they are sometimes called double complementary. The fact that they contain two sets of opposite colors is the defining aspect of tetradic colors.
     """,
     "Monochromatic Colors" : """
-    Monochromatic colors are all the colors of a single hue. Monochromatic color schemes are derived from a single base hue and extended using its shades, tones and tints. Tints are achieved by adding white and shades and tones are achieved by adding a darker color, grey or black. 
+    Monochromatic colors are all the colors of a single hue. Monochromatic color schemes are derived from a single base hue and extended using its shades, tones and tints. Tints are achieved by adding white and shades and tones are achieved by adding a darker color, grey or black.
+    """,
+    "RGB": """
+    The Rgb color space consists of all possible colors that can be made by the combination of red, green, and blue light. It's a popular model in photography, television, and computer graphics.
+    """,
+    "HEX": """
+    Hex is RGB color space in hexadecimal format.
+    """,
+    "HSB" : """
+    Hsl (for hue, saturation, lightness), also known as Hsb (for hue, saturation, brightness), is a cylindrical-coordinate representation of the Rgb color model. This representation rearranges the colors in an attempt to be more intuitive and perceptually relevant than the typical Rgb representation. It's frequently used for computer graphics applications like color pickers and image analysis.
+    """,
+    "CMYK" : """
+    Cmyk is similar to the Cmy color space, with the addition of black (k). In theory the black component is not necessary, however this color space is primarily used in color printing where the mixture of cyan, magenta, and yellow result in a brown color rather than black.
+    """,
+    "XYZ" : """
+    Xyz is an additive color space based on how the eye intereprets stimulus from light. Unlike other additive rgb like Rgb, Xyz is a purely mathmatical space and the primary components are "imaginary", meaning you can't create the represented color in the physical by shining any sort of lights representing x, y, and z.
+    """,
+    "LAB" : """
+    Cie-L*ab is defined by lightness and the color-opponent dimensions a and b, which are based on the compressed Xyz color space coordinates. Lab is particularly notable for it's use in delta-e calculations.
     """,
 ]

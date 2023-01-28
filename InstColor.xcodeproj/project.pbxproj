@@ -11,6 +11,7 @@
 		B60785102951706E00C6897E /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607850F2951706E00C6897E /* BannerView.swift */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
+		B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619EB292980D470001BF11A /* SliderCmykGroupView.swift */; };
 		B61D9C862963E0AD00ED0D0E /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = B61D9C852963E0AD00ED0D0E /* RevenueCat */; };
 		B625B14129668D85001E1890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B625B14029668D85001E1890 /* LaunchScreen.storyboard */; };
 		B625B1432968A090001E1890 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B625B1422968A090001E1890 /* StoreKit.framework */; };
@@ -82,6 +83,7 @@
 		B6EBA0C428E78DC6006954F8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C328E78DC6006954F8 /* ContentViewModel.swift */; };
 		B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C528E790A4006954F8 /* CGImage.swift */; };
 		B6EBA0C828E79736006954F8 /* FrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA0C728E79736006954F8 /* FrameModifier.swift */; };
+		B6ED630529847E4800634579 /* ColorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ED630429847E4800634579 /* ColorInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +91,7 @@
 		B607850F2951706E00C6897E /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
+		B619EB292980D470001BF11A /* SliderCmykGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCmykGroupView.swift; sourceTree = "<group>"; };
 		B625B14029668D85001E1890 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B625B1422968A090001E1890 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B625B1452968B011001E1890 /* PurchasesDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelegateHandler.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 		B6EBA0C328E78DC6006954F8 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		B6EBA0C528E790A4006954F8 /* CGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
 		B6EBA0C728E79736006954F8 /* FrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameModifier.swift; sourceTree = "<group>"; };
+		B6ED630429847E4800634579 /* ColorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,15 +227,16 @@
 		B68C1A582928A2AD00AC7662 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				B68C1A492921C2B000AC7662 /* ColorIconView.swift */,
 				B6BBCF4D2916B1D90010C3FE /* ColorDetailView.swift */,
 				B68C1A4B2923471500AC7662 /* ColorHexTextView.swift */,
+				B68C1A492921C2B000AC7662 /* ColorIconView.swift */,
 				B60EC4842933182700483710 /* ColorShadeView.swift */,
+				B68C1A4029213D1300AC7662 /* ColorSliderView.swift */,
+				B68C1A4329213E8500AC7662 /* ColorTypeView.swift */,
+				B619EB292980D470001BF11A /* SliderCmykGroupView.swift */,
 				B68C1A5529273F4500AC7662 /* SliderGroupContainerView.swift */,
 				B68C1A53292734FB00AC7662 /* SliderHsbGroupView.swift */,
 				B68C1A512927323900AC7662 /* SliderRgbGroupView.swift */,
-				B68C1A4329213E8500AC7662 /* ColorTypeView.swift */,
-				B68C1A4029213D1300AC7662 /* ColorSliderView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				B6DDD72528FF844900E2EC66 /* Enum.swift */,
 				B68C1A622929DD0800AC7662 /* FavoriteColor.swift */,
 				B6DDD70F28F1B33C00E2EC66 /* RGBColor.swift */,
+				B6ED630429847E4800634579 /* ColorInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -569,8 +575,10 @@
 				B68C1A5F292928A600AC7662 /* ToolBarView.swift in Sources */,
 				B6B30CFE2957950100F92811 /* CloseButtonView.swift in Sources */,
 				B6CE35542973B33A00A78764 /* WebView.swift in Sources */,
+				B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */,
 				B68C1A54292734FB00AC7662 /* SliderHsbGroupView.swift in Sources */,
 				B6DE829B28E72FA900826201 /* CameraError.swift in Sources */,
+				B6ED630529847E4800634579 /* ColorInfo.swift in Sources */,
 				B6DDD72A29071FA200E2EC66 /* CIImage.swift in Sources */,
 				B6DDD72E2908312100E2EC66 /* RectCornerView.swift in Sources */,
 				B6BBCF4E2916B1D90010C3FE /* ColorDetailView.swift in Sources */,
@@ -739,7 +747,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
@@ -775,7 +783,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;

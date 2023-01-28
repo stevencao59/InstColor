@@ -20,6 +20,7 @@ class ColorResultViewModel: ObservableObject {
     init() {
         $color
             .receive(on: RunLoop.main)
+            .removeDuplicates()
             .sink(receiveValue: { color in
                 let closestColor = color.calculateClosestColor()
 
