@@ -117,7 +117,7 @@ struct ColorSpaceView: View {
 
 struct InformationTypeView: View {
     @ObservedObject var model: ColorDetailViewModel
-    @State var selectedInformationType = "Types"
+    @State private var informationTypeIndex = 0
     
     var containerCotentWidth: Double
     var informationTypes = ["Types", "Shades", "Color Spaces"]
@@ -128,24 +128,18 @@ struct InformationTypeView: View {
             Divider()
                 .padding([.horizontal])
             
-            Picker("Information", selection: $selectedInformationType) {
-                ForEach(informationTypes, id: \.self) {
-                    Text($0)
-                }
-            }
-            .pickerStyle(.segmented)
-            .frame(width: containerCotentWidth / 1.2)
+            SegmentedPickerView(preselectedIndex: $informationTypeIndex, options: informationTypes)
+                .padding()
             
-            if selectedInformationType == "Types" {
+            if informationTypes[informationTypeIndex] == "Types" {
                 ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
-            } else if selectedInformationType == "Shades" {
+            } else if informationTypes[informationTypeIndex] == "Shades" {
                 ColorShadeView(referenceColor: $model.color)
-            } else if selectedInformationType == "Color Spaces" {
+            } else if informationTypes[informationTypeIndex] == "Color Spaces" {
                 ColorSpaceView(colorInfos: $model.colorInfos)
             }
         }
         .padding([.horizontal])
-        .animation(.easeIn, value: selectedInformationType)
     }
 }
 

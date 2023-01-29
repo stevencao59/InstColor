@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B6078506295161B400C6897E /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = B6078505295161B400C6897E /* GoogleMobileAds */; };
 		B60785102951706E00C6897E /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607850F2951706E00C6897E /* BannerView.swift */; };
+		B60C70E1298720F400031121 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E0298720F400031121 /* SegmentedPickerView.swift */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619EB292980D470001BF11A /* SliderCmykGroupView.swift */; };
@@ -89,6 +90,7 @@
 /* Begin PBXFileReference section */
 		B6078507295163BE00C6897E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B607850F2951706E00C6897E /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		B60C70E0298720F400031121 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
 		B619EB292980D470001BF11A /* SliderCmykGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCmykGroupView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				B659D5712943D28600BB4D76 /* PressableButtonView.swift */,
 				B6B30CFD2957950100F92811 /* CloseButtonView.swift */,
 				B6B30CFF2958A8B700F92811 /* VerticalSliderView.swift */,
+				B60C70E0298720F400031121 /* SegmentedPickerView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				B6DDD72A29071FA200E2EC66 /* CIImage.swift in Sources */,
 				B6DDD72E2908312100E2EC66 /* RectCornerView.swift in Sources */,
 				B6BBCF4E2916B1D90010C3FE /* ColorDetailView.swift in Sources */,
+				B60C70E1298720F400031121 /* SegmentedPickerView.swift in Sources */,
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B659D5722943D28600BB4D76 /* PressableButtonView.swift in Sources */,
 				B6B30D002958A8B700F92811 /* VerticalSliderView.swift in Sources */,
@@ -747,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
@@ -764,7 +768,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.5;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.home.leicao.InstColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -783,7 +787,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
@@ -800,7 +804,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.5;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.home.leicao.InstColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

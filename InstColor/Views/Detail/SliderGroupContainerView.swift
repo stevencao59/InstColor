@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SliderGroupContainerView: View {
     @ObservedObject var model: ColorDetailViewModel
-    @State private var colorType = "RGB"
-    
+    @State private var colorTypeIndex = 0
+
     var keyboardFocusState: FocusState<FocusElement?>.Binding
     
     var containerCotentWidth: Double
@@ -28,27 +28,21 @@ struct SliderGroupContainerView: View {
     
     var body: some View {
         VStack {
-            Picker("Color Type", selection: $colorType) {
-                ForEach(colorTypes, id: \.self) {
-                    Text($0)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding([.bottom])
+            SegmentedPickerView(preselectedIndex: $colorTypeIndex, options: colorTypes)
+                .padding([.horizontal, .bottom])
             
             ZStack {
-                if colorType == "RGB" {
+                if colorTypes[colorTypeIndex] == "RGB" {
                     SliderRgbGroupView(red: $model.red, green: $model.green, blue: $model.blue, redText: $model.redText, greenText: $model.greenText, blueText: $model.blueText, color: $model.color, keyboardFocusState: keyboardFocusState, containerCotentWidth: containerCotentWidth)
-                } else if colorType == "HSB" {
+                } else if colorTypes[colorTypeIndex] == "HSB" {
                     SliderHsbGroupView(hue: $model.hue, satuation: $model.satuation, brightness: $model.brightness, hueText: $model.hueText, satuationText: $model.satuationText, brightnessText: $model.brightnessText, color: $model.color, keyboardFocusState: keyboardFocusState, containerCotentWidth: containerCotentWidth)
-                } else if colorType == "CMYK" {
+                } else if colorTypes[colorTypeIndex] == "CMYK" {
                     SliderCmykGroupView(cyan: $model.cyan, magenta: $model.magenta, yellow: $model.yellow, key: $model.key, cyanText: $model.cyanText, magentaText: $model.magentaText, yellowText: $model.yellowText, keyText: $model.keyText, color: $model.color, keyboardFocusState: keyboardFocusState, containerCotentWidth: containerCotentWidth)
                 }
             }
         }
         .padding([.horizontal])
         .frame(width: containerCotentWidth / 1.2)
-        .animation(.default, value: colorType)
     }
 }
 
