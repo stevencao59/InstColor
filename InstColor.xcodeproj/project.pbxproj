@@ -41,7 +41,7 @@
 		B698946F293C55450057265D /* ReferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698946E293C55450057265D /* ReferencesView.swift */; };
 		B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A695812909B482003DEE57 /* ContentContainerView.swift */; };
 		B6A69584290A2DE2003DEE57 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69583290A2DE2003DEE57 /* SliderControlView.swift */; };
-		B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69585290C7109003DEE57 /* ScaleSliderView.swift */; };
+		B6A69586290C7109003DEE57 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A69585290C7109003DEE57 /* SliderView.swift */; };
 		B6B30CEB295408EB00F92811 /* Admob.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CEA295408EB00F92811 /* Admob.swift */; };
 		B6B30CF7295792C900F92811 /* FloatToolbarViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CF6295792C900F92811 /* FloatToolbarViewModifier.swift */; };
 		B6B30CFA2957931100F92811 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B30CF92957931100F92811 /* AboutView.swift */; };
@@ -119,7 +119,7 @@
 		B698946E293C55450057265D /* ReferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesView.swift; sourceTree = "<group>"; };
 		B6A695812909B482003DEE57 /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
 		B6A69583290A2DE2003DEE57 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
-		B6A69585290C7109003DEE57 /* ScaleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleSliderView.swift; sourceTree = "<group>"; };
+		B6A69585290C7109003DEE57 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		B6B30CEA295408EB00F92811 /* Admob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admob.swift; sourceTree = "<group>"; };
 		B6B30CF6295792C900F92811 /* FloatToolbarViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatToolbarViewModifier.swift; sourceTree = "<group>"; };
 		B6B30CF92957931100F92811 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 				B6DDD72728FFA82600E2EC66 /* FrameSourceView.swift */,
 				B637962A29159F110004DBC0 /* ImageButtonView.swift */,
 				B6DDD70528EFDA4600E2EC66 /* NavigationView.swift */,
-				B6A69585290C7109003DEE57 /* ScaleSliderView.swift */,
+				B6A69585290C7109003DEE57 /* SliderView.swift */,
 				B6A69583290A2DE2003DEE57 /* SliderControlView.swift */,
 				B68C1A5E292928A600AC7662 /* ToolBarView.swift */,
 			);
@@ -618,7 +618,7 @@
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,
 				B6B30CFC2957938600F92811 /* ModalViewModifier.swift in Sources */,
 				B6B30CF7295792C900F92811 /* FloatToolbarViewModifier.swift in Sources */,
-				B6A69586290C7109003DEE57 /* ScaleSliderView.swift in Sources */,
+				B6A69586290C7109003DEE57 /* SliderView.swift in Sources */,
 				B6BBCF59291E014E0010C3FE /* ColorDetailViewModel.swift in Sources */,
 				B6DE828928E729E300826201 /* InstColorApp.swift in Sources */,
 			);

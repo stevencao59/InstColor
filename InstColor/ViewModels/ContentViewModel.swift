@@ -44,7 +44,9 @@ class ContentViewModel: ObservableObject {
     @Published var error: Error?
 
     // Thumb view size to exact color
+    let thumbViewBaseSize: CGFloat = (UIScreen.screenHeight / UIScreen.screenWidth) * 5
     var thumbViewSize: CGFloat = 0.0
+    @Published var thumbViewSizeDelta: CGFloat = 0.0
     
     // Animation Amounts
     @Published var animationAmount = 0.0
@@ -83,6 +85,11 @@ class ContentViewModel: ObservableObject {
     func getScaledHeight(image: CGImage) -> CGFloat {
         let scaledHeight = (Double(image.height) / Double(image.width)) * UIScreen.screenWidth
         return scaledHeight
+    }
+    
+    func clampSize(originalSize: CGFloat, deltaSize: CGFloat) -> CGFloat {
+        let size = originalSize + deltaSize
+        return size < 1 ? 1 : size
     }
     
     func setupSubscriptions() {
@@ -132,7 +139,7 @@ class ContentViewModel: ObservableObject {
                     self.frame = nil
                     return
                 }
-                self.thumbViewSize = (Double(image.height) / Double(image.width)) * 10
+                self.thumbViewSize = self.clampSize(originalSize: self.thumbViewBaseSize, deltaSize: self.thumbViewSizeDelta)
                 self.frame = image
                 self.rect = self.getRect(loc: self.location)
                 self.imageScaledHeight = self.getScaledHeight(image: image)

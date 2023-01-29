@@ -12,6 +12,7 @@ struct NavigationView: View {
 
     @State var imageName = "viewfinder"
     @State var sizeWeight: CGFloat = 1
+    @State var thumbViewSizeDelta: CGFloat = 0
     @State var showSliderControl = false
     @State var showScaleSlider = false
     
@@ -24,8 +25,14 @@ struct NavigationView: View {
                     ToolBarView(model: model, imageName: $imageName, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth)
                 }
                 if showScaleSlider {
-                    ScaleSliderView(sizeWeight: $sizeWeight)
-                        .padding([.horizontal, .bottom])
+                    SliderView(value: $sizeWeight, range: CGFloat(1.0)...5.0, sliderText: "Scale Size")
+                        .padding([.horizontal])
+                    Group {
+                        Divider()
+                            .tint(.gray)
+                        SliderView(value: $thumbViewSizeDelta, range: CGFloat(-10.0)...10.0, sliderText: "Detect Area")
+                    }
+                    .padding([.horizontal, .bottom])
                 }
             }
             .frame(maxWidth: .infinity)
@@ -35,6 +42,9 @@ struct NavigationView: View {
             .animation(.default, value: showSliderControl)
             .onChange(of: sizeWeight) { scale in
                 model.scaleAmount = scale
+            }
+            .onChange(of: thumbViewSizeDelta) { size in
+                model.thumbViewSizeDelta = size
             }
             .onChange(of: model.frameSource) { source in
                 showSliderControl = model.frameSource == .thumbImage
