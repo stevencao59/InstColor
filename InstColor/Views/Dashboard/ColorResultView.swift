@@ -43,8 +43,6 @@ struct ColorResultView: View {
         }
         .sheet(isPresented: $showColorDetail) {
             ColorDetailView(color: color, showModalButtons: true, selectedDetent: selectedDetent)
-                .opacity(0.8)
-                .clearModalBackground()
                 .presentationDetents([.medium, .large], selection: $selectedDetent)
         }
     }

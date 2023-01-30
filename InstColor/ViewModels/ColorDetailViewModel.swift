@@ -125,7 +125,7 @@ class ColorDetailViewModel: ObservableObject {
             .store(in: &subscriptions)
 
         $color
-            .debounce(for: .seconds(0.1) , scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { color in

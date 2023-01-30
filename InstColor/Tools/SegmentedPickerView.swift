@@ -42,8 +42,6 @@ struct SegmentedPickerView: View {
             }
         }
         .cornerRadius(5)
-        .opacity(0.8)
-        .clearModalBackground()
         .frame(height: frameHeight)
     }
 }
