@@ -38,7 +38,7 @@ struct FrameView: View {
                         .blur(radius: frameBlur)
                         .modifier(FrameModifier(contentSize: CGSize(width: UIScreen.screenWidth, height: model.imageScaledHeight), rectSize: $model.size, location: $model.location, frameSource: $model.frameSource, scaleAmount: $model.scaleAmount))
                         .onChange(of: model.isCameraReady) { isReady in
-                            frameBlur = isReady ? 0 : 50
+                            frameBlur = isReady ? 0 : 10
                         }
                         .animation(.default, value: frameBlur)
                         .overlay(ThumbView(model: model), alignment: .topLeading)

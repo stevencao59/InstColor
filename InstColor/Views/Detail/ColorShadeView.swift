@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ShadeView: View {
     @Binding var referenceColor: UIColor
+    
+    let colorMap: [RGBColor]
+
     var shadeColor: UIColor
     var colorName: String {
-        let name = shadeColor.calculateClosestColor()
+        let name = shadeColor.calculateClosestColor(colorMap: colorMap)
         return name.Color
     }
     
@@ -40,6 +43,8 @@ struct ShadeRowView: View {
     var title: String
     var combineColor: UIColor
     
+    let colorMap: [RGBColor]
+
     var body: some View {
         GridRow {
             VStack {
@@ -50,7 +55,7 @@ struct ShadeRowView: View {
                 HStack {
                     if let referenceColor {
                         ForEach(1...4, id: \.self) { i in
-                            ShadeView(referenceColor: $referenceColor, shadeColor: referenceColor.combine(with: combineColor, amount: sliderValue * Double(i)))
+                            ShadeView(referenceColor: $referenceColor, colorMap: colorMap, shadeColor: referenceColor.combine(with: combineColor, amount: sliderValue * Double(i)))
                         }
                     }
                 }
@@ -63,6 +68,8 @@ struct ColorShadeView: View {
     @Binding var referenceColor: UIColor
     @State var sliderValue = 0.15
     
+    let colorMap: [RGBColor]
+    
     var body: some View {
         VStack {
             HStack {
@@ -73,8 +80,8 @@ struct ColorShadeView: View {
             .padding([.horizontal])
             
             Grid {
-                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Light Shades", combineColor: .white)
-                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Dark Shades", combineColor: .black)
+                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Light Shades", combineColor: .white, colorMap: colorMap)
+                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Dark Shades", combineColor: .black, colorMap: colorMap)
             }
         }
         .foregroundColor(.white)
@@ -86,7 +93,7 @@ struct ColorShadeView_Previews: PreviewProvider {
         ZStack {
             Color.black
                 .ignoresSafeArea()
-            ColorShadeView(referenceColor: .constant(.red))
+            ColorShadeView(referenceColor: .constant(.red), colorMap: [])
         }
     }
 }

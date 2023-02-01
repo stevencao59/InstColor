@@ -47,12 +47,14 @@ struct FavoritesView: View {
     @State private var showAlertWindow = false
 
     var containerCotentWidth = 0.0
-    
+    let colorMap: [RGBColor]
+
     init(favoriteColors: [FavoriteColor]? = nil, selectedColor: UIColor = UIColor(.white), showAlertWindow: Bool = false, containerCotentWidth: Double = 0.0) {
         self.favoriteColors = favoriteColors
         self.selectedColor = selectedColor
         self.showAlertWindow = showAlertWindow
         self.containerCotentWidth = containerCotentWidth
+        self.colorMap = Bundle.main.decode("color.json")
         
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
@@ -77,7 +79,7 @@ struct FavoritesView: View {
                     List {
                         ForEach(favoriteColors) { color in
                             let uiColor = UIColor(red: color.red, green: color.green, blue: color.blue)
-                            let title = uiColor.calculateClosestColor().Color
+                            let title = uiColor.calculateClosestColor(colorMap: colorMap).Color
                             NavigationLink(destination: ColorDetailView(color: uiColor, showModalButtons: false, selectedDetent: .large)) {
                                 FavoriteColorRow(title: title, uiColor: uiColor)
                             }

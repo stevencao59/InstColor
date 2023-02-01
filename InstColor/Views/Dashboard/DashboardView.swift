@@ -48,14 +48,19 @@ struct ResultTextContainerView: View {
 
 struct DashboardView: View {
     @ObservedObject var model: ContentViewModel
-    @StateObject private var resultModel = ColorResultViewModel()
-
+    @StateObject var resultModel: ColorResultViewModel
+    
+    init(model: ContentViewModel) {
+        self.model = model
+        self._resultModel = StateObject(wrappedValue: ColorResultViewModel(camera: model.cameraManager))
+    }
+    
     var body: some View {
         VStack {
             Spacer()
             if let color = model.averageColor {
                 HStack(alignment: .center) {
-                    ColorResultView(color: color, colorName: resultModel.colorName, baseColorName: resultModel.baseColorName)
+                    ColorResultView(model: resultModel, color: color)
                     Spacer()
                     ResultTextContainerView(color: color, baseColorName: resultModel.baseColorName, baseColorHex: resultModel.baseColorHex)
                 }

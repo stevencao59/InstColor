@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ColorResultView: View {
-    @StateObject private var model = ColorResultViewModel()
-    @State var showColorDetail = false
-    @State var selectedDetent: PresentationDetent = .medium
+    @ObservedObject var model: ColorResultViewModel
 
     let color: UIColor
     
-    let colorName: String
-    let baseColorName: String
-    
     let resultSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 40
     
+    init(model: ColorResultViewModel, color: UIColor) {
+        self.model = model
+        self.color = color
+    }
+    
     func clickToShowSheet() {
-        showColorDetail.toggle()
+        model.showColorDetail.toggle()
     }
     
     var body: some View {
@@ -32,7 +32,7 @@ struct ColorResultView: View {
                     }
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("\(colorName)")
+                        Text("\(model.colorName)")
                             .lineLimit(1)
                             .font(.title2)
                             .foregroundColor(.white)
@@ -41,9 +41,10 @@ struct ColorResultView: View {
 
             }
         }
-        .sheet(isPresented: $showColorDetail) {
-            ColorDetailView(color: color, showModalButtons: true, selectedDetent: selectedDetent)
-                .presentationDetents([.medium, .large], selection: $selectedDetent)
+        
+        .sheet(isPresented: $model.showColorDetail) {
+            ColorDetailView(color: color, showModalButtons: true, selectedDetent: model.selectedDentent)
+                .presentationDetents([.medium, .large], selection: $model.selectedDentent)
         }
     }
 }
@@ -52,7 +53,7 @@ struct ColorResultView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle()
-            ColorResultView(color: UIColor(.red), colorName: "Red", baseColorName: "Red")
+            ColorResultView(model: ColorResultViewModel(camera: ContentViewModel().cameraManager), color: UIColor(.red))
         }
         .ignoresSafeArea()
     }

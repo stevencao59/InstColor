@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ColorSliderView: View {
-    @State var sliderValue: Double = 0
+    @State var sliderValue: Double
     
     @Binding var colorValue: Double
     @Binding var colorValueText: String
@@ -27,6 +27,7 @@ struct ColorSliderView: View {
     init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, path: FocusElement, keyboardFocusState: FocusState<FocusElement?>.Binding
         , setColor: @escaping (Double, String) -> Void) {
         self._colorValue = colorValue
+        self.sliderValue = colorValue.wrappedValue
         self._colorValueText = colorValueText
         self._color = color
 
@@ -72,23 +73,14 @@ struct ColorSliderView: View {
         .padding([.horizontal])
         .foregroundColor(.white)
         .frame(width: containerCotentWidth)
-        .onAppear() {
-            withAnimation {
-                sliderValue = colorValue
-            }
-        }
         .onChange(of: colorValue) { value in
             setColor(value, iconText)
-            withAnimation {
-                sliderValue = colorValue
-            }
+            sliderValue = colorValue
         }
         .onChange(of: colorValueText) { text in
             let valueText = Double(text)
             if let valueText {
-                withAnimation() {
-                    setColor(valueText, iconText)
-                }
+                setColor(valueText, iconText)
             }
         }
     }
