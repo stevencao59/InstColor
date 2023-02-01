@@ -107,6 +107,7 @@ struct ColorTypeView: View {
     var tetradicColor: [UIColor]?
     var monochromaticColor: [UIColor]?
     
+    let colorGroup: [(title: String, colorType: [UIColor]?)]
     let colorMap: [RGBColor]
     
     @Binding var referenceColor: UIColor
@@ -118,18 +119,25 @@ struct ColorTypeView: View {
         self.analogousColor = analogousColor
         self.tetradicColor = tetradicColor
         self.monochromaticColor = monochromaticColor
+        
+        self.colorGroup = [
+            (title: "Complementary Color", colorType: complementaryColor),
+            (title: "Triadic Colors", colorType: triadicColor),
+            (title: "Split Complementary Colors", colorType: splitComplementaryColor),
+            (title: "Analogous Colors", colorType: analogousColor),
+            (title: "Tetradic Colors", colorType: tetradicColor),
+            (title: "Monochromatic Colors", colorType: monochromaticColor)
+        ]
+        
         self._referenceColor = referenceColor
         self.colorMap = colorMap
     }
     
     var body: some View {
         VStack {
-            ColorTypeGridView(colors: complementaryColor, title: "Complementary Color", referenceColor: $referenceColor, colorMap: colorMap)
-            ColorTypeGridView(colors: triadicColor, title: "Triadic Colors", referenceColor: $referenceColor, colorMap: colorMap)
-            ColorTypeGridView(colors: splitComplementaryColor, title: "Split Complementary Colors", referenceColor: $referenceColor, colorMap: colorMap)
-            ColorTypeGridView(colors: analogousColor, title: "Analogous Colors", referenceColor: $referenceColor, colorMap: colorMap)
-            ColorTypeGridView(colors: tetradicColor, title: "Tetradic Colors", referenceColor: $referenceColor, colorMap: colorMap)
-            ColorTypeGridView(colors: monochromaticColor, title: "Monochromatic Colors", referenceColor: $referenceColor, colorMap: colorMap)
+            ForEach(colorGroup, id: \.title ) { color in
+                ColorTypeGridView(colors: color.colorType, title: color.title, referenceColor: $referenceColor, colorMap: colorMap)
+            }
         }
     }
 }

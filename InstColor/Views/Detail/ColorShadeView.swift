@@ -70,6 +70,11 @@ struct ColorShadeView: View {
     
     let colorMap: [RGBColor]
     
+    let shadeViewList: [(title: String, color: UIColor)] = [
+        (title: "Light Shades", color: .white),
+        (title: "Dark Shades", color: .black)
+    ]
+
     var body: some View {
         VStack {
             HStack {
@@ -80,8 +85,9 @@ struct ColorShadeView: View {
             .padding([.horizontal])
             
             Grid {
-                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Light Shades", combineColor: .white, colorMap: colorMap)
-                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: "Dark Shades", combineColor: .black, colorMap: colorMap)
+                ForEach(shadeViewList, id: \.title) { shadeView in
+                    ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: shadeView.title, combineColor: shadeView.color, colorMap: colorMap)
+                }
             }
         }
         .foregroundColor(.white)

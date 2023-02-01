@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ColorSliderView: View {
-    @State var sliderValue: Double
-    
     @Binding var colorValue: Double
     @Binding var colorValueText: String
     @Binding var color: UIColor
@@ -27,7 +26,6 @@ struct ColorSliderView: View {
     init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, path: FocusElement, keyboardFocusState: FocusState<FocusElement?>.Binding
         , setColor: @escaping (Double, String) -> Void) {
         self._colorValue = colorValue
-        self.sliderValue = colorValue.wrappedValue
         self._colorValueText = colorValueText
         self._color = color
 
@@ -60,11 +58,9 @@ struct ColorSliderView: View {
                 .keyboardType(.numberPad)
                 .cornerRadius(10)
             
-            Slider(value: $sliderValue, in: range)
+            Slider(value: $colorValue, in: range)
                 .frame(maxWidth: .infinity)
-                .onChange(of: sliderValue) { value in
-                    colorValue = value
-                }
+
             Stepper("", value: $colorValue, in: range, step: step)
                 .labelsHidden()
                 .foregroundColor(.white)
@@ -75,7 +71,6 @@ struct ColorSliderView: View {
         .frame(width: containerCotentWidth)
         .onChange(of: colorValue) { value in
             setColor(value, iconText)
-            sliderValue = colorValue
         }
         .onChange(of: colorValueText) { text in
             let valueText = Double(text)
