@@ -59,9 +59,6 @@ class ColorDetailViewModel: ObservableObject {
     // Debounce frequency
     let debounceSeconds = 0.1
     
-    // Color map json object
-    let colorMap: [RGBColor]
-    
     @Published var colorInfos: [ColorInfo] = [
         ColorInfo(InfoName: "RGB", Value: ""),
         ColorInfo(InfoName: "HEX", Value: ""),
@@ -83,6 +80,18 @@ class ColorDetailViewModel: ObservableObject {
         self.assignColorInfo(infoName: "HEX", value: "#\("\(self.colorHexString)")")
     }
     
+    func assignRgb() {
+        self.red = Double(color.components.red * 255)
+        self.green = Double(color.components.green * 255)
+        self.blue = Double(color.components.blue * 255)
+        
+        self.redText = "\("\(String(format: "%.0f", self.red))")"
+        self.greenText = "\("\(String(format: "%.0f", self.green))")"
+        self.blueText = "\("\(String(format: "%.0f", self.blue))")"
+        
+        self.assignColorInfo(infoName: "RGB", value: "\("\(self.redText)"), \("\(self.greenText)"), \("\(self.blueText)")")
+    }
+    
     func assignHsb() {
         var hue: CGFloat = 0.0
         var satuation: CGFloat = 0.0
@@ -100,18 +109,6 @@ class ColorDetailViewModel: ObservableObject {
         
         self.assignColorInfo(infoName: "HSB", value: "\("\(self.hueText)")°, \("\(self.satuationText)")%, \("\(self.brightnessText)")%")
         
-        self.red = Double(color.components.red * 255)
-        self.green = Double(color.components.green * 255)
-        self.blue = Double(color.components.blue * 255)
-        
-        self.redText = "\("\(String(format: "%.0f", self.red))")"
-        self.greenText = "\("\(String(format: "%.0f", self.green))")"
-        self.blueText = "\("\(String(format: "%.0f", self.blue))")"
-        
-        self.assignColorInfo(infoName: "RGB", value: "\("\(self.redText)"), \("\(self.greenText)"), \("\(self.blueText)")")
-    }
-    
-    func assignRgb() {
         self.red = Double(color.components.red * 255)
         self.green = Double(color.components.green * 255)
         self.blue = Double(color.components.blue * 255)
@@ -169,7 +166,7 @@ class ColorDetailViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { color in
-                let rgbColor = color.calculateClosestColor(colorMap: self.colorMap)
+                let rgbColor = color.calculateClosestColor(colorMap: Settings.shared.colorMap)
                 self.colorName = rgbColor.Color
                 self.baseColorName = rgbColor.BaseColor
 
@@ -184,7 +181,6 @@ class ColorDetailViewModel: ObservableObject {
     }
     
     init() {
-        self.colorMap = Bundle.main.decode("color.json")
         startSubscription()
     }
     

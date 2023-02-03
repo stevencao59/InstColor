@@ -132,9 +132,9 @@ struct InformationTypeView: View {
                 .padding()
             
             if informationTypes[informationTypeIndex] == "Types" {
-                ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color, colorMap: model.colorMap)
+                ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
             } else if informationTypes[informationTypeIndex] == "Shades" {
-                ColorShadeView(referenceColor: $model.color, colorMap: model.colorMap)
+                ColorShadeView(referenceColor: $model.color)
             } else if informationTypes[informationTypeIndex] == "Color Spaces" {
                 ColorSpaceView(colorInfos: $model.colorInfos)
             }

@@ -10,6 +10,7 @@
 		B6078506295161B400C6897E /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = B6078505295161B400C6897E /* GoogleMobileAds */; };
 		B60785102951706E00C6897E /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607850F2951706E00C6897E /* BannerView.swift */; };
 		B60C70E1298720F400031121 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E0298720F400031121 /* SegmentedPickerView.swift */; };
+		B60C70E3298CC39E00031121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B60C70E2298CC39E00031121 /* GoogleService-Info.plist */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619EB292980D470001BF11A /* SliderCmykGroupView.swift */; };
@@ -25,7 +26,6 @@
 		B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D56E2940378800BB4D76 /* TooltipView.swift */; };
 		B659D5722943D28600BB4D76 /* PressableButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659D5712943D28600BB4D76 /* PressableButtonView.swift */; };
 		B659D5752944D10C00BB4D76 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B659D5742944D10C00BB4D76 /* FirebaseAnalytics */; };
-		B659D5772944D25200BB4D76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B659D5762944D25200BB4D76 /* GoogleService-Info.plist */; };
 		B68C1A4129213D1300AC7662 /* ColorSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4029213D1300AC7662 /* ColorSliderView.swift */; };
 		B68C1A4429213E8500AC7662 /* ColorTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4329213E8500AC7662 /* ColorTypeView.swift */; };
 		B68C1A4829215E6900AC7662 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C1A4729215E6900AC7662 /* Array.swift */; };
@@ -91,6 +91,7 @@
 		B6078507295163BE00C6897E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B607850F2951706E00C6897E /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B60C70E0298720F400031121 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
+		B60C70E2298CC39E00031121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
 		B619EB292980D470001BF11A /* SliderCmykGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCmykGroupView.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		B6471B2C292B31C6006A1474 /* BorderedRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedRectView.swift; sourceTree = "<group>"; };
 		B659D56E2940378800BB4D76 /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		B659D5712943D28600BB4D76 /* PressableButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressableButtonView.swift; sourceTree = "<group>"; };
-		B659D5762944D25200BB4D76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B68C1A4029213D1300AC7662 /* ColorSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSliderView.swift; sourceTree = "<group>"; };
 		B68C1A4329213E8500AC7662 /* ColorTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTypeView.swift; sourceTree = "<group>"; };
 		B68C1A4729215E6900AC7662 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -444,7 +444,7 @@
 		B6DE828728E729E300826201 /* InstColor */ = {
 			isa = PBXGroup;
 			children = (
-				B659D5762944D25200BB4D76 /* GoogleService-Info.plist */,
+				B60C70E2298CC39E00031121 /* GoogleService-Info.plist */,
 				B6078507295163BE00C6897E /* Info.plist */,
 				B625B14029668D85001E1890 /* LaunchScreen.storyboard */,
 				B6DE828828E729E300826201 /* InstColorApp.swift */,
@@ -542,10 +542,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DE829028E729E400826201 /* Preview Assets.xcassets in Resources */,
-				B659D5772944D25200BB4D76 /* GoogleService-Info.plist in Resources */,
 				B6DDD70B28F1B05900E2EC66 /* color.json in Resources */,
 				B625B14129668D85001E1890 /* LaunchScreen.storyboard in Resources */,
 				B6DE828D28E729E400826201 /* Assets.xcassets in Resources */,
+				B60C70E3298CC39E00031121 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
@@ -787,7 +787,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;

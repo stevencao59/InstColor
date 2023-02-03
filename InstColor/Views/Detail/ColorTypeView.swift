@@ -12,12 +12,10 @@ struct ColorTypeGridItemView: View {
     @State var colorName: String?
     
     @Binding var referenceColor: UIColor
-    
-    let colorMap: [RGBColor]
 
     func getColorName(color: UIColor) {
         DispatchQueue.main.async {
-            colorName = color.calculateClosestColor(colorMap: colorMap).Color
+            colorName = color.calculateClosestColor(colorMap: Settings.shared.colorMap).Color
         }
     }
     
@@ -57,8 +55,6 @@ struct ColorTypeGridView: View {
     @Binding var referenceColor: UIColor
     @State var showTooltipsSheet = false
     
-    let colorMap: [RGBColor]
-    
     var body: some View {
         VStack {
             Grid {
@@ -77,7 +73,7 @@ struct ColorTypeGridView: View {
                     ForEach(colors!.chunked(into: 4), id: \.self) { colorRow in
                         GridRow {
                             ForEach(colorRow, id: \.self) { row in
-                                ColorTypeGridItemView(gridItemColor: row, referenceColor: $referenceColor, colorMap: colorMap)
+                                ColorTypeGridItemView(gridItemColor: row, referenceColor: $referenceColor)
                             }
                         }
                     }
@@ -108,11 +104,10 @@ struct ColorTypeView: View {
     var monochromaticColor: [UIColor]?
     
     let colorGroup: [(title: String, colorType: [UIColor]?)]
-    let colorMap: [RGBColor]
     
     @Binding var referenceColor: UIColor
     
-    init(complementaryColor: [UIColor]?, triadicColor: [UIColor]?, splitComplementaryColor: [UIColor]?, analogousColor: [UIColor]?, tetradicColor: [UIColor]?, monochromaticColor: [UIColor]?, referenceColor: Binding<UIColor>, colorMap: [RGBColor]) {
+    init(complementaryColor: [UIColor]?, triadicColor: [UIColor]?, splitComplementaryColor: [UIColor]?, analogousColor: [UIColor]?, tetradicColor: [UIColor]?, monochromaticColor: [UIColor]?, referenceColor: Binding<UIColor>) {
         self.complementaryColor = complementaryColor
         self.triadicColor = triadicColor
         self.splitComplementaryColor = splitComplementaryColor
@@ -130,13 +125,12 @@ struct ColorTypeView: View {
         ]
         
         self._referenceColor = referenceColor
-        self.colorMap = colorMap
     }
     
     var body: some View {
         VStack {
             ForEach(colorGroup, id: \.title ) { color in
-                ColorTypeGridView(colors: color.colorType, title: color.title, referenceColor: $referenceColor, colorMap: colorMap)
+                ColorTypeGridView(colors: color.colorType, title: color.title, referenceColor: $referenceColor)
             }
         }
     }
@@ -156,8 +150,7 @@ struct ColorTypeView_Previews: PreviewProvider {
                 analogousColor: [UIColor(.red), UIColor(.green), UIColor(.blue)],
                 tetradicColor: [UIColor(.red), UIColor(.green), UIColor(.blue), UIColor(.gray)],
                 monochromaticColor: [UIColor(.red), UIColor(.green), UIColor(.blue)],
-                referenceColor: .constant(UIColor(.red)),
-                colorMap: []
+                referenceColor: .constant(UIColor(.red))
             )
         }
     }

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
 import UIKit
+import CoreGraphics
 
 extension UIImage {
     var averageColor: UIColor? {
@@ -237,5 +237,12 @@ extension UIColor {
         
         let color = UIColor(red: redAmount, green: greenAmount, blue: blueAmount, alpha:  1)
         return color
+    }
+    
+    func toDisplayP3HexString() -> String {
+        guard let displayP3Color = self.cgColor.converted(to: CGColorSpace(name: CGColorSpace.displayP3)!, intent: .defaultIntent, options: nil) else {
+            return ""
+        }
+        return UIColor(cgColor: displayP3Color).toHexString() ?? ""
     }
 }

@@ -18,7 +18,6 @@ class ColorResultViewModel: ObservableObject {
     @Published var showColorDetail: Bool = false
     
     let camera: CameraManager
-    let colorMap: [RGBColor]
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -27,7 +26,7 @@ class ColorResultViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .removeDuplicates()
             .sink(receiveValue: { color in
-                let closestColor = color.calculateClosestColor(colorMap: self.colorMap)
+                let closestColor = color.calculateClosestColor(colorMap: Settings.shared.colorMap)
 
                 self.colorName = closestColor.Color
                 self.baseColorName = closestColor.BaseColor
@@ -46,7 +45,6 @@ class ColorResultViewModel: ObservableObject {
     
     init(camera: CameraManager) {
         self.camera = camera
-        self.colorMap = Bundle.main.decode("color.json")
         self.setupSubscriptions()
     }
 }

@@ -8,6 +8,13 @@ import CoreImage
 import UIKit
 import Combine
 
+class Settings {
+    static let shared = Settings()
+    var colorMap: [RGBColor] = Bundle.main.decode("color.json")
+
+    private init() { }
+}
+
 @MainActor
 class ContentViewModel: ObservableObject {
     
@@ -92,6 +99,16 @@ class ContentViewModel: ObservableObject {
         return size < 1 ? 1 : size
     }
     
+    func getColor(cgImage: CGImage?) -> UIColor? {
+        if let image = cgImage {
+            let image = UIImage(cgImage: image)
+            if let color = image.averageColor {
+                return color
+            }
+        }
+        return nil
+    }
+    
     func setupSubscriptions() {
         cameraManager.$error
             .receive(on: RunLoop.main)
@@ -169,16 +186,11 @@ class ContentViewModel: ObservableObject {
 
         $recgonizeFrame
             .receive(on: RunLoop.main)
-            .compactMap { result in
-                if let image = result.publisher.output {
-                    let image = UIImage(cgImage: image)
-                    if let color = image.averageColor {
-                        return color
-                    }
-                }
-                return nil
-            }
-            .assign(to: &$averageColor)
+            .removeDuplicates()
+            .sink(receiveValue: { result in
+                self.averageColor = self.getColor(cgImage: result.publisher.output)
+            })
+            .store(in: &subscriptions)
     }
     
     init() {

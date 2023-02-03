@@ -46,12 +46,9 @@ struct ReferenceSectionView: View {
 }
 
 struct ReferencesView: View {
-    @State var colorMaps: [RGBColor]?
-
     var containerCotentWidth = 0.0
     
-    init(colorMaps: [RGBColor]? = nil, containerCotentWidth: Double = 0.0) {
-        self.colorMaps = colorMaps
+    init(containerCotentWidth: Double = 0.0) {
         self.containerCotentWidth = containerCotentWidth
         
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -60,31 +57,26 @@ struct ReferencesView: View {
     var body: some View {
         VStack {
             NavigationStack {
-                if let colorMaps {
-                    let groupedColors = Dictionary(grouping: colorMaps, by: { $0.BaseColor } )
-                    List {
-                        ForEach(Array(groupedColors), id: \.key) { item in
-                            NavigationLink(destination: ReferenceSectionView(item: item, containerCotentWidth: containerCotentWidth, title: item.key)) {
-                                HStack {
-                                    if let sectionColor = UIColor(hex: item.value[0].BaseColorHex) {
-                                        BorderedRectView(color: Color(sectionColor), cornerRadius: 10, lineWidth: 2, width: 10, height: 10)
-                                    }
-                                    Text(item.key)
+                let groupedColors = Dictionary(grouping: Settings.shared.colorMap, by: { $0.BaseColor } )
+                List {
+                    ForEach(Array(groupedColors), id: \.key) { item in
+                        NavigationLink(destination: ReferenceSectionView(item: item, containerCotentWidth: containerCotentWidth, title: item.key)) {
+                            HStack {
+                                if let sectionColor = UIColor(hex: item.value[0].BaseColorHex) {
+                                    BorderedRectView(color: Color(sectionColor), cornerRadius: 10, lineWidth: 2, width: 10, height: 10)
                                 }
+                                Text(item.key)
                             }
-                            .listRowBackground(Color.black)
                         }
+                        .listRowBackground(Color.black)
                     }
-                    .modifier(SimpleModalViewModifier())
-                    .navigationTitle("References")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .scrollContentBackground(.hidden)
-                    .background(.black)
                 }
+                .modifier(SimpleModalViewModifier())
+                .navigationTitle("References")
+                .navigationBarTitleDisplayMode(.inline)
+                .scrollContentBackground(.hidden)
+                .background(.black)
             }
-        }
-        .onAppear() {
-            colorMaps = Bundle.main.decode("color.json")
         }
     }
 }
