@@ -7,9 +7,36 @@
 
 import SwiftUI
 
+struct ImageSwitchButtonView: View {
+    @State var imageName: String
+    
+    var initialImageName: String
+    var switchImageName: String
+
+    var action: () -> Void
+    
+    func buttonAction() {
+        imageName = imageName == initialImageName ? switchImageName : initialImageName
+        action()
+    }
+    
+    init(initialImageName: String, switchImageName: String, action: @escaping () -> Void) {
+        self.imageName = initialImageName
+        self.initialImageName = initialImageName
+        self.switchImageName = switchImageName
+        self.action = action
+    }
+    
+    var body: some View {
+        Button(action: buttonAction) {
+            ImageButtonView(imageName: imageName)
+        }
+        .animation(.easeIn, value: imageName)    }
+}
+
 struct FrameSourceView: View {
     @Binding var frameSource: FrameSource
-    @Binding var imageName: String
+    @State var imageName: String = "viewfinder"
 
     func changeFrameSource() {
         frameSource = frameSource == .thumbImage ? .wholeImage : .thumbImage
@@ -28,6 +55,6 @@ struct FrameSourceView: View {
 
 struct FrameSourceView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameSourceView(frameSource: .constant(.wholeImage), imageName: .constant("viewfinder"))
+        FrameSourceView(frameSource: .constant(.wholeImage))
     }
 }

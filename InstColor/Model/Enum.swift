@@ -42,3 +42,8 @@ enum FocusElement: Hashable {
     case yellow
     case key
 }
+
+enum AverageColorAlgorithm : String {
+    case defaultAlgo = "Default"
+    case linearAlgo = "Linear"
+}

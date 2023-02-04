@@ -49,8 +49,14 @@ let tooltipsDict = [
     "HEX": """
     Hex is RGB color space in hexadecimal format.
     """,
+    "P3 HEX": """
+    Display P3 is a color space created by Apple Inc. It uses the DCI-P3 primaries, but instead of the ~6300 K white point, Display P3 uses the CIE standard illuminant D65 as the white point, which is the most common standard for self-illuminated displays and devices (sRGB and Adobe RGB both use D65).
+    """,
     "HSB" : """
-    Hsl (for hue, saturation, lightness), also known as Hsb (for hue, saturation, brightness), is a cylindrical-coordinate representation of the Rgb color model. This representation rearranges the colors in an attempt to be more intuitive and perceptually relevant than the typical Rgb representation. It's frequently used for computer graphics applications like color pickers and image analysis.
+    Hsb (for hue, saturation, brightness), is a cylindrical-coordinate representation of the Rgb color model. This representation rearranges the colors in an attempt to be more intuitive and perceptually relevant than the typical Rgb representation. It's frequently used for computer graphics applications like color pickers and image analysis.
+    """,
+    "HSL": """
+    HSL is short for Hue, Saturation and Luminance. The HSL color space defines colors more naturally: Hue specifies the base color, the other two values then let you specify the saturation of that color and how bright the color should be. HSB, 100% Brightness can give you the White Color only when the Saturation is 0 while in HSL 100% Lightness will give you the White Colour irrespective of the Saturation.
     """,
     "CMYK" : """
     Cmyk is similar to the Cmy color space, with the addition of black (k). In theory the black component is not necessary, however this color space is primarily used in color printing where the mixture of cyan, magenta, and yellow result in a brown color rather than black.

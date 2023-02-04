@@ -15,6 +15,10 @@ class Settings {
     private init() { }
 }
 
+class States: ObservableObject {
+    @Published var description: String = ""
+}
+
 @MainActor
 class ContentViewModel: ObservableObject {
     
@@ -53,7 +57,7 @@ class ContentViewModel: ObservableObject {
     // Thumb view size to exact color
     let thumbViewBaseSize: CGFloat = (UIScreen.screenHeight / UIScreen.screenWidth) * 5
     var thumbViewSize: CGFloat = 0.0
-    @Published var thumbViewSizeDelta: CGFloat = 0.0
+    @Published var thumbViewSizeDelta: Double = 0
     
     // Animation Amounts
     @Published var animationAmount = 0.0
@@ -66,6 +70,9 @@ class ContentViewModel: ObservableObject {
     
     // Image height scale
     var imageScaledHeight: CGFloat = 0.0
+    
+    // Average color algorithm
+    @Published var colorAlgorithm: AverageColorAlgorithm = .defaultAlgo
     
     func getThumbFrame(cgImage: CGImage?) -> CGImage? {
         if let cgImage {
@@ -102,7 +109,7 @@ class ContentViewModel: ObservableObject {
     func getColor(cgImage: CGImage?) -> UIColor? {
         if let image = cgImage {
             let image = UIImage(cgImage: image)
-            if let color = image.averageColor {
+            if let color = colorAlgorithm == .defaultAlgo ? image.averageColor : image.averageColorLinear {
                 return color
             }
         }

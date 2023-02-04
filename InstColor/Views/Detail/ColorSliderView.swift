@@ -8,11 +8,53 @@
 import SwiftUI
 import Combine
 
+class ColorSliderViewObject: ObservableObject {
+    @Published var value: Double = 0.0
+    @Published var valueText: String = ""
+    
+    var iconText: String
+    var setColor: (Double, String) -> Void
+    
+    private var subscriptions = Set<AnyCancellable>()
+    
+    func startSubscription() {
+        $value
+            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { value in
+                self.setColor(value, self.iconText)
+            })
+            .store(in: &subscriptions)
+        
+        $valueText
+            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { text in
+                let valueText = Double(text)
+                if let valueText {
+                    self.setColor(valueText, self.iconText)
+                }
+            })
+            .store(in: &subscriptions)
+    }
+    
+    init(value: Double, valueText: String, iconText: String, setColor: @escaping (Double, String) -> Void) {
+        self.value = value
+        self.valueText = valueText
+        self.iconText = iconText
+        self.setColor = setColor
+        self.startSubscription()
+    }
+}
+
 struct ColorSliderView: View {
+    @StateObject var model: ColorSliderViewObject
+    
     @Binding var colorValue: Double
     @Binding var colorValueText: String
-    @Binding var color: UIColor
-
+    
     var keyboardFocusState: FocusState<FocusElement?>.Binding
     
     var containerCotentWidth: Double
@@ -23,12 +65,12 @@ struct ColorSliderView: View {
     
     var setColor: (Double, String) -> Void
     
-    init(colorValue: Binding<Double>, colorValueText: Binding<String>, color: Binding<UIColor>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, path: FocusElement, keyboardFocusState: FocusState<FocusElement?>.Binding
+    init(colorValue: Binding<Double>, colorValueText: Binding<String>, containerCotentWidth: Double, iconText: String, range: ClosedRange<Double>, step: Double, path: FocusElement, keyboardFocusState: FocusState<FocusElement?>.Binding
         , setColor: @escaping (Double, String) -> Void) {
         self._colorValue = colorValue
         self._colorValueText = colorValueText
-        self._color = color
-
+        self._model = StateObject(wrappedValue: ColorSliderViewObject(value: colorValue.wrappedValue, valueText: colorValueText.wrappedValue, iconText: iconText, setColor: setColor))
+        
         self.containerCotentWidth = containerCotentWidth
         self.iconText = iconText
         self.range = range
@@ -70,13 +112,10 @@ struct ColorSliderView: View {
         .foregroundColor(.white)
         .frame(width: containerCotentWidth)
         .onChange(of: colorValue) { value in
-            setColor(value, iconText)
+            model.value = value
         }
         .onChange(of: colorValueText) { text in
-            let valueText = Double(text)
-            if let valueText {
-                setColor(valueText, iconText)
-            }
+            model.valueText = text
         }
     }
 }
@@ -84,6 +123,6 @@ struct ColorSliderView: View {
 struct ColorSliderView_Previews: PreviewProvider {
     static var focused: FocusState<FocusElement?> = FocusState<FocusElement?>()
     static var previews: some View {
-        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), color: .constant(UIColor(.white)), containerCotentWidth: 400, iconText: "R", range: 0.0...255.0, step: 0.1, path: .brightness, keyboardFocusState: focused.projectedValue) {_, _ in }
+        ColorSliderView(colorValue: .constant(0.05), colorValueText: .constant("255"), containerCotentWidth: 400, iconText: "R", range: 0.0...255.0, step: 0.1, path: .brightness, keyboardFocusState: focused.projectedValue) {_, _ in }
     }
 }

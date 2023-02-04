@@ -55,6 +55,7 @@ class ColorDetailViewModel: ObservableObject {
     
     // Hex color properties
     @Published var colorHexString: String = ""
+    @Published var colorP3HexString: String = ""
     
     // Debounce frequency
     let debounceSeconds = 0.1
@@ -62,7 +63,9 @@ class ColorDetailViewModel: ObservableObject {
     @Published var colorInfos: [ColorInfo] = [
         ColorInfo(InfoName: "RGB", Value: ""),
         ColorInfo(InfoName: "HEX", Value: ""),
+        ColorInfo(InfoName: "P3 HEX", Value: ""),
         ColorInfo(InfoName: "HSB", Value: ""),
+        ColorInfo(InfoName: "HSL", Value: ""),
         ColorInfo(InfoName: "CMYK", Value: ""),
         ColorInfo(InfoName: "XYZ", Value: ""),
         ColorInfo(InfoName: "LAB", Value: ""),
@@ -75,9 +78,14 @@ class ColorDetailViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
-    func assignHex() {
+    func assignP3Hex() {
         self.colorHexString = color.toHexString() ?? "Unknown Hex"
         self.assignColorInfo(infoName: "HEX", value: "#\("\(self.colorHexString)")")
+    }
+    
+    func assignHex() {
+        self.colorP3HexString = color.toDisplayP3HexString() ?? "Unknown P3 Hex"
+        self.assignColorInfo(infoName: "P3 HEX", value: "#\("\(self.colorP3HexString)")")
     }
     
     func assignRgb() {
@@ -108,16 +116,6 @@ class ColorDetailViewModel: ObservableObject {
         self.brightnessText = "\("\(String(format: "%.0f", self.brightness))")"
         
         self.assignColorInfo(infoName: "HSB", value: "\("\(self.hueText)")°, \("\(self.satuationText)")%, \("\(self.brightnessText)")%")
-        
-        self.red = Double(color.components.red * 255)
-        self.green = Double(color.components.green * 255)
-        self.blue = Double(color.components.blue * 255)
-        
-        self.redText = "\("\(String(format: "%.0f", self.red))")"
-        self.greenText = "\("\(String(format: "%.0f", self.green))")"
-        self.blueText = "\("\(String(format: "%.0f", self.blue))")"
-        
-        self.assignColorInfo(infoName: "RGB", value: "\("\(self.redText)"), \("\(self.greenText)"), \("\(self.blueText)")")
     }
     
     func assignCmyk() {
@@ -141,6 +139,11 @@ class ColorDetailViewModel: ObservableObject {
         self.assignColorInfo(infoName: "XYZ", value: "\("\(String(format: "%.0f", xyzValue.x))")%, \("\(String(format: "%.0f", xyzValue.y))")%, \("\(String(format: "%.0f", xyzValue.z))")%")
     }
     
+    func assignHsl() {
+        let hslValue = color.toHSL()
+        self.assignColorInfo(infoName: "HSL", value: "\("\(String(format: "%.0f", hslValue.hue))")°, \("\(String(format: "%.0f", hslValue.saturation))")%, \("\(String(format: "%.0f", hslValue.lightness))")%")
+    }
+    
     func assignLab() {
         let labValue = getRgbLab(r: color.components.red, g: color.components.green, b: color.components.blue)
         self.assignColorInfo(infoName: "LAB", value: "\("\(String(format: "%.0f", labValue.l))")%, \("\(String(format: "%.0f", labValue.a))")%, \("\(String(format: "%.0f", labValue.b))")%")
@@ -153,7 +156,9 @@ class ColorDetailViewModel: ObservableObject {
             .removeDuplicates()
             .sink(receiveValue: { color in
                 self.assignHex()
+                self.assignP3Hex()
                 self.assignHsb()
+                self.assignHsl()
                 self.assignRgb()
                 self.assignCmyk()
                 self.assignXyz()

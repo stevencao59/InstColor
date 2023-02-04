@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ToolBarView: View {
     @ObservedObject var model: ContentViewModel
-    @Binding var imageName: String
     @Binding var showScaleSlider: Bool
     @Binding var showSliderControl: Bool
 
@@ -19,10 +18,9 @@ struct ToolBarView: View {
     
     var containerCotentWidth: CGFloat
     
-    init(model: ContentViewModel, imageName: Binding<String>, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat) {
+    init(model: ContentViewModel, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat) {
         self.model = model
 
-        self._imageName = imageName
         self._showScaleSlider = showScaleSlider
         self._showSliderControl = showSliderControl
 
@@ -85,6 +83,6 @@ struct ToolBarView: View {
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(model: ContentViewModel(), imageName: .constant("ImageName"), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300)
+        ToolBarView(model: ContentViewModel(), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300)
     }
 }

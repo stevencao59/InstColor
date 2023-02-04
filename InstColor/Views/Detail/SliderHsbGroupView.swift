@@ -42,9 +42,9 @@ struct SliderHsbGroupView: View {
     
     var body: some View {
         VStack {
-            ColorSliderView(colorValue: $hue, colorValueText: $hueText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "H", range: 0.0...360.0, step: 1, path: .hue, keyboardFocusState: keyboardFocusState, setColor: setColor)
-            ColorSliderView(colorValue: $satuation, colorValueText: $satuationText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "S", range: 0.0...100.0, step: 1, path: .satuation, keyboardFocusState: keyboardFocusState, setColor: setColor)
-            ColorSliderView(colorValue: $brightness, colorValueText: $brightnessText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...100.0, step: 1, path: .brightness, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $hue, colorValueText: $hueText, containerCotentWidth: containerCotentWidth, iconText: "H", range: 0.0...360.0, step: 1, path: .hue, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $satuation, colorValueText: $satuationText, containerCotentWidth: containerCotentWidth, iconText: "S", range: 0.0...100.0, step: 1, path: .satuation, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $brightness, colorValueText: $brightnessText, containerCotentWidth: containerCotentWidth, iconText: "B", range: 0.0...100.0, step: 1, path: .brightness, keyboardFocusState: keyboardFocusState, setColor: setColor)
         }
     }
 }

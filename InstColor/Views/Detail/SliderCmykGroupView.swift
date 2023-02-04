@@ -46,10 +46,10 @@ struct SliderCmykGroupView: View {
     
     var body: some View {
         VStack {
-            ColorSliderView(colorValue: $cyan, colorValueText: $cyanText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "C", range: 0.0...100, step: 1, path: .cyan, keyboardFocusState: keyboardFocusState, setColor: setColor)
-            ColorSliderView(colorValue: $magenta, colorValueText: $magentaText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "M", range: 0.0...100.0, step: 1, path: .magenta, keyboardFocusState: keyboardFocusState, setColor: setColor)
-            ColorSliderView(colorValue: $yellow, colorValueText: $yellowText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "Y", range: 0.0...100.0, step: 1, path: .yellow, keyboardFocusState: keyboardFocusState, setColor: setColor)
-            ColorSliderView(colorValue: $key, colorValueText: $keyText, color: $color, containerCotentWidth: containerCotentWidth, iconText: "K", range: 0.0...100.0, step: 1, path: .key, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $cyan, colorValueText: $cyanText, containerCotentWidth: containerCotentWidth, iconText: "C", range: 0.0...100, step: 1, path: .cyan, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $magenta, colorValueText: $magentaText, containerCotentWidth: containerCotentWidth, iconText: "M", range: 0.0...100.0, step: 1, path: .magenta, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $yellow, colorValueText: $yellowText, containerCotentWidth: containerCotentWidth, iconText: "Y", range: 0.0...100.0, step: 1, path: .yellow, keyboardFocusState: keyboardFocusState, setColor: setColor)
+            ColorSliderView(colorValue: $key, colorValueText: $keyText, containerCotentWidth: containerCotentWidth, iconText: "K", range: 0.0...100.0, step: 1, path: .key, keyboardFocusState: keyboardFocusState, setColor: setColor)
         }
     }
 }

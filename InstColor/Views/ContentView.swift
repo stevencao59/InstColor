@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var model = ContentViewModel()
+    @StateObject private var states = States()
     
     var body: some View {
         ContentContainerView(model: model) {
@@ -18,6 +19,7 @@ struct ContentView: View {
                 DashboardView(model: model)
             }
         }
+        .environmentObject(states)
     }
 }
 

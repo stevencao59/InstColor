@@ -6,17 +6,49 @@
 //
 
 import SwiftUI
+import Combine
+
+class SliderViewModel: ObservableObject {
+    @Published var value: Int
+    let assign: (Int) -> Void
+    private var subscriptions = Set<AnyCancellable>()
+
+    init(value: Int, assign: @escaping (Int) -> Void) {
+        self.value = value
+        self.assign = assign
+
+        $value
+            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink(receiveValue: { value in
+                self.assign(value)
+            })
+            .store(in: &subscriptions)
+    }
+}
 
 struct SliderView: View {
-    @Binding var value: CGFloat
-    let range: ClosedRange<CGFloat>
+    @StateObject var model: SliderViewModel
+
+    let range: ClosedRange<Double>
     let sliderText: String
+
+    var intProxy: Binding<Double>{
+        Binding<Double>(get: {
+            //returns the score as a Double
+            return Double(model.value)
+        }, set: {
+            //rounds the double to an Int
+            model.value = Int($0)
+        })
+    }
     
-    init(value: Binding<CGFloat>, range: ClosedRange<CGFloat>, sliderText: String) {
-        self._value = value
+    init(value: Int, range: ClosedRange<Double>, sliderText: String, assign: @escaping (Int) -> Void) {
+        self._model = StateObject(wrappedValue: SliderViewModel(value: value, assign: assign))
         self.range = range
         self.sliderText = sliderText
-        
+
         UIStepper.appearance().setDecrementImage(UIImage(systemName: "minus"), for: .normal)
         UIStepper.appearance().setIncrementImage(UIImage(systemName: "plus"), for: .normal)
     }
@@ -26,13 +58,13 @@ struct SliderView: View {
             Text(sliderText)
                 .bold()
             HStack {
-                Slider(value: $value, in: range)
+                Slider(value: intProxy, in: range)
                     .padding([.horizontal])
-                Stepper("", value: $value, in: range, step: 0.1)
+                Stepper("", value: intProxy, in: range, step: 1)
                     .labelsHidden()
                     .foregroundColor(.white)
                     .tint(.white)
-                Text("\(String(format: "%.1f", value)) / \(String(format: "%.1f", range.upperBound))")
+                Text("\(String(model.value)) / \(String(format: "%.0f", range.upperBound))")
             }
         }
         .font(.footnote)
@@ -41,6 +73,6 @@ struct SliderView: View {
 
 struct ViewScaleView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderView(value: .constant(1.0), range: CGFloat(1.0)...5.0, sliderText: "Test")
+        SliderView(value: 1, range: CGFloat(1.0)...5.0, sliderText: "Test", assign: { _ in })
     }
 }
