@@ -15,11 +15,112 @@ struct ContainerSizeAwareModifier: ViewModifier {
             .overlay() {
                 GeometryReader { geo in
                     Color.clear
+                        .onChange(of: geo.size.width) {width in
+                            size = CGSize(width: width, height: geo.size.height)
+                        }
                         .onAppear {
                             size = CGSize(width: geo.size.width, height: geo.size.height)
                         }
                 }
             }
+    }
+}
+
+struct DescriptionView: View {
+    @EnvironmentObject var states: States
+    @ObservedObject var model: ContentViewModel
+    @Binding var showDescription: Bool
+    
+    let toolbarSize: CGSize
+
+    var body: some View {
+        VStack {
+            if showDescription {
+                Text(states.description)
+                    .font(.footnote)
+                    .foregroundColor(.white)
+                    .padding(5)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.black)
+                            .opacity(0.8)
+                            .shadow(radius: 3)
+                    )
+                    .offset(CGSize(width: 0, height: -toolbarSize.height - 50))
+            }
+        }
+        .onChange(of: model.frameSource) { source in
+            states.description = "\(source == .thumbImage ? "Area Detection" : "Full Image Detection")"
+            showDescription.toggle()
+        }
+        .onChange(of: showDescription) { value in
+            if value == true {
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                    withAnimation(.easeInOut) {
+                        showDescription.toggle()
+                    }
+                }
+            }
+        }
+        .animation(.easeIn, value: showDescription)
+    }
+}
+
+struct ThumbViewToolbarView : View {
+    @EnvironmentObject var states: States
+    @StateObject var model: ContentViewModel
+    @Binding var showThumbConfigs: Bool
+    @Binding var showDescription: Bool
+    
+    var increaseScaleAmount: () -> Void
+    var decreaseScaleAmount: () -> Void
+    var increaseFrameDelta: () -> Void
+    var decreaseFrameDelta: () -> Void
+    
+    var body: some View {
+        Button(action: { showThumbConfigs.toggle() }) {
+            ImageButtonView(imageName: "arrowshape.backward")
+        }
+        Divider()
+            .overlay(.gray)
+        Button(action: increaseFrameDelta) {
+            ImageButtonView(imageName: "plus.square")
+        }
+        Button(action: decreaseFrameDelta) {
+            ImageButtonView(imageName: "minus.square")
+        }
+        Divider()
+            .overlay(.gray)
+        Button(action: increaseScaleAmount) {
+            ImageButtonView(imageName: "plus.magnifyingglass")
+        }
+        Button(action: decreaseScaleAmount) {
+            ImageButtonView(imageName: "minus.magnifyingglass")
+        }
+    }
+}
+
+struct GenericToolbarView: View {
+    @ObservedObject var model: ContentViewModel
+    var switchCameraPosition: () -> Void
+    var showThumbConfig: () -> Void
+    var turnOnTorch: () -> Void
+    var turnOnScreenStay: () -> Void
+    var switchAlgo: () -> Void
+    
+    var body: some View {
+        Button(action: switchCameraPosition) {
+            ImageButtonView(imageName: "arrow.triangle.2.circlepath")
+        }
+        FrameSourceView(frameSource: $model.frameSource)
+        if model.frameSource == .thumbImage {
+            Button(action: showThumbConfig) {
+                ImageButtonView(imageName: "square.and.pencil.circle.fill")
+            }
+        }
+        PressableButtonView(imageName: "flashlight.on.fill", action: turnOnTorch)
+        PressableButtonView(imageName: "light.max", action: turnOnScreenStay)
+        ImageSwitchButtonView(initialImageName: "d.square", switchImageName: "l.square", action: switchAlgo)
     }
 }
 
@@ -30,6 +131,8 @@ struct FloatToolbarViewModifier: ViewModifier {
     @State var showDescription = false
     @State var toolbarSize: CGSize = CGSize(width: 0, height: 0)
     @State var screenStayOn = false
+    
+    @State var showThumbConfigs = false
     
     let fillRect = RoundedRectangle(cornerRadius: 20)
     
@@ -60,6 +163,35 @@ struct FloatToolbarViewModifier: ViewModifier {
         showDescription.toggle()
     }
     
+    func showThumbConfig() {
+        showThumbConfigs.toggle()
+    }
+    
+    func increaseScaleAmount() {
+        model.scaleAmount = model.scaleAmount == 5 ? 5 : model.scaleAmount + 1
+        states.description = "Magnify Amount: \(model.scaleAmount)"
+        showDescription.toggle()
+        
+    }
+    
+    func decreaseScaleAmount() {
+        model.scaleAmount = model.scaleAmount == 1 ? 1 : model.scaleAmount - 1
+        states.description = "Magnify Amount: \(model.scaleAmount)"
+        showDescription.toggle()
+    }
+    
+    func increaseFrameDelta() {
+        model.thumbViewSizeDelta = model.thumbViewSizeDelta == 10 ? 10 : model.thumbViewSizeDelta + 1
+        states.description = "Detection area: \(model.thumbViewSizeDelta)"
+        showDescription.toggle()
+    }
+    
+    func decreaseFrameDelta() {
+        model.thumbViewSizeDelta = model.thumbViewSizeDelta == -10 ? -10 : model.thumbViewSizeDelta - 1
+        states.description = "Detection area: \(model.thumbViewSizeDelta)"
+        showDescription.toggle()
+    }
+    
     func body(content: Content) -> some View {
         content
             .overlay(alignment: .top) {
@@ -69,13 +201,12 @@ struct FloatToolbarViewModifier: ViewModifier {
                     .overlay() {
                         HStack {
                             Group {
-                                Button(action: switchCameraPosition) {
-                                    ImageButtonView(imageName: "arrow.triangle.2.circlepath")
+                                if showThumbConfigs {
+                                    ThumbViewToolbarView(model: model, showThumbConfigs: $showThumbConfigs,showDescription: $showDescription, increaseScaleAmount: increaseScaleAmount, decreaseScaleAmount: decreaseScaleAmount, increaseFrameDelta: increaseFrameDelta, decreaseFrameDelta: decreaseFrameDelta)
                                 }
-                                FrameSourceView(frameSource: $model.frameSource)
-                                PressableButtonView(imageName: "flashlight.on.fill", action: turnOnTorch)
-                                PressableButtonView(imageName: "light.max", action: turnOnScreenStay)
-                                ImageSwitchButtonView(initialImageName: "d.square", switchImageName: "l.square", action: switchAlgo)
+                                else {
+                                    GenericToolbarView(model: model, switchCameraPosition: switchCameraPosition, showThumbConfig: showThumbConfig, turnOnTorch: turnOnTorch, turnOnScreenStay: turnOnScreenStay, switchAlgo: switchAlgo)
+                                }
                             }
                             .padding([.horizontal], 5)
                             .scaleEffect(1.2)
@@ -88,36 +219,9 @@ struct FloatToolbarViewModifier: ViewModifier {
                     .opacity(0.8)
                     .offset(CGSize(width: 0, height: -toolbarSize.height - 10))
                     .overlay {
-                        VStack {
-                            if showDescription {
-                                Text(states.description)
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .fill(Color.black)
-                                            .opacity(0.8)
-                                            .shadow(radius: 3)
-                                    )
-                                    .offset(CGSize(width: 0, height: -toolbarSize.height - 50))
-                            }
-                        }
-                        .onChange(of: model.frameSource) { source in
-                            states.description = "\(source == .thumbImage ? "Area Detection" : "Full Image Detection")"
-                            showDescription.toggle()
-                        }
-                        .onChange(of: showDescription) { value in
-                            if value == true {
-                                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
-                                    withAnimation(.easeInOut) {
-                                        showDescription.toggle()
-                                    }
-                                }
-                            }
-                        }
-                        .animation(.easeIn, value: showDescription)
+                        DescriptionView(model: model, showDescription: $showDescription, toolbarSize: toolbarSize)
                     }
+                    .animation(.default, value: showThumbConfigs)
             }
     }
 }

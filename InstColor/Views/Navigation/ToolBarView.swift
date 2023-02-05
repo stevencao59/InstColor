@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ToolBarView: View {
     @ObservedObject var model: ContentViewModel
-    @Binding var showScaleSlider: Bool
-    @Binding var showSliderControl: Bool
 
     @State var showAbout: Bool = false
     @State var showFavorites: Bool = false
@@ -18,12 +16,8 @@ struct ToolBarView: View {
     
     var containerCotentWidth: CGFloat
     
-    init(model: ContentViewModel, showScaleSlider: Binding<Bool>, showSliderControl: Binding<Bool>, containerContentWidth: CGFloat) {
+    init(model: ContentViewModel, containerContentWidth: CGFloat) {
         self.model = model
-
-        self._showScaleSlider = showScaleSlider
-        self._showSliderControl = showSliderControl
-
         self.containerCotentWidth = containerContentWidth
     }
     
@@ -47,9 +41,6 @@ struct ToolBarView: View {
                 }
                 Button(action: toggleReferences) {
                     ImageButtonView(imageName: "list.bullet")
-                }
-                if showSliderControl {
-                    SliderControlView(showScaleSlider: $showScaleSlider)
                 }
                 Button(action: toggleAbout) {
                     ImageButtonView(imageName: "questionmark")
@@ -83,6 +74,6 @@ struct ToolBarView: View {
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(model: ContentViewModel(), showScaleSlider: .constant(true), showSliderControl: .constant(true), containerContentWidth: 300)
+        ToolBarView(model: ContentViewModel(), containerContentWidth: 300)
     }
 }

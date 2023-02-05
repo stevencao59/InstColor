@@ -13,8 +13,6 @@ struct NavigationView: View {
     @State var imageName = "viewfinder"
     @State var sizeWeight = 1
     @State var thumbViewSizeDelta = 0
-    @State var showSliderControl = false
-    @State var showScaleSlider = false
     
     init(model: ContentViewModel) {
         self.model = model
@@ -36,27 +34,12 @@ struct NavigationView: View {
                 BannerContentView(adUnitId: adUnitID)
                     .padding([.bottom])
                 HStack {
-                    ToolBarView(model: model, showScaleSlider: $showScaleSlider, showSliderControl: $showSliderControl, containerContentWidth: model.containerCotentWidth)
-                }
-                if showScaleSlider {
-                    SliderView(value: Int(model.scaleAmount), range: 1...5, sliderText: "Scale Size", assign: assignScale)
-                        .padding([.horizontal])
-                    Group {
-                        Divider()
-                            .tint(.gray)
-                        SliderView(value: Int(model.thumbViewSizeDelta), range: -10...10, sliderText: "Detect Area", assign: assignDelta)
-                    }
-                    .padding([.horizontal, .bottom])
+                    ToolBarView(model: model, containerContentWidth: model.containerCotentWidth)
                 }
             }
             .frame(maxWidth: .infinity)
             .background(.black)
             .foregroundColor(.white)
-            .animation(.default, value: showScaleSlider)
-            .animation(.default, value: showSliderControl)
-            .onChange(of: model.frameSource) { source in
-                showSliderControl = model.frameSource == .thumbImage
-            }
             Spacer()
         }
     }
