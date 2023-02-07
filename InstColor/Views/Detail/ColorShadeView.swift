@@ -62,26 +62,27 @@ struct ShadeRowView: View {
 
 struct ColorShadeView: View {
     @Binding var referenceColor: UIColor
+    @State var blendColor: Color = .white
     @State var sliderValue = 0.15
+    let colorViewSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 20
     
-    let shadeViewList: [(title: String, color: UIColor)] = [
-        (title: "Light Shades", color: .white),
-        (title: "Dark Shades", color: .black)
-    ]
-
+    var shadeView: (title: String, color: Color) {
+        return (title: "Blend Color", color: blendColor)
+    }
+    
     var body: some View {
         VStack {
             HStack {
                 Text("Shade Amount")
                     .bold(true)
                 Slider(value: $sliderValue, in: 0.1...0.3)
+                ColorPicker("", selection: $blendColor, supportsOpacity: false)
+                    .frame(width: colorViewSize)
             }
             .padding([.horizontal])
             
             Grid {
-                ForEach(shadeViewList, id: \.title) { shadeView in
-                    ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: shadeView.title, combineColor: shadeView.color)
-                }
+                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: shadeView.title, combineColor: UIColor(shadeView.color))
             }
         }
         .foregroundColor(.white)

@@ -66,6 +66,30 @@ struct DescriptionView: View {
     }
 }
 
+struct ToolbarInfoView: View {
+    let infoData: String
+    let frameSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 20
+    let fontSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 10
+    
+    var body: some View {
+        Rectangle()
+            .strokeBorder(.clear)
+            .frame(width: frameSize)
+            .background(.clear)
+            .overlay {
+                VStack {
+                    Group {
+                        Text(infoData)
+                            .bold()
+                    }
+                    .font(.system(size: fontSize))
+                    .background(.clear)
+                    .foregroundColor(.white)
+                }
+            }
+    }
+}
+
 struct ThumbViewToolbarView : View {
     @EnvironmentObject var states: States
     @StateObject var model: ContentViewModel
@@ -86,6 +110,7 @@ struct ThumbViewToolbarView : View {
         Button(action: increaseFrameDelta) {
             ImageButtonView(imageName: "plus.square")
         }
+        ToolbarInfoView(infoData: "+" + String(format: "%.0f", model.thumbViewSizeDelta))
         Button(action: decreaseFrameDelta) {
             ImageButtonView(imageName: "minus.square")
         }
@@ -94,6 +119,7 @@ struct ThumbViewToolbarView : View {
         Button(action: increaseScaleAmount) {
             ImageButtonView(imageName: "plus.magnifyingglass")
         }
+        ToolbarInfoView(infoData: "x" + String(format: "%.0f", model.scaleAmount))
         Button(action: decreaseScaleAmount) {
             ImageButtonView(imageName: "minus.magnifyingglass")
         }
@@ -169,27 +195,18 @@ struct FloatToolbarViewModifier: ViewModifier {
     
     func increaseScaleAmount() {
         model.scaleAmount = model.scaleAmount == 5 ? 5 : model.scaleAmount + 1
-        states.description = "Magnify Amount: \(model.scaleAmount)"
-        showDescription.toggle()
-        
     }
     
     func decreaseScaleAmount() {
         model.scaleAmount = model.scaleAmount == 1 ? 1 : model.scaleAmount - 1
-        states.description = "Magnify Amount: \(model.scaleAmount)"
-        showDescription.toggle()
     }
     
     func increaseFrameDelta() {
         model.thumbViewSizeDelta = model.thumbViewSizeDelta == 10 ? 10 : model.thumbViewSizeDelta + 1
-        states.description = "Detection area: \(model.thumbViewSizeDelta)"
-        showDescription.toggle()
     }
     
     func decreaseFrameDelta() {
         model.thumbViewSizeDelta = model.thumbViewSizeDelta == -10 ? -10 : model.thumbViewSizeDelta - 1
-        states.description = "Detection area: \(model.thumbViewSizeDelta)"
-        showDescription.toggle()
     }
     
     func body(content: Content) -> some View {

@@ -120,7 +120,7 @@ struct InformationTypeView: View {
     @State private var informationTypeIndex = 0
     
     var containerCotentWidth: Double
-    var informationTypes = ["Types", "Shades", "Color Spaces"]
+    var informationTypes = ["Types", "Blends", "Color Spaces"]
     var selectedDetent: PresentationDetent
     
     var body: some View {
@@ -133,7 +133,7 @@ struct InformationTypeView: View {
             
             if informationTypes[informationTypeIndex] == "Types" {
                 ColorTypeView(complementaryColor: model.complementaryColor, triadicColor: model.triadicColor, splitComplementaryColor: model.splitComplementaryColor, analogousColor: model.analogousColor, tetradicColor: model.tetradicColor,  monochromaticColor: model.monochromaticColor, referenceColor: $model.color)
-            } else if informationTypes[informationTypeIndex] == "Shades" {
+            } else if informationTypes[informationTypeIndex] == "Blends" {
                 ColorShadeView(referenceColor: $model.color)
             } else if informationTypes[informationTypeIndex] == "Color Spaces" {
                 ColorSpaceView(colorInfos: $model.colorInfos)

@@ -10,8 +10,20 @@ import SwiftUI
 struct ImageButtonView: View {
     let imageName: String
     var color: Color = .white
-    @State var frameSize: CGFloat = 20
-    @State var imageSize: CGFloat = 10
+
+    var frameSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 20
+    var imageSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 10
+    
+    init(imageName: String) {
+        self.imageName = imageName
+    }
+    
+    init(imageName: String, color: Color, frameSize: CGFloat, imageSize: CGFloat) {
+        self.imageName = imageName
+        self.color = color
+        self.frameSize = UIScreen.screenHeight / defaultScreenHeight * frameSize
+        self.imageSize = UIScreen.screenHeight / defaultScreenHeight * imageSize
+    }
     
     var body: some View {
         Circle()

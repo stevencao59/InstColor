@@ -10,9 +10,13 @@ import SwiftUI
 struct ThumbView: View {
     @ObservedObject var model: ContentViewModel
     @State private var thumbViewOpacity = 0.0
-    
+    @State private var phase = 0.0
+
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
+    
+    let StrokeBorder: some View = Rectangle()
+        .strokeBorder(style: StrokeStyle())
     
     var orientation: Image.Orientation {
         return model.cameraManager.cameraPosition == .front ? .upMirrored : .up
@@ -42,12 +46,17 @@ struct ThumbView: View {
     var body: some View {
         if let rect = model.rect {
             if let frame = model.thumbFrame {
-                VStack {
+                ZStack {
                     Image(frame, scale: 1, orientation: orientation, label: Text("Thumbview Feed"))
                         .resizable()
                         .scaledToFit()
                         .aspectRatio(contentMode: .fit)
-                        .border(.yellow)
+                    StrokeBorder
+                        .frame(width: rect.width, height: rect.height)
+                        .foregroundColor(.white)
+                    StrokeBorder
+                        .frame(width: rect.width + 1, height: rect.height + 1)
+                        .foregroundColor(.black)
                 }
                 .frame(width: rect.width)
                 .opacity(thumbViewOpacity)
