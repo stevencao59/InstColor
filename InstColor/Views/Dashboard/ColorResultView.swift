@@ -9,14 +9,11 @@ import SwiftUI
 
 struct ColorResultView: View {
     @ObservedObject var model: ColorResultViewModel
-
-    let color: UIColor
     
     let resultSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 40
     
-    init(model: ColorResultViewModel, color: UIColor) {
+    init(model: ColorResultViewModel) {
         self.model = model
-        self.color = color
     }
     
     func clickToShowSheet() {
@@ -26,10 +23,7 @@ struct ColorResultView: View {
     var body: some View {
         Button(action: clickToShowSheet) {
             HStack {
-                BorderedRectView(color: Color(color), cornerRadius: resultSize, lineWidth: 1, width: resultSize, height: resultSize)
-                    .onChange(of: color) { newValue in
-                        model.color = newValue
-                    }
+                BorderedRectView(color: Color(model.color), cornerRadius: resultSize, lineWidth: 1, width: resultSize, height: resultSize)
                 VStack(alignment: .leading) {
                     HStack {
                         Text("\(model.colorName)")
@@ -43,7 +37,7 @@ struct ColorResultView: View {
         }
         
         .sheet(isPresented: $model.showColorDetail) {
-            ColorDetailView(color: color, showModalButtons: true, selectedDetent: model.selectedDentent)
+            ColorDetailView(color: model.color, showModalButtons: true, selectedDetent: model.selectedDentent)
                 .presentationDetents([.medium, .large], selection: $model.selectedDentent)
         }
     }
@@ -53,7 +47,7 @@ struct ColorResultView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle()
-            ColorResultView(model: ColorResultViewModel(camera: ContentViewModel().cameraManager), color: UIColor(.red))
+            ColorResultView(model: ColorResultViewModel(camera: ContentViewModel().cameraManager))
         }
         .ignoresSafeArea()
     }

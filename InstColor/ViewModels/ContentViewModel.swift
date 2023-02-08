@@ -34,7 +34,7 @@ class ContentViewModel: ObservableObject {
     @Published var frameSource: FrameSource = .wholeImage
     
     // Average color results
-    @Published var averageColor: UIColor?
+    @Published var averageColor: UIColor = .white
     
     // Pressed location, size and scale
     @Published var location: CGPoint?
@@ -195,7 +195,9 @@ class ContentViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .removeDuplicates()
             .sink(receiveValue: { result in
-                self.averageColor = self.getColor(cgImage: result.publisher.output)
+                if let color = self.getColor(cgImage: result.publisher.output) {
+                    self.averageColor = color
+                }
             })
             .store(in: &subscriptions)
     }

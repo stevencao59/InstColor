@@ -58,27 +58,25 @@ struct DashboardView: View {
     var body: some View {
         VStack {
             Spacer()
-            if let color = model.averageColor {
-                HStack(alignment: .center) {
-                    ColorResultView(model: resultModel, color: color)
-                    Spacer()
-                    ResultTextContainerView(color: color, baseColorName: resultModel.baseColorName, baseColorHex: resultModel.baseColorHex)
-                }
-                .padding()
-                .background(.black)
-                .onChange(of: color) { color in
-                    resultModel.color = color
-                }
-                .modifier(FloatToolbarViewModifier(model: model))
-                .overlay(
-                    GeometryReader { geo in
-                        Color.clear
-                            .onAppear {
-                                model.dashboardHeight = geo.size.height
-                            }
-                    }
-                )
+            HStack(alignment: .center) {
+                ColorResultView(model: resultModel)
+                Spacer()
+                ResultTextContainerView(color: resultModel.color, baseColorName: resultModel.baseColorName, baseColorHex: resultModel.baseColorHex)
             }
+            .padding()
+            .background(.black)
+            .onChange(of: model.averageColor) { color in
+                resultModel.color = color
+            }
+            .modifier(FloatToolbarViewModifier(model: model))
+            .overlay(
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear {
+                            model.dashboardHeight = geo.size.height
+                        }
+                }
+            )
         }
         .padding([.bottom])
     }

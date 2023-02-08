@@ -26,17 +26,13 @@ struct ColorHexTextView: View {
                 .cornerRadius(5)
                 .frame(width: 100, height: 40)
                 .onSubmit {
-                    DispatchQueue.main.async {
-                        if let color = UIColor(hex: hexText) {
-                            displayColor = color
-                        }
+                    if let color = UIColor(hex: hexText) {
+                        displayColor = color
                     }
                 }
                 .onChange(of: displayColor) { color in
-                    DispatchQueue.main.async {
-                        if let text = color.toHexString() {
-                            hexText = text
-                        }
+                    if let text = color.toHexString() {
+                        hexText = text
                     }
                 }
         }
