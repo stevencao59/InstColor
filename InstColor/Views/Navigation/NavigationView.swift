@@ -31,8 +31,10 @@ struct NavigationView: View {
     var body: some View {
         VStack {
             VStack {
-                BannerContentView(adUnitId: adUnitID)
-                    .padding([.bottom])
+                if model.isCameraReady {
+                    BannerContentView(adUnitId: adUnitID)
+                        .padding([.bottom])
+                }
                 HStack {
                     ToolBarView(model: model, containerContentWidth: model.containerCotentWidth)
                 }

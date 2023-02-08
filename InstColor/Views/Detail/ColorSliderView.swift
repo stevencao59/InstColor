@@ -19,7 +19,7 @@ class ColorSliderViewObject: ObservableObject {
     
     func startSubscription() {
         $value
-            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.2) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { value in
@@ -28,7 +28,7 @@ class ColorSliderViewObject: ObservableObject {
             .store(in: &subscriptions)
         
         $valueText
-            .debounce(for: .seconds(0.5) , scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.2) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { text in
