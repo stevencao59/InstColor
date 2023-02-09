@@ -30,6 +30,8 @@ struct SaveColorModifier: ViewModifier {
     func body(content: Content) -> some View {
         if showModalButtons {
             content
+                .opacity(0.8)
+                .clearModalBackground()
                 .overlay(alignment: .topLeading) {
                     Button(action: saveColor) {
                         Text("Save")
@@ -191,8 +193,6 @@ struct ColorDetailView: View {
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
-        .opacity(0.8)
-        .clearModalBackground()
         .modifier(SaveColorModifier(color: model.color, showModalButtons: showModalButtons))
         .overlay {
             GeometryReader { geo in
