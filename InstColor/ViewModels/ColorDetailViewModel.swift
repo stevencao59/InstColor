@@ -57,9 +57,6 @@ class ColorDetailViewModel: ObservableObject {
     @Published var colorHexString: String = ""
     @Published var colorP3HexString: String = ""
     
-    // Debounce frequency
-    let debounceSeconds = 0.1
-    
     @Published var colorInfos: [ColorInfo] = [
         ColorInfo(InfoName: "RGB", Value: ""),
         ColorInfo(InfoName: "HEX", Value: ""),
@@ -151,7 +148,6 @@ class ColorDetailViewModel: ObservableObject {
     
     func startSubscription() {
         $color
-            .debounce(for: .seconds(debounceSeconds) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { color in
@@ -167,7 +163,6 @@ class ColorDetailViewModel: ObservableObject {
             .store(in: &subscriptions)
 
         $color
-            .debounce(for: .seconds(debounceSeconds) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { color in

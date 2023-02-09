@@ -11,6 +11,7 @@
 		B60785102951706E00C6897E /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607850F2951706E00C6897E /* BannerView.swift */; };
 		B60C70E1298720F400031121 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E0298720F400031121 /* SegmentedPickerView.swift */; };
 		B60C70E3298CC39E00031121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B60C70E2298CC39E00031121 /* GoogleService-Info.plist */; };
+		B60C70E72994A15700031121 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E62994A15700031121 /* Binding.swift */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619EB292980D470001BF11A /* SliderCmykGroupView.swift */; };
@@ -92,6 +93,7 @@
 		B607850F2951706E00C6897E /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B60C70E0298720F400031121 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		B60C70E2298CC39E00031121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B60C70E62994A15700031121 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
 		B619EB292980D470001BF11A /* SliderCmykGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCmykGroupView.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				B6DDD71D28F7A7C100E2EC66 /* UIImage.swift */,
 				B68C1A642929DF7600AC7662 /* UserDefaults.swift */,
 				B6BBCF53291B5D5A0010C3FE /* View.swift */,
+				B60C70E62994A15700031121 /* Binding.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				B6DDD71C28F791F500E2EC66 /* ThumbView.swift in Sources */,
 				B698946C293BA5790057265D /* String.swift in Sources */,
 				B68C1A4429213E8500AC7662 /* ColorTypeView.swift in Sources */,
+				B60C70E72994A15700031121 /* Binding.swift in Sources */,
 				B625B1482968B188001E1890 /* ConfigurationManager.swift in Sources */,
 				B68C1A4C2923471500AC7662 /* ColorHexTextView.swift in Sources */,
 				B6BBCF54291B5D5A0010C3FE /* View.swift in Sources */,
@@ -751,7 +755,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
@@ -768,7 +772,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.12;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.home.leicao.InstColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -787,7 +791,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"InstColor/Preview Content\"";
 				DEVELOPMENT_TEAM = 2ZZ3PS5FL5;
 				ENABLE_PREVIEWS = YES;
@@ -804,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.12;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.home.leicao.InstColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

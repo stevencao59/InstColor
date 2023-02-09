@@ -18,7 +18,6 @@ class SliderViewModel: ObservableObject {
         self.assign = assign
 
         $value
-            .debounce(for: .seconds(0.1) , scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { value in

@@ -191,6 +191,8 @@ struct ColorDetailView: View {
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
+        .opacity(0.8)
+        .clearModalBackground()
         .modifier(SaveColorModifier(color: model.color, showModalButtons: showModalButtons))
         .overlay {
             GeometryReader { geo in
