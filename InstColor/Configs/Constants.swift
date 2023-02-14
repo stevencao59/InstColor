@@ -24,6 +24,10 @@ let defaultFontSize = 17.0
 
 let defaultScreenHeight: CGFloat = 852 // iPhone 14 Pro height as reference
 
+let defaultItemSize = UIScreen.screenHeight / defaultScreenHeight * 40
+
+let maxViewedColors = 24
+
 let tooltipsDict = [
     "Complementary Color" : """
     Complementary colors are pairs of colors which, when combined or mixed, cancel each other out (lose hue) by producing a grayscale color like white or black. When placed next to each other, they create the strongest contrast for those two colors. Complementary colors may also be called "opposite colors".

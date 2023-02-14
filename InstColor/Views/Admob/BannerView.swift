@@ -124,9 +124,11 @@ struct BannerContentView: View {
     
     @State var adSize: GADAdSize = GADAdSize()
     let adUnitId: String
+    let showBanner: Bool
     
-    init(adUnitId: String) {
+    init(adUnitId: String, showBanner: Bool) {
         self.adUnitId = adUnitId
+        self.showBanner = showBanner
     }
     
     var keyWindow: UIWindow? {
@@ -149,7 +151,7 @@ struct BannerContentView: View {
                 .onAppear {
                     setFrame()
                 }
-                .opacity(isSuccesful ? 1 : 0)
+                .opacity(isSuccesful && showBanner ? 1 : 0)
                 .animation(.default, value: isSuccesful)
                 
         }
@@ -173,7 +175,7 @@ struct BannerContentView: View {
 struct BannerContentView_Previews: PreviewProvider {
   static var previews: some View {
       ZStack {
-          BannerContentView(adUnitId: adUnitTestID)
+          BannerContentView(adUnitId: adUnitTestID, showBanner: true)
       }
   }
 }

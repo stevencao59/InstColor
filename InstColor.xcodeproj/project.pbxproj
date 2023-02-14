@@ -12,6 +12,12 @@
 		B60C70E1298720F400031121 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E0298720F400031121 /* SegmentedPickerView.swift */; };
 		B60C70E3298CC39E00031121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B60C70E2298CC39E00031121 /* GoogleService-Info.plist */; };
 		B60C70E72994A15700031121 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E62994A15700031121 /* Binding.swift */; };
+		B60C70EA2995F7E400031121 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70E92995F7E400031121 /* HistoryView.swift */; };
+		B60C70EC2995F95D00031121 /* ViewedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70EB2995F95D00031121 /* ViewedColor.swift */; };
+		B60C70EE29983AD100031121 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70ED29983AD100031121 /* PlaceholderView.swift */; };
+		B60C70F02998890200031121 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70EF2998890200031121 /* Date.swift */; };
+		B60C70F229996CE800031121 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70F129996CE800031121 /* ButtonView.swift */; };
+		B60C70F4299B261800031121 /* Crud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70F3299B261800031121 /* Crud.swift */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619EB292980D470001BF11A /* SliderCmykGroupView.swift */; };
@@ -94,6 +100,12 @@
 		B60C70E0298720F400031121 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		B60C70E2298CC39E00031121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B60C70E62994A15700031121 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
+		B60C70E92995F7E400031121 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		B60C70EB2995F95D00031121 /* ViewedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedColor.swift; sourceTree = "<group>"; };
+		B60C70ED29983AD100031121 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		B60C70EF2998890200031121 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		B60C70F129996CE800031121 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		B60C70F3299B261800031121 /* Crud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crud.swift; sourceTree = "<group>"; };
 		B60EC482292DDD6200483710 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B60EC4842933182700483710 /* ColorShadeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShadeView.swift; sourceTree = "<group>"; };
 		B619EB292980D470001BF11A /* SliderCmykGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCmykGroupView.swift; sourceTree = "<group>"; };
@@ -192,6 +204,14 @@
 			path = Admob;
 			sourceTree = "<group>";
 		};
+		B60C70E82995F7C400031121 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				B60C70E92995F7E400031121 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		B60EC481292DDD4D00483710 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,11 +240,13 @@
 		B659D5702940378F00BB4D76 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				B659D56E2940378800BB4D76 /* TooltipView.swift */,
-				B659D5712943D28600BB4D76 /* PressableButtonView.swift */,
+				B60C70F129996CE800031121 /* ButtonView.swift */,
 				B6B30CFD2957950100F92811 /* CloseButtonView.swift */,
-				B6B30CFF2958A8B700F92811 /* VerticalSliderView.swift */,
+				B60C70ED29983AD100031121 /* PlaceholderView.swift */,
+				B659D5712943D28600BB4D76 /* PressableButtonView.swift */,
 				B60C70E0298720F400031121 /* SegmentedPickerView.swift */,
+				B659D56E2940378800BB4D76 /* TooltipView.swift */,
+				B6B30CFF2958A8B700F92811 /* VerticalSliderView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -318,6 +340,7 @@
 			children = (
 				B6B30CEA295408EB00F92811 /* Admob.swift */,
 				B6BBCF56291B5FD10010C3FE /* ColorConverter.swift */,
+				B60C70F3299B261800031121 /* Crud.swift */,
 				B6BBCF5C291F37C70010C3FE /* Math.swift */,
 			);
 			path = Utilities;
@@ -343,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				B68C1A4729215E6900AC7662 /* Array.swift */,
+				B60C70EF2998890200031121 /* Date.swift */,
 				B6EBA0C528E790A4006954F8 /* CGImage.swift */,
 				B6DDD72929071FA200E2EC66 /* CIImage.swift */,
 				B6DDD6FA28EA7A9700E2EC66 /* Color.swift */,
@@ -378,6 +402,7 @@
 				B68C1A582928A2AD00AC7662 /* Detail */,
 				B68C1A5D2929227900AC7662 /* Favorites */,
 				B68C1A592928A30200AC7662 /* Frame */,
+				B60C70E82995F7C400031121 /* History */,
 				B625B14B296A2CD3001E1890 /* Image */,
 				B68C1A5A2928A34400AC7662 /* Navigation */,
 				B698946D293C55220057265D /* Reference */,
@@ -419,10 +444,11 @@
 		B6DDD70E28F1B31900E2EC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B6ED630429847E4800634579 /* ColorInfo.swift */,
 				B6DDD72528FF844900E2EC66 /* Enum.swift */,
 				B68C1A622929DD0800AC7662 /* FavoriteColor.swift */,
 				B6DDD70F28F1B33C00E2EC66 /* RGBColor.swift */,
-				B6ED630429847E4800634579 /* ColorInfo.swift */,
+				B60C70EB2995F95D00031121 /* ViewedColor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -566,6 +592,7 @@
 				B6DDD72828FFA82600E2EC66 /* FrameSourceView.swift in Sources */,
 				B625B14A2968BEEF001E1890 /* RevenueViewModel.swift in Sources */,
 				B60EC4852933182700483710 /* ColorShadeView.swift in Sources */,
+				B60C70EA2995F7E400031121 /* HistoryView.swift in Sources */,
 				B659D56F2940378800BB4D76 /* TooltipView.swift in Sources */,
 				B6DDD70428EFC06200E2EC66 /* ColorResultView.swift in Sources */,
 				B6EBA0C228E78B97006954F8 /* FrameManager.swift in Sources */,
@@ -589,6 +616,7 @@
 				B6DDD72E2908312100E2EC66 /* RectCornerView.swift in Sources */,
 				B6BBCF4E2916B1D90010C3FE /* ColorDetailView.swift in Sources */,
 				B60C70E1298720F400031121 /* SegmentedPickerView.swift in Sources */,
+				B60C70F02998890200031121 /* Date.swift in Sources */,
 				B6DDD71628F4BDCB00E2EC66 /* ColorTextGroupView.swift in Sources */,
 				B659D5722943D28600BB4D76 /* PressableButtonView.swift in Sources */,
 				B6B30D002958A8B700F92811 /* VerticalSliderView.swift in Sources */,
@@ -604,6 +632,7 @@
 				B6EBA0C628E790A4006954F8 /* CGImage.swift in Sources */,
 				B6CE35512971119200A78764 /* Device.swift in Sources */,
 				B6DDD70228EE72CD00E2EC66 /* ColorTextView.swift in Sources */,
+				B60C70F4299B261800031121 /* Crud.swift in Sources */,
 				B625B14D296A2CED001E1890 /* ImageView.swift in Sources */,
 				B6A695822909B482003DEE57 /* ContentContainerView.swift in Sources */,
 				B625B1462968B011001E1890 /* PurchasesDelegateHandler.swift in Sources */,
@@ -622,13 +651,16 @@
 				B625B1482968B188001E1890 /* ConfigurationManager.swift in Sources */,
 				B68C1A4C2923471500AC7662 /* ColorHexTextView.swift in Sources */,
 				B6BBCF54291B5D5A0010C3FE /* View.swift in Sources */,
+				B60C70F229996CE800031121 /* ButtonView.swift in Sources */,
 				B6B30CEB295408EB00F92811 /* Admob.swift in Sources */,
 				B6DDD70628EFDA4600E2EC66 /* NavigationView.swift in Sources */,
 				B6B30CFC2957938600F92811 /* ModalViewModifier.swift in Sources */,
+				B60C70EE29983AD100031121 /* PlaceholderView.swift in Sources */,
 				B6B30CF7295792C900F92811 /* FloatToolbarViewModifier.swift in Sources */,
 				B6A69586290C7109003DEE57 /* SliderView.swift in Sources */,
 				B6BBCF59291E014E0010C3FE /* ColorDetailViewModel.swift in Sources */,
 				B6DE828928E729E300826201 /* InstColorApp.swift in Sources */,
+				B60C70EC2995F95D00031121 /* ViewedColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

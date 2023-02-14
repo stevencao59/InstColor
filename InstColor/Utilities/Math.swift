@@ -22,3 +22,10 @@ func lerp(from a: CGFloat, to b: CGFloat, alpha: CGFloat) -> CGFloat {
 func clamp(value: CGFloat, greater: CGFloat, less: CGFloat) -> CGFloat {
     return value < greater ? greater : value > less ? less : value
 }
+
+func calculate3dDistance(point1: (x: CGFloat, y: CGFloat, z: CGFloat), point2: (x: CGFloat, y: CGFloat, z: CGFloat)) -> CGFloat {
+    let sum1 = pow(point2.x - point1.x, 2)
+    let sum2 = pow(point2.y - point1.y, 2)
+    let sum3 = pow(point2.z - point1.z, 2)
+    return sqrt(sum1 + sum2 + sum3)
+}

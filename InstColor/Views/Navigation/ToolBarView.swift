@@ -13,6 +13,7 @@ struct ToolBarView: View {
     @State var showAbout: Bool = false
     @State var showFavorites: Bool = false
     @State var showReferences: Bool = false
+    @State var showHistory: Bool = false
     
     var containerCotentWidth: CGFloat
     
@@ -33,6 +34,10 @@ struct ToolBarView: View {
         showAbout.toggle()
     }
 
+    func toggleHistory() {
+        showHistory.toggle()
+    }
+    
     var body: some View {
         HStack {
             Group {
@@ -41,6 +46,9 @@ struct ToolBarView: View {
                 }
                 Button(action: toggleReferences) {
                     ImageButtonView(imageName: "list.bullet")
+                }
+                Button(action: toggleHistory) {
+                    ImageButtonView(imageName: "clock")
                 }
                 Button(action: toggleAbout) {
                     ImageButtonView(imageName: "questionmark")
@@ -51,21 +59,27 @@ struct ToolBarView: View {
             .padding([.bottom, .horizontal])
             .scaleEffect(1.2)
             .fullScreenCover(isPresented: $showFavorites) {
-                return FavoritesView(containerCotentWidth: containerCotentWidth)
+                FavoritesView(containerCotentWidth: containerCotentWidth)
             }
             .onChange(of: showFavorites) { toShow in
                 model.cameraManager.cameraRunnning = !toShow
             }
             .fullScreenCover(isPresented: $showReferences) {
-                return ReferencesView(containerCotentWidth: containerCotentWidth)
+                ReferencesView(containerCotentWidth: containerCotentWidth)
             }
             .onChange(of: showReferences) { toShow in
                 model.cameraManager.cameraRunnning = !toShow
             }
             .fullScreenCover(isPresented: $showAbout) {
-                return AboutView()
+                AboutView()
             }
             .onChange(of: showAbout) { toShow in
+                model.cameraManager.cameraRunnning = !toShow
+            }
+            .fullScreenCover(isPresented: $showHistory) {
+                HistoryView()
+            }
+            .onChange(of: showHistory) { toShow in
                 model.cameraManager.cameraRunnning = !toShow
             }
         }

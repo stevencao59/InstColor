@@ -21,9 +21,7 @@ struct SaveColorModifier: ViewModifier {
     }
     
     func saveColor() {
-        var savedColors = UserDefaults.standard.readColor(forKey: favoritColorKey) ?? []
-        savedColors.append(FavoriteColor(id: UUID().uuidString, red: Int(color.components.red * 255), green: Int(color.components.green * 255), blue: Int(color.components.blue * 255), createdDate: Date()))
-        UserDefaults.standard.setColor(savedColors, forKey: favoritColorKey)
+        saveFavoriteColor(color: color)
         showAlertWindow = true
     }
     
@@ -162,6 +160,8 @@ struct ColorIconContainerView: View {
 }
 
 struct ColorDetailView: View {
+    @EnvironmentObject var states: States
+
     @StateObject var model = ColorDetailViewModel()
     @State var hexText: String = "Unknown Hex"
     @State var viewSize: CGSize = CGSize(width: 0, height: 0)
@@ -171,12 +171,14 @@ struct ColorDetailView: View {
     var color: UIColor
     var showModalButtons: Bool
     var selectedDetent: PresentationDetent
+    var saveHistory: Bool = false
     
-    init(color: UIColor, showModalButtons: Bool, selectedDetent: PresentationDetent) {
+    init(color: UIColor, showModalButtons: Bool, selectedDetent: PresentationDetent, saveHistory: Bool = false) {
         self.color = color
         self.showModalButtons = showModalButtons
         self.selectedDetent = selectedDetent
         self.hexText = color.toHexString() ?? "Unknown Hex"
+        self.saveHistory = saveHistory
     }
     
     var body: some View {
@@ -204,6 +206,9 @@ struct ColorDetailView: View {
         }
         .onAppear() {
             self.model.color = color
+            if saveHistory {
+                states.viewedColors.appendLimit(item: ViewedColor(red: color.components.red, green: color.components.green, blue: color.components.blue, viewedTime: Date()), limit: maxViewedColors)
+            }
         }
     }
 }

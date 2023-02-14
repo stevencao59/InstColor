@@ -31,13 +31,10 @@ struct NavigationView: View {
     var body: some View {
         VStack {
             VStack {
-                if model.isCameraReady {
-                    BannerContentView(adUnitId: adUnitID)
-                        .padding([.bottom])
-                }
-                HStack {
-                    ToolBarView(model: model, containerContentWidth: model.containerCotentWidth)
-                }
+                BannerContentView(adUnitId: adUnitID, showBanner: model.isCameraReady)
+                    .padding([.bottom])
+                ToolBarView(model: model, containerContentWidth: model.containerCotentWidth)
+                
             }
             .frame(maxWidth: .infinity)
             .background(.black)

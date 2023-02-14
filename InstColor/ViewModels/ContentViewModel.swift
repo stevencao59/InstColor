@@ -17,6 +17,7 @@ class Settings {
 
 class States: ObservableObject {
     @Published var description: String = ""
+    @Published var viewedColors: [ViewedColor] = []
 }
 
 @MainActor

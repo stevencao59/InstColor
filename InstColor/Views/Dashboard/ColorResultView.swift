@@ -10,8 +10,6 @@ import SwiftUI
 struct ColorResultView: View {
     @ObservedObject var model: ColorResultViewModel
     
-    let resultSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 40
-    
     init(model: ColorResultViewModel) {
         self.model = model
     }
@@ -23,7 +21,7 @@ struct ColorResultView: View {
     var body: some View {
         Button(action: clickToShowSheet) {
             HStack {
-                BorderedRectView(color: Color(model.color), cornerRadius: resultSize, lineWidth: 1, width: resultSize, height: resultSize)
+                BorderedRectView(color: Color(model.color), cornerRadius: defaultItemSize, lineWidth: 1, width: defaultItemSize, height: defaultItemSize)
                 VStack(alignment: .leading) {
                     HStack {
                         Text("\(model.colorName)")
@@ -37,7 +35,7 @@ struct ColorResultView: View {
         }
         
         .sheet(isPresented: $model.showColorDetail) {
-            ColorDetailView(color: model.color, showModalButtons: true, selectedDetent: model.selectedDentent)
+            ColorDetailView(color: model.color, showModalButtons: true, selectedDetent: model.selectedDentent, saveHistory: true)
                 .presentationDetents([.medium, .large], selection: $model.selectedDentent)
         }
     }
