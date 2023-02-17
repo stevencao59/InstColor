@@ -31,9 +31,12 @@ struct HistoryColrGridItemView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Text("\(closestColor.Color)")
-                        .bold()
-                    Text("R: \(Int(round(color.components.red * 255))) G: \(Int(round(color.components.green * 255))) B: \(Int(round(color.components.blue * 255)))")
+                    Group {
+                        Text("\(closestColor.Color)")
+                            .bold()
+                        Text("R: \(Int(round(color.components.red * 255))) G: \(Int(round(color.components.green * 255))) B: \(Int(round(color.components.blue * 255)))")
+                    }
+                    .lineLimit(1, reservesSpace: false)
                 }
                 Spacer()
                 Button(action: saveColor) {

@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct ColorValuePair: Identifiable, Equatable {
+    let id = UUID()
+    var color: Color
+    var value: Double
+}
+
 struct ShadeView: View {
     @Binding var referenceColor: UIColor
 
@@ -37,21 +43,16 @@ struct ShadeView: View {
 
 struct ShadeRowView: View {
     @Binding var referenceColor: UIColor
-    var sliderValue: Double
-    var title: String
-    var combineColor: UIColor
-
+    var colorValuePairs: [ColorValuePair]
+    
     var body: some View {
         GridRow {
             VStack {
-                Text(title)
-                    .font(.headline)
-                    .bold(true)
-                    .padding([.top])
                 HStack {
                     if let referenceColor {
                         ForEach(1...4, id: \.self) { i in
-                            ShadeView(referenceColor: $referenceColor, shadeColor: referenceColor.combine(with: combineColor, amount: sliderValue * Double(i)))
+                            let color = colorValuePairs.reduce(referenceColor) { $0.combine(with: UIColor($1.color), amount: $1.value * Double(i)) }
+                            ShadeView(referenceColor: $referenceColor, shadeColor: color)
                         }
                     }
                 }
@@ -60,32 +61,82 @@ struct ShadeRowView: View {
     }
 }
 
-struct ColorShadeView: View {
-    @Binding var referenceColor: UIColor
-    @State var blendColor: Color = .white
-    @State var sliderValue = 0.15
-    let colorViewSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 20
+struct ColorPickerView: View {
+    @Binding var pairs: [ColorValuePair]
     
-    var shadeView: (title: String, color: Color) {
-        return (title: "Blend Color", color: blendColor)
+    var index: Int? {
+        if let item = pairs.first(where: { $0.id == pickerId}) {
+            return pairs.firstIndex(of: item)
+        }
+        return nil
+    }
+    
+    let pickerId: UUID
+    let viewSize: CGFloat
+    let shadeRange: ClosedRange<Double>
+    
+    func remove() {
+        if let index {
+            pairs.remove(at: index)
+        }
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Shade Amount")
-                    .bold(true)
-                Slider(value: $sliderValue, in: 0.1...0.3)
-                ColorPicker("", selection: $blendColor, supportsOpacity: false)
-                    .frame(width: colorViewSize)
+        HStack {
+            if let index {
+                if pairs.count > 1 {
+                    Button(action: remove) {
+                        ImageButtonView(imageName: "minus.circle")
+                    }
+                }
+                ColorPicker("", selection: $pairs[index].color, supportsOpacity: false)
+                    .frame(width: viewSize)
+                    .padding(.horizontal)
+                Slider(value: $pairs[index].value, in: shadeRange)
+                Text("\(String(format: "%.0f%%", pairs[index].value / shadeRange.upperBound * 100))")
+                Stepper("", value: $pairs[index].value, in: shadeRange, step: shadeRange.upperBound / 100)
+                    .labelsHidden()
+                    .foregroundColor(.white)
+                    .tint(.white)
             }
-            .padding([.horizontal])
-            
+        }
+    }
+}
+
+struct ColorShadeView: View {
+    @Binding var referenceColor: UIColor
+    @State var colorValuePairs: [ColorValuePair] = [ColorValuePair(color: .white, value: 0.0)]
+
+    let colorViewSize: CGFloat = UIScreen.screenHeight / defaultScreenHeight * 20
+    let shadeRange = 0.0...0.3
+    
+    var body: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Spacer()
+                    Group {
+                        if colorValuePairs.count < 4 {
+                            Button(action: { colorValuePairs.append(ColorValuePair(color: .white, value: 0.1)) }) {
+                                ImageButtonView(imageName: "plus")
+                            }
+                        }
+                    }
+                    .padding([.trailing])
+                }
+                
+                ForEach(colorValuePairs) { item in
+                    ColorPickerView(pairs: $colorValuePairs, pickerId: item.id, viewSize: colorViewSize, shadeRange: shadeRange)
+                        .padding([.bottom])
+                }
+            }
+
             Grid {
-                ShadeRowView(referenceColor: $referenceColor, sliderValue: sliderValue, title: shadeView.title, combineColor: UIColor(shadeView.color))
+                ShadeRowView(referenceColor: $referenceColor, colorValuePairs: colorValuePairs)
             }
         }
         .foregroundColor(.white)
+        .animation(.default, value: colorValuePairs)
     }
 }
 
