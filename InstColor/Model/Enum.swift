@@ -20,7 +20,6 @@ enum CameraError: Error {
 enum FrameSource {
     case wholeImage
     case thumbImage
-    case cameraImage
 }
 
 enum ThumbFrameSize: Double {

@@ -21,22 +21,25 @@ struct ColorResultView: View {
     var body: some View {
         Button(action: clickToShowSheet) {
             HStack {
-                BorderedRectView(color: Color(model.color), cornerRadius: defaultItemSize, lineWidth: 1, width: defaultItemSize, height: defaultItemSize)
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("\(model.colorName)")
-                            .lineLimit(1)
-                            .font(.title2)
-                            .foregroundColor(.white)
+                if let color = model.color {
+                    BorderedRectView(color: Color(color), cornerRadius: defaultItemSize, lineWidth: 1, width: defaultItemSize, height: defaultItemSize)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("\(model.colorName)")
+                                .lineLimit(1)
+                                .font(.title2)
+                                .foregroundColor(.white)
+                        }
                     }
                 }
-
             }
         }
         
         .sheet(isPresented: $model.showColorDetail) {
-            ColorDetailView(color: model.color, showModalButtons: true, selectedDetent: model.selectedDentent, saveHistory: true)
-                .presentationDetents([.medium, .large], selection: $model.selectedDentent)
+            if let color = model.color {
+                ColorDetailView(color: color, showModalButtons: true, selectedDetent: model.selectedDentent, saveHistory: true)
+                    .presentationDetents([.medium, .large], selection: $model.selectedDentent)
+            }
         }
     }
 }

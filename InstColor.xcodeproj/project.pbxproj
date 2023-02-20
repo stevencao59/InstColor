@@ -18,6 +18,7 @@
 		B60C70F02998890200031121 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70EF2998890200031121 /* Date.swift */; };
 		B60C70F229996CE800031121 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70F129996CE800031121 /* ButtonView.swift */; };
 		B60C70F4299B261800031121 /* Crud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C70F3299B261800031121 /* Crud.swift */; };
+		B60C70F729A032B800031121 /* ColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = B60C70F629A032B800031121 /* ColorKit */; };
 		B60EC483292DDD6200483710 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC482292DDD6200483710 /* Constants.swift */; };
 		B60EC4852933182700483710 /* ColorShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EC4842933182700483710 /* ColorShadeView.swift */; };
 		B619EB2A2980D470001BF11A /* SliderCmykGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619EB292980D470001BF11A /* SliderCmykGroupView.swift */; };
@@ -186,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B60C70F729A032B800031121 /* ColorKit in Frameworks */,
 				B6078506295161B400C6897E /* GoogleMobileAds in Frameworks */,
 				B659D5752944D10C00BB4D76 /* FirebaseAnalytics in Frameworks */,
 				B61D9C862963E0AD00ED0D0E /* RevenueCat in Frameworks */,
@@ -522,6 +524,7 @@
 				B659D5742944D10C00BB4D76 /* FirebaseAnalytics */,
 				B6078505295161B400C6897E /* GoogleMobileAds */,
 				B61D9C852963E0AD00ED0D0E /* RevenueCat */,
+				B60C70F629A032B800031121 /* ColorKit */,
 			);
 			productName = InstColor;
 			productReference = B6DE828528E729E300826201 /* InstColor.app */;
@@ -555,6 +558,7 @@
 				B659D5732944D10C00BB4D76 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B6078504295161B400C6897E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				B61D9C842963E0AD00ED0D0E /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				B60C70F529A032B700031121 /* XCRemoteSwiftPackageReference "ColorKit" */,
 			);
 			productRefGroup = B6DE828628E729E300826201 /* Products */;
 			projectDirPath = "";
@@ -885,6 +889,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		B60C70F529A032B700031121 /* XCRemoteSwiftPackageReference "ColorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Boris-Em/ColorKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B61D9C842963E0AD00ED0D0E /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -908,6 +920,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B6078504295161B400C6897E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		B60C70F629A032B800031121 /* ColorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B60C70F529A032B700031121 /* XCRemoteSwiftPackageReference "ColorKit" */;
+			productName = ColorKit;
 		};
 		B61D9C852963E0AD00ED0D0E /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;

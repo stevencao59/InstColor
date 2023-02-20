@@ -50,7 +50,7 @@ struct DescriptionView: View {
             }
         }
         .onChange(of: model.frameSource) { source in
-            states.description = "\(source == .thumbImage ? "Area Detection" : "Full Image Detection")"
+            states.description = "\(source == .thumbImage ? "Single Color Detection" : "Dominant Colors Detection")"
             showDescription.toggle()
         }
         .onChange(of: showDescription) { value in

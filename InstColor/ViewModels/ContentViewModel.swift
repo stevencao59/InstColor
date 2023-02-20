@@ -7,6 +7,7 @@
 import CoreImage
 import UIKit
 import Combine
+import ColorKit
 
 class Settings {
     static let shared = Settings()
@@ -31,11 +32,18 @@ class ContentViewModel: ObservableObject {
     @Published var thumbFrame: CGImage?
     @Published var recgonizeFrame: CGImage?
     
-    // Image source can be from whole camera, thumb image or camera pictures
-    @Published var frameSource: FrameSource = .wholeImage
+    // Image source can be from whole camera, thumb image
+    @Published var frameSource: FrameSource = .thumbImage
     
     // Average color results
     @Published var averageColor: UIColor = .white
+    
+    // Dominant color results
+    @Published var dominantColors: [UIColor] = []
+    
+    // Frame Passthrough objects
+    @Published var averageColorPassthrough: CGImage?
+    @Published var dominantColorsPassthrough: CGImage?
     
     // Pressed location, size and scale
     @Published var location: CGPoint?
@@ -117,12 +125,33 @@ class ContentViewModel: ObservableObject {
         return nil
     }
     
+    func getDominantColors(cgImage: CGImage?) -> [UIColor]? {
+        if let image = cgImage {
+            let image = UIImage(cgImage: image)
+            return try? image.dominantColors()
+        }
+        return nil
+    }
+    
+    func checkIsColorSimilar(originalColors: [UIColor], currentColors: [UIColor]) -> [UIColor] {
+        if originalColors.count != currentColors.count {
+            return currentColors
+        }
+        var returnColors: [UIColor] = []
+        for (index, _) in currentColors.enumerated() {
+            let result = currentColors[index].difference(from: originalColors[index], using: .CIE94)
+            let colorToAdd = result > .different(0) ? currentColors[index] : originalColors[index]
+            returnColors.append(colorToAdd)
+        }
+        return returnColors
+    }
+    
     func setupSubscriptions() {
         cameraManager.$error
             .receive(on: RunLoop.main)
             .map { $0 }
             .assign(to: &$error)
-
+        
         cameraManager.$cameraRunnning
             .receive(on: RunLoop.main)
             .sink(receiveValue: { isRunning in
@@ -180,24 +209,37 @@ class ContentViewModel: ObservableObject {
 
         $frame
             .receive(on: RunLoop.main)
-            .compactMap { frame in
+            .removeDuplicates()
+            .sink(receiveValue: { frame in
                 switch self.frameSource {
-                case .wholeImage:
-                    return self.frame
                 case .thumbImage:
-                    return self.thumbFrame
-                default:
-                    return self.frame
+                    self.averageColorPassthrough = self.thumbFrame.publisher.output
+                case .wholeImage:
+                    self.dominantColorsPassthrough = self.frame.publisher.output
                 }
-            }
-            .assign(to: &$recgonizeFrame)
-
-        $recgonizeFrame
+            })
+            .store(in: &subscriptions)
+        
+        $averageColorPassthrough
             .receive(on: RunLoop.main)
             .removeDuplicates()
-            .sink(receiveValue: { result in
-                if let color = self.getColor(cgImage: result.publisher.output) {
+            .sink(receiveValue: { frame in
+                if let color = self.getColor(cgImage: frame.publisher.output) {
                     self.averageColor = color
+                }
+            })
+            .store(in: &subscriptions)
+        
+        $dominantColorsPassthrough
+            .receive(on: RunLoop.main)
+            .removeDuplicates()
+            .throttle(for: 1.5, scheduler: RunLoop.main, latest: true)
+            .sink(receiveValue: { frame in
+                if let colors = self.getDominantColors(cgImage: frame.publisher.output) {
+                    let sortedColors = colors.sorted {
+                        return getRgbHsv(r: $0.red, g: $0.green, b: $0.blue) < getRgbHsv(r: $1.red, g: $1.green, b: $1.blue)
+                    }
+                    self.dominantColors = self.checkIsColorSimilar(originalColors: self.dominantColors, currentColors: sortedColors)
                 }
             })
             .store(in: &subscriptions)

@@ -45,6 +45,26 @@ struct ResultTextContainerView: View {
     }
 }
 
+struct DominantColorsView: View {
+    let colors: [UIColor]?
+    
+    var body: some View {
+        HStack {
+            if let colors {
+                ForEach(colors, id: \.self) { color in
+                    BorderedRectView(color: Color(color), cornerRadius: 20, lineWidth: 1, width: 20, height: 20)
+                }
+                Spacer()
+                Text("Dominant Colors: \(colors.count)")
+                    .bold()
+                    .font(.footnote)
+            }
+        }
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity)
+        .animation(.easeIn, value: colors)
+    }
+}
 
 struct DashboardView: View {
     @ObservedObject var model: ContentViewModel
@@ -59,14 +79,23 @@ struct DashboardView: View {
         VStack {
             Spacer()
             HStack(alignment: .center) {
-                ColorResultView(model: resultModel)
-                Spacer()
-                ResultTextContainerView(color: resultModel.color, baseColorName: resultModel.baseColorName, baseColorHex: resultModel.baseColorHex)
+                if model.frameSource == .wholeImage {
+                    DominantColorsView(colors: resultModel.dominantColors)
+                } else {
+                    ColorResultView(model: resultModel)
+                    Spacer()
+                    if let color = resultModel.color {
+                        ResultTextContainerView(color: color, baseColorName: resultModel.baseColorName, baseColorHex: resultModel.baseColorHex)
+                    }
+                }
             }
             .padding()
             .background(.black)
             .onChange(of: model.averageColor) { color in
                 resultModel.color = color
+            }
+            .onChange(of: model.dominantColors) { colors in
+                resultModel.dominantColors = colors
             }
             .modifier(FloatToolbarViewModifier(model: model))
             .overlay(

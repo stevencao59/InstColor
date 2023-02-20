@@ -10,7 +10,8 @@ import SwiftUI
 import Combine
 
 class ColorResultViewModel: ObservableObject {
-    @Published var color: UIColor = UIColor(.white)
+    @Published var color: UIColor?
+    @Published var dominantColors: [UIColor] = []
     @Published var colorName: String = "Unknown Color"
     @Published var baseColorName: String = "Unknown Base Color"
     @Published var baseColorHex: String = "#000000"
@@ -26,6 +27,7 @@ class ColorResultViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .removeDuplicates()
             .sink(receiveValue: { color in
+                guard let color else { return }
                 let closestColor = color.calculateClosestColor(colorMap: Settings.shared.colorMap)
 
                 self.colorName = closestColor.Color
