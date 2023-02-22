@@ -46,23 +46,39 @@ struct ResultTextContainerView: View {
 }
 
 struct DominantColorsView: View {
-    let colors: [UIColor]?
+    @Binding var selectedDentent: PresentationDetent
+    @Binding var showColorDetail: Bool
+
+    let colors: [DetectedColor]
+    
+    let viewSize = screenRatio * 20
     
     var body: some View {
-        HStack {
+        VStack {
             if let colors {
-                ForEach(colors, id: \.self) { color in
-                    BorderedRectView(color: Color(color), cornerRadius: 20, lineWidth: 1, width: 20, height: 20)
-                }
-                Spacer()
-                Text("Dominant Colors: \(colors.count)")
-                    .bold()
+                Text("Dominant colors / Frequency")
                     .font(.footnote)
+                    .foregroundColor(.gray)
+                Button(action: { showColorDetail.toggle() }) {
+                    HStack {
+                        ForEach(colors, id: \.self) { color in
+                            VStack {
+                                BorderedRectView(color: Color(color.color), cornerRadius: 1, lineWidth: 1, width: viewSize, height: viewSize)
+                                Text((String(format: "%.0f%%", color.frequency * 100)))
+                                    .font(.footnote)
+                            }
+                        }
+                    }
+                }
             }
         }
         .foregroundColor(.white)
         .frame(maxWidth: .infinity)
         .animation(.easeIn, value: colors)
+        .sheet(isPresented: $showColorDetail) {
+            ColorDetailView(colors: colors, showModalButtons: true, selectedDetent: selectedDentent, saveHistory: true)
+                .presentationDetents([.medium, .large], selection: $selectedDentent)
+        }
     }
 }
 
@@ -80,7 +96,7 @@ struct DashboardView: View {
             Spacer()
             HStack(alignment: .center) {
                 if model.frameSource == .wholeImage {
-                    DominantColorsView(colors: resultModel.dominantColors)
+                    DominantColorsView(selectedDentent: $resultModel.selectedDentent, showColorDetail: $resultModel.showColorDetail, colors: resultModel.detectedColors)
                 } else {
                     ColorResultView(model: resultModel)
                     Spacer()
@@ -95,7 +111,7 @@ struct DashboardView: View {
                 resultModel.color = color
             }
             .onChange(of: model.dominantColors) { colors in
-                resultModel.dominantColors = colors
+                resultModel.detectedColors = colors
             }
             .modifier(FloatToolbarViewModifier(model: model))
             .overlay(
@@ -107,7 +123,6 @@ struct DashboardView: View {
                 }
             )
         }
-        .padding([.bottom])
     }
 }
 

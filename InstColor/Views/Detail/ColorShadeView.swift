@@ -117,7 +117,7 @@ struct ColorShadeView: View {
                     Spacer()
                     Group {
                         if colorValuePairs.count < 4 {
-                            Button(action: { colorValuePairs.append(ColorValuePair(color: .white, value: 0.1)) }) {
+                            Button(action: { colorValuePairs.append(ColorValuePair(color: .white, value: 0.0)) }) {
                                 ImageButtonView(imageName: "plus")
                             }
                         }
@@ -134,6 +134,12 @@ struct ColorShadeView: View {
             Grid {
                 ShadeRowView(referenceColor: $referenceColor, colorValuePairs: colorValuePairs)
             }
+            
+            Text("You can blend custom colors (up to 4) with color you just detected.")
+                .multilineTextAlignment(.center)
+                .font(.footnote)
+                .foregroundColor(.gray)
+                .padding()
         }
         .foregroundColor(.white)
         .animation(.default, value: colorValuePairs)

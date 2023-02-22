@@ -13,3 +13,9 @@ struct ColorInfo: Identifiable {
     let InfoName: String
     let Value: String
 }
+
+struct DetectedColor: Identifiable, Hashable, Equatable {
+    let id = UUID()
+    let color: UIColor
+    var frequency: CGFloat = 1
+}

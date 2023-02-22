@@ -65,7 +65,7 @@ struct ReferencesView: View {
                 
                 List {
                     OutlineGroup(colors, children: \.children) { child in
-                        NavigationLink(destination: ColorDetailView(color: UIColor(red: child.Red, green: child.Green, blue: child.Blue), showModalButtons: false, selectedDetent: .large)) {
+                        NavigationLink(destination: ColorDetailView(colors: [DetectedColor(color: UIColor(red: child.Red, green: child.Green, blue: child.Blue), frequency: 1)], showModalButtons: false, selectedDetent: .large)) {
                             VStack {
                                 ReferenceRowView(mapItem: RGBColor(Color: child.Color, BaseColor: child.BaseColor, BaseColorHex: child.BaseColorHex, Red: child.Red, Green: child.Green, Blue: child.Blue))
                             }

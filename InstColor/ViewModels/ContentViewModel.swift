@@ -39,7 +39,7 @@ class ContentViewModel: ObservableObject {
     @Published var averageColor: UIColor = .white
     
     // Dominant color results
-    @Published var dominantColors: [UIColor] = []
+    @Published var dominantColors: [DetectedColor] = []
     
     // Frame Passthrough objects
     @Published var averageColorPassthrough: CGImage?
@@ -125,10 +125,15 @@ class ContentViewModel: ObservableObject {
         return nil
     }
     
-    func getDominantColors(cgImage: CGImage?) -> [UIColor]? {
+    func getDominantColors(cgImage: CGImage?) -> [DetectedColor]? {
         if let image = cgImage {
             let image = UIImage(cgImage: image)
-            return try? image.dominantColors()
+            let colorFrequency = try? image.dominantColorFrequencies()
+            if let colorFrequency {
+                return colorFrequency.map {
+                    DetectedColor(color: $0.color , frequency: $0.frequency)
+                }
+            }
         }
         return nil
     }
@@ -235,11 +240,9 @@ class ContentViewModel: ObservableObject {
             .removeDuplicates()
             .throttle(for: 1.5, scheduler: RunLoop.main, latest: true)
             .sink(receiveValue: { frame in
+                if !self.cameraManager.cameraRunnning { return }
                 if let colors = self.getDominantColors(cgImage: frame.publisher.output) {
-                    let sortedColors = colors.sorted {
-                        return getRgbHsv(r: $0.red, g: $0.green, b: $0.blue) < getRgbHsv(r: $1.red, g: $1.green, b: $1.blue)
-                    }
-                    self.dominantColors = self.checkIsColorSimilar(originalColors: self.dominantColors, currentColors: sortedColors)
+                    self.dominantColors = colors
                 }
             })
             .store(in: &subscriptions)

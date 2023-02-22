@@ -11,7 +11,7 @@ import Combine
 
 class ColorResultViewModel: ObservableObject {
     @Published var color: UIColor?
-    @Published var dominantColors: [UIColor] = []
+    @Published var detectedColors: [DetectedColor] = []
     @Published var colorName: String = "Unknown Color"
     @Published var baseColorName: String = "Unknown Base Color"
     @Published var baseColorHex: String = "#000000"

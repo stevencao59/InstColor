@@ -24,7 +24,9 @@ let defaultFontSize = 17.0
 
 let defaultScreenHeight: CGFloat = 852 // iPhone 14 Pro height as reference
 
-let defaultItemSize = UIScreen.screenHeight / defaultScreenHeight * 40
+let screenRatio = UIScreen.screenHeight / defaultScreenHeight
+
+let defaultItemSize = screenRatio * 40
 
 let maxViewedColors = 24
 

@@ -79,7 +79,8 @@ struct FavoritesView: View {
                         ForEach(favoriteColors) { color in
                             let uiColor = UIColor(red: color.red, green: color.green, blue: color.blue)
                             let title = uiColor.calculateClosestColor(colorMap: Settings.shared.colorMap).Color
-                            NavigationLink(destination: ColorDetailView(color: uiColor, showModalButtons: false, selectedDetent: .large)) {
+                            let colors = [DetectedColor(color: uiColor)]
+                            NavigationLink(destination: ColorDetailView(colors: colors, showModalButtons: false, selectedDetent: .large)) {
                                 FavoriteColorRow(title: title, uiColor: uiColor)
                             }
                             .listRowBackground(Color.black)

@@ -159,6 +159,35 @@ struct ColorIconContainerView: View {
     }
 }
 
+struct ColorGroupVew: View {
+    var colors: [DetectedColor]
+    @Binding var selectColor: UIColor
+    
+    let viewSize = screenRatio * 35
+    
+    var body: some View {
+        if colors.count > 1 {
+            VStack {
+                Text("Dominant Colors")
+                    .font(.body)
+                HStack {
+                    ForEach(colors, id: \.self) { c in
+                        Button(action: { selectColor = c.color }) {
+                            VStack {
+                                BorderedRectView(color: Color(c.color), cornerRadius: 10, lineWidth: 2, width: viewSize, height: viewSize)
+                                Text((String(format: "%.0f%%", c.frequency * 100)))
+                                    .font(.footnote)
+                            }
+                        }
+                    }
+                }
+            }
+            .foregroundColor(.white)
+            .padding([.horizontal, .bottom])
+        }
+    }
+}
+
 struct ColorDetailView: View {
     @EnvironmentObject var states: States
 
@@ -168,16 +197,18 @@ struct ColorDetailView: View {
 
     @FocusState var keyboardFocusState: FocusElement?
     
-    var color: UIColor
+    var colors: [DetectedColor]
+    var selectedColor: UIColor
     var showModalButtons: Bool
     var selectedDetent: PresentationDetent
     var saveHistory: Bool = false
     
-    init(color: UIColor, showModalButtons: Bool, selectedDetent: PresentationDetent, saveHistory: Bool = false) {
-        self.color = color
+    init(colors: [DetectedColor], showModalButtons: Bool, selectedDetent: PresentationDetent, saveHistory: Bool = false) {
+        self.colors = colors
+        self.selectedColor = colors[0].color
         self.showModalButtons = showModalButtons
         self.selectedDetent = selectedDetent
-        self.hexText = color.toHexString() ?? "Unknown Hex"
+        self.hexText = self.selectedColor.toHexString() ?? "Unknown Hex"
         self.saveHistory = saveHistory
     }
     
@@ -185,6 +216,7 @@ struct ColorDetailView: View {
         VStack {
             ColorIconContainerView(color: model.color, colorName: model.colorName, baseColorName: model.baseColorName, keyboardFocusState: $keyboardFocusState)
             ScrollView {
+                ColorGroupVew(colors: colors, selectColor: $model.color)
                 SliderGroupContainerView(model: model, keyboardFocusState: $keyboardFocusState, containerCotentWidth: viewSize.width)
                 
                 ColorHexTextView(displayColor: $model.color, keyboardFocusState: $keyboardFocusState)
@@ -205,9 +237,9 @@ struct ColorDetailView: View {
             }
         }
         .onAppear() {
-            self.model.color = color
+            self.model.color = selectedColor
             if saveHistory {
-                states.viewedColors.appendLimit(item: ViewedColor(red: color.components.red, green: color.components.green, blue: color.components.blue, viewedTime: Date()), limit: maxViewedColors)
+                states.viewedColors.appendLimit(item: ViewedColor(red: selectedColor.components.red, green: selectedColor.components.green, blue: selectedColor.components.blue, viewedTime: Date()), limit: maxViewedColors)
             }
         }
     }
@@ -215,6 +247,6 @@ struct ColorDetailView: View {
 
 struct ColorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorDetailView(color: .orange, showModalButtons: true, selectedDetent: .large)
+        ColorDetailView(colors: [DetectedColor(color: .orange)], showModalButtons: true, selectedDetent: .large)
     }
 }

@@ -45,7 +45,6 @@ struct HistoryColrGridItemView: View {
             }
             .font(.footnote)
         }
-        .padding()
         .alert("Favorite color is saved!", isPresented: $showAlertWindow) {
             Button("Ok", role: .cancel) { }
         }
@@ -64,27 +63,21 @@ struct HistoryView: View {
         VStack {
             NavigationStack {
                 if !states.viewedColors.isEmpty {
-                    ZStack(alignment: .topLeading) {
-                        Color.black
-                        VStack {
-                            Grid {
-                                ForEach(states.viewedColors.reversed().chunked(into: 2), id: \.self) { colorRow in
-                                    GridRow {
-                                        ForEach(colorRow, id: \.self) { viewColor in
-                                            let color = Color(red: viewColor.red, green: viewColor.green, blue: viewColor.blue)
-                                            NavigationLink(destination: ColorDetailView(color: UIColor(color), showModalButtons: false, selectedDetent: .large)) {
-                                                HistoryColrGridItemView(color: color, viewedTime: viewColor.viewedTime)
-                                            }
-                                        }
+                        
+                            List {
+                                ForEach(states.viewedColors.reversed(), id: \.self) { viewColor in
+                                    let color = Color(red: viewColor.red, green: viewColor.green, blue: viewColor.blue)
+                                    NavigationLink(destination: ColorDetailView(colors: [DetectedColor(color: UIColor(color))], showModalButtons: false, selectedDetent: .large)) {
+                                        HistoryColrGridItemView(color: color, viewedTime: viewColor.viewedTime)
+                                            .listRowBackground(Color.black)
                                     }
                                 }
+                                .listRowBackground(Color.black)
                             }
                             Text("Here are colors you have previously detected. We keep \(maxViewedColors) colors maximum.")
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                                 .multilineTextAlignment(.center)
-                        }
-                    }
                     .toolbar() {
                         ToolbarItem(placement: .navigationBarLeading) {
                             CloseButtonView()
@@ -104,7 +97,20 @@ struct HistoryView: View {
 }
 
 struct HistoryView_Previews: PreviewProvider {
+    static let states = States()
+    
+    
+    
     static var previews: some View {
         HistoryView()
+            .background(.black)
+            .foregroundColor(.white)
+            .onAppear() {
+                states.viewedColors = [
+                    ViewedColor(red: 0, green: 0, blue: 0.3, viewedTime: Date()),
+                    ViewedColor(red: 0.7, green: 0, blue: 0.1, viewedTime: Date())
+                ]
+            }
+            .environmentObject(states)
     }
 }

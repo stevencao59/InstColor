@@ -37,7 +37,7 @@ struct ColorResultView: View {
         
         .sheet(isPresented: $model.showColorDetail) {
             if let color = model.color {
-                ColorDetailView(color: color, showModalButtons: true, selectedDetent: model.selectedDentent, saveHistory: true)
+                ColorDetailView(colors: [DetectedColor(color: color, frequency: 1)], showModalButtons: true, selectedDetent: model.selectedDentent, saveHistory: true)
                     .presentationDetents([.medium, .large], selection: $model.selectedDentent)
             }
         }
