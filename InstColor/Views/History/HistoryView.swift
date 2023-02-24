@@ -63,31 +63,31 @@ struct HistoryView: View {
         VStack {
             NavigationStack {
                 if !states.viewedColors.isEmpty {
-                        
                             List {
-                                ForEach(states.viewedColors.reversed(), id: \.self) { viewColor in
+                                Text("Here are colors you have previously detected. We keep \(maxViewedColors) colors maximum.")
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                                    .multilineTextAlignment(.center)
+                                    .background(.black)
+                                    .frame(maxWidth: .infinity)
+                                    .listRowBackground(Color.black)
+                                ForEach(states.viewedColors.reversed()) { viewColor in
                                     let color = Color(red: viewColor.red, green: viewColor.green, blue: viewColor.blue)
                                     NavigationLink(destination: ColorDetailView(colors: [DetectedColor(color: UIColor(color))], showModalButtons: false, selectedDetent: .large)) {
                                         HistoryColrGridItemView(color: color, viewedTime: viewColor.viewedTime)
-                                            .listRowBackground(Color.black)
                                     }
+                                    .listRowBackground(Color.black)
                                 }
-                                .listRowBackground(Color.black)
                             }
-                            Text("Here are colors you have previously detected. We keep \(maxViewedColors) colors maximum.")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
-                                .multilineTextAlignment(.center)
-                    .toolbar() {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            CloseButtonView()
-                        }
-                    }
-                    .navigationTitle("History")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .scrollContentBackground(.hidden)
-                    .background(.black)
-                    .foregroundColor(.white)
+                            .navigationTitle("History")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .scrollContentBackground(.hidden)
+                            .background(.black)
+                            .toolbar() {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    CloseButtonView()
+                                }
+                            }
                 } else {
                     PlaceholderView(placeholderImageName: "fossil.shell", placeholderText: "Viewed colors will be availble once you select any colors")
                 }

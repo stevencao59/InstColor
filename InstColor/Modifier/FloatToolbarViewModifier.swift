@@ -50,7 +50,7 @@ struct DescriptionView: View {
             }
         }
         .onChange(of: model.frameSource) { source in
-            states.description = "\(source == .thumbImage ? "Single Color Detection" : "Dominant Colors Detection")"
+            states.description = "\(source == .thumbImage ? "Single Color" : "Dominant Colors")"
             showDescription.toggle()
         }
         .onChange(of: showDescription) { value in
@@ -110,7 +110,7 @@ struct ThumbViewToolbarView : View {
         Button(action: increaseFrameDelta) {
             ImageButtonView(imageName: "plus.square")
         }
-        ToolbarInfoView(infoData: "+" + String(format: "%.0f", model.thumbViewSizeDelta))
+        ToolbarInfoView(infoData: (model.thumbViewSizeDelta > 0 ? "+" : "") + String(format: "%.0f", model.thumbViewSizeDelta))
         Button(action: decreaseFrameDelta) {
             ImageButtonView(imageName: "minus.square")
         }
@@ -139,14 +139,16 @@ struct GenericToolbarView: View {
             ImageButtonView(imageName: "arrow.triangle.2.circlepath")
         }
         FrameSourceView(frameSource: $model.frameSource)
+        PressableButtonView(imageName: "flashlight.on.fill", action: turnOnTorch)
+        PressableButtonView(imageName: "light.max", action: turnOnScreenStay)
         if model.frameSource == .thumbImage {
             Button(action: showThumbConfig) {
                 ImageButtonView(imageName: "square.and.pencil.circle.fill")
             }
         }
-        PressableButtonView(imageName: "flashlight.on.fill", action: turnOnTorch)
-        PressableButtonView(imageName: "light.max", action: turnOnScreenStay)
-        ImageSwitchButtonView(initialImageName: "d.square", switchImageName: "l.square", action: switchAlgo)
+        if model.frameSource == .thumbImage {
+            ImageSwitchButtonView(initialImageName: "d.square", switchImageName: "l.square", action: switchAlgo)
+        }
     }
 }
 

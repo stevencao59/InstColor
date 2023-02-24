@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct DashboardHeightPreferenceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat,
+                       nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
 struct ResultTextContainerView: View {
     let color: UIColor
     let baseColorName: String
@@ -86,6 +95,10 @@ struct DashboardView: View {
     @ObservedObject var model: ContentViewModel
     @StateObject var resultModel: ColorResultViewModel
     
+    private var showDominantConfigView: Bool {
+        return model.frameSource == .wholeImage
+    }
+    
     init(model: ContentViewModel) {
         self.model = model
         self._resultModel = StateObject(wrappedValue: ColorResultViewModel(camera: model.cameraManager))
@@ -95,7 +108,7 @@ struct DashboardView: View {
         VStack {
             Spacer()
             HStack(alignment: .center) {
-                if model.frameSource == .wholeImage {
+                if showDominantConfigView {
                     DominantColorsView(selectedDentent: $resultModel.selectedDentent, showColorDetail: $resultModel.showColorDetail, colors: resultModel.detectedColors)
                 } else {
                     ColorResultView(model: resultModel)
@@ -114,14 +127,13 @@ struct DashboardView: View {
                 resultModel.detectedColors = colors
             }
             .modifier(FloatToolbarViewModifier(model: model))
-            .overlay(
-                GeometryReader { geo in
-                    Color.clear
-                        .onAppear {
-                            model.dashboardHeight = geo.size.height
-                        }
-                }
-            )
+            .background (GeometryReader { geo in
+                Color.clear.preference(key: DashboardHeightPreferenceKey.self, value: geo.size.height)
+            })
+            .animation(.easeIn, value: showDominantConfigView)
+        }
+        .onPreferenceChange(DashboardHeightPreferenceKey.self) {
+            model.dashboardHeight = $0
         }
     }
 }

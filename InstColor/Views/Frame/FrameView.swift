@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct FrameGapHeightPreferenceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat,
+                       nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
 struct FrameView: View {
     @ObservedObject var model: ContentViewModel
     @State private var frameBlur = 0.0
@@ -42,10 +51,16 @@ struct FrameView: View {
                         }
                         .animation(.default, value: frameBlur)
                         .overlay(ThumbView(model: model), alignment: .topLeading)
+                        .background (GeometryReader { geo in
+                            Color.clear.preference(key: FrameGapHeightPreferenceKey.self, value: geo.frame(in: .named("Custom")).minY)
+                        })
                 }
             }
         }
-        .ignoresSafeArea()
+        .coordinateSpace(name: "Custom")
+        .onPreferenceChange(FrameGapHeightPreferenceKey.self) {
+            model.imageGapHeight = $0
+        }
     }
 }
 

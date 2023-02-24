@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct NavigationHeightPreferenceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat,
+                       nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
 struct NavigationView: View {
     @ObservedObject var model: ContentViewModel
 
@@ -39,7 +48,13 @@ struct NavigationView: View {
             .frame(maxWidth: .infinity)
             .background(.black)
             .foregroundColor(.white)
+            .background (GeometryReader { geo in
+                Color.clear.preference(key: NavigationHeightPreferenceKey.self, value: geo.size.height)
+            })
             Spacer()
+        }
+        .onPreferenceChange(NavigationHeightPreferenceKey.self) {
+            model.navigationHeight = $0
         }
     }
 }

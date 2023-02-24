@@ -59,6 +59,8 @@ class ContentViewModel: ObservableObject {
     @Published var bottomBarHeight: CGFloat = 0
     @Published var containerCotentWidth: CGFloat = 0
     @Published var containerCotentHeight: CGFloat = 0
+    @Published var navigationHeight: CGFloat = 0
+    @Published var imageGapHeight: CGFloat = 0
     
     // All camera errors
     @Published var error: Error?
@@ -164,12 +166,12 @@ class ContentViewModel: ObservableObject {
             })
             .store(in: &subscriptions)
         
-        $location
-            .receive(on: RunLoop.main)
-            .compactMap() { loc in
-                return self.getRect(loc: loc)
-            }
-            .assign(to: &$rect)
+//        $location
+//            .receive(on: RunLoop.main)
+//            .compactMap() { loc in
+//                return self.getRect(loc: loc)
+//            }
+//            .assign(to: &$rect)
         
 //        Timer.publish(every: 0.01, on: .main, in: .default)
 //            .autoconnect()
@@ -241,8 +243,16 @@ class ContentViewModel: ObservableObject {
             .throttle(for: 1.5, scheduler: RunLoop.main, latest: true)
             .sink(receiveValue: { frame in
                 if !self.cameraManager.cameraRunnning { return }
-                if let colors = self.getDominantColors(cgImage: frame.publisher.output) {
-                    self.dominantColors = colors
+                if let image = frame.publisher.output {
+                    if let size = self.size {
+                        let posY = Int(self.navigationHeight - self.imageGapHeight)
+                        let cropHeight = Int(self.imageScaledHeight + self.imageGapHeight - self.dashboardHeight)
+                        let rect = CGRect(x: 0, y: posY, width: Int(self.containerCotentWidth), height: cropHeight)
+                        let croppedImage = UIImage(cgImage: image).cropImage(toRect: rect, viewWidth: size.width, viewHeight: size.height)
+                        if let colors = self.getDominantColors(cgImage: croppedImage) {
+                            self.dominantColors = colors
+                        }
+                    }
                 }
             })
             .store(in: &subscriptions)
