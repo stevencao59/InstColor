@@ -12,17 +12,10 @@ struct HistoryColrGridItemView: View {
     var viewedTime: Date
     var closestColor: (Color: String, BaseColor: String, BaseColorHex: String, Red: Int, Green: Int, Blue: Int)
     
-    @State private var showAlertWindow = false
-    
     init(color: Color, viewedTime: Date) {
         self.color = UIColor(color)
         self.closestColor = self.color.calculateClosestColor(colorMap: Settings.shared.colorMap)
         self.viewedTime = viewedTime
-    }
-    
-    func saveColor() {
-        saveFavoriteColor(color: color)
-        showAlertWindow = true
     }
     
     var body: some View {
@@ -39,14 +32,8 @@ struct HistoryColrGridItemView: View {
                     .lineLimit(1, reservesSpace: false)
                 }
                 Spacer()
-                Button(action: saveColor) {
-                    ImageButtonView(imageName: "square.and.arrow.down")
-                }
             }
             .font(.footnote)
-        }
-        .alert("Favorite color is saved!", isPresented: $showAlertWindow) {
-            Button("Ok", role: .cancel) { }
         }
     }
 }
@@ -54,7 +41,8 @@ struct HistoryColrGridItemView: View {
 
 struct HistoryView: View {
     @EnvironmentObject var states: States
-    
+    @State private var showAlertWindow = false
+
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
@@ -63,31 +51,42 @@ struct HistoryView: View {
         VStack {
             NavigationStack {
                 if !states.viewedColors.isEmpty {
-                            List {
-                                Text("Here are colors you have previously detected. We keep \(maxViewedColors) colors maximum.")
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
-                                    .multilineTextAlignment(.center)
-                                    .background(.black)
-                                    .frame(maxWidth: .infinity)
-                                    .listRowBackground(Color.black)
-                                ForEach(states.viewedColors.reversed()) { viewColor in
-                                    let color = Color(red: viewColor.red, green: viewColor.green, blue: viewColor.blue)
-                                    NavigationLink(destination: ColorDetailView(colors: [DetectedColor(color: UIColor(color))], showModalButtons: false, selectedDetent: .large)) {
-                                        HistoryColrGridItemView(color: color, viewedTime: viewColor.viewedTime)
-                                    }
-                                    .listRowBackground(Color.black)
-                                }
-                            }
-                            .navigationTitle("History")
-                            .navigationBarTitleDisplayMode(.inline)
-                            .scrollContentBackground(.hidden)
+                    List {
+                        Text("Here are colors you have previously detected. We keep \(maxViewedColors) colors maximum.")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
                             .background(.black)
-                            .toolbar() {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                    CloseButtonView()
+                            .frame(maxWidth: .infinity)
+                            .listRowBackground(Color.black)
+                        ForEach(states.viewedColors.reversed()) { viewColor in
+                            let color = Color(red: viewColor.red, green: viewColor.green, blue: viewColor.blue)
+                            NavigationLink(destination: ColorDetailView(colors: [DetectedColor(color: UIColor(color))], showModalButtons: false, selectedDetent: .large)) {
+                                HistoryColrGridItemView(color: color, viewedTime: viewColor.viewedTime)
+                                Spacer()
+                                Button(action: {
+                                    saveFavoriteColor(color: UIColor(color))
+                                    showAlertWindow = true
+                                }) {
+                                    ImageButtonView(imageName: "square.and.arrow.down")
                                 }
+                                .buttonStyle(PlainButtonStyle())
                             }
+                            .listRowBackground(Color.black)
+                        }
+                    }
+                    .navigationTitle("History")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .scrollContentBackground(.hidden)
+                    .background(.black)
+                    .toolbar() {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            CloseButtonView()
+                        }
+                    }
+                    .alert("Favorite color is saved!", isPresented: $showAlertWindow) {
+                        Button("Ok", role: .cancel) { }
+                    }
                 } else {
                     PlaceholderView(placeholderImageName: "fossil.shell", placeholderText: "Viewed colors will be availble once you select any colors")
                 }
