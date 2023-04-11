@@ -9,17 +9,24 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct OpacityViewModifier: ViewModifier {
+    
+    var showModalButtons = false
+    
     func body(content: Content) -> some View {
-        if #available(iOS 16.4, *) {
-            content
-                .background(Color.black.edgesIgnoringSafeArea(.all))
+        if showModalButtons {
+            if #available(iOS 16.4, *) {
+                content
+                    .presentationBackground(Color(.black).opacity(0.95))
+            } else {
+                content
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .opacity(0.8)
+                    .clearModalBackground()
+            }
         } else {
             content
                 .background(Color.black.edgesIgnoringSafeArea(.all))
-                .opacity(0.8)
-                .clearModalBackground()
         }
-
     }
 }
 
@@ -240,7 +247,7 @@ struct ColorDetailView: View {
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .modifier(SaveColorModifier(color: model.color, showModalButtons: showModalButtons))
-        .modifier(OpacityViewModifier())
+        .modifier(OpacityViewModifier(showModalButtons: showModalButtons))
         .onAppear() {
             self.model.color = selectedColor
             if saveHistory {
