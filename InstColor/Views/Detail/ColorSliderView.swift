@@ -77,7 +77,7 @@ struct ColorSliderView: View {
         }
         .padding([.horizontal])
         .foregroundColor(.white)
-        .frame(width: containerCotentWidth)
+        .frame(maxWidth: .infinity)
     }
 }
 

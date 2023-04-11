@@ -49,11 +49,9 @@ struct ShadeRowView: View {
         GridRow {
             VStack {
                 HStack {
-                    if let referenceColor {
-                        ForEach(1...4, id: \.self) { i in
-                            let color = colorValuePairs.reduce(referenceColor) { $0.combine(with: UIColor($1.color), amount: $1.value * Double(i)) }
-                            ShadeView(referenceColor: $referenceColor, shadeColor: color)
-                        }
+                    ForEach(1...4, id: \.self) { i in
+                        let color = colorValuePairs.reduce(referenceColor) { $0.combine(with: UIColor($1.color), amount: $1.value * Double(i)) }
+                        ShadeView(referenceColor: $referenceColor, shadeColor: color)
                     }
                 }
             }

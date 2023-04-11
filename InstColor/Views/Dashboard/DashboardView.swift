@@ -64,18 +64,16 @@ struct DominantColorsView: View {
     
     var body: some View {
         VStack {
-            if let colors {
-                Text("Dominant colors / Frequency")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                Button(action: { showColorDetail.toggle() }) {
-                    HStack {
-                        ForEach(colors, id: \.self) { color in
-                            VStack {
-                                BorderedRectView(color: Color(color.color), cornerRadius: 1, lineWidth: 1, width: viewSize, height: viewSize)
-                                Text((String(format: "%.0f%%", color.frequency * 100)))
-                                    .font(.footnote)
-                            }
+            Text("Dominant colors / Frequency")
+                .font(.footnote)
+                .foregroundColor(.gray)
+            Button(action: { showColorDetail.toggle() }) {
+                HStack {
+                    ForEach(colors, id: \.self) { color in
+                        VStack {
+                            BorderedRectView(color: Color(color.color), cornerRadius: 1, lineWidth: 1, width: viewSize, height: viewSize)
+                            Text((String(format: "%.0f%%", color.frequency * 100)))
+                                .font(.footnote)
                         }
                     }
                 }

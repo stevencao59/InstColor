@@ -42,7 +42,7 @@ struct SliderGroupContainerView: View {
             }
         }
         .padding([.horizontal])
-        .frame(width: containerCotentWidth / 1.2)
+        .frame(maxWidth: .infinity)
     }
 }
 

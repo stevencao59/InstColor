@@ -8,6 +8,21 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+struct OpacityViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 16.4, *) {
+            content
+                .presentationBackground(Color.black.opacity(0.8))
+        } else {
+            content
+                .background(Color.black.edgesIgnoringSafeArea(.all))
+                .opacity(0.8)
+                .clearModalBackground()
+        }
+
+    }
+}
+
 struct SaveColorModifier: ViewModifier {
     @Environment(\.dismiss) private var dismiss
     
@@ -28,8 +43,6 @@ struct SaveColorModifier: ViewModifier {
     func body(content: Content) -> some View {
         if showModalButtons {
             content
-                .opacity(0.8)
-                .clearModalBackground()
                 .overlay(alignment: .topLeading) {
                     Button(action: saveColor) {
                         Text("Save")
@@ -226,16 +239,8 @@ struct ColorDetailView: View {
         }
         .padding([.top])
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.edgesIgnoringSafeArea(.all))
         .modifier(SaveColorModifier(color: model.color, showModalButtons: showModalButtons))
-        .overlay {
-            GeometryReader { geo in
-                Color.clear
-                    .onAppear {
-                        viewSize = CGSize(width: geo.size.width, height: geo.size.height)
-                    }
-            }
-        }
+        .modifier(OpacityViewModifier())
         .onAppear() {
             self.model.color = selectedColor
             if saveHistory {
