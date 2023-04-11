@@ -12,7 +12,7 @@ struct OpacityViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 16.4, *) {
             content
-                .presentationBackground(Color.black.opacity(0.8))
+                .background(Color.black.edgesIgnoringSafeArea(.all))
         } else {
             content
                 .background(Color.black.edgesIgnoringSafeArea(.all))
